@@ -1,21 +1,28 @@
-![alt text](https://raw.githubusercontent.com/chrisbanes/cheesesquare/master/art/icon.png)
 
-Cheesesquare Sample
+
+![Ultimate Android Hitorian Logo](https://raw.github.com/mwolfson/android-historian/master/art/readmeicon.png)
+
+Android Ultimate Historian 
 ===================================
 
-Demos the new Android Design library. This is not an exhaustive sample, but shows
-some of the important features in the Design library:
+This app is designed to demonstrate the various components of the Android Support libraries, in particular, showing how to implement Material design into your app, using these controls.
+
+This is not a complete example (but will be growing), and is intended to provide a high-level overview of many of the main controls in the Support and Design libraries:
 
 - Collapsing Toolbar
 - FloatingActionButton
-- View anchoring
+- CoordinatorLayout
+- RecyclerView (with multiple LayoutManagers)
+- Snackbar
+- AppCompat Tinting
 - NavigationView
 - Snackbar
+- Floating TextInputView
 
 Pre-requisites
 --------------
 
-- Android SDK v22
+- Android SDK v22.2.1
 - Android Build Tools v22.0.1
 - Android Support Repository r16 (for v22.2.1)
 

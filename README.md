@@ -19,6 +19,10 @@ This is not a complete example (but will be growing), and is intended to provide
 - Snackbar
 - Floating TextInputView
 
+Special Thanks
+--------------
+This project was originally forked from the [Cheesesquare](https://github.com/chrisbanes/cheesesquare) project. Special thanks to [Chris Banes](https://github.com/chrisbanes).   
+
 Pre-requisites
 --------------
 

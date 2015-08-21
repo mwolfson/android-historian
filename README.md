@@ -1,6 +1,6 @@
 
 
-![Ultimate Android Historian Logo](https://raw.github.com/mwolfson/android-historian/raw/master/art/appdemo.gif)
+![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/appdemo.gif)
 
 Android Ultimate Historian 
 ===================================

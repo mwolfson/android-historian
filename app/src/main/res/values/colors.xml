@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <color name="window_background">#FFF5F5F5</color>
+
+    <!-- Material Color Resources -->
+    <color name="red_050">#fde0dc</color> <!-- Use with black text -->
+    <color name="red_100">#f9bdbb</color> <!-- Use with black text -->
+    <color name="red_200">#f69988</color> <!-- Use with black text -->
+    <color name="red_300">#f36c60</color> <!-- Use with black text -->
+    <color name="red_400">#e84e40</color> <!-- Use with black text -->
+    <color name="red_500">#e51c23</color> <!-- Use with white text -->
+    <color name="red_600">#dd191d</color> <!-- Use with white text -->
+    <color name="red_700">#d01716</color> <!-- Use with white text -->
+    <color name="red_800">#c41411</color> <!-- Use with white text -->
+    <color name="red_900">#b0120a</color> <!-- Use with white text -->
+    <color name="red_a100">#ff7997</color> <!-- Use with black text -->
+    <color name="red_a200">#ff5177</color> <!-- Use with white text -->
+    <color name="red_a400">#ff2d6f</color> <!-- Use with white text -->
+    <color name="red_a700">#e00032</color> <!-- Use with white text -->
+
+
+    <color name="pink_050">#fce4ec</color> <!-- Use with black text -->
+    <color name="pink_100">#f8bbd0</color> <!-- Use with black text -->
+    <color name="pink_200">#f48fb1</color> <!-- Use with black text -->
+    <color name="pink_300">#f06292</color> <!-- Use with black text -->
+    <color name="pink_400">#ec407a</color> <!-- Use with black text -->
+    <color name="pink_500">#e91e63</color> <!-- Use with white text -->
+    <color name="pink_600">#d81b60</color> <!-- Use with white text -->
+    <color name="pink_700">#c2185b</color> <!-- Use with white text -->
+    <color name="pink_800">#ad1457</color> <!-- Use with white text -->
+    <color name="pink_900">#880e4f</color> <!-- Use with white text -->
+    <color name="pink_a100">#ff80ab</color> <!-- Use with black text -->
+    <color name="pink_a200">#ff4081</color> <!-- Use with white text -->
+    <color name="pink_a400">#f50057</color> <!-- Use with white text -->
+    <color name="pink_a700">#c51162</color> <!-- Use with white text -->
+
+
+    <color name="purple_050">#f3e5f5</color> <!-- Use with black text -->
+    <color name="purple_100">#e1bee7</color> <!-- Use with black text -->
+    <color name="purple_200">#ce93d8</color> <!-- Use with black text -->
+    <color name="purple_300">#ba68c8</color> <!-- Use with white text -->
+    <color name="purple_400">#ab47bc</color> <!-- Use with white text -->
+    <color name="purple_500">#9c27b0</color> <!-- Use with white text -->
+    <color name="purple_600">#8e24aa</color> <!-- Use with white text -->
+    <color name="purple_700">#7b1fa2</color> <!-- Use with white text -->
+    <color name="purple_800">#6a1b9a</color> <!-- Use with white text -->
+    <color name="purple_900">#4a148c</color> <!-- Use with white text -->
+    <color name="purple_a100">#ea80fc</color> <!-- Use with black text -->
+    <color name="purple_a200">#e040fb</color> <!-- Use with white text -->
+    <color name="purple_a400">#d500f9</color> <!-- Use with white text -->
+    <color name="purple_a700">#aa00ff</color> <!-- Use with white text -->
+
+
+    <color name="deep_purple_050">#ede7f6</color> <!-- Use with black text -->
+    <color name="deep_purple_100">#d1c4e9</color> <!-- Use with black text -->
+    <color name="deep_purple_200">#b39ddb</color> <!-- Use with black text -->
+    <color name="deep_purple_300">#9575cd</color> <!-- Use with white text -->
+    <color name="deep_purple_400">#7e57c2</color> <!-- Use with white text -->
+    <color name="deep_purple_500">#673ab7</color> <!-- Use with white text -->
+    <color name="deep_purple_600">#5e35b1</color> <!-- Use with white text -->
+    <color name="deep_purple_700">#512da8</color> <!-- Use with white text -->
+    <color name="deep_purple_800">#4527a0</color> <!-- Use with white text -->
+    <color name="deep_purple_900">#311b92</color> <!-- Use with white text -->
+    <color name="deep_purple_a100">#b388ff</color> <!-- Use with black text -->
+    <color name="deep_purple_a200">#7c4dff</color> <!-- Use with white text -->
+    <color name="deep_purple_a400">#651fff</color> <!-- Use with white text -->
+    <color name="deep_purple_a700">#6200ea</color> <!-- Use with white text -->
+
+
+    <color name="indigo_050">#e8eaf6</color> <!-- Use with black text -->
+    <color name="indigo_100">#c5cae9</color> <!-- Use with black text -->
+    <color name="indigo_200">#9fa8da</color> <!-- Use with black text -->
+    <color name="indigo_300">#7986cb</color> <!-- Use with white text -->
+    <color name="indigo_400">#5c6bc0</color> <!-- Use with white text -->
+    <color name="indigo_500">#3f51b5</color> <!-- Use with white text -->
+    <color name="indigo_600">#3949ab</color> <!-- Use with white text -->
+    <color name="indigo_700">#303f9f</color> <!-- Use with white text -->
+    <color name="indigo_800">#283593</color> <!-- Use with white text -->
+    <color name="indigo_900">#1a237e</color> <!-- Use with white text -->
+    <color name="indigo_a100">#8c9eff</color> <!-- Use with black text -->
+    <color name="indigo_a200">#536dfe</color> <!-- Use with white text -->
+    <color name="indigo_a400">#3d5afe</color> <!-- Use with white text -->
+    <color name="indigo_a700">#304ffe</color> <!-- Use with white text -->
+
+
+    <color name="blue_050">#e7e9fd</color> <!-- Use with black text -->
+    <color name="blue_100">#d0d9ff</color> <!-- Use with black text -->
+    <color name="blue_200">#afbfff</color> <!-- Use with black text -->
+    <color name="blue_300">#91a7ff</color> <!-- Use with black text -->
+    <color name="blue_400">#738ffe</color> <!-- Use with black text -->
+    <color name="blue_500">#5677fc</color> <!-- Use with white text -->
+    <color name="blue_600">#4e6cef</color> <!-- Use with white text -->
+    <color name="blue_700">#455ede</color> <!-- Use with white text -->
+    <color name="blue_800">#3b50ce</color> <!-- Use with white text -->
+    <color name="blue_900">#2a36b1</color> <!-- Use with white text -->
+    <color name="blue_a100">#a6baff</color> <!-- Use with black text -->
+    <color name="blue_a200">#6889ff</color> <!-- Use with white text -->
+    <color name="blue_a400">#4d73ff</color> <!-- Use with white text -->
+    <color name="blue_a700">#4d69ff</color> <!-- Use with white text -->
+
+
+    <color name="light_blue_050">#e1f5fe</color> <!-- Use with black text -->
+    <color name="light_blue_100">#b3e5fc</color> <!-- Use with black text -->
+    <color name="light_blue_200">#81d4fa</color> <!-- Use with black text -->
+    <color name="light_blue_300">#4fc3f7</color> <!-- Use with black text -->
+    <color name="light_blue_400">#29b6f6</color> <!-- Use with black text -->
+    <color name="light_blue_500">#03a9f4</color> <!-- Use with white text -->
+    <color name="light_blue_600">#039be5</color> <!-- Use with white text -->
+    <color name="light_blue_700">#0288d1</color> <!-- Use with white text -->
+    <color name="light_blue_800">#0277bd</color> <!-- Use with white text -->
+    <color name="light_blue_900">#01579b</color> <!-- Use with white text -->
+    <color name="light_blue_a100">#80d8ff</color> <!-- Use with black text -->
+    <color name="light_blue_a200">#40c4ff</color> <!-- Use with black text -->
+    <color name="light_blue_a400">#00b0ff</color> <!-- Use with black text -->
+    <color name="light_blue_a700">#0091ea</color> <!-- Use with white text -->
+
+
+    <color name="cyan_050">#e0f7fa</color> <!-- Use with black text -->
+    <color name="cyan_100">#b2ebf2</color> <!-- Use with black text -->
+    <color name="cyan_200">#80deea</color> <!-- Use with black text -->
+    <color name="cyan_300">#4dd0e1</color> <!-- Use with black text -->
+    <color name="cyan_400">#26c6da</color> <!-- Use with black text -->
+    <color name="cyan_500">#00bcd4</color> <!-- Use with white text -->
+    <color name="cyan_600">#00acc1</color> <!-- Use with white text -->
+    <color name="cyan_700">#0097a7</color> <!-- Use with white text -->
+    <color name="cyan_800">#00838f</color> <!-- Use with white text -->
+    <color name="cyan_900">#006064</color> <!-- Use with white text -->
+    <color name="cyan_a100">#84ffff</color> <!-- Use with black text -->
+    <color name="cyan_a200">#18ffff</color> <!-- Use with black text -->
+    <color name="cyan_a400">#00e5ff</color> <!-- Use with black text -->
+    <color name="cyan_a700">#00b8d4</color> <!-- Use with black text -->
+
+
+    <color name="teal_050">#e0f2f1</color> <!-- Use with black text -->
+    <color name="teal_100">#b2dfdb</color> <!-- Use with black text -->
+    <color name="teal_200">#80cbc4</color> <!-- Use with black text -->
+    <color name="teal_300">#4db6ac</color> <!-- Use with black text -->
+    <color name="teal_400">#26a69a</color> <!-- Use with black text -->
+    <color name="teal_500">#009688</color> <!-- Use with white text -->
+    <color name="teal_600">#00897b</color> <!-- Use with white text -->
+    <color name="teal_700">#00796b</color> <!-- Use with white text -->
+    <color name="teal_800">#00695c</color> <!-- Use with white text -->
+    <color name="teal_900">#004d40</color> <!-- Use with white text -->
+    <color name="teal_a100">#a7ffeb</color> <!-- Use with black text -->
+    <color name="teal_a200">#64ffda</color> <!-- Use with black text -->
+    <color name="teal_a400">#1de9b6</color> <!-- Use with black text -->
+    <color name="teal_a700">#00bfa5</color> <!-- Use with black text -->
+
+
+    <color name="green_050">#d0f8ce</color> <!-- Use with black text -->
+    <color name="green_100">#a3e9a4</color> <!-- Use with black text -->
+    <color name="green_200">#72d572</color> <!-- Use with black text -->
+    <color name="green_300">#42bd41</color> <!-- Use with black text -->
+    <color name="green_400">#2baf2b</color> <!-- Use with black text -->
+    <color name="green_500">#259b24</color> <!-- Use with white text -->
+    <color name="green_600">#0a8f08</color> <!-- Use with white text -->
+    <color name="green_700">#0a7e07</color> <!-- Use with white text -->
+    <color name="green_800">#056f00</color> <!-- Use with white text -->
+    <color name="green_900">#0d5302</color> <!-- Use with white text -->
+    <color name="green_a100">#a2f78d</color> <!-- Use with black text -->
+    <color name="green_a200">#5af158</color> <!-- Use with black text -->
+    <color name="green_a400">#14e715</color> <!-- Use with black text -->
+    <color name="green_a700">#12c700</color> <!-- Use with black text -->
+
+
+    <color name="light_green_050">#f1f8e9</color> <!-- Use with black text -->
+    <color name="light_green_100">#dcedc8</color> <!-- Use with black text -->
+    <color name="light_green_200">#c5e1a5</color> <!-- Use with black text -->
+    <color name="light_green_300">#aed581</color> <!-- Use with black text -->
+    <color name="light_green_400">#9ccc65</color> <!-- Use with black text -->
+    <color name="light_green_500">#8bc34a</color> <!-- Use with black text -->
+    <color name="light_green_600">#7cb342</color> <!-- Use with black text -->
+    <color name="light_green_700">#689f38</color> <!-- Use with black text -->
+    <color name="light_green_800">#558b2f</color> <!-- Use with white text -->
+    <color name="light_green_900">#33691e</color> <!-- Use with white text -->
+    <color name="light_green_a100">#ccff90</color> <!-- Use with black text -->
+    <color name="light_green_a200">#b2ff59</color> <!-- Use with black text -->
+    <color name="light_green_a400">#76ff03</color> <!-- Use with black text -->
+    <color name="light_green_a700">#64dd17</color> <!-- Use with black text -->
+
+
+    <color name="lime_050">#f9fbe7</color> <!-- Use with black text -->
+    <color name="lime_100">#f0f4c3</color> <!-- Use with black text -->
+    <color name="lime_200">#e6ee9c</color> <!-- Use with black text -->
+    <color name="lime_300">#dce775</color> <!-- Use with black text -->
+    <color name="lime_400">#d4e157</color> <!-- Use with black text -->
+    <color name="lime_500">#cddc39</color> <!-- Use with black text -->
+    <color name="lime_600">#c0ca33</color> <!-- Use with black text -->
+    <color name="lime_700">#afb42b</color> <!-- Use with black text -->
+    <color name="lime_800">#9e9d24</color> <!-- Use with black text -->
+    <color name="lime_900">#827717</color> <!-- Use with white text -->
+    <color name="lime_a100">#f4ff81</color> <!-- Use with black text -->
+    <color name="lime_a200">#eeff41</color> <!-- Use with black text -->
+    <color name="lime_a400">#c6ff00</color> <!-- Use with black text -->
+    <color name="lime_a700">#aeea00</color> <!-- Use with black text -->
+
+
+    <color name="yellow_050">#fffde7</color> <!-- Use with black text -->
+    <color name="yellow_100">#fff9c4</color> <!-- Use with black text -->
+    <color name="yellow_200">#fff59d</color> <!-- Use with black text -->
+    <color name="yellow_300">#fff176</color> <!-- Use with black text -->
+    <color name="yellow_400">#ffee58</color> <!-- Use with black text -->
+    <color name="yellow_500">#ffeb3b</color> <!-- Use with black text -->
+    <color name="yellow_600">#fdd835</color> <!-- Use with black text -->
+    <color name="yellow_700">#fbc02d</color> <!-- Use with black text -->
+    <color name="yellow_800">#f9a825</color> <!-- Use with black text -->
+    <color name="yellow_900">#f57f17</color> <!-- Use with black text -->
+    <color name="yellow_a100">#ffff8d</color> <!-- Use with black text -->
+    <color name="yellow_a200">#ffff00</color> <!-- Use with black text -->
+    <color name="yellow_a400">#ffea00</color> <!-- Use with black text -->
+    <color name="yellow_a700">#ffd600</color> <!-- Use with black text -->
+
+
+    <color name="amber_050">#fff8e1</color> <!-- Use with black text -->
+    <color name="amber_100">#ffecb3</color> <!-- Use with black text -->
+    <color name="amber_200">#ffe082</color> <!-- Use with black text -->
+    <color name="amber_300">#ffd54f</color> <!-- Use with black text -->
+    <color name="amber_400">#ffca28</color> <!-- Use with black text -->
+    <color name="amber_500">#ffc107</color> <!-- Use with black text -->
+    <color name="amber_600">#ffb300</color> <!-- Use with black text -->
+    <color name="amber_700">#ffa000</color> <!-- Use with black text -->
+    <color name="amber_800">#ff8f00</color> <!-- Use with black text -->
+    <color name="amber_900">#ff6f00</color> <!-- Use with black text -->
+    <color name="amber_a100">#ffe57f</color> <!-- Use with black text -->
+    <color name="amber_a200">#ffd740</color> <!-- Use with black text -->
+    <color name="amber_a400">#ffc400</color> <!-- Use with black text -->
+    <color name="amber_a700">#ffab00</color> <!-- Use with black text -->
+
+
+    <color name="orange_050">#fff3e0</color> <!-- Use with black text -->
+    <color name="orange_100">#ffe0b2</color> <!-- Use with black text -->
+    <color name="orange_200">#ffcc80</color> <!-- Use with black text -->
+    <color name="orange_300">#ffb74d</color> <!-- Use with black text -->
+    <color name="orange_400">#ffa726</color> <!-- Use with black text -->
+    <color name="orange_500">#ff9800</color> <!-- Use with black text -->
+    <color name="orange_600">#fb8c00</color> <!-- Use with black text -->
+    <color name="orange_700">#f57c00</color> <!-- Use with black text -->
+    <color name="orange_800">#ef6c00</color> <!-- Use with white text -->
+    <color name="orange_900">#e65100</color> <!-- Use with white text -->
+    <color name="orange_a100">#ffd180</color> <!-- Use with black text -->
+    <color name="orange_a200">#ffab40</color> <!-- Use with black text -->
+    <color name="orange_a400">#ff9100</color> <!-- Use with black text -->
+    <color name="orange_a700">#ff6d00</color> <!-- Use with black text -->
+
+
+    <color name="deep_orange_050">#fbe9e7</color> <!-- Use with black text -->
+    <color name="deep_orange_100">#ffccbc</color> <!-- Use with black text -->
+    <color name="deep_orange_200">#ffab91</color> <!-- Use with black text -->
+    <color name="deep_orange_300">#ff8a65</color> <!-- Use with black text -->
+    <color name="deep_orange_400">#ff7043</color> <!-- Use with black text -->
+    <color name="deep_orange_500">#ff5722</color> <!-- Use with white text -->
+    <color name="deep_orange_600">#f4511e</color> <!-- Use with white text -->
+    <color name="deep_orange_700">#e64a19</color> <!-- Use with white text -->
+    <color name="deep_orange_800">#d84315</color> <!-- Use with white text -->
+    <color name="deep_orange_900">#bf360c</color> <!-- Use with white text -->
+    <color name="deep_orange_a100">#ff9e80</color> <!-- Use with black text -->
+    <color name="deep_orange_a200">#ff6e40</color> <!-- Use with black text -->
+    <color name="deep_orange_a400">#ff3d00</color> <!-- Use with white text -->
+    <color name="deep_orange_a700">#dd2c00</color> <!-- Use with white text -->
+
+
+    <color name="brown_050">#efebe9</color> <!-- Use with black text -->
+    <color name="brown_100">#d7ccc8</color> <!-- Use with black text -->
+    <color name="brown_200">#bcaaa4</color> <!-- Use with black text -->
+    <color name="brown_300">#a1887f</color> <!-- Use with white text -->
+    <color name="brown_400">#8d6e63</color> <!-- Use with white text -->
+    <color name="brown_500">#795548</color> <!-- Use with white text -->
+    <color name="brown_600">#6d4c41</color> <!-- Use with white text -->
+    <color name="brown_700">#5d4037</color> <!-- Use with white text -->
+    <color name="brown_800">#4e342e</color> <!-- Use with white text -->
+    <color name="brown_900">#3e2723</color> <!-- Use with white text -->
+
+
+    <color name="blue_grey_050">#eceff1</color> <!-- Use with black text -->
+    <color name="blue_grey_100">#cfd8dc</color> <!-- Use with black text -->
+    <color name="blue_grey_200">#b0bec5</color> <!-- Use with black text -->
+    <color name="blue_grey_300">#90a4ae</color> <!-- Use with black text -->
+    <color name="blue_grey_400">#78909c</color> <!-- Use with white text -->
+    <color name="blue_grey_500">#607d8b</color> <!-- Use with white text -->
+    <color name="blue_grey_600">#546e7a</color> <!-- Use with white text -->
+    <color name="blue_grey_700">#455a64</color> <!-- Use with white text -->
+    <color name="blue_grey_800">#37474f</color> <!-- Use with white text -->
+    <color name="blue_grey_900">#263238</color> <!-- Use with white text -->
+
+
+    <color name="grey_050">#fafafa</color> <!-- Use with black text -->
+    <color name="grey_100">#f5f5f5</color> <!-- Use with black text -->
+    <color name="grey_200">#eeeeee</color> <!-- Use with black text -->
+    <color name="grey_300">#e0e0e0</color> <!-- Use with black text -->
+    <color name="grey_400">#bdbdbd</color> <!-- Use with black text -->
+    <color name="grey_500">#9e9e9e</color> <!-- Use with black text -->
+    <color name="grey_600">#757575</color> <!-- Use with white text -->
+    <color name="grey_700">#616161</color> <!-- Use with white text -->
+    <color name="grey_800">#424242</color> <!-- Use with white text -->
+    <color name="grey_900">#212121</color> <!-- Use with white text -->
+    <color name="grey_1000_b">#000000</color> <!-- Use with white text -->
+    <color name="grey_1000_w">#ffffff</color> <!-- Use with black text -->
+
+</resources>

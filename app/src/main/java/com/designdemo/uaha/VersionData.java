@@ -29,19 +29,9 @@ public class VersionData {
     public static final int NUM_OF_DEVICES = 10;
 
     public static int getOsDrawable() {
-        switch (RANDOM.nextInt(5)) {
-            default:
-            case 0:
-                return R.drawable.cheese_1;
-            case 1:
-                return R.drawable.cheese_2;
-            case 2:
-                return R.drawable.cheese_3;
-            case 3:
-                return R.drawable.cheese_4;
-            case 4:
-                return R.drawable.cheese_5;
-        }
+        
+        //Temp return to fix project, til I can check fix when I get home from NYC
+        return R.drawable.ic_cupcake;
     }
 
     public static int getOsDrawable(int osVersion) {

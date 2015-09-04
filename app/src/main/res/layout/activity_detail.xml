@@ -94,7 +94,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:text="@string/favorites_content" />
 
                 </LinearLayout>
@@ -108,8 +108,8 @@
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardElevation="2dp"
+                app:cardCornerRadius="2dp">
 
                 <LinearLayout
                     style="@style/Widget.CardContent"
@@ -182,8 +182,8 @@
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 app:cardUseCompatPadding="true"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="6dp">
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,7 +192,6 @@
 
                     <TextView
                         android:id="@+id/regulations_title"
-                        style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Wikipedia Page"

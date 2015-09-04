@@ -50,6 +50,13 @@
     <string name="profile_snackbar">Your profile has been saved</string>
     <string name="dialog_photo_text">At some point, you will be able to enter a picture for your profile</string>
     <string name="dialog_photo_switch">Excited?</string>
+    <string name="user_info">User Info</string>
+    <string name="ever_owned">Have you ever owned any of these?</string>
+    <string name="nexus">Nexus</string>
+    <string name="android_tv">Android TV</string>
+    <string name="android_wear">Android Wear</string>
+    <string name="preferences">Preferences</string>
+    <string name="android_historian">Android Historian</string>
 
     <string-array name="country_arrays">
         <item>Malaysia</item>

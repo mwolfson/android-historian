@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -24,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.support.android.designlibdemo.R;
 
@@ -31,8 +31,8 @@ public class UserActivity extends AppCompatActivity {
     private Activity mActivity;
 
     private DrawerLayout drawerLayout;
-    private AppCompatEditText nameEnterField;
-    private AppCompatEditText phoneEnterField;
+    private EditText nameEnterField;
+    private EditText phoneEnterField;
     private FloatingActionButton fab;
     private Button picButton;
 
@@ -76,8 +76,8 @@ public class UserActivity extends AppCompatActivity {
 
     private void setupViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nameEnterField = (AppCompatEditText) findViewById(R.id.name_edit);
-        phoneEnterField = (AppCompatEditText) findViewById(R.id.phone_edit);
+        nameEnterField = (EditText) findViewById(R.id.name_edit);
+        phoneEnterField = (EditText) findViewById(R.id.phone_edit);
 
         //Format phone number as user is typing
         phoneEnterField.addTextChangedListener(new PhoneNumberFormattingTextWatcher());

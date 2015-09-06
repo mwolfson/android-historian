@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:id="@+id/photo_content_text"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonTakePic"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/dialog_photo_text"/>
+        android:text="Take picture"
+        android:layout_weight="1"/>
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/photo_pref_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/photo_pref_text"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonChoosePic"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/photo_content_text"
-        android:layout_marginLeft="16dp"
-        android:layout_toLeftOf="@+id/photo_pref_switch"
-        android:text="@string/dialog_photo_switch"/>
-</RelativeLayout>
+        android:text="Choose picture"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

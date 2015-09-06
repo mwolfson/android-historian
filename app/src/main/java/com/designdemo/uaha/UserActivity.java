@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -13,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
@@ -25,9 +26,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.bumptech.glide.Glide;
 import com.support.android.designlibdemo.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserActivity extends AppCompatActivity {
+    private static final String TAG = "UserActivity";
     private Activity mActivity;
 
     private DrawerLayout drawerLayout;
@@ -36,6 +46,13 @@ public class UserActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private Button picButton;
 
+    private CircleImageView profileImageView;
+
+    private AlertDialog photoDialog;
+
+    public static final int TAKE_PICTURE_CODE = 23423;
+    public static final int CHOOSE_PICTURE_CODE = 453;
+    private String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +91,44 @@ public class UserActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "Request Code = " + requestCode);
+
+        if(resultCode == RESULT_OK){
+            if(requestCode == TAKE_PICTURE_CODE){
+                photoDialog.dismiss();
+
+                // We've created this photo path when we launched the camera intent
+                Uri selectedImage = Uri.parse(mCurrentPhotoPath);
+                Glide.with(this).load(selectedImage).into(profileImageView);
+                PrefsUtil.saveProfilePic(this, selectedImage);
+
+            }else if (requestCode == CHOOSE_PICTURE_CODE){
+                photoDialog.dismiss();
+
+                // Uri comes back from the Gallery
+                Uri selectedImage = data.getData();
+                Glide.with(this).load(selectedImage).into(profileImageView);
+                PrefsUtil.saveProfilePic(this, selectedImage);
+            }
+        }
+    }
+
     private void setupViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         nameEnterField = (EditText) findViewById(R.id.name_edit);
         phoneEnterField = (EditText) findViewById(R.id.phone_edit);
+
+        profileImageView = (CircleImageView)findViewById(R.id.profile_image_view);
+
+        Uri imageUri = PrefsUtil.getProfilePic(this);
+        if(imageUri != null){
+            Glide.with(this).load(imageUri).centerCrop().into(profileImageView);
+        }else {
+            Glide.with(this).load(R.drawable.ic_account_lg).centerCrop().into(profileImageView);
+        }
 
         //Format phone number as user is typing
         phoneEnterField.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
@@ -163,10 +214,27 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setPictureDialog() {
-        AlertDialog photoDialog;
+
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         LayoutInflater inflater = mActivity.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_picture, null);
+
+        dialogView.findViewById(R.id.buttonTakePic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
+
+        dialogView.findViewById(R.id.buttonChoosePic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, CHOOSE_PICTURE_CODE);
+            }
+        });
+
         builder.setView(dialogView);
         builder.setTitle(mActivity.getString(R.string.picture_dialog_title));
         builder.setCancelable(true);
@@ -178,20 +246,47 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        final SwitchCompat prefSwitch = (SwitchCompat) dialogView.findViewById(R.id.photo_pref_switch);
-        prefSwitch.setChecked(true);
-        prefSwitch.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (prefSwitch.isChecked()) {
-                    Log.d("Dialog", "The Photo switch was enabled");
-                } else {
-                    Log.d("Dialog", "The Photo switch was disabled");
-                }
-            }
-        });
-
         photoDialog = builder.create();
         photoDialog.show();
+    }
+
+    // https://developer.android.com/training/camera/photobasics.html
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
+    // https://developer.android.com/training/camera/photobasics.html
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Log.e(TAG, "Error: "+ex.getMessage());
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, TAKE_PICTURE_CODE);
+            }
+        }
     }
 
     private void setupDrawerContent(final NavigationView navigationView) {

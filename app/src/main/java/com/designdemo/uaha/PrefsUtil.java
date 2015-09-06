@@ -2,6 +2,7 @@ package com.designdemo.uaha;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -17,6 +18,22 @@ public class PrefsUtil {
 
     public static final String PREFS_NAME_UNSET = "nameunset";
 
+    public static final String PREFS_PROFILE_PIC = "prefs_pic";
+
+
+    public static void saveProfilePic(Context context, Uri location ){
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString(PREFS_PROFILE_PIC, location.toString()).apply();
+    }
+
+    public static Uri getProfilePic(Context context){
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String uriString = prefs.getString(PREFS_PROFILE_PIC, "");
+        if(!uriString.isEmpty()){
+            return Uri.parse(uriString);
+        }
+        return null;
+    }
 
     public static boolean toggleFavorite(Context cxt, int productKey) {
         boolean toSet;

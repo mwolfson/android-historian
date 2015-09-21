@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,7 +43,7 @@
                 android:paddingTop="24dp">
 
                 <TextView
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/activity_horizontal_margin"
@@ -50,8 +51,8 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/info_card"
-                    cardCornerRadius="2dp"
-                    cardElevation="2dp"
+                    cardCornerRadius="20dp"
+                    cardElevation="20dp"
                     cardUseCompatPadding="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,11 +68,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="@string/user_info"
+                            android:text="User Info"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/profile_name_phone_text"/>
@@ -115,8 +116,8 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/prefs_card"
-                    cardCornerRadius="2dp"
-                    cardElevation="2dp"
+                    cardCornerRadius="20dp"
+                    cardElevation="20dp"
                     cardUseCompatPadding="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,16 +132,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="@string/preferences"
+                            android:text="Preferences"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="@string/ever_owned"/>
+                            android:text="Have you ever owned any of these?"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -152,25 +153,25 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/nexus"/>
+                                android:text="Nexus"/>
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/android_tv"/>
+                                android:text="Android TV"/>
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/android_wear"/>
+                                android:text="Android Wear"/>
 
                         </LinearLayout>
 
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -216,7 +217,7 @@
                         </RadioGroup>
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -230,7 +231,7 @@
                             android:entries="@array/country_arrays"/>
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.AppCompat.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"

@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.telephony.PhoneNumberFormattingTextWatcher;
@@ -23,16 +24,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.support.android.designlibdemo.R;
 
 public class UserActivity extends AppCompatActivity {
-    private Activity mActivity;
+    private Activity mainActivity;
 
     private DrawerLayout drawerLayout;
-    private EditText nameEnterField;
-    private EditText phoneEnterField;
+    private AppCompatEditText nameEnterField;
+    private AppCompatEditText phoneEnterField;
     private FloatingActionButton fab;
     private Button picButton;
 
@@ -41,7 +41,7 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        mActivity = this;
+        mainActivity = this;
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,8 +76,8 @@ public class UserActivity extends AppCompatActivity {
 
     private void setupViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nameEnterField = (EditText) findViewById(R.id.name_edit);
-        phoneEnterField = (EditText) findViewById(R.id.phone_edit);
+        nameEnterField = (AppCompatEditText) findViewById(R.id.name_edit);
+        phoneEnterField = (AppCompatEditText) findViewById(R.id.phone_edit);
 
         //Format phone number as user is typing
         phoneEnterField.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
@@ -121,22 +121,22 @@ public class UserActivity extends AppCompatActivity {
                 //Validation successful, save values and message user
 
                 // Save original Values before sending, in-case user changes their mind
-                final String beforeName = PrefsUtil.getName(mActivity.getApplicationContext());
-                final long beforePhone = PrefsUtil.getPhone(mActivity.getApplicationContext());
+                final String beforeName = PrefsUtil.getName(mainActivity.getApplicationContext());
+                final long beforePhone = PrefsUtil.getPhone(mainActivity.getApplicationContext());
 
                 // Store new values
                 final String nameToSet = nameEnterField.getText().toString();
                 String formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.getText().toString());
                 final long phoneToSet = Long.valueOf(formattedNum);
 
-                PrefsUtil.setProfile(mActivity.getApplicationContext(), nameToSet, phoneToSet);
+                PrefsUtil.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
 
                 Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
                         .setAction("Undo", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 // Reset to original
-                                boolean complete = PrefsUtil.setProfile(mActivity.getApplicationContext(), beforeName, beforePhone);
+                                boolean complete = PrefsUtil.setProfile(mainActivity.getApplicationContext(), beforeName, beforePhone);
                                 if (complete) {
                                     setPhoneNameValues();
                                 }
@@ -164,13 +164,13 @@ public class UserActivity extends AppCompatActivity {
 
     private void setPictureDialog() {
         AlertDialog photoDialog;
-        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        LayoutInflater inflater = mActivity.getLayoutInflater();
+        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+        LayoutInflater inflater = mainActivity.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_picture, null);
         builder.setView(dialogView);
-        builder.setTitle(mActivity.getString(R.string.picture_dialog_title));
+        builder.setTitle(mainActivity.getString(R.string.picture_dialog_title));
         builder.setCancelable(true);
-        builder.setPositiveButton(mActivity.getString(R.string.picture_dialog_button), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(mainActivity.getString(R.string.picture_dialog_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Send the phone number to get validated

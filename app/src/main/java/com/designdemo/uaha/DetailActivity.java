@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.designdemo.uaha;
 
 import android.content.Intent;
@@ -52,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
 
     private OkHttpClient okclient;
-    private int os_version;
+    private int osVersion;
 
 
     @Override
@@ -62,14 +46,14 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String androidName = intent.getStringExtra(EXTRA_NAME);
-        os_version = VersionData.getOsNum(androidName);
+        osVersion = VersionData.getOsNum(androidName);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(VersionData.getProductName(os_version));
+        collapsingToolbar.setTitle(VersionData.getProductName(osVersion));
 
         okclient = new OkHttpClient();
         loadBackdrop();
@@ -82,7 +66,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-        Glide.with(this).load(VersionData.getOsDrawable(os_version)).centerCrop().into(imageView);
+        Glide.with(this).load(VersionData.getOsDrawable(osVersion)).centerCrop().into(imageView);
     }
 
     private void setupViews() {
@@ -101,7 +85,7 @@ public class DetailActivity extends AppCompatActivity {
 
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                PrefsUtil.toggleFavorite(getApplicationContext(), os_version);
+                PrefsUtil.toggleFavorite(getApplicationContext(), osVersion);
                 setFabIcon();
 
                 //Send the user a message to let them know change was made
@@ -113,7 +97,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setFabIcon() {
-        if (PrefsUtil.isFavorite(getApplicationContext(), os_version)) {
+        if (PrefsUtil.isFavorite(getApplicationContext(), osVersion)) {
             fab.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_favorite_on));
         } else {
             fab.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_favorite_off));
@@ -121,7 +105,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupPalette() {
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), VersionData.getOsDrawable(os_version));
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), VersionData.getOsDrawable(osVersion));
 
         Palette.PaletteAsyncListener listener = new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
@@ -167,7 +151,7 @@ public class DetailActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String respStr = "";
 
-            String req = "https://en.wikipedia.org/w/api.php?action=query&titles=" + VersionData.getWikiQuery(os_version) + "&prop=revisions&rvprop=content&format=jsonfm";
+            String req = "https://en.wikipedia.org/w/api.php?action=query&titles=" + VersionData.getWikiQuery(osVersion) + "&prop=revisions&rvprop=content&format=jsonfm";
             Log.d("NET", "WIKIPedia request: " + req);
 
             Request request = new Request.Builder()

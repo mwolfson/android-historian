@@ -1,38 +1,11 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.designdemo.uaha;
 
 import android.os.Build;
 
 import com.support.android.designlibdemo.R;
 
-import java.util.Random;
-
 public class VersionData {
-
-    private static final Random RANDOM = new Random();
     public static final int NUM_OF_OS = 9;
-    public static final int NUM_OF_DEVICES = 10;
-
-    public static int getOsDrawable() {
-        
-        //Temp return to fix project, til I can check fix when I get home from NYC
-        return R.drawable.ic_cupcake;
-    }
 
     public static int getOsDrawable(int osVersion) {
         int retDraw = 0;
@@ -321,7 +294,7 @@ public class VersionData {
         return retStr;
     }
 
-    public static final String[] sOsStrings = {
+    public static final String[] osStrings = {
             getProductName(OS_CUPCAKE),
             getProductName(OS_DONUT),
             getProductName(OS_ECLAIR),
@@ -334,7 +307,7 @@ public class VersionData {
             getProductName(OS_LOLLIPOP)
     };
 
-    public static final String[] sDeviceStrings = {
+    public static final String[] deviceStrings = {
             getProductName(DEVICE_G1),
             getProductName(DEVICE_DROID),
             getProductName(DEVICE_N1),

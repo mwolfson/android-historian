@@ -99,23 +99,17 @@ public class UserActivity extends AppCompatActivity {
 
                 if (nameLen < 4) {
                     nameEnterField.setError("At least 4 characters");
-                    Snackbar.make(mainView, "Name input error", Snackbar.LENGTH_SHORT)
-                            .show();
+                    nameEnterField.requestFocus();
+                    Snackbar.make(mainView, "Name input error", Snackbar.LENGTH_SHORT).show();
+                    return;
                 }
 
                 int phoneLen = phoneEnterField.getText().length();
                 if (phoneLen != 14) {
                     phoneEnterField.setError("Invalid Phone");
-
-
-
-
-                    Snackbar.make(mainView, "Phone input error",
-                            Snackbar.LENGTH_SHORT)
-                            .show();
-
-
-
+                    phoneEnterField.requestFocus();
+                    Snackbar.make(mainView, "Phone input error",Snackbar.LENGTH_SHORT).show();
+                    return;
                 }
 
                 //Validation successful, save values and message user

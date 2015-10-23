@@ -15,15 +15,17 @@
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/photo_pref_switch"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_below="@+id/photo_content_text"/>
 
     <TextView
         android:id="@+id/photo_pref_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/photo_content_text"
         android:layout_marginLeft="16dp"
-        android:layout_toLeftOf="@+id/photo_pref_switch"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/photo_pref_switch"
         android:text="@string/dialog_photo_switch"/>
 </RelativeLayout>

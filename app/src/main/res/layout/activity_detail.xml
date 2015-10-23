@@ -90,8 +90,8 @@
                 android:layout_marginBottom="@dimen/card_margin"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -158,7 +158,101 @@
 
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="PercentageLayout"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:id="@+id/perc_40_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/perc1_left"
+                            app:layout_widthPercent="40%"
+                            android:layout_height="64dp"
+                            android:layout_alignParentLeft="true"
+                            android:text="40%"
+                            android:gravity="center"
+                            android:textColor="@color/grey_900"/>
+
+                        <TextView
+                            android:id="@+id/perc1_middle"
+                            app:layout_widthPercent="20%"
+                            android:layout_height="64dp"
+                            android:text="20%"
+                            android:layout_toRightOf="@id/perc1_left"
+                            android:gravity="center"
+                            android:textColor="@color/grey_900"/>
+
+                        <TextView
+                            android:id="@+id/perc1_right"
+                            app:layout_widthPercent="40%"
+                            android:layout_height="64dp"
+                            android:layout_alignParentRight="true"
+                            android:text="40%"
+                            android:gravity="center"
+                            android:textColor="@color/grey_900"/>
+                    </android.support.percent.PercentRelativeLayout>
+
+                <android.support.percent.PercentRelativeLayout
+                    android:id="@+id/perc_30_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/perc2_left"
+                        app:layout_widthPercent="20%"
+                        android:layout_height="64dp"
+                        android:layout_alignParentLeft="true"
+                        android:text="20%"
+                        android:gravity="center"
+                        android:textColor="@color/grey_900"/>
+
+                    <TextView
+                        android:id="@+id/perc2_middle"
+                        app:layout_widthPercent="60%"
+                        android:layout_height="64dp"
+                        android:text="60%"
+                        android:gravity="center"
+                        android:layout_toRightOf="@id/perc2_left"
+                        android:textColor="@color/grey_900"/>
+
+                    <TextView
+                        android:id="@+id/perc2_right"
+                        app:layout_widthPercent="20%"
+                        android:layout_height="64dp"
+                        android:layout_alignParentRight="true"
+                        android:text="20%"
+                        android:gravity="center"
+                        android:textColor="@color/grey_900"/>
+                </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"

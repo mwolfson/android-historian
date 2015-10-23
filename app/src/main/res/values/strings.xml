@@ -32,7 +32,7 @@
     <string name="picture_dialog_button">Dismiss</string>
     <string name="profile_snackbar">Your profile has been saved</string>
     <string name="dialog_photo_text">At some point, you will be able to enter a picture for your profile</string>
-    <string name="dialog_photo_switch">Excited?</string>
+    <string name="dialog_photo_switch">SwitchCompat Is Pretty</string>
 
     <string-array name="country_arrays">
         <item>Malaysia</item>

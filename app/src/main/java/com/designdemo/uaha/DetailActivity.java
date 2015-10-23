@@ -111,21 +111,33 @@ public class DetailActivity extends AppCompatActivity {
             public void onGenerated(Palette palette) {
                 Log.d("Palette", "Palette has been generated");
                 TextView pal_vib = (TextView) findViewById(R.id.palette_vibrant);
+                TextView perc1left = (TextView) findViewById(R.id.perc1_left);
+                perc1left.setBackgroundColor(palette.getVibrantColor(0x000000));
                 pal_vib.setBackgroundColor(palette.getVibrantColor(0x000000));
 
                 TextView pal_vib_dark = (TextView) findViewById(R.id.palette_vibrant_dark);
+                TextView perc1mid = (TextView) findViewById(R.id.perc1_middle);
+                perc1mid.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
                 pal_vib_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
 
                 TextView pal_vib_light = (TextView) findViewById(R.id.palette_vibrant_light);
+                TextView perc1right = (TextView) findViewById(R.id.perc1_right);
+                perc1right.setBackgroundColor(palette.getLightVibrantColor(0x000000));
                 pal_vib_light.setBackgroundColor(palette.getLightVibrantColor(0x000000));
 
                 TextView pal_muted = (TextView) findViewById(R.id.palette_muted);
+                TextView perc2left = (TextView) findViewById(R.id.perc2_left);
+                perc2left.setBackgroundColor(palette.getMutedColor(0x000000));
                 pal_muted.setBackgroundColor(palette.getMutedColor(0x000000));
 
                 TextView pal_muted_dark = (TextView) findViewById(R.id.palette_muted_dark);
+                TextView perc2mid = (TextView) findViewById(R.id.perc2_middle);
+                perc2mid.setBackgroundColor(palette.getDarkMutedColor(0x000000));
                 pal_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000));
 
                 TextView pal_muted_light = (TextView) findViewById(R.id.palette_muted_light);
+                TextView perc2right = (TextView) findViewById(R.id.perc2_right);
+                perc2right.setBackgroundColor(palette.getLightMutedColor(0x000000));
                 pal_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000));
 
                 //Noticed the Expanded white doesn't show everywhere, use Palette to fix this

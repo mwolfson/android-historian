@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
@@ -89,7 +90,7 @@ public class DetailActivity extends AppCompatActivity {
                 setFabIcon();
 
                 //Send the user a message to let them know change was made
-                View mainView = (View) findViewById(R.id.main_content);
+                View mainView = findViewById(R.id.main_content);
                 Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
                         .show(); // Don’t forget to show!
             }
@@ -98,9 +99,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setFabIcon() {
         if (PrefsUtil.isFavorite(getApplicationContext(), osVersion)) {
-            fab.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_favorite_on));
+            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on));
         } else {
-            fab.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_favorite_off));
+            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off));
         }
     }
 
@@ -146,7 +147,7 @@ public class DetailActivity extends AppCompatActivity {
         };
 
         // Start this Async, because it takes some time to generate
-        Palette.generateAsync(bm, listener);
+        Palette.from(bm).generate(listener);
 
     }
 

@@ -75,3 +75,23 @@ proguard/
 android-historian.iml
 
 app/app.iml
+
+.idea/encodings.xml
+
+.idea/libraries/appcompat_v7_23_1_1.xml
+
+.idea/libraries/cardview_v7_23_1_1.xml
+
+.idea/libraries/design_23_1_1.xml
+
+.idea/libraries/mockable_android_23.xml
+
+.idea/libraries/palette_v7_23_1_1.xml
+
+.idea/libraries/percent_23_1_1.xml
+
+.idea/libraries/recyclerview_v7_23_1_1.xml
+
+.idea/libraries/support_annotations_23_1_1.xml
+
+.idea/libraries/support_v4_23_1_1.xml

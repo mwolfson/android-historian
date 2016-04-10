@@ -1,9 +1,11 @@
 package com.designdemo.uaha;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -59,10 +61,25 @@ public class DetailActivity extends AppCompatActivity {
         okclient = new OkHttpClient();
         loadBackdrop();
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            postponeEnterTransition();
+        }
+
         setupViews();
         setupFab();
         setupPalette();
         new WikiPullTask().execute();
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (hasFocus) {
+                startPostponedEnterTransition();
+            }
+        }
     }
 
     private void loadBackdrop() {

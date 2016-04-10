@@ -3,9 +3,11 @@ package com.designdemo.uaha;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,19 +84,16 @@ public class ProductListFragment extends Fragment {
             case (FRAG_TYPE_OS):
                 recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
                 recyclerView.addItemDecoration(new GridDividerDecoration(recyclerView.getContext()));
-                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                        getDataList()));
+                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList()));
                 break;
             case (FRAG_TYPE_DEVICE):
                 recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 2));
                 recyclerView.addItemDecoration(new GridDividerDecoration(recyclerView.getContext()));
-                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                        getDataList()));
+                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList()));
                 break;
             case (FRAG_TYPE_FAV):
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                recyclerView.setAdapter(new SimpleStaggaredRecyclerViewAdapter(getActivity(),
-                        getDataList()));
+                recyclerView.setAdapter(new SimpleStaggaredRecyclerViewAdapter(getActivity(), getDataList()));
 
                 break;
         }
@@ -126,6 +125,7 @@ public class ProductListFragment extends Fragment {
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
         private List<String> mValues;
+        private Activity mActivity;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public String mBoundString;
@@ -152,8 +152,9 @@ public class ProductListFragment extends Fragment {
             return mValues.get(position);
         }
 
-        public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
+        public SimpleStringRecyclerViewAdapter(Activity mActivityIn, Context context, List<String> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
+            mActivity = mActivityIn;
             mBackground = mTypedValue.resourceId;
             mValues = items;
         }
@@ -178,7 +179,13 @@ public class ProductListFragment extends Fragment {
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(DetailActivity.EXTRA_NAME, holder.mBoundString);
 
-                    context.startActivity(intent);
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        String transitionName = context.getString(R.string.transition_string);
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.mImageView, transitionName);
+                        context.startActivity(intent, options.toBundle());
+                    } else {
+                        context.startActivity(intent);
+                    }
                 }
             });
 
@@ -200,6 +207,7 @@ public class ProductListFragment extends Fragment {
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
         private List<String> mValues;
+        private Activity mActivity;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public String mBoundString;
@@ -227,10 +235,11 @@ public class ProductListFragment extends Fragment {
             return mValues.get(position);
         }
 
-        public SimpleStaggaredRecyclerViewAdapter(Context context, List<String> items) {
-            context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
+        public SimpleStaggaredRecyclerViewAdapter(Activity mActivityIn, List<String> items) {
+            mActivityIn.getApplicationContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
             mValues = items;
+            mActivity = mActivityIn;
         }
 
         @Override
@@ -273,7 +282,13 @@ public class ProductListFragment extends Fragment {
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(DetailActivity.EXTRA_NAME, holder.mBoundString);
 
-                    context.startActivity(intent);
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        String transitionName = context.getString(R.string.transition_string);
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.mImageView, transitionName);
+                        context.startActivity(intent, options.toBundle());
+                    } else {
+                        context.startActivity(intent);
+                    }
                 }
             });
 

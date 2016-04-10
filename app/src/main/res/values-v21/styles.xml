@@ -6,6 +6,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- Can even change system colors if we want to -->
         <item name="android:navigationBarColor">@color/green_500</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
 </resources>

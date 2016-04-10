@@ -25,10 +25,11 @@
             android:paddingRight="8dp"
             android:paddingTop="8dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/avatar"
                 android:layout_width="@dimen/list_item_avatar_size"
                 android:layout_height="@dimen/list_item_avatar_size"
+                android:transitionName="@string/transition_string"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="16dp"/>

@@ -7,6 +7,7 @@ This app is designed to demonstrate the various components of the Android Suppor
 
 This is not a complete example (but will be growing), and is intended to provide a high-level overview of many of the main controls in the Support and Design libraries:
 
+Sept 15, 2015
 - AppCompatActivity
 - CoordinatorLayout
 - AppBarLayout & Toolbar
@@ -25,6 +26,14 @@ This is not a complete example (but will be growing), and is intended to provide
 - FloatingActionButton
 - TextInputLayout
 - TextAppearance.AppCompat
+
+Oct 22, 2015
+- PercentageLayout
+
+Apr 10, 2016
+- Bottom Sheets
+- Vector Drawables
+- SharedElementTransition
 
 Special Thanks
 --------------

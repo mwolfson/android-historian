@@ -35,6 +35,8 @@
     <string name="dialog_photo_switch">SwitchCompat Is Pretty</string>
     <string name="android_supports_vectors">Isn\'t it cool that Android supports Vector Graphics!!!</string>
 
+    <string name="transition_string">transitionString</string>
+
     <string-array name="country_arrays">
         <item>Malaysia</item>
         <item>United States</item>

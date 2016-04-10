@@ -2,22 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="88dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:gravity="center_vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/avatar"
+        android:transitionName="@string/transition_string"
         android:layout_width="@dimen/list_item_avatar_size"
-        android:layout_height="@dimen/list_item_avatar_size"
-        android:layout_margin="16dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
 
     <TextView
         android:id="@android:id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
         android:textAppearance="?attr/textAppearanceListItem"/>
 
 </LinearLayout>

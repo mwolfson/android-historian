@@ -12,6 +12,7 @@ machine:
 
 dependencies:
     pre:
+    - wget "https://services.gradle.org/distributions/gradle-2.10-bin.zip"; unzip gradle-2.10-bin.zip
     - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
 
 test:

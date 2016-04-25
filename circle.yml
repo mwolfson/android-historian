@@ -1,6 +1,9 @@
 #
 # Build configuration for Circle CI
 #
+pre:
+- wget "https\://services.gradle.org/distributions/gradle-2.10-all.zip"; unzip gradle-2.10-all.zip
+
 
 general:
     artifacts:

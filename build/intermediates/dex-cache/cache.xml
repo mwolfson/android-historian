@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.1_89a71d2483119878a0a2029b9dd9c4d8e89ed51e.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.2.0/cb20062e14c523637b7643295418097b48cccec2/okhttp-urlconnection-2.2.0.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="cb20062e14c523637b7643295418097b48cccec2">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.2.0_99a8e3d56ecdc48fb942979dc6bd3eda5b317c03.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.2.0/c0b52915a48fa91b1b94a28d4a2997bac5f524df/okio-1.2.0.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/okio-1.2.0_3ff526d10043b72560c890124ea857f3dac64393.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_b13d560c7b6d308261902e94cfc50ef0d23a435c.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/percent/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="ce16cf844ef6f424adb546dd8f9b07cb03c5bf52">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-percent-23.2.1_e95af9a66237f8fb26b16e25bb8bf5c5fa6110c5.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.1_f3adf6aeba57ec74938222e14ecd51a860170819.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.6.0/a7537446a030da8eb0da4c71424d16c2589f6c4a/glide-3.6.0.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="a7537446a030da8eb0da4c71424d16c2589f6c4a">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/glide-3.6.0_18b6fd3d275636ef73cadaffcabd480094c088bb.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_28c776d527f21e0c12b724b3896dca6b099df1f8.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0_540fb0506090ad6275c0d2aada0e897bad07c6d6.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.1_cf6a99176b172484205ccdc60b8a43d0a35e7736.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.1_de5775abeaaefab966c0249f305c35d8772993e9.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="78b77fc066fdda6b634c0d3b1389770a18a4a2e3">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_3a21f79615de1155df14e023b2e112d2c18152c2.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="c8965c1a54116b0f3d3aa694bae4443d9695076f">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/instant-run_eaeb8a7b5c2bdc111a046f7a62795c6fd1d382a1.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/palette-v7/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="bcee2598dbb74f6d043225a0d7e178b0c7ea4006">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-palette-v7-23.2.1_f933b355de177eded1913ec78c2eb5d9e289551e.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/design/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.2.1_294ba4745954d2e39f916a6ae88403a27bbe578f.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_1c63ae6a45e8ccf9974942cf886d7cecbfc0ce08.jar" />
+    </item>
+    <item
+        jar="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.1"
+        sha1="cb86970df0f0f25f766d320b279c7858c1ca0003">
+        <dex dex="/Users/mwolfson/git/auha/android-historian/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.2.1_ae36cf824d2bfdb54fff5c532fb97dfcc67cca44.jar" />
+    </item>
+
+</items>

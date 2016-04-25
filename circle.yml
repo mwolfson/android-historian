@@ -9,6 +9,3 @@ machine:
 test:
   override:
     - ./gradlew assembleDebug
-
-post:
-    - cp -r app/build/outputs $CIRCLE_ARTIFACTS

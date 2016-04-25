@@ -1,9 +1,6 @@
 #
 # Build configuration for Circle CI
 #
-pre:
-- wget "https\://services.gradle.org/distributions/gradle-2.10-all.zip"; unzip gradle-2.10-all.zip
-
 
 general:
     artifacts:
@@ -12,6 +9,10 @@ general:
 machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
+
+dependencies:
+    pre:
+    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
 
 test:
   override:

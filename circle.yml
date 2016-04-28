@@ -13,7 +13,7 @@ test:
     - cp -r project-name/build/outputs $CIRCLE_ARTIFACTS
 
 deployment:
-  production: prodLabel
+  production:
     branch: master
     commands:
       - ./gradlew publishApkRelease

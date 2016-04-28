@@ -23,5 +23,3 @@ deployment:
     commands:
       - ./gradlew publishApkRelease
         -Dorg.gradle.project.track=beta
-
-Sample circle.yml

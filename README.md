@@ -44,5 +44,14 @@ Item Decorator from [recyclerview-playground](https://github.com/devunwired/recy
 Pre-requisites
 --------------
 
-- Android SDK, Build Tools and Support Repository for v23.0.1
+- Android SDK, Build Tools and Support Repository
+
+Presentation Slides and Video
+-----------------------------
+
+This project was originally created to support my presentation titled "Material Design Everywhere using the Android Support Libs".
+
+- My most current slides from this presentation are posted here: http://tiny.cc/MaterialAppCompat
+- The video from Droidcon NYC: https://www.youtube.com/watch?v=5u0dtzXL3PQ
+
 

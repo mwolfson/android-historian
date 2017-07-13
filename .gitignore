@@ -34,3 +34,6 @@ android-historian.iml
 app/app.iml
 
 .gradle/**
+*.lock
+
+*.bin

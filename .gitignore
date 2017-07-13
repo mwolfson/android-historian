@@ -11,6 +11,7 @@
 # Generated files
 bin/
 gen/
+build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -23,8 +24,6 @@ proguard/
 
 *.iml
 
-*.iml
-
 .idea/libraries/*
 
 .idea/*
@@ -33,7 +32,18 @@ android-historian.iml
 
 app/app.iml
 
-.gradle/**
 *.lock
 
 *.bin
+
+*.rawproto
+
+.gradle/2.10/
+
+projectFilesBackup/.idea/workspace.xml
+
+build/intermediates/dex-cache/cache.xml
+
+.gradle/2.10/taskArtifacts/fileHashes.bin
+
+.gradle/2.10/taskArtifacts/fileSnapshots.bin

@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/bugdroid"
+                app:srcCompat="@drawable/vct_bugdroid"
                 tools:ignore="MissingPrefix"/>
         </LinearLayout>
 

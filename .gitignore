@@ -47,3 +47,6 @@ build/intermediates/dex-cache/cache.xml
 .gradle/2.10/taskArtifacts/fileHashes.bin
 
 .gradle/2.10/taskArtifacts/fileSnapshots.bin
+.gradle/vcsWorkingDirs/gc.properties
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties

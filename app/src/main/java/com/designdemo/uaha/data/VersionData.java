@@ -1,4 +1,4 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.data;
 
 import android.os.Build;
 

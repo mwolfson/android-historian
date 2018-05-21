@@ -1,9 +1,11 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.designdemo.uaha.data.VersionData;
 
 import java.util.ArrayList;
 

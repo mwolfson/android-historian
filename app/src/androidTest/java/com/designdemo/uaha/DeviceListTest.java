@@ -4,8 +4,9 @@ package com.designdemo.uaha;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
+import androidx.test.suitebuilder.annotation.LargeTest;
 
+import com.designdemo.uaha.ui.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;

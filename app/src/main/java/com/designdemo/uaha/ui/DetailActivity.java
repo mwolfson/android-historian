@@ -1,4 +1,4 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.ui;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+
+import com.designdemo.uaha.util.PrefsUtil;
+import com.designdemo.uaha.data.VersionData;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

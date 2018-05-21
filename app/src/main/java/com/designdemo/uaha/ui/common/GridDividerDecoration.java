@@ -1,4 +1,4 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.ui.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,10 +1,13 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import com.designdemo.uaha.ui.MainActivity;
+import com.designdemo.uaha.util.PrefsUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;

@@ -40,7 +40,9 @@ dependencies {
     implementation 'com.squareup.okio:okio:1.2.0'
     implementation 'com.squareup.okhttp:okhttp:2.2.0'
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
-    implementation 'androidx.test.espresso:espresso-core:3.1.0-alpha2'
-    implementation 'androidx.test:runner:1.1.0-alpha2'
-    implementation 'androidx.test.espresso:espresso-contrib:3.1.0-alpha2'
+
+
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha2'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0-alpha2'
 }

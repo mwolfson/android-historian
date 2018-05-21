@@ -1,11 +1,11 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.ui.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.support.android.designlibdemo.R;

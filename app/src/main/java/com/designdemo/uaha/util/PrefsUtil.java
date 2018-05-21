@@ -1,9 +1,11 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.designdemo.uaha.data.VersionData;
 
 import java.util.ArrayList;
 
@@ -31,9 +33,7 @@ public class PrefsUtil {
 
         final SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(PREFS_KEY_PREFIX + productKey, toSet);
-        editor.commit();
-
-        //TODO - ASYNC
+        editor.apply();
 
         return toSet;
     }
@@ -48,7 +48,7 @@ public class PrefsUtil {
         final SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PREFS_KEY_NAME, name);
         editor.putLong(PREFS_KEY_PHONE, phone);
-        editor.commit();
+        editor.apply();
 
         return true;
     }
@@ -63,7 +63,13 @@ public class PrefsUtil {
         return prefs.getLong(PREFS_KEY_PHONE, 0);
     }
 
-    //For Favorites, we return verbose product names - which will Show the Staggared Layout Manager
+
+    /**
+     * Returns list of verbose product names for favorites
+     *
+     * @param cxt
+     * @return list of verbose product names
+     */
     public static ArrayList<String> getFavorites(Context cxt) {
         ArrayList<String> list = new ArrayList<>();
 

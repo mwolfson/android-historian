@@ -157,67 +157,67 @@ public class VersionData {
 
         switch (osVersion) {
             case OS_CUPCAKE:
-                retStr = "Cupcake (API Level 3)";
+                retStr = "Cupcake-API Level 3";
                 break;
             case OS_DONUT:
-                retStr = "Donut (API Level 4)";
+                retStr = "Donut-API Level 4";
                 break;
             case OS_ECLAIR:
-                retStr = "Eclair (API Level 5 - 7)";
+                retStr = "Eclair-API Level 5 to 7";
                 break;
             case OS_FROYO:
-                retStr = "Froyo (API Level 8)";
+                retStr = "Froyo-API Level 8";
                 break;
             case OS_GINGERBREAD:
-                retStr = "Gingerbread (API Level 9, 10)";
+                retStr = "Gingerbread-API Level 9, 10";
                 break;
             case OS_HONEYCOMB:
-                retStr = "Honeycomb (API Level 11 - 13)";
+                retStr = "Honeycomb-API Level 11 to 13";
                 break;
             case OS_ICS:
-                retStr = "Ice Cream Sandwich (API Level 14, 15)";
+                retStr = "Ice Cream Sandwich-API Level 14, 15";
                 break;
             case OS_JB:
-                retStr = "Jelly Bean (API Level 16 - 18)";
+                retStr = "Jelly Bean-API Level 16 to 18";
                 break;
             case OS_KITKAT:
-                retStr = "KitKat (API Level 19, 20)";
+                retStr = "KitKat-API Level 19, 20";
                 break;
             case OS_LOLLIPOP:
-                retStr = "Lollipop (API Level 21)";
+                retStr = "Lollipop-API Level 21";
                 break;
             case DEVICE_DROID:
-                retStr = "Motorola Droid";
+                retStr = "Droid-Motorola";
                 break;
             case DEVICE_G1:
-                retStr = "HTC G1";
+                retStr = "G1-HTC";
                 break;
             case DEVICE_GNEX:
-                retStr = "Samsung Galaxy Nexus";
+                retStr = "Galaxy Nexus-Samsung";
                 break;
             case DEVICE_N1:
-                retStr = "HTC Nexus 1";
+                retStr = "Nexus One-HTC";
                 break;
             case DEVICE_N4:
-                retStr = "LG Nexus 4";
+                retStr = "Nexus 4-LG";
                 break;
             case DEVICE_N5:
-                retStr = "LG Nexus 5";
+                retStr = "Nexus 5-LG";
                 break;
             case DEVICE_N6:
-                retStr = "Motorola Nexus 6";
+                retStr = "Nexus 6-Motorola";
                 break;
             case DEVICE_N7:
-                retStr = "ASUS Nexus 7";
+                retStr = "Nexus 7-ASUS";
                 break;
             case DEVICE_N9:
-                retStr = "HTC Nexus 9";
+                retStr = "Nexus 9-HTC";
                 break;
             case DEVICE_NEXS:
-                retStr = "Samsung Nexus S";
+                retStr = "Nexus S-Samsung";
                 break;
             default:
-                retStr = "None Set";
+                retStr = "None-Set";
                 break;
         }
         return retStr;
@@ -246,7 +246,7 @@ public class VersionData {
                 retStr = "Android%20Honeycomb";
                 break;
             case OS_ICS:
-                retStr = "Android%20Ice%20Crea%20Sandwich";
+                retStr = "Android%20Ice%20Cream%20Sandwich";
                 break;
             case OS_JB:
                 retStr = "Android%20Jelly%20Bean";

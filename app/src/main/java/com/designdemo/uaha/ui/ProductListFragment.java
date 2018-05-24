@@ -5,18 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
+import com.designdemo.uaha.ui.adapter.SimpleStaggaredRecyclerViewAdapter;
+import com.designdemo.uaha.ui.adapter.SimpleStringRecyclerViewAdapter;
 import com.designdemo.uaha.ui.common.GridDividerDecoration;
 import com.designdemo.uaha.data.VersionData;
 import com.designdemo.uaha.util.PrefsUtil;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -43,8 +48,7 @@ public class ProductListFragment extends Fragment {
     private int thisFragType = 0;
     private Activity mainActivity;
 
-    private BottomSheetBehavior mBottomSheetBehavior;
-
+    private BottomSheetBehavior bottomSheetBehavior;
 
 
     @Nullable
@@ -57,18 +61,16 @@ public class ProductListFragment extends Fragment {
         mainActivity = getActivity();
 
         thisFragType = getArguments().getInt(ARG_FRAG_TYPE, 0);
-        Log.d("MSW", "The Frag Type is: " + thisFragType);
         setupRecyclerView(rv);
 
-
         View bottomSheet = mainView.findViewById(R.id.bottom_sheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
-        mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mBottomSheetBehavior.setPeekHeight(0);
+                    bottomSheetBehavior.setPeekHeight(0);
                 }
             }
 
@@ -77,7 +79,7 @@ public class ProductListFragment extends Fragment {
             }
         });
 
-        mBottomSheetBehavior.setPeekHeight(300);
+        bottomSheetBehavior.setPeekHeight(300);
 
         return mainView;
     }
@@ -98,7 +100,6 @@ public class ProductListFragment extends Fragment {
             case (FRAG_TYPE_FAV):
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 recyclerView.setAdapter(new SimpleStaggaredRecyclerViewAdapter(getActivity(), getDataList()));
-
                 break;
         }
     }
@@ -123,188 +124,4 @@ public class ProductListFragment extends Fragment {
         return list;
     }
 
-    public static class SimpleStringRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
-
-        private final TypedValue mTypedValue = new TypedValue();
-        private int mBackground;
-        private List<String> mValues;
-        private Activity mActivity;
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public String mBoundString;
-
-            public final View mView;
-            public final ImageView mImageView;
-            public final TextView mTextView;
-            public int os_version;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mImageView = (ImageView) view.findViewById(R.id.avatar);
-                mTextView = (TextView) view.findViewById(android.R.id.text1);
-            }
-
-            @Override
-            public String toString() {
-                return super.toString() + " '" + mTextView.getText();
-            }
-        }
-
-        public String getValueAt(int position) {
-            return mValues.get(position);
-        }
-
-        public SimpleStringRecyclerViewAdapter(Activity mActivityIn, Context context, List<String> items) {
-            context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
-            mActivity = mActivityIn;
-            mBackground = mTypedValue.resourceId;
-            mValues = items;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_item, parent, false);
-            view.setBackgroundResource(mBackground);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mBoundString = mValues.get(position);
-            holder.mTextView.setText(mValues.get(position));
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity.EXTRA_NAME, holder.mBoundString);
-
-                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        String transitionName = context.getString(R.string.transition_string);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.mImageView, transitionName);
-                        context.startActivity(intent, options.toBundle());
-                    } else {
-                        context.startActivity(intent);
-                    }
-                }
-            });
-
-            Glide.with(holder.mImageView.getContext())
-                    .load(VersionData.getOsDrawable(VersionData.getOsNum(holder.mBoundString)))
-                    .fitCenter()
-                    .into(holder.mImageView);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-    }
-
-    public static class SimpleStaggaredRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleStaggaredRecyclerViewAdapter.ViewHolder> {
-
-        private final TypedValue mTypedValue = new TypedValue();
-        private int mBackground;
-        private List<String> mValues;
-        private Activity mActivity;
-
-        public static class ViewHolder extends RecyclerView.ViewHolder {
-            public String mBoundString;
-
-            public final View mView;
-            public final ImageView mImageView;
-            public final TextView mTextView;
-            public final TextView mTextView2;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mImageView = (ImageView) view.findViewById(R.id.avatar);
-                mTextView = (TextView) view.findViewById(R.id.text_title);
-                mTextView2 = (TextView) view.findViewById(R.id.text_content);
-            }
-
-            @Override
-            public String toString() {
-                return super.toString() + " '" + mTextView.getText();
-            }
-        }
-
-        public String getValueAt(int position) {
-            return mValues.get(position);
-        }
-
-        public SimpleStaggaredRecyclerViewAdapter(Activity mActivityIn, List<String> items) {
-            mActivityIn.getApplicationContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
-            mBackground = mTypedValue.resourceId;
-            mValues = items;
-            mActivity = mActivityIn;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.stag_list_item, parent, false);
-            view.setBackgroundResource(mBackground);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mBoundString = mValues.get(position);
-            holder.mTextView.setText(mValues.get(position));
-            // We will set random length text to offset this view for staggarred effect
-            Random rand = new Random();
-            int randomNum = rand.nextInt(3);
-
-            int strRes = 0;
-
-            Log.d("MSW", "The random number is: " +strRes);
-            switch (randomNum) {
-                case (0):
-                    strRes = R.string.ipsum_med;
-                    break;
-                case (1):
-                    strRes = R.string.ipsum_long;
-                    break;
-                default:
-                    strRes = R.string.ipsum_short;
-                    break;
-            }
-
-            holder.mTextView2.setText(strRes);
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity.EXTRA_NAME, holder.mBoundString);
-
-                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        String transitionName = context.getString(R.string.transition_string);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.mImageView, transitionName);
-                        context.startActivity(intent, options.toBundle());
-                    } else {
-                        context.startActivity(intent);
-                    }
-                }
-            });
-
-            Glide.with(holder.mImageView.getContext())
-                    .load(VersionData.getOsDrawable(VersionData.getOsNum(holder.mBoundString)))
-                    .fitCenter()
-                    .into(holder.mImageView);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-    }
 }

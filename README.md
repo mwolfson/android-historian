@@ -3,9 +3,23 @@
 Android Ultimate Historian - Material Design Demo
 =================================================
 
-This app is designed to demonstrate the various components of the Android Support libraries, in particular, showing how to implement Material design into your app, using these controls.
+This app is designed to demonstrate the various components of the Material Design Components, in particular, showing how to implement Material design into your app, using these controls.
 
-This is not a complete example (but will be growing), and is intended to provide a high-level overview of many of the main controls in the Support and Design libraries:
+The [official Material site](https://material.io/develop/android/) has great information specific to Android Development.
+
+May 24, 2018
+- Update packages and build
+    - Jetpack conversion (androidx)
+    - Using new Material Component Packages
+- Auto-Resizing TextViews
+
+Apr 10, 2016
+- Bottom Sheets
+- Vector Drawables
+- SharedElementTransition
+
+Oct 22, 2015
+- PercentageLayout
 
 Sept 15, 2015
 - AppCompatActivity
@@ -26,14 +40,6 @@ Sept 15, 2015
 - FloatingActionButton
 - TextInputLayout
 - TextAppearance.AppCompat
-
-Oct 22, 2015
-- PercentageLayout
-
-Apr 10, 2016
-- Bottom Sheets
-- Vector Drawables
-- SharedElementTransition
 
 Special Thanks
 --------------

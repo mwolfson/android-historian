@@ -2,9 +2,10 @@ package com.designdemo.uaha;
 
 
 import androidx.test.espresso.ViewInteraction;
+//import androidx.test.rule.ActivityTestRule;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
-import androidx.test.suitebuilder.annotation.LargeTest;
+//import androidx.test.suitebuilder.annotation.LargeTest;
 
 import com.designdemo.uaha.ui.MainActivity;
 import com.support.android.designlibdemo.R;
@@ -22,9 +23,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static org.hamcrest.Matchers.allOf;
 
-@LargeTest
+//@LargeTest
 @RunWith(AndroidJUnit4.class)
 public class VersionListTest {
+
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);

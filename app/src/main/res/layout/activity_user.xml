@@ -77,10 +77,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/profile_name_phone_text"/>
 
+                        <!-- There is lots you can do with the native controls -->
+                        <!-- https://material.io/develop/android/components/text-input-layout/ -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/name_editlayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="10"
                             android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp">
 
@@ -91,11 +96,12 @@
                                 android:focusable="true"
                                 android:hint="@string/profile_nickname_hint"
                                 android:inputType="textPersonName"
-                                android:maxLength="10"/>
+                                android:maxLength="20"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/phone_editlayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
@@ -109,6 +115,25 @@
                                 android:hint="@string/profile_phone_hint"
                                 android:inputType="phone"
                                 android:maxLength="14"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/password_editlayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
+                            app:passwordToggleEnabled="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/password_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="true"
+                                android:hint="Enter a Password"
+                                android:inputType="textPassword"
+                                android:maxLength="8"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>

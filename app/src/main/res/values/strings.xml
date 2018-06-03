@@ -28,6 +28,7 @@
     <string name="profile_nickname_hint">Nickname (4 - 10 Chars)</string>
     <string name="profile_phone_hint">Enter ANY phone number</string>
     <string name="picture_dialog_title">Profile Picture Selector</string>
+    <string name="profile_saved_confirm">Your profile has been updated</string>
     <string name="picture_dialog_text">In the future you will be able to set your profile picture using this Material Dialog!</string>
     <string name="picture_dialog_button">Dismiss</string>
     <string name="profile_snackbar">Your profile has been saved</string>
@@ -36,6 +37,7 @@
     <string name="android_supports_vectors">Isn\'t it cool that Android supports Vector Graphics!!!</string>
 
     <string name="transition_string">transitionString</string>
+
 
     <string-array name="country_arrays">
         <item>Malaysia</item>

@@ -4,7 +4,7 @@
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo">
     </style>
 
-    <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/green_500</item>
         <item name="colorPrimaryDark">@color/green_700</item>
         <item name="colorAccent">@color/amber_500</item>

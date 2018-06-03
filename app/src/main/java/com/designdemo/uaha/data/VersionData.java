@@ -5,7 +5,8 @@ import android.os.Build;
 import com.support.android.designlibdemo.R;
 
 public class VersionData {
-    public static final int NUM_OF_OS = 9;
+    public static final int NUM_OF_OS = 12;
+    public static final int NUM_OF_DEVICES = 9;
 
     public static int getOsDrawable(int osVersion) {
         int retDraw = 0;
@@ -40,6 +41,15 @@ public class VersionData {
                 break;
             case OS_LOLLIPOP:
                 retDraw = R.drawable.ic_lollipop;
+                break;
+            case OS_MARSHMALLOW:
+                retDraw = R.drawable.ic_marshmallow;
+                break;
+            case OS_NOUGAT:
+                retDraw = R.drawable.ic_nougat;
+                break;
+            case OS_OREO:
+                retDraw = R.drawable.ic_oreo;
                 break;
             case DEVICE_DROID:
                 retDraw = R.drawable.ic_device_droid;
@@ -101,7 +111,13 @@ public class VersionData {
             return OS_KITKAT;
         } else if (osName.equals(getProductName(OS_LOLLIPOP))) {
             return OS_LOLLIPOP;
-        } else if (osName.equals(getProductName(DEVICE_DROID))) {
+        } else if (osName.equals(getProductName(OS_MARSHMALLOW))) {
+            return OS_MARSHMALLOW;
+        }else if (osName.equals(getProductName(OS_NOUGAT))) {
+            return OS_NOUGAT;
+        }else if (osName.equals(getProductName(OS_OREO))) {
+            return OS_OREO;
+        }else if (osName.equals(getProductName(DEVICE_DROID))) {
             return DEVICE_DROID;
         } else if (osName.equals(getProductName(DEVICE_G1))) {
             return DEVICE_G1;
@@ -137,6 +153,9 @@ public class VersionData {
     public static final int OS_JB = Build.VERSION_CODES.JELLY_BEAN;
     public static final int OS_KITKAT = Build.VERSION_CODES.KITKAT;
     public static final int OS_LOLLIPOP = Build.VERSION_CODES.LOLLIPOP;
+    public static final int OS_MARSHMALLOW = Build.VERSION_CODES.M;
+    public static final int OS_NOUGAT = Build.VERSION_CODES.N;
+    public static final int OS_OREO = Build.VERSION_CODES.O;
     public static final int DEVICE_G1 = 100;
     public static final int DEVICE_DROID = 101;
     public static final int DEVICE_GNEX = 102;
@@ -185,6 +204,15 @@ public class VersionData {
                 break;
             case OS_LOLLIPOP:
                 retStr = "Lollipop-API Level 21";
+                break;
+            case OS_MARSHMALLOW:
+                retStr = "Marshmallow-API Level 22";
+                break;
+            case OS_NOUGAT:
+                retStr = "Nougat-API Level 23";
+                break;
+            case OS_OREO:
+                retStr = "Oreo-API Level 24";
                 break;
             case DEVICE_DROID:
                 retStr = "Droid-Motorola";
@@ -304,7 +332,10 @@ public class VersionData {
             getProductName(OS_ICS),
             getProductName(OS_JB),
             getProductName(OS_KITKAT),
-            getProductName(OS_LOLLIPOP)
+            getProductName(OS_LOLLIPOP),
+            getProductName(OS_MARSHMALLOW),
+            getProductName(OS_NOUGAT),
+            getProductName(OS_OREO)
     };
 
     public static final String[] deviceStrings = {

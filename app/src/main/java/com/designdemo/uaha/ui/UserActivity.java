@@ -46,7 +46,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         mainActivity = this;
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
@@ -55,7 +55,7 @@ public class UserActivity extends AppCompatActivity {
 
         setupViews();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
@@ -78,14 +78,14 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nameEnterField = (AppCompatEditText) findViewById(R.id.name_edit);
-        phoneEnterField = (AppCompatEditText) findViewById(R.id.phone_edit);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        nameEnterField = findViewById(R.id.name_edit);
+        phoneEnterField = findViewById(R.id.phone_edit);
 
         //Format phone number as user is typing
         phoneEnterField.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
-        picButton = (Button) findViewById(R.id.profile_pic_button);
+        picButton = findViewById(R.id.profile_pic_button);
         picButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,12 +93,12 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Validate values
                 int nameLen = nameEnterField.getText().length();
-                View mainView = (View) findViewById(R.id.main_content);
+                View mainView = findViewById(R.id.main_content);
 
                 if (nameLen < 4) {
                     nameEnterField.setError("At least 4 characters");
@@ -128,7 +128,7 @@ public class UserActivity extends AppCompatActivity {
 
                 PrefsUtil.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
 
-                Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
+                Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
                         .setAction("Undo", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -221,7 +221,7 @@ public class UserActivity extends AppCompatActivity {
                                 startActivity(browser1);
                                 return true;
                             case R.id.nav_link2:
-                                Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/"));
+                                Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"));
                                 startActivity(browser2);
                                 return true;
                             default:

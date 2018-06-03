@@ -56,7 +56,7 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mainView = inflater.inflate(R.layout.fragment_prod_list, container, false);
 
-        RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recyclerview);
+        RecyclerView rv = mainView.findViewById(R.id.recyclerview);
 
         mainActivity = getActivity();
 
@@ -113,7 +113,7 @@ public class ProductListFragment extends Fragment {
                 }
                 break;
             case (FRAG_TYPE_DEVICE):
-                for (int x = 0; x <= VersionData.NUM_OF_OS; x++) {
+                for (int x = 0; x <= VersionData.NUM_OF_DEVICES; x++) {
                     list.add(VersionData.deviceStrings[x]);
                 }
                 break;

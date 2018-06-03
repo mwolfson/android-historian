@@ -4,6 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,10 +16,12 @@ import com.designdemo.uaha.data.VersionData;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -55,12 +60,16 @@ public class DetailActivity extends AppCompatActivity {
         final String androidName = intent.getStringExtra(EXTRA_NAME);
         osVersion = VersionData.getOsNum(androidName);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(VersionData.getProductName(osVersion));
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+
+        //Split the and Version to display better
+        String splitString = VersionData.getProductName(osVersion);
+        String[] parts = splitString.split("-");
+        collapsingToolbar.setTitle(parts[0]);
 
         okclient = new OkHttpClient();
         loadBackdrop();
@@ -97,7 +106,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
     private void setupFab() {
-        fab = (FloatingActionButton) findViewById((R.id.fab_detail));
+        fab = findViewById((R.id.fab_detail));
 
         // Set initial state based on pref
         setFabIcon();
@@ -113,7 +122,7 @@ public class DetailActivity extends AppCompatActivity {
                 //Send the user a message to let them know change was made
                 View mainView = findViewById(R.id.main_content);
                 Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
-                        .show(); // Don’t forget to show!
+                        .show();
             }
         });
     }
@@ -132,38 +141,45 @@ public class DetailActivity extends AppCompatActivity {
         Palette.PaletteAsyncListener listener = new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 Log.d("Palette", "Palette has been generated");
-                TextView pal_vib = (TextView) findViewById(R.id.palette_vibrant);
-                TextView perc1left = (TextView) findViewById(R.id.perc1_left);
+                TextView pal_vib = findViewById(R.id.palette_vibrant);
+                TextView perc1left = findViewById(R.id.perc1_left);
                 perc1left.setBackgroundColor(palette.getVibrantColor(0x000000));
                 pal_vib.setBackgroundColor(palette.getVibrantColor(0x000000));
 
-                TextView pal_vib_dark = (TextView) findViewById(R.id.palette_vibrant_dark);
-                TextView perc1mid = (TextView) findViewById(R.id.perc1_middle);
+                TextView pal_vib_dark = findViewById(R.id.palette_vibrant_dark);
+                TextView perc1mid = findViewById(R.id.perc1_middle);
                 perc1mid.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
                 pal_vib_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
 
-                TextView pal_vib_light = (TextView) findViewById(R.id.palette_vibrant_light);
-                TextView perc1right = (TextView) findViewById(R.id.perc1_right);
+                TextView pal_vib_light = findViewById(R.id.palette_vibrant_light);
+                TextView perc1right = findViewById(R.id.perc1_right);
                 perc1right.setBackgroundColor(palette.getLightVibrantColor(0x000000));
                 pal_vib_light.setBackgroundColor(palette.getLightVibrantColor(0x000000));
 
-                TextView pal_muted = (TextView) findViewById(R.id.palette_muted);
-                TextView perc2left = (TextView) findViewById(R.id.perc2_left);
+                TextView pal_muted = findViewById(R.id.palette_muted);
+                TextView perc2left = findViewById(R.id.perc2_left);
                 perc2left.setBackgroundColor(palette.getMutedColor(0x000000));
                 pal_muted.setBackgroundColor(palette.getMutedColor(0x000000));
 
-                TextView pal_muted_dark = (TextView) findViewById(R.id.palette_muted_dark);
-                TextView perc2mid = (TextView) findViewById(R.id.perc2_middle);
+                TextView pal_muted_dark = findViewById(R.id.palette_muted_dark);
+                TextView perc2mid = findViewById(R.id.perc2_middle);
                 perc2mid.setBackgroundColor(palette.getDarkMutedColor(0x000000));
                 pal_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000));
 
-                TextView pal_muted_light = (TextView) findViewById(R.id.palette_muted_light);
-                TextView perc2right = (TextView) findViewById(R.id.perc2_right);
+                TextView pal_muted_light = findViewById(R.id.palette_muted_light);
+                TextView perc2right = findViewById(R.id.perc2_right);
                 perc2right.setBackgroundColor(palette.getLightMutedColor(0x000000));
                 pal_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000));
 
                 //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
                 collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
+
+                //The back button should also have a better color applied to ensure it is visible
+                String resName = Build.VERSION.SDK_INT >= 23 ? "abc_ic_ab_back_material" : "abc_ic_ab_back_mtrl_am_alpha";
+                int res = getResources().getIdentifier(resName, "drawable", getPackageName());
+                Drawable upArrow = getResources().getDrawable(res);
+                upArrow.setColorFilter(palette.getVibrantColor(0x000000), PorterDuff.Mode.SRC_ATOP);
+                getSupportActionBar().setHomeAsUpIndicator(upArrow);
             }
         };
 

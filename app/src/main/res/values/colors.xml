@@ -2,6 +2,8 @@
 <resources>
     <color name="window_background">#FFF5F5F5</color>
 
+    <color name="white">#FFF5FFFF</color>
+
     <!-- Material Color Resources -->
     <color name="red_050">#fde0dc</color> <!-- Use with black text -->
     <color name="red_100">#f9bdbb</color> <!-- Use with black text -->

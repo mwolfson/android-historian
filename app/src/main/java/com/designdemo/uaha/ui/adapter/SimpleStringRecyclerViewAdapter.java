@@ -41,9 +41,9 @@ public class SimpleStringRecyclerViewAdapter
         public ViewHolder(View view) {
             super(view);
             this.view = view;
-            imageView = (ImageView) view.findViewById(R.id.avatar);
-            titleText = (TextView) view.findViewById(R.id.list_title);
-            subTitleText = (TextView) view.findViewById(R.id.list_subtext);
+            imageView = view.findViewById(R.id.avatar);
+            titleText = view.findViewById(R.id.list_title);
+            subTitleText = view.findViewById(R.id.list_subtext);
         }
 
         @Override
@@ -79,20 +79,17 @@ public class SimpleStringRecyclerViewAdapter
         holder.titleText.setText(parts[0]);
         holder.subTitleText.setText(parts[1]);
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_NAME, holder.boundString);
+        holder.view.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_NAME, holder.boundString);
 
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    String transitionName = context.getString(R.string.transition_string);
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName);
-                    context.startActivity(intent, options.toBundle());
-                } else {
-                    context.startActivity(intent);
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                String transitionName = context.getString(R.string.transition_string);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName);
+                context.startActivity(intent, options.toBundle());
+            } else {
+                context.startActivity(intent);
             }
         });
 

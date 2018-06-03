@@ -63,7 +63,7 @@ public class UserActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_actions, menu);
+        getMenuInflater().inflate(R.menu.profile_actions, menu);
         return true;
     }
 
@@ -86,61 +86,51 @@ public class UserActivity extends AppCompatActivity {
         phoneEnterField.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
         picButton = findViewById(R.id.profile_pic_button);
-        picButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setPictureDialog();
-            }
+        picButton.setOnClickListener(v -> {
+            setPictureDialog();
         });
 
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //Validate values
-                int nameLen = nameEnterField.getText().length();
-                View mainView = findViewById(R.id.main_content);
+        fab.setOnClickListener(v -> {
+            //Validate values
+            int nameLen = nameEnterField.getText().length();
+            View mainView = findViewById(R.id.main_content);
 
-                if (nameLen < 4) {
-                    nameEnterField.setError("At least 4 characters");
-                    nameEnterField.requestFocus();
-                    Snackbar.make(mainView, "Name input error", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                int phoneLen = phoneEnterField.getText().length();
-                if (phoneLen != 14) {
-                    phoneEnterField.setError("Invalid Phone");
-                    phoneEnterField.requestFocus();
-                    Snackbar.make(mainView, "Phone input error",Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //Validation successful, save values and message user
-
-                // Save original Values before sending, in-case user changes their mind
-                final String beforeName = PrefsUtil.getName(mainActivity.getApplicationContext());
-                final long beforePhone = PrefsUtil.getPhone(mainActivity.getApplicationContext());
-
-                // Store new values
-                final String nameToSet = nameEnterField.getText().toString();
-                String formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.getText().toString());
-                final long phoneToSet = Long.valueOf(formattedNum);
-
-                PrefsUtil.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
-
-                Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
-                        .setAction("Undo", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Reset to original
-                                boolean complete = PrefsUtil.setProfile(mainActivity.getApplicationContext(), beforeName, beforePhone);
-                                if (complete) {
-                                    setPhoneNameValues();
-                                }
-                            }
-                        })
-                        .show();
+            if (nameLen < 4) {
+                nameEnterField.setError(getString(R.string.at_least_4_char));
+                nameEnterField.requestFocus();
+                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show();
+                return;
             }
+
+            int phoneLen = phoneEnterField.getText().length();
+            if (phoneLen != 14) {
+                phoneEnterField.setError(getString(R.string.invalid_phone));
+                phoneEnterField.requestFocus();
+                Snackbar.make(mainView, getString(R.string.phone_input_error),Snackbar.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Save original Values before sending, in-case user changes their mind
+            final String beforeName = PrefsUtil.getName(mainActivity.getApplicationContext());
+            final long beforePhone = PrefsUtil.getPhone(mainActivity.getApplicationContext());
+
+            // Store new values
+            final String nameToSet = nameEnterField.getText().toString();
+            String formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.getText().toString());
+            final long phoneToSet = Long.valueOf(formattedNum);
+
+            PrefsUtil.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
+
+            Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.undo), view -> {
+                        // Reset to original
+                        boolean complete = PrefsUtil.setProfile(mainActivity.getApplicationContext(), beforeName, beforePhone);
+                        if (complete) {
+                            setPhoneNameValues();
+                        }
+                    })
+                    .show();
         });
 
         // Set initial values from Prefs
@@ -167,23 +157,17 @@ public class UserActivity extends AppCompatActivity {
         builder.setView(dialogView);
         builder.setTitle(mainActivity.getString(R.string.picture_dialog_title));
         builder.setCancelable(true);
-        builder.setPositiveButton(mainActivity.getString(R.string.picture_dialog_button), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Send the phone number to get validated
-                Log.d("Dialog", "The positive button was pressed");
-            }
+        builder.setPositiveButton(mainActivity.getString(R.string.picture_dialog_button), (dialog, which) -> {
+            Log.d("Dialog", "The positive button was pressed");
         });
 
         final SwitchCompat prefSwitch = (SwitchCompat) dialogView.findViewById(R.id.photo_pref_switch);
         prefSwitch.setChecked(true);
-        prefSwitch.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (prefSwitch.isChecked()) {
-                    Log.d("Dialog", "The Photo switch was enabled");
-                } else {
-                    Log.d("Dialog", "The Photo switch was disabled");
-                }
+        prefSwitch.setOnClickListener(v -> {
+            if (prefSwitch.isChecked()) {
+                Log.d("Dialog", "The Photo switch was enabled");
+            } else {
+                Log.d("Dialog", "The Photo switch was disabled");
             }
         });
 
@@ -193,40 +177,37 @@ public class UserActivity extends AppCompatActivity {
 
     private void setupDrawerContent(final NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_home:
-                                Intent osIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                osIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.OS_FRAG);
-                                startActivity(osIntent);
-                                return true;
-                            case R.id.nav_devices:
-                                Intent deviceIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                deviceIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.DEVICE_FRAG);
-                                startActivity(deviceIntent);
-                                return true;
-                            case R.id.nav_favorites:
-                                Intent favIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                favIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.FAV_FRAG);
-                                startActivity(favIntent);
-                                return true;
-                            case R.id.nav_userinfo:
-                                drawerLayout.closeDrawers();
-                                return true;
-                            case R.id.nav_link1:
-                                Intent browser1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"));
-                                startActivity(browser1);
-                                return true;
-                            case R.id.nav_link2:
-                                Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"));
-                                startActivity(browser2);
-                                return true;
-                            default:
-                                return true;
-                        }
+                menuItem -> {
+                    menuItem.setChecked(true);
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_home:
+                            Intent osIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            osIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.OS_FRAG);
+                            startActivity(osIntent);
+                            return true;
+                        case R.id.nav_devices:
+                            Intent deviceIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            deviceIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.DEVICE_FRAG);
+                            startActivity(deviceIntent);
+                            return true;
+                        case R.id.nav_favorites:
+                            Intent favIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            favIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.FAV_FRAG);
+                            startActivity(favIntent);
+                            return true;
+                        case R.id.nav_userinfo:
+                            drawerLayout.closeDrawers();
+                            return true;
+                        case R.id.nav_link1:
+                            Intent browser1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"));
+                            startActivity(browser1);
+                            return true;
+                        case R.id.nav_link2:
+                            Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"));
+                            startActivity(browser2);
+                            return true;
+                        default:
+                            return true;
                     }
                 });
     }

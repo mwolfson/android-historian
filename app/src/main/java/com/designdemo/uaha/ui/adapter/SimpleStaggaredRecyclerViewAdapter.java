@@ -42,9 +42,9 @@ public class SimpleStaggaredRecyclerViewAdapter
         public ViewHolder(View view) {
             super(view);
             this.view = view;
-            imageView = (ImageView) view.findViewById(R.id.avatar);
-            textView = (TextView) view.findViewById(R.id.text_title);
-            textView2 = (TextView) view.findViewById(R.id.text_content);
+            imageView = view.findViewById(R.id.avatar);
+            textView = view.findViewById(R.id.text_title);
+            textView2 = view.findViewById(R.id.text_content);
         }
 
         @Override
@@ -82,8 +82,6 @@ public class SimpleStaggaredRecyclerViewAdapter
         int randomNum = rand.nextInt(3);
 
         int strRes = 0;
-
-        Log.d("MSW", "The random number is: " +strRes);
         switch (randomNum) {
             case (0):
                 strRes = R.string.ipsum_med;
@@ -98,20 +96,17 @@ public class SimpleStaggaredRecyclerViewAdapter
 
         holder.textView2.setText(strRes);
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_NAME, holder.boundString);
+        holder.view.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_NAME, holder.boundString);
 
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    String transitionName = context.getString(R.string.transition_string);
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName);
-                    context.startActivity(intent, options.toBundle());
-                } else {
-                    context.startActivity(intent);
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                String transitionName = context.getString(R.string.transition_string);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName);
+                context.startActivity(intent, options.toBundle());
+            } else {
+                context.startActivity(intent);
             }
         });
 

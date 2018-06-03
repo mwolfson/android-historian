@@ -9,9 +9,6 @@ import com.designdemo.uaha.data.VersionData;
 
 import java.util.ArrayList;
 
-/**
- * Created by mwolfson on 8/6/15.
- */
 public class PrefsUtil {
     private static final String PREFS_KEY_PREFIX = "prefs_favlist_";
     private static final String PREFS_KEY_NAME = "prefs_name_";
@@ -72,8 +69,6 @@ public class PrefsUtil {
      */
     public static ArrayList<String> getFavorites(Context cxt) {
         ArrayList<String> list = new ArrayList<>();
-
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(cxt);
 
         //Clunky I know
         for (int x = 0; x < VersionData.osVersions.length; x++) {

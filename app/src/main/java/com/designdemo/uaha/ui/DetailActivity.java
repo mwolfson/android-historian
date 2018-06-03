@@ -49,8 +49,6 @@ public class DetailActivity extends AppCompatActivity {
     private OkHttpClient okclient;
     private int osVersion;
 
-    //
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,16 +112,14 @@ public class DetailActivity extends AppCompatActivity {
         // To over-ride the color of the FAB other then the theme color
         //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.grey_300)));
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                PrefsUtil.toggleFavorite(getApplicationContext(), osVersion);
-                setFabIcon();
+        fab.setOnClickListener(v -> {
+            PrefsUtil.toggleFavorite(getApplicationContext(), osVersion);
+            setFabIcon();
 
-                //Send the user a message to let them know change was made
-                View mainView = findViewById(R.id.main_content);
-                Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
-                        .show();
-            }
+            //Send the user a message to let them know change was made
+            View mainView = findViewById(R.id.main_content);
+            Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
+                    .show();
         });
     }
 
@@ -138,49 +134,47 @@ public class DetailActivity extends AppCompatActivity {
     private void setupPalette() {
         Bitmap bm = BitmapFactory.decodeResource(getResources(), VersionData.getOsDrawable(osVersion));
 
-        Palette.PaletteAsyncListener listener = new Palette.PaletteAsyncListener() {
-            public void onGenerated(Palette palette) {
-                Log.d("Palette", "Palette has been generated");
-                TextView pal_vib = findViewById(R.id.palette_vibrant);
-                TextView perc1left = findViewById(R.id.perc1_left);
-                perc1left.setBackgroundColor(palette.getVibrantColor(0x000000));
-                pal_vib.setBackgroundColor(palette.getVibrantColor(0x000000));
+        Palette.PaletteAsyncListener listener = palette -> {
+            Log.d("Palette", "Palette has been generated");
+            TextView pal_vib = findViewById(R.id.palette_vibrant);
+            TextView perc1left = findViewById(R.id.perc1_left);
+            perc1left.setBackgroundColor(palette.getVibrantColor(0x000000));
+            pal_vib.setBackgroundColor(palette.getVibrantColor(0x000000));
 
-                TextView pal_vib_dark = findViewById(R.id.palette_vibrant_dark);
-                TextView perc1mid = findViewById(R.id.perc1_middle);
-                perc1mid.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
-                pal_vib_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
+            TextView pal_vib_dark = findViewById(R.id.palette_vibrant_dark);
+            TextView perc1mid = findViewById(R.id.perc1_middle);
+            perc1mid.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
+            pal_vib_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000));
 
-                TextView pal_vib_light = findViewById(R.id.palette_vibrant_light);
-                TextView perc1right = findViewById(R.id.perc1_right);
-                perc1right.setBackgroundColor(palette.getLightVibrantColor(0x000000));
-                pal_vib_light.setBackgroundColor(palette.getLightVibrantColor(0x000000));
+            TextView pal_vib_light = findViewById(R.id.palette_vibrant_light);
+            TextView perc1right = findViewById(R.id.perc1_right);
+            perc1right.setBackgroundColor(palette.getLightVibrantColor(0x000000));
+            pal_vib_light.setBackgroundColor(palette.getLightVibrantColor(0x000000));
 
-                TextView pal_muted = findViewById(R.id.palette_muted);
-                TextView perc2left = findViewById(R.id.perc2_left);
-                perc2left.setBackgroundColor(palette.getMutedColor(0x000000));
-                pal_muted.setBackgroundColor(palette.getMutedColor(0x000000));
+            TextView pal_muted = findViewById(R.id.palette_muted);
+            TextView perc2left = findViewById(R.id.perc2_left);
+            perc2left.setBackgroundColor(palette.getMutedColor(0x000000));
+            pal_muted.setBackgroundColor(palette.getMutedColor(0x000000));
 
-                TextView pal_muted_dark = findViewById(R.id.palette_muted_dark);
-                TextView perc2mid = findViewById(R.id.perc2_middle);
-                perc2mid.setBackgroundColor(palette.getDarkMutedColor(0x000000));
-                pal_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000));
+            TextView pal_muted_dark = findViewById(R.id.palette_muted_dark);
+            TextView perc2mid = findViewById(R.id.perc2_middle);
+            perc2mid.setBackgroundColor(palette.getDarkMutedColor(0x000000));
+            pal_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000));
 
-                TextView pal_muted_light = findViewById(R.id.palette_muted_light);
-                TextView perc2right = findViewById(R.id.perc2_right);
-                perc2right.setBackgroundColor(palette.getLightMutedColor(0x000000));
-                pal_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000));
+            TextView pal_muted_light = findViewById(R.id.palette_muted_light);
+            TextView perc2right = findViewById(R.id.perc2_right);
+            perc2right.setBackgroundColor(palette.getLightMutedColor(0x000000));
+            pal_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000));
 
-                //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
-                collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
+            //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
+            collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
 
-                //The back button should also have a better color applied to ensure it is visible
-                String resName = Build.VERSION.SDK_INT >= 23 ? "abc_ic_ab_back_material" : "abc_ic_ab_back_mtrl_am_alpha";
-                int res = getResources().getIdentifier(resName, "drawable", getPackageName());
-                Drawable upArrow = getResources().getDrawable(res);
-                upArrow.setColorFilter(palette.getVibrantColor(0x000000), PorterDuff.Mode.SRC_ATOP);
-                getSupportActionBar().setHomeAsUpIndicator(upArrow);
-            }
+            //The back button should also have a better color applied to ensure it is visible
+            String resName = Build.VERSION.SDK_INT >= 23 ? "abc_ic_ab_back_material" : "abc_ic_ab_back_mtrl_am_alpha";
+            int res = getResources().getIdentifier(resName, "drawable", getPackageName());
+            Drawable upArrow = getResources().getDrawable(res);
+            upArrow.setColorFilter(palette.getVibrantColor(0x000000), PorterDuff.Mode.SRC_ATOP);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
         };
 
         // Start this Async, because it takes some time to generate
@@ -194,6 +188,7 @@ public class DetailActivity extends AppCompatActivity {
         return true;
     }
 
+    //TODO - this will replaced with a proper API call (and network stack)
     private class WikiPullTask extends AsyncTask<String, Void, String> {
         private String phone;
 

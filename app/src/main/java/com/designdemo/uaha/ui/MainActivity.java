@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.support.android.designlibdemo.R;
 
@@ -61,13 +60,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -107,76 +101,73 @@ public class MainActivity extends AppCompatActivity {
         args2.putInt(ProductListFragment.ARG_FRAG_TYPE, ProductListFragment.FRAG_TYPE_FAV);
         favFrag.setArguments(args2);
 
-        adapter.addFragment(osFrag, "OS Version");
-        adapter.addFragment(deviceFrag, "Device");
-        adapter.addFragment(favFrag, "Favorites");
+        adapter.addFragment(osFrag, getString(R.string.os_version));
+        adapter.addFragment(deviceFrag, getString(R.string.devices));
+        adapter.addFragment(favFrag, getString(R.string.favorites));
         viewPager.setAdapter(adapter);
     }
 
     private void setupDrawerContent(final NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_home:
-                        viewPager.setCurrentItem(0);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.nav_devices:
-                        viewPager.setCurrentItem(1);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.nav_favorites:
-                        viewPager.setCurrentItem(2);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.nav_userinfo:
-                        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.nav_link1:
-                        Intent browser1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"));
-                        startActivity(browser1);
-                        return true;
-                    case R.id.nav_link2:
-                        Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/"));
-                        startActivity(browser2);
-                        return true;
-                    default:
-                        return true;
-                }
-            }
-        });
+                menuItem -> {
+                    menuItem.setChecked(true);
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_home:
+                            viewPager.setCurrentItem(0);
+                            drawerLayout.closeDrawers();
+                            return true;
+                        case R.id.nav_devices:
+                            viewPager.setCurrentItem(1);
+                            drawerLayout.closeDrawers();
+                            return true;
+                        case R.id.nav_favorites:
+                            viewPager.setCurrentItem(2);
+                            drawerLayout.closeDrawers();
+                            return true;
+                        case R.id.nav_userinfo:
+                            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                            startActivity(intent);
+                            return true;
+                        case R.id.nav_link1:
+                            Intent browser1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"));
+                            startActivity(browser1);
+                            return true;
+                        case R.id.nav_link2:
+                            Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/"));
+                            startActivity(browser2);
+                            return true;
+                        default:
+                            return true;
+                    }
+                });
     }
 
     static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments = new ArrayList<>();
-        private final List<String> mFragmentTitles = new ArrayList<>();
+        private final List<Fragment> fragments = new ArrayList<>();
+        private final List<String> fragmentTitles = new ArrayList<>();
 
         public Adapter(FragmentManager fm) {
             super(fm);
         }
 
         public void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mFragmentTitles.add(title);
+            fragments.add(fragment);
+            fragmentTitles.add(title);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragments.get(position);
+            return fragments.get(position);
         }
 
         @Override
         public int getCount() {
-            return mFragments.size();
+            return fragments.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitles.get(position);
+            return fragmentTitles.get(position);
         }
     }
 }

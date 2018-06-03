@@ -8,6 +8,7 @@
 
     <string name="checkin">Checkin</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_save">Save</string>
     <string name="favorites_content">Is there an Android you particularly loved? Save it to your favorites and it will appear in a special list, which is pretty cool, huh?!</string>
     <string name="favorite_title">Favorite</string>
     <string name="favorite_confirm">Your favorite has been changed</string>
@@ -37,6 +38,14 @@
     <string name="android_supports_vectors">Isn\'t it cool that Android supports Vector Graphics!!!</string>
 
     <string name="transition_string">transitionString</string>
+    <string name="undo">Undo</string>
+    <string name="at_least_4_char">Minimum of 4 characters</string>
+    <string name="name_input_error">Name input error</string>
+    <string name="invalid_phone">Invalid Phone</string>
+    <string name="phone_input_error">Phone input error</string>
+    <string name="os_version">OS Version</string>
+    <string name="devices">Device</string>
+    <string name="favorites">Favorites</string>
 
 
     <string-array name="country_arrays">

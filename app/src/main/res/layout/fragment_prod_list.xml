@@ -36,7 +36,7 @@
                 android:paddingRight="32dp"
                 android:paddingTop="16dp"
                 android:text="@string/android_supports_vectors"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
             <ImageView
                 android:layout_width="wrap_content"

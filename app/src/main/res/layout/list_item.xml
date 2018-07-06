@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="88dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:minHeight="88dp"
+    android:orientation="horizontal"
+    android:paddingRight="16dp">
 
     <ImageView
         android:id="@+id/avatar"
-        android:transitionName="@string/transition_string"
-        android:layout_width="64dp"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+        android:transitionName="@string/transition_string" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,22 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginLeft="8dp"
-            android:gravity="center_vertical"
             android:autoSizeTextType="uniform"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <TextView
             android:id="@+id/list_subtext"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="8dp"
             android:autoSizeTextType="uniform"
-            android:text="this is sample"
             android:gravity="center_vertical"
-            android:textAppearance="?attr/textAppearanceListItem"/>
-
+            tools:text="this is sample"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
     </LinearLayout>
-
-
-
 </LinearLayout>

@@ -43,7 +43,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
             <TextView
                 android:id="@+id/text_title"
@@ -52,7 +52,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_toRightOf="@+id/avatar"
                 android:layout_above="@+id/text_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

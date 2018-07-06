@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,8 +89,9 @@ public class ProductListFragment extends Fragment {
     private void setupRecyclerView(RecyclerView recyclerView) {
         switch (thisFragType) {
             case (FRAG_TYPE_OS):
-                recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-                recyclerView.addItemDecoration(new GridDividerDecoration(recyclerView.getContext()));
+                LinearLayoutManager llm = new LinearLayoutManager(recyclerView.getContext());
+                recyclerView.setLayoutManager(llm);
+                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), llm.getOrientation()));
                 recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList()));
                 break;
             case (FRAG_TYPE_DEVICE):

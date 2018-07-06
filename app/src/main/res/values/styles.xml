@@ -8,9 +8,26 @@
         <item name="colorPrimary">@color/green_500</item>
         <item name="colorPrimaryDark">@color/green_700</item>
         <item name="colorAccent">@color/amber_500</item>
+        <item name="colorSecondary">@color/teal_500</item>
+        <item name="colorSecondaryDark">@color/teal_700</item>
+        <item name="colorSecondaryLight">@color/teal_400</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
+    <!-- Coming Soon -->
+    <!--<item name="colorPrimaryVariant">@color/green_600</item>-->
+    <!--<item name="colorSecondaryVariant">@color/green_600</item>-->
+    <!--<item name="colorBackground">@color/green_600</item>-->
+    <!--<item name="colorError">@color/green_600</item>-->
+    <!--<item name="colorSurface">@color/green_600</item>-->
+    <!--<item name="colorOnPrimary">@color/green_600</item>-->
+    <!--<item name="colorOnSecondary">@color/green_600</item>-->
+    <!--<item name="colorOnBackground">@color/green_600</item>-->
+    <!--<item name="colorOnError">@color/green_600</item>-->
+    <!--<item name="colorOnSurface">@color/green_600</item>-->
+
+
+    <!--Create custom style for a Component, that will be applied manually-->
     <style name="Widget.CardContent" parent="android:Widget">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
@@ -18,5 +35,16 @@
         <item name="android:paddingBottom">24dp</item>
         <item name="android:orientation">vertical</item>
     </style>
+
+    <!-- Example changes the color background to use Primary color instead of default Secondary for Button Backgrounds -->
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
+    <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme
+    <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
+        ...
+        <item name="materialButtonStyle">@style/CustomButton</item>
+    </style> -->
 
 </resources>

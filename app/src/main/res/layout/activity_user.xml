@@ -39,11 +39,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="24dp">
+                android:orientation="vertical" >
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Body1"
+                    style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/activity_horizontal_margin"
@@ -67,12 +66,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:text="User Info"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/profile_name_phone_text"/>
@@ -158,10 +156,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:text="Preferences"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -196,7 +194,7 @@
 
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -242,7 +240,7 @@
                         </RadioGroup>
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -256,7 +254,7 @@
                             android:entries="@array/country_arrays"/>
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Body1"
+                            style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_background">#FFF5F5F5</color>
+    <color name="window_background">#ffffffff</color>
+    <color name="card_background">@color/grey_200</color>
 
     <color name="white">#FFF5FFFF</color>
 

@@ -1,4 +1,4 @@
-package com.designdemo.uaha;
+package com.designdemo.uaha.ui;
 
 
 import com.designdemo.uaha.ui.MainActivity;
@@ -48,17 +48,22 @@ public class DeviceListTest {
                         isDisplayed()));
         recyclerView.check(matches(isDisplayed()));
 
-        ViewInteraction textView = onView(
-                allOf(withId(android.R.id.text1), withText("HTC G1"), isDisplayed()));
-        textView.check(matches(withText("HTC G1")));
+        ViewInteraction g1View = onView(
+                allOf(withId(R.id.list_title), withText("G1"), isDisplayed()));
+        g1View.check(matches(withText("G1")));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(android.R.id.text1), withText("Motorola Droid"), isDisplayed()));
-        textView2.check(matches(withText("Motorola Droid")));
+        ViewInteraction droidView = onView(
+                allOf(withId(R.id.list_title), withText("Droid"), isDisplayed()));
+        droidView.check(matches(withText("Droid")));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(android.R.id.text1), withText("Motorola Droid"), isDisplayed()));
-        textView3.check(matches(withText("Motorola Droid")));
+//
+//        ViewInteraction textView2 = onView(
+//                allOf(withId(android.R.id.text1), withText("Motorola Droid"), isDisplayed()));
+//        textView2.check(matches(withText("Motorola Droid")));
+//
+//        ViewInteraction textView3 = onView(
+//                allOf(withId(android.R.id.text1), withText("Motorola Droid"), isDisplayed()));
+//        textView3.check(matches(withText("Motorola Droid")));
 
     }
 }

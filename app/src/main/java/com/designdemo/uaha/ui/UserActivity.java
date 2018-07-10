@@ -160,11 +160,7 @@ public class UserActivity extends AppCompatActivity {
 
         Button showHide = findViewById(R.id.show_bottom_sheet);
         showHide.setOnClickListener(view -> {
-            //calculate offset based on screen height
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            int peekHeight = displayMetrics.heightPixels - 300;
-            bottomSheetBehavior.setPeekHeight(peekHeight);
+            bottomSheetBehavior.setPeekHeight(300);
         });
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -177,7 +173,7 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public void onSlide(View bottomSheet, float slideOffset) {
-
+                closeButton.setRotation(slideOffset * -180);
             }
         });
 

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_rounded"
     android:clipToPadding="true"
-    android:elevation="40dp"
+    android:elevation="8dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:showIn="@layout/activity_user">
 
@@ -40,7 +40,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/vct_close" />
+                android:background="@drawable/vct_carat_up" />
         </RelativeLayout>
 
         <TextView

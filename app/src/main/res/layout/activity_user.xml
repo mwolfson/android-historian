@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,7 +24,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -39,20 +37,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/TextAppearance.MaterialComponents.Body1"
+                <Button
+                    android:id="@+id/show_bottom_sheet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/activity_horizontal_margin"
-                    android:text="@string/profile_main_text"/>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Show Text Scale Bottom Sheet" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/info_card"
-                    cardCornerRadius="20dp"
-                    cardElevation="20dp"
-                    cardUseCompatPadding="true"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/card_margin">
@@ -65,15 +65,16 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:layout_marginBottom="8dp"
                             android:text="User Info"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/profile_name_phone_text"/>
+                            android:textStyle="italic"
+                            android:text="@string/profile_name_phone_text" />
 
                         <!-- There is lots you can do with the native controls -->
                         <!-- https://material.io/develop/android/components/text-input-layout/ -->
@@ -82,10 +83,9 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
                             app:counterEnabled="true"
-                            app:counterMaxLength="10"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp">
+                            app:counterMaxLength="10">
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/name_edit"
@@ -94,7 +94,7 @@
                                 android:focusable="true"
                                 android:hint="@string/profile_nickname_hint"
                                 android:inputType="textPersonName"
-                                android:maxLength="20"/>
+                                android:maxLength="20" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -102,8 +102,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp">
+                            android:layout_marginBottom="8dp">
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/phone_edit"
@@ -112,17 +111,17 @@
                                 android:focusable="true"
                                 android:hint="@string/profile_phone_hint"
                                 android:inputType="phone"
-                                android:maxLength="14"/>
+                                android:maxLength="14" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/password_editlayout"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlineBox"
-                            app:passwordToggleEnabled="true"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
-                            android:layout_marginTop="8dp">
+                            app:passwordToggleEnabled="true">
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/password_edit"
@@ -131,7 +130,7 @@
                                 android:focusable="true"
                                 android:hint="Enter a Password"
                                 android:inputType="textPassword"
-                                android:maxLength="8"/>
+                                android:maxLength="8" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -139,9 +138,9 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/prefs_card"
-                    cardCornerRadius="20dp"
-                    cardElevation="20dp"
-                    cardUseCompatPadding="true"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/card_margin">
@@ -156,15 +155,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:text="Preferences"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
                         <TextView
                             style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="Have you ever owned any of these?"/>
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:text="Have you ever owned any of these?" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -176,19 +175,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Nexus"/>
+                                android:text="Nexus" />
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Android TV"/>
+                                android:text="Android TV" />
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Android Wear"/>
+                                android:text="Android Wear" />
 
                         </LinearLayout>
 
@@ -197,9 +196,9 @@
                             style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="Which is your favorite device manufacturer?"/>
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:text="Which is your favorite device manufacturer?" />
 
                         <RadioGroup
                             android:id="@+id/radioSex"
@@ -210,32 +209,32 @@
                                 android:id="@+id/radioAsus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Asus"/>
+                                android:text="Asus" />
 
                             <RadioButton
                                 android:id="@+id/radioHtc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="HTC"/>
+                                android:text="HTC" />
 
                             <RadioButton
                                 android:id="@+id/radioMoto"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Motorola"/>
+                                android:text="Motorola" />
 
                             <RadioButton
                                 android:id="@+id/radioOnePlus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="One Plus One"/>
+                                android:text="One Plus One" />
 
                             <RadioButton
                                 android:id="@+id/radioSamsung"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Samsung"/>
+                                android:text="Samsung" />
 
                         </RadioGroup>
 
@@ -243,28 +242,28 @@
                             style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="Where do you live?"/>
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:text="Where do you live?" />
 
                         <Spinner
                             android:id="@+id/android_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/country_arrays"/>
+                            android:entries="@array/country_arrays" />
 
                         <TextView
                             style="@style/TextAppearance.MaterialComponents.Body1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:text="Rate your feelings about Android"/>
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:text="Rate your feelings about Android" />
 
                         <RatingBar
                             android:id="@+id/android_rating"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
 
                     </LinearLayout>
@@ -272,9 +271,9 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/profile_pic_card"
-                    cardCornerRadius="20dp"
-                    cardElevation="20dp"
-                    cardUseCompatPadding="true"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/card_margin">
@@ -288,13 +287,13 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_account_lg"/>
+                            android:src="@drawable/ic_account_lg" />
 
                         <Button
                             android:id="@+id/profile_pic_button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Change Profile Picture"/>
+                            android:text="Change Profile Picture" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -309,7 +308,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_save"/>
+            android:src="@drawable/ic_save" />
+
+        <!-- Bottom Sheet Layout With Scale Text Info -->
+        <include layout="@layout/include_scaletext_layout" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -320,6 +322,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_actions"/>
+        app:menu="@menu/drawer_actions" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

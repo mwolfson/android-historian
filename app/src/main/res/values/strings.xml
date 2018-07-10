@@ -24,8 +24,8 @@
     <string name="nav_link1">Android Home Page</string>
     <string name="nav_link2">Developer Home</string>
     <string name="nav_links">Links</string>
-    <string name="profile_main_text">Enter some information about yourself (Name and Phone are required):</string>
-    <string name="profile_name_phone_text">1) Have a nickname you want to associate?\n2) Enter any phone number - to verify you are a real person.</string>
+    <string name="profile_main_text">Enter account information</string>
+    <string name="profile_name_phone_text">Name and Phone are required to save</string>
     <string name="profile_nickname_hint">Nickname (4 - 10 Chars)</string>
     <string name="profile_phone_hint">Enter ANY phone number</string>
     <string name="picture_dialog_title">Profile Picture Selector</string>
@@ -47,6 +47,59 @@
     <string name="devices">Device</string>
     <string name="favorites">Favorites</string>
 
+    <!-- Scale Text Labels-->
+    <string name="letter_spacing">Letter Spacing</string>
+    <string name="size">Size</string>
+    <string name="case_text">Case</string>
+    <string name="font_text">Font</string>
+    <string name="sentence">Sentence</string>
+    <string name="all_caps">ALL CAPS</string>
+    <string name="regular">Regular</string>
+    <string name="text_appearance_style_example">\@style/TextAppearance.MaterialComponents.%1$s\n---\nandroid:textAppearance=\"?textAppearance%1$s\"</string>
+
+    <!-- Letter Spacing  -->
+    <string name="ls_neg1_5">-1.5</string>
+    <string name="ls_neg5">-0.5</string>
+    <string name="ls_zero">0</string>
+    <string name="ls_25">0.25</string>
+    <string name="ls_15">0.15</string>
+    <string name="ls_1">0.1</string>
+    <string name="ls_75">0.75</string>
+    <string name="ls_5">0.5</string>
+    <string name="ls_4">0.4</string>
+    <string name="ls_1dot5">1.5</string>
+
+    <!-- Scale Text Values-->
+    <string name="st_h1">Headline1</string>
+    <string name="st_h2">Headline2</string>
+    <string name="st_h3">Headline3</string>
+    <string name="st_h4">Headline4</string>
+    <string name="st_h5">Headline5</string>
+    <string name="st_h6">Headline6</string>
+    <string name="st_subtitle1">Subtitle1</string>
+    <string name="st_subtitle2">Subtitle2</string>
+    <string name="st_body1">Body1</string>
+    <string name="st_body2">Body2</string>
+    <string name="st_button">Button</string>
+    <string name="st_caption">Caption</string>
+    <string name="st_overline">Overline</string>
+
+    <!-- Scale Text Arrays-->
+    <string-array name="scaletext_array">
+        <item>Headline1</item>
+        <item>Headline2</item>
+        <item>Headline3</item>
+        <item>Headline4</item>
+        <item>Headline5</item>
+        <item>Headline6</item>
+        <item>Subtitle1</item>
+        <item>Subtitle2</item>
+        <item>Body1</item>
+        <item>Body2</item>
+        <item>Button</item>
+        <item>Caption</item>
+        <item>Overline</item>
+    </string-array>
 
     <string-array name="country_arrays">
         <item>Malaysia</item>

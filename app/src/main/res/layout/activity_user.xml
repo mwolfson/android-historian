@@ -67,10 +67,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:text="User Info"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                            android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                            android:textAppearance="?textAppearanceBody1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="italic"
@@ -155,10 +155,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
                             android:text="Preferences"
-                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                            android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -193,7 +193,7 @@
 
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -239,7 +239,7 @@
                         </RadioGroup>
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -253,7 +253,7 @@
                             android:entries="@array/country_arrays" />
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"

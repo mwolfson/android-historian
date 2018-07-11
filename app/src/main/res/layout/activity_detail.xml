@@ -74,14 +74,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/favorite_title"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        android:textAppearance="?textAppearanceHeadline6"/>
 
                     <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/favorites_content"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+                        android:textAppearance="?textAppearanceBody1"/>
 
                 </LinearLayout>
 
@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="Palette"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        android:textAppearance="?textAppearanceHeadline6"/>
 
                     <TextView
                         android:id="@+id/palette_vibrant"
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Vibrant"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                     <TextView
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Vibrant Dark"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                     <TextView
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Vibrant Light"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                     <TextView
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Muted"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                     <TextView
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Muted Dark"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                     <TextView
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:text="Muted Light"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:textColor="@android:color/white"/>
 
                 </LinearLayout>
@@ -189,7 +189,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
                         android:text="PercentageLayout"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        android:textAppearance="?textAppearanceHeadline6"/>
 
 
                     <androidx.percentlayout.widget.PercentRelativeLayout
@@ -199,7 +199,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:id="@+id/perc1_left"
                             app:layout_widthPercent="40%"
                             android:layout_height="64dp"
@@ -209,7 +209,7 @@
                             android:textColor="@color/grey_900"/>
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:id="@+id/perc1_middle"
                             app:layout_widthPercent="20%"
                             android:layout_height="64dp"
@@ -219,7 +219,7 @@
                             android:textColor="@color/grey_900"/>
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Body1"
+                            style="?textAppearanceBody1"
                             android:id="@+id/perc1_right"
                             app:layout_widthPercent="40%"
                             android:layout_height="64dp"
@@ -236,7 +236,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:id="@+id/perc2_left"
                         app:layout_widthPercent="20%"
                         android:layout_height="64dp"
@@ -246,7 +246,7 @@
                         android:textColor="@color/grey_900"/>
 
                     <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:id="@+id/perc2_middle"
                         app:layout_widthPercent="60%"
                         android:layout_height="64dp"
@@ -256,7 +256,7 @@
                         android:textColor="@color/grey_900"/>
 
                     <TextView
-                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        style="?textAppearanceBody1"
                         android:id="@+id/perc2_right"
                         app:layout_widthPercent="20%"
                         android:layout_height="64dp"
@@ -292,7 +292,7 @@
                         android:layout_marginBottom="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
+                        android:textAppearance="?textAppearanceHeadline6"/>
 
                     <WebView
                         android:id="@+id/regulations_webview"

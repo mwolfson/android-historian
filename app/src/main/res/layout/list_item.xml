@@ -27,7 +27,7 @@
             android:layout_marginLeft="8dp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+            android:textAppearance="?textAppearanceHeadline6" />
 
         <TextView
             android:id="@+id/list_subtext"
@@ -37,6 +37,6 @@
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
             tools:text="this is sample"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            android:textAppearance="?textAppearanceBody1" />
     </LinearLayout>
 </LinearLayout>

@@ -31,20 +31,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
-    implementation 'com.google.android.material:material:1.0.0-alpha1'
-    implementation 'androidx.cardview:cardview:1.0.0-alpha1'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha1'
-    implementation 'androidx.palette:palette:1.0.0-alpha1'
-    implementation 'androidx.percentlayout:percentlayout:1.0.0-alpha1'
+    implementation "androidx.appcompat:appcompat:$jetpackVersion"
+    implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
+    implementation "com.google.android.material:material:$jetpackVersion"
+    implementation "androidx.cardview:cardview:$jetpackVersion"
+    implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
+    implementation "androidx.palette:palette:$jetpackVersion"
+    implementation "androidx.percentlayout:percentlayout:$jetpackVersion"
 
     implementation 'com.github.bumptech.glide:glide:3.6.0'
 
     implementation 'com.squareup.okio:okio:1.2.0'
     implementation 'com.squareup.okhttp:okhttp:2.2.0'
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
-
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha2'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha2'

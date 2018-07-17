@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/dialog_photo_text"
-        style="@style/TextAppearance.MaterialComponents.Body1"/>
+        style="?textAppearanceBody1"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/photo_pref_switch"
@@ -28,6 +28,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/photo_pref_switch"
-        style="@style/TextAppearance.MaterialComponents.Body1"
+        style="?textAppearanceBody1"
         android:text="@string/dialog_photo_switch"/>
 </RelativeLayout>

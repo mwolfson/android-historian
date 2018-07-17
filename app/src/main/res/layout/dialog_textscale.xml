@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="32dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/ts_font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Font" />
+
+    <TextView
+        android:id="@+id/ts_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Size" />
+
+    <TextView
+        android:id="@+id/ts_textcase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Case" />
+
+    <TextView
+        android:id="@+id/ts_letter_spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Letter Spacing" />
+</LinearLayout>

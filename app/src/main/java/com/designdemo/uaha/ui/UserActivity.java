@@ -1,16 +1,20 @@
 package com.designdemo.uaha.ui;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.designdemo.uaha.ui.MainActivity;
 import com.designdemo.uaha.util.PrefsUtil;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
@@ -18,15 +22,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
+
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.support.android.designlibdemo.R;
 
@@ -39,6 +51,7 @@ public class UserActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private Button picButton;
 
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +59,124 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         mainActivity = this;
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        BottomAppBar bottomAppBar = findViewById(R.id.bottom_appbar);
+        setSupportActionBar(bottomAppBar);
+        bottomAppBar.replaceMenu(R.menu.profile_actions);
 
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
         setupViews();
+        setupTextScaleDialog();
+        setupChips();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
+    }
+
+    private void setupChips() {
+        Chip chipEntry1 = findViewById(R.id.chip_entry1);
+        chipEntry1.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry2 = findViewById(R.id.chip_entry2);
+        chipEntry2.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry3 = findViewById(R.id.chip_entry3);
+        chipEntry3.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry4 = findViewById(R.id.chip_entry4);
+        chipEntry4.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry5 = findViewById(R.id.chip_entry5);
+        chipEntry5.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        ChipGroup filter1Group = findViewById(R.id.filter1_group);
+        filter1Group.setOnCheckedChangeListener((chipGroup, i) -> {
+            switch (i) {
+                case R.id.choice_item1:
+                    Log.d("MSW", "Filter1 Item 1");
+                    break;
+                case R.id.choice_item2:
+                    Log.d("MSW", "Filter1 Item 2");
+                    break;
+                case R.id.choice_item3:
+                    Log.d("MSW", "Filter1 Item 3");
+                    break;
+            }
+        });
+
+        ChipGroup filter2Group = findViewById(R.id.filter2_group);
+        filter2Group.setOnCheckedChangeListener((chipGroup, i) -> {
+            switch (i) {
+                case R.id.filter2_item1:
+                    Log.d("MSW", "Filter2 Item 1");
+                    break;
+                case R.id.filter2_item2:
+                    Log.d("MSW", "Filter2 Item 2");
+                    break;
+                case R.id.filter2_item3:
+                    Log.d("MSW", "Filter2 Item 3");
+                    break;
+                case R.id.filter2_item4:
+                    Log.d("MSW", "Filter2 Item 4");
+                    break;
+                case R.id.filter2_item5:
+                    Log.d("MSW", "Filter2 Item 5");
+                    break;
+                case R.id.filter2_item6:
+                    Log.d("MSW", "Filter2 Item 6");
+                    break;
+                case R.id.filter2_item7:
+                    Log.d("MSW", "Filter2 Item 7");
+                    break;
+            }
+        });
+
+        EditText customChipEdit = findViewById(R.id.chip_edit);
+
+        ChipGroup entryGroup = findViewById(R.id.chipgroup_entry);
+        Activity activity = this;
+
+        customChipEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String textEntered = customChipEdit.getText().toString();
+                Chip dynamicChip = new Chip(activity);
+                dynamicChip.setText(textEntered);
+                dynamicChip.setCloseIconEnabled(true);
+                dynamicChip.setCheckable(true);
+                dynamicChip.setChipIcon(getResources().getDrawable(R.drawable.vct_account));
+                dynamicChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dynamicChip.setVisibility(View.GONE);
+                    }
+                });
+
+                entryGroup.addView(dynamicChip);
+                customChipEdit.requestFocus();
+                return false;
+            }
+        });
+
+//        Chip chipActionCustom = findViewById(R.id.chip_action_custom);
+//        chipActionCustom.setOnClickListener(view -> {
+//            chipActionCustom.setChipDrawable(R.drawable.);
+//        });
+
     }
 
     @Override
@@ -107,7 +225,7 @@ public class UserActivity extends AppCompatActivity {
             if (phoneLen != 14) {
                 phoneEnterField.setError(getString(R.string.invalid_phone));
                 phoneEnterField.requestFocus();
-                Snackbar.make(mainView, getString(R.string.phone_input_error),Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
@@ -136,6 +254,144 @@ public class UserActivity extends AppCompatActivity {
         // Set initial values from Prefs
         setPhoneNameValues();
     }
+
+    private void setupTextScaleDialog() {
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+
+        ImageButton closeButton = findViewById(R.id.textscale_close);
+        closeButton.setOnClickListener(view -> {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            bottomSheetBehavior.setPeekHeight(0);
+        });
+
+        Button showHide = findViewById(R.id.show_bottom_sheet);
+        showHide.setOnClickListener(view -> {
+            bottomSheetBehavior.setPeekHeight(300);
+        });
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.setPeekHeight(0);
+                }
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+                closeButton.setRotation(slideOffset * -180);
+            }
+        });
+
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setPeekHeight(0);
+    }
+
+    /**
+     * When an item is clicked, this will launch an Alert Dialog with information specific to that item
+     *
+     * @param view
+     */
+    public void scaleTextItemClicked(View view) {
+        TextView temp = (TextView) view;
+        String scaleText = temp.getText().toString();
+        String valueToSet = "No Value";
+
+        //Sets custom text in the dialog
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_textscale, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+
+        TextView caseText = dialogView.findViewById(R.id.ts_textcase);
+        TextView fontText = dialogView.findViewById(R.id.ts_font);
+        TextView sizeText = dialogView.findViewById(R.id.ts_size);
+        TextView letterSpacingText = dialogView.findViewById(R.id.ts_letter_spacing);
+
+        caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.sentence)));
+        fontText.setText(boldFirstWord(getString(R.string.font_text), getString(R.string.regular)));
+
+        switch (scaleText) {
+            case "H1":
+                valueToSet = getString(R.string.st_h1);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "96"));
+                break;
+            case "H2":
+                valueToSet = getString(R.string.st_h2);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "60"));
+                break;
+            case "H3":
+                valueToSet = getString(R.string.st_h3);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "48"));
+                break;
+            case "H4":
+                valueToSet = getString(R.string.st_h4);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "34"));
+                break;
+            case "H5":
+                valueToSet = getString(R.string.st_h5);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "24"));
+                break;
+            case "H6":
+                valueToSet = getString(R.string.st_h6);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "20"));
+                break;
+            case "Subtitle1":
+                valueToSet = getString(R.string.st_subtitle1);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "16"));
+                break;
+            case "Subtitle2":
+                valueToSet = getString(R.string.st_subtitle2);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_1)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                break;
+            case "Body1":
+                valueToSet = getString(R.string.st_body1);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_5)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "16"));
+                break;
+            case "Body2":
+                valueToSet = getString(R.string.st_body2);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                break;
+            case "Button":
+                valueToSet = getString(R.string.st_button);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_75)));
+                caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                break;
+            case "Caption":
+                valueToSet = getString(R.string.st_caption);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_4)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "12"));
+                break;
+            case "Overline":
+                valueToSet = getString(R.string.st_overline);
+                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_1dot5)));
+                caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "10"));
+                break;
+            default:
+                valueToSet = "Unset";
+                caseText.setText(boldFirstWord(getString(R.string.case_text), "Unset"));
+                sizeText.setText(boldFirstWord(getString(R.string.size), "Unset"));
+                break;
+        }
+
+        builder.setMessage(getString(R.string.text_appearance_style_example, valueToSet));
+        builder.setTitle(valueToSet);
+        builder.create();
+        builder.show();
+    }
+
 
     private void setPhoneNameValues() {
         String name = PrefsUtil.getName(this);
@@ -210,5 +466,14 @@ public class UserActivity extends AppCompatActivity {
                             return true;
                     }
                 });
+    }
+
+    private SpannableStringBuilder boldFirstWord(String word1, String word2) {
+        SpannableStringBuilder str = new SpannableStringBuilder(word1 + ":  " + word2);
+        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str.setSpan(new AbsoluteSizeSpan(16, true), word1.length() + 1, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str.setSpan(new android.text.style.StyleSpan(Typeface.ITALIC), word1.length() + 1, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return str;
     }
 }

@@ -49,9 +49,6 @@ public class ProductListFragment extends Fragment {
     private int thisFragType = 0;
     private Activity mainActivity;
 
-    private BottomSheetBehavior bottomSheetBehavior;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,24 +60,6 @@ public class ProductListFragment extends Fragment {
 
         thisFragType = getArguments().getInt(ARG_FRAG_TYPE, 0);
         setupRecyclerView(rv);
-
-        View bottomSheet = mainView.findViewById(R.id.bottom_sheet);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior.setPeekHeight(0);
-                }
-            }
-
-            @Override
-            public void onSlide(View bottomSheet, float slideOffset) {
-            }
-        });
-
-        bottomSheetBehavior.setPeekHeight(300);
 
         return mainView;
     }

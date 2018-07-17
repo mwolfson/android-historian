@@ -7,6 +7,14 @@ This app is designed to demonstrate the various components of the Material Desig
 
 The [official Material site](https://material.io/develop/android/) has great information specific to Android Development.
 
+July 18, 2018
+- Bottom App Bar (with inset FAB)
+- Chip
+- Text Scale Attributes
+- Bottom Sheet
+    - Coordinated Motion
+- MDC style TextInputView with Outline
+
 May 24, 2018
 - Update packages and build
     - Jetpack conversion (androidx)

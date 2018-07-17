@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo">
-    </style>
-
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/green_500</item>
-        <item name="colorPrimaryDark">@color/green_700</item>
-        <item name="colorAccent">@color/amber_500</item>
-        <item name="colorSecondary">@color/teal_500</item>
-        <item name="colorSecondaryDark">@color/teal_700</item>
-        <item name="colorSecondaryLight">@color/teal_400</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
     <!-- Coming Soon -->
+    <!--<item name="colorSecondary">@color/color_secondary</item>-->
+    <!--<item name="colorSecondaryDark">@color/color_secondary_dark</item>-->
+    <!--<item name="colorSecondaryLight">@color/colors_secondary_light</item>-->
+
     <!--<item name="colorPrimaryVariant">@color/green_600</item>-->
     <!--<item name="colorSecondaryVariant">@color/green_600</item>-->
     <!--<item name="colorBackground">@color/green_600</item>-->
@@ -39,6 +37,14 @@
     <!-- Example changes the color background to use Primary color instead of default Secondary for Button Backgrounds -->
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="TextScaleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/bg_selector</item>
+        <item name="android:onClick">scaleTextItemClicked</item>
     </style>
 
     <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme

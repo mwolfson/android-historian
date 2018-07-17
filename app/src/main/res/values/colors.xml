@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_background">#ffffffff</color>
+
     <color name="card_background">@color/grey_200</color>
 
     <color name="white">#FFF5FFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="color_primary">@color/green_500</color>
+    <color name="color_primary_dark">@color/green_700</color>
+    <color name="color_accent">@color/amber_500</color>
+    <color name="color_secondary">@color/teal_500</color>
+    <color name="color_secondary_dark">@color/teal_700</color>
+    <color name="colors_secondary_light">@color/teal_400</color>
+    <color name="window_background">#ffffffff</color>
 
     <!-- Material Color Resources -->
     <color name="red_050">#fde0dc</color> <!-- Use with black text -->

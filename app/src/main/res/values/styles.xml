@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo"></style>
-
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="colorSecondary">@color/color_secondary</item>
-        <item name="colorSecondaryDark">@color/color_secondary_dark</item>
-        <item name="colorSecondaryLight">@color/colors_secondary_light</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
     <!-- Coming Soon -->
+    <!--<item name="colorSecondary">@color/color_secondary</item>-->
+    <!--<item name="colorSecondaryDark">@color/color_secondary_dark</item>-->
+    <!--<item name="colorSecondaryLight">@color/colors_secondary_light</item>-->
+
     <!--<item name="colorPrimaryVariant">@color/green_600</item>-->
     <!--<item name="colorSecondaryVariant">@color/green_600</item>-->
     <!--<item name="colorBackground">@color/green_600</item>-->

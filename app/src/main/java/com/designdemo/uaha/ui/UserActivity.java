@@ -7,7 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.designdemo.uaha.util.PrefsUtil;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,7 +22,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
 
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
@@ -27,13 +29,14 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -56,8 +59,9 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         mainActivity = this;
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        BottomAppBar bottomAppBar = findViewById(R.id.bottom_appbar);
+        setSupportActionBar(bottomAppBar);
+        bottomAppBar.replaceMenu(R.menu.profile_actions);
 
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -65,11 +69,114 @@ public class UserActivity extends AppCompatActivity {
 
         setupViews();
         setupTextScaleDialog();
+        setupChips();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
+    }
+
+    private void setupChips() {
+        Chip chipEntry1 = findViewById(R.id.chip_entry1);
+        chipEntry1.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry2 = findViewById(R.id.chip_entry2);
+        chipEntry2.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry3 = findViewById(R.id.chip_entry3);
+        chipEntry3.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry4 = findViewById(R.id.chip_entry4);
+        chipEntry4.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        Chip chipEntry5 = findViewById(R.id.chip_entry5);
+        chipEntry5.setOnCloseIconClickListener(view -> {
+            view.setVisibility(View.GONE);
+        });
+
+        ChipGroup filter1Group = findViewById(R.id.filter1_group);
+        filter1Group.setOnCheckedChangeListener((chipGroup, i) -> {
+            switch (i) {
+                case R.id.choice_item1:
+                    Log.d("MSW", "Filter1 Item 1");
+                    break;
+                case R.id.choice_item2:
+                    Log.d("MSW", "Filter1 Item 2");
+                    break;
+                case R.id.choice_item3:
+                    Log.d("MSW", "Filter1 Item 3");
+                    break;
+            }
+        });
+
+        ChipGroup filter2Group = findViewById(R.id.filter2_group);
+        filter2Group.setOnCheckedChangeListener((chipGroup, i) -> {
+            switch (i) {
+                case R.id.filter2_item1:
+                    Log.d("MSW", "Filter2 Item 1");
+                    break;
+                case R.id.filter2_item2:
+                    Log.d("MSW", "Filter2 Item 2");
+                    break;
+                case R.id.filter2_item3:
+                    Log.d("MSW", "Filter2 Item 3");
+                    break;
+                case R.id.filter2_item4:
+                    Log.d("MSW", "Filter2 Item 4");
+                    break;
+                case R.id.filter2_item5:
+                    Log.d("MSW", "Filter2 Item 5");
+                    break;
+                case R.id.filter2_item6:
+                    Log.d("MSW", "Filter2 Item 6");
+                    break;
+                case R.id.filter2_item7:
+                    Log.d("MSW", "Filter2 Item 7");
+                    break;
+            }
+        });
+
+        EditText customChipEdit = findViewById(R.id.chip_edit);
+
+        ChipGroup entryGroup = findViewById(R.id.chipgroup_entry);
+        Activity activity = this;
+
+        customChipEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String textEntered = customChipEdit.getText().toString();
+                Chip dynamicChip = new Chip(activity);
+                dynamicChip.setText(textEntered);
+                dynamicChip.setCloseIconEnabled(true);
+                dynamicChip.setCheckable(true);
+                dynamicChip.setChipIcon(getResources().getDrawable(R.drawable.vct_account));
+                dynamicChip.setOnCloseIconClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dynamicChip.setVisibility(View.GONE);
+                    }
+                });
+
+                entryGroup.addView(dynamicChip);
+                customChipEdit.requestFocus();
+                return false;
+            }
+        });
+
+//        Chip chipActionCustom = findViewById(R.id.chip_action_custom);
+//        chipActionCustom.setOnClickListener(view -> {
+//            chipActionCustom.setChipDrawable(R.drawable.);
+//        });
+
     }
 
     @Override
@@ -183,10 +290,11 @@ public class UserActivity extends AppCompatActivity {
 
     /**
      * When an item is clicked, this will launch an Alert Dialog with information specific to that item
+     *
      * @param view
      */
     public void scaleTextItemClicked(View view) {
-        TextView temp = (TextView)view;
+        TextView temp = (TextView) view;
         String scaleText = temp.getText().toString();
         String valueToSet = "No Value";
 

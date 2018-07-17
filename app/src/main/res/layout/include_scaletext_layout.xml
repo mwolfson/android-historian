@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_rounded"
     android:clipToPadding="true"
-    android:elevation="8dp"
+    android:elevation="6dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:showIn="@layout/activity_user">
 

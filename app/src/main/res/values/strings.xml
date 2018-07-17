@@ -83,6 +83,7 @@
     <string name="st_button">Button</string>
     <string name="st_caption">Caption</string>
     <string name="st_overline">Overline</string>
+    <string name="show_text_scale_bottom_sheet">Show Text Scale Bottom Sheet</string>
 
     <!-- Scale Text Arrays-->
     <string-array name="scaletext_array">

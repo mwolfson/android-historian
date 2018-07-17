@@ -16,3 +16,7 @@ allprojects {
         google()
     }
 }
+
+ext {
+    jetpackVersion = "1.0.0-beta01"
+}

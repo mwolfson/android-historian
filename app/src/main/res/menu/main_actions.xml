@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/vct_search"
+        app:showAsAction="collapseActionView|always"
+        android:orderInCategory="98"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        tools:ignore="AppCompatResource" />
+</menu>

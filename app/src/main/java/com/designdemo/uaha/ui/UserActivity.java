@@ -2,11 +2,11 @@ package com.designdemo.uaha.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.designdemo.uaha.util.PrefsUtil;
+import com.designdemo.uaha.util.UiUtil;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
@@ -25,10 +25,6 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -308,81 +304,81 @@ public class UserActivity extends AppCompatActivity {
         TextView sizeText = dialogView.findViewById(R.id.ts_size);
         TextView letterSpacingText = dialogView.findViewById(R.id.ts_letter_spacing);
 
-        caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.sentence)));
-        fontText.setText(boldFirstWord(getString(R.string.font_text), getString(R.string.regular)));
+        caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence)));
+        fontText.setText(UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular)));
 
         switch (scaleText) {
             case "H1":
                 valueToSet = getString(R.string.st_h1);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "96"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "96"));
                 break;
             case "H2":
                 valueToSet = getString(R.string.st_h2);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "60"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "60"));
                 break;
             case "H3":
                 valueToSet = getString(R.string.st_h3);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "48"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "48"));
                 break;
             case "H4":
                 valueToSet = getString(R.string.st_h4);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_25)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "34"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "34"));
                 break;
             case "H5":
                 valueToSet = getString(R.string.st_h5);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "24"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "24"));
                 break;
             case "H6":
                 valueToSet = getString(R.string.st_h6);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_15)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "20"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "20"));
                 break;
             case "Subtitle1":
                 valueToSet = getString(R.string.st_subtitle1);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_15)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "16"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "16"));
                 break;
             case "Subtitle2":
                 valueToSet = getString(R.string.st_subtitle2);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_1)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Body1":
                 valueToSet = getString(R.string.st_body1);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_5)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "16"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_5)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "16"));
                 break;
             case "Body2":
                 valueToSet = getString(R.string.st_body2);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_25)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Button":
                 valueToSet = getString(R.string.st_button);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_75)));
-                caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.all_caps)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_75)));
+                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Caption":
                 valueToSet = getString(R.string.st_caption);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_4)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "12"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_4)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "12"));
                 break;
             case "Overline":
                 valueToSet = getString(R.string.st_overline);
-                letterSpacingText.setText(boldFirstWord(getString(R.string.letter_spacing), getString(R.string.ls_1dot5)));
-                caseText.setText(boldFirstWord(getString(R.string.case_text), getString(R.string.all_caps)));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "10"));
+                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1dot5)));
+                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "10"));
                 break;
             default:
                 valueToSet = "Unset";
-                caseText.setText(boldFirstWord(getString(R.string.case_text), "Unset"));
-                sizeText.setText(boldFirstWord(getString(R.string.size), "Unset"));
+                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), "Unset"));
+                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "Unset"));
                 break;
         }
 
@@ -466,14 +462,5 @@ public class UserActivity extends AppCompatActivity {
                             return true;
                     }
                 });
-    }
-
-    private SpannableStringBuilder boldFirstWord(String word1, String word2) {
-        SpannableStringBuilder str = new SpannableStringBuilder(word1 + ":  " + word2);
-        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        str.setSpan(new AbsoluteSizeSpan(16, true), word1.length() + 1, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        str.setSpan(new android.text.style.StyleSpan(Typeface.ITALIC), word1.length() + 1, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return str;
     }
 }

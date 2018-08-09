@@ -1,6 +1,7 @@
 package com.designdemo.uaha.ui;
 
 import android.annotation.TargetApi;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,20 +14,26 @@ import android.os.Bundle;
 
 import com.designdemo.uaha.util.PrefsUtil;
 import com.designdemo.uaha.data.VersionData;
+import com.designdemo.uaha.util.UiUtil;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.UiThread;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,12 +62,60 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
+        handleIntent(intent);
+
         final String androidName = intent.getStringExtra(EXTRA_NAME);
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            Log.d("MSW", "The Query is: " + query);
+        }
+
+        okclient = new OkHttpClient();
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            postponeEnterTransition();
+        }
+
+        setupToolbar(androidName);
+        loadBackdrop();
+        setupViews();
+        setupFab();
+        setupPalette();
+        new WikiPullTask().execute();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            Log.d("MSW", "The Query is: " + query);
+        }
+    }
+
+    private void setupToolbar(String androidName) {
         osVersion = VersionData.getOsNum(androidName);
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        BottomAppBar bottomAppBar = findViewById(R.id.bottom_appbar);
+        bottomAppBar.replaceMenu(R.menu.detail_actions);
+        bottomAppBar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_shuffle:
+                    Log.d("MSW", "SHUFFLE");
+                    return true;
+            }
+            return false;
+        });
 
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
@@ -68,18 +123,6 @@ public class DetailActivity extends AppCompatActivity {
         String splitString = VersionData.getProductName(osVersion);
         String[] parts = splitString.split("-");
         collapsingToolbar.setTitle(parts[0]);
-
-        okclient = new OkHttpClient();
-        loadBackdrop();
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            postponeEnterTransition();
-        }
-
-        setupViews();
-        setupFab();
-        setupPalette();
-        new WikiPullTask().execute();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -116,10 +159,28 @@ public class DetailActivity extends AppCompatActivity {
             PrefsUtil.toggleFavorite(getApplicationContext(), osVersion);
             setFabIcon();
 
-            //Send the user a message to let them know change was made
+            // Notify the User with a snackbar
+            // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+            float pxScreenHeight = UiUtil.getScreenHeight(this);
+            float pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this);
+            float pxTopOffset = pxScreenHeight - pxToolbar;
+            float sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            lp.topMargin = (int) pxTopOffset;
+            lp.leftMargin = (int) sideOffset;
+            lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin);
+
             View mainView = findViewById(R.id.main_content);
-            Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
-                    .show();
+            Snackbar snackbar = Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG);
+            View snackbarLayout = snackbar.getView();
+
+            // Set the Layout Params we calculated before showing the Snackbar
+            snackbarLayout.setLayoutParams(lp);
+            snackbar.show();
         });
     }
 
@@ -175,17 +236,13 @@ public class DetailActivity extends AppCompatActivity {
             Drawable upArrow = getResources().getDrawable(res);
             upArrow.setColorFilter(palette.getVibrantColor(0x000000), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
+            collapsingToolbar.setCollapsedTitleTextColor(palette.getVibrantColor(0x000000));
+
         };
 
         // Start this Async, because it takes some time to generate
         Palette.from(bm).generate(listener);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_actions, menu);
-        return true;
     }
 
     //TODO - this will replaced with a proper API call (and network stack)

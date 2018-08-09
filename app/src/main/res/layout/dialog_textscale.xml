@@ -7,28 +7,27 @@
     android:paddingEnd="32dp"
     android:orientation="vertical">
 
-
     <TextView
         android:id="@+id/ts_font"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Font" />
+        android:text="@string/font" />
 
     <TextView
         android:id="@+id/ts_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Size" />
+        android:text="@string/size" />
 
     <TextView
         android:id="@+id/ts_textcase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Case" />
+        android:text="@string/case_string" />
 
     <TextView
         android:id="@+id/ts_letter_spacing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Letter Spacing" />
+        android:text="@string/letter_spacing" />
 </LinearLayout>

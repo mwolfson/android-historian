@@ -55,14 +55,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Chips"
+                            android:text="@string/chips"
                             android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Action - trigger an action on main content"
+                            android:text="@string/action_trigger_an_action_on_main_content"
                             android:textAppearance="?textAppearanceSubtitle2" />
 
                         <com.google.android.material.chip.ChipGroup
@@ -75,25 +75,25 @@
                                 style="@style/Widget.MaterialComponents.Chip.Action"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:chipIcon="@drawable/vct__add_circle"
-                                android:text="Add" />
+                                android:text="@string/add"
+                                app:chipIcon="@drawable/vct__add_circle" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/action2"
                                 style="@style/Widget.MaterialComponents.Chip.Action"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@string/save"
                                 app:chipIcon="@drawable/vct_save"
-                                app:chipIconTint="@color/grey_900"
-                                android:text="Save" />
+                                app:chipIconTint="@color/grey_900" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/action3"
                                 style="@style/Widget.MaterialComponents.Chip.Action"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:chipIcon="@drawable/vct_alarm"
-                                android:text="Set Alarm" />
+                                android:text="@string/set_alarm"
+                                app:chipIcon="@drawable/vct_alarm" />
 
                         </com.google.android.material.chip.ChipGroup>
 
@@ -108,7 +108,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Choice - single choice from 2 or more options"
+                            android:text="@string/choice_single_choice_from_2_or_more_options"
                             android:textAppearance="?textAppearanceSubtitle2" />
 
                         <!-- If a ChipGroup is using single line, it MUST have a Scroll view wrappting it -->
@@ -128,49 +128,49 @@
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ldpi" />
+                                    android:text="@string/ldpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item2"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="mdpi" />
+                                    android:text="@string/mdpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item3"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="hdpi" />
+                                    android:text="@string/hdpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item4"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="xhdpi" />
+                                    android:text="@string/xhdpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item5"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="xxhdpi" />
+                                    android:text="@string/xxhdpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item6"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="xxxhdpi" />
+                                    android:text="@string/xxxhdpi" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/choice_item7"
                                     style="@style/Widget.MaterialComponents.Chip.Choice"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="nodpi" />
+                                    android:text="@string/nodpi" />
 
                             </com.google.android.material.chip.ChipGroup>
                         </HorizontalScrollView>
@@ -186,65 +186,65 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Filter - apply criteria to a selection"
+                            android:text="@string/filter_apply_criteria_to_a_selection"
                             android:textAppearance="?textAppearanceSubtitle2" />
 
-                            <com.google.android.material.chip.ChipGroup
-                                android:id="@+id/filter2_group"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/filter2_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item1"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item1"
-                                    app:chipIcon="@drawable/vct_location_pin" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item1"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item1"
+                                app:chipIcon="@drawable/vct_location_pin" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item2"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item2" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item2"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item2" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item3"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item3" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item3"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item3" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item4"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item4" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item4"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item4" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item5"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item5" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item5"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item5" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item6"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item6" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item6"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item6" />
 
-                                <com.google.android.material.chip.Chip
-                                    android:id="@+id/filter2_item7"
-                                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Item7" />
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/filter2_item7"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/item7" />
 
-                            </com.google.android.material.chip.ChipGroup>
+                        </com.google.android.material.chip.ChipGroup>
 
                         <View
                             android:layout_width="match_parent"
@@ -257,7 +257,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="Input - information used in fields"
+                            android:text="@string/input_information_used_in_fields"
                             android:textAppearance="?textAppearanceSubtitle2" />
 
                         <com.google.android.material.chip.ChipGroup
@@ -271,7 +271,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Entry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Transit"
+                                android:text="@string/transit"
                                 app:chipIcon="@drawable/vct_train"
                                 app:rippleColor="@color/yellow_500" />
 
@@ -280,7 +280,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Entry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Mike"
+                                android:text="@string/mike"
                                 app:chipIcon="@drawable/vct_account"
                                 app:rippleColor="@color/yellow_500" />
 
@@ -289,7 +289,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Entry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Cost"
+                                android:text="@string/cost"
                                 app:chipIcon="@drawable/vct_cost"
                                 app:rippleColor="@color/yellow_500" />
 
@@ -298,7 +298,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Entry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Denver"
+                                android:text="@string/denver"
                                 app:chipIcon="@drawable/vct_location_pin" />
 
                             <com.google.android.material.chip.Chip
@@ -306,7 +306,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Entry"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Business"
+                                android:text="@string/business"
                                 app:chipIcon="@drawable/vct_business" />
                         </com.google.android.material.chip.ChipGroup>
 
@@ -316,16 +316,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:hint="@string/chip_content"
+                            app:counterMaxLength="10"
                             app:passwordToggleDrawable="@drawable/vct__add_circle"
-                            app:passwordToggleEnabled="true"
-                            app:counterMaxLength="10">
+                            app:passwordToggleEnabled="true">
 
                             <EditText
                                 android:id="@+id/chip_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="Chip Content"
                                 android:inputType="text"
                                 android:maxLength="10" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -342,7 +342,7 @@
                             style="@style/Widget.MaterialComponents.Chip.Action"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Save State"
+                            android:text="@string/save_state"
                             app:chipIcon="@drawable/vct_save" />
 
 
@@ -368,7 +368,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="User Info"
+                            android:text="@string/user_info"
                             android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
@@ -386,6 +386,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:hint="@string/profile_nickname_hint"
                             app:counterEnabled="true"
                             app:counterMaxLength="10">
 
@@ -394,7 +395,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="@string/profile_nickname_hint"
                                 android:inputType="textPersonName"
                                 android:maxLength="20" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -404,14 +404,14 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp">
+                            android:layout_marginBottom="8dp"
+                            android:hint="@string/profile_phone_hint">
 
                             <androidx.appcompat.widget.AppCompatEditText
                                 android:id="@+id/phone_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="@string/profile_phone_hint"
                                 android:inputType="phone"
                                 android:maxLength="14" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -423,6 +423,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
+                            android:hint="@string/enter_a_password"
                             app:passwordToggleEnabled="true">
 
                             <androidx.appcompat.widget.AppCompatEditText
@@ -430,11 +431,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="Enter a Password"
                                 android:inputType="textPassword"
                                 android:maxLength="8" />
                         </com.google.android.material.textfield.TextInputLayout>
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -465,7 +464,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="Have you ever owned any of these?" />
+                            android:text="@string/have_you_ever_owned_any_of_these" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -477,22 +476,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Nexus" />
+                                android:text="@string/nexus" />
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Android TV" />
+                                android:text="@string/android_tv" />
 
                             <CheckBox
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Android Wear" />
-
+                                android:text="@string/android_wear" />
                         </LinearLayout>
-
 
                         <TextView
                             style="?textAppearanceBody1"
@@ -500,10 +497,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="Which is your favorite device manufacturer?" />
+                            android:text="@string/which_is_your_favorite_device_manufacturer" />
 
                         <RadioGroup
-                            android:id="@+id/radioSex"
+                            android:id="@+id/manufacturer_group"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -511,32 +508,32 @@
                                 android:id="@+id/radioAsus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Asus" />
+                                android:text="@string/asus" />
 
                             <RadioButton
                                 android:id="@+id/radioHtc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="HTC" />
+                                android:text="@string/htc" />
 
                             <RadioButton
                                 android:id="@+id/radioMoto"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Motorola" />
+                                android:text="@string/motorola" />
 
                             <RadioButton
                                 android:id="@+id/radioOnePlus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="One Plus One" />
+                                android:text="@string/one_plus_one" />
 
                             <RadioButton
                                 android:id="@+id/radioSamsung"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Samsung" />
+                                android:text="@string/samsung" />
 
                         </RadioGroup>
 
@@ -546,7 +543,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="Where do you live?" />
+                            android:text="@string/where_do_you_live" />
 
                         <Spinner
                             android:id="@+id/android_spinner"
@@ -560,14 +557,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_horizontal_margin"
                             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="Rate your feelings about Android" />
+                            android:text="@string/rate_your_feelings_about_android" />
 
                         <RatingBar
                             android:id="@+id/android_rating"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
-
-
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -595,7 +590,7 @@
                             android:id="@+id/profile_pic_button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Change Profile Picture" />
+                            android:text="@string/change_profile_picture" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -608,7 +603,7 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_appbar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/toolbar_height"
             android:layout_gravity="bottom"
             android:elevation="8dp"
             app:backgroundTint="@color/color_primary"

@@ -8,6 +8,7 @@
     android:background="@drawable/bg_rounded"
     android:clipToPadding="true"
     android:elevation="6dp"
+    android:paddingBottom="96dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:showIn="@layout/activity_user">
 
@@ -45,80 +46,80 @@
 
         <TextView
             android:id="@+id/textscale_h1"
-            android:text="H1"
+            android:text="@string/textscale_label_h1"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline1" />
 
         <TextView
             android:id="@+id/textscale_h2"
-            android:text="H2"
+            android:text="@string/textscale_label_h2"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline2" />
 
         <TextView
             android:id="@+id/textscale_h3"
-            android:text="H3"
+            android:text="@string/textscale_label_h3"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline3" />
 
         <TextView
             android:id="@+id/textscale_h4"
-            android:text="H4"
+            android:text="@string/textscale_label_h4"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline4" />
 
         <TextView
             android:id="@+id/textscale_h5"
-            android:text="H5"
+            android:text="@string/textscale_label_h5"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline5" />
 
         <TextView
             android:id="@+id/textscale_h6"
-            android:text="H6"
+            android:text="@string/textscale_label_h6"
             android:onClick="scaleTextItemClicked"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceHeadline6" />
 
         <TextView
             android:id="@+id/textscale_subtitle1"
-            android:text="Subtitle1"
+            android:text="@string/textscale_label_subtitle1"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceSubtitle1" />
 
         <TextView
             android:id="@+id/textscale_subtitle2"
-            android:text="Subtitle2"
+            android:text="@string/textscale_label_subtitle2"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceSubtitle2" />
 
         <TextView
             android:id="@+id/textscale_body1"
-            android:text="Body1"
+            android:text="@string/textscale_label_body1"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceBody1" />
 
         <TextView
             android:id="@+id/textscale_body2"
-            android:text="Body2"
+            android:text="@string/textscale_label_body2"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceBody2" />
 
         <TextView
             android:id="@+id/textscale_button"
-            android:text="Button"
+            android:text="@string/textscale_label_button"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceButton" />
 
         <TextView
             android:id="@+id/textscale_caption"
-            android:text="Caption"
+            android:text="@string/textscale_label_caption"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceCaption" />
 
         <TextView
             android:id="@+id/textscale_overline"
-            android:text="Overline"
+            android:text="@string/textscale_label_overline"
             style="@style/TextScaleStyle"
             android:textAppearance="?textAppearanceOverline" />
 

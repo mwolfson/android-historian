@@ -85,6 +85,72 @@
     <string name="st_overline">Overline</string>
     <string name="show_text_scale_bottom_sheet">Show Text Scale Bottom Sheet</string>
 
+    <!-- Chips -->
+    <string name="chips">Chips</string>
+    <string name="action_trigger_an_action_on_main_content">Action - trigger an action on main content</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="set_alarm">Set Alarm</string>
+    <string name="choice_single_choice_from_2_or_more_options">Choice - single choice from 2 or more options</string>
+    <string name="ldpi">ldpi</string>
+    <string name="mdpi">mdpi</string>
+    <string name="hdpi">hdpi</string>
+    <string name="xhdpi">xhdpi</string>
+    <string name="xxhdpi">xxhdpi</string>
+    <string name="xxxhdpi">xxxhdpi</string>
+    <string name="nodpi">nodpi</string>
+    <string name="filter_apply_criteria_to_a_selection">Filter - apply criteria to a selection</string>
+    <string name="item1">Item1</string>
+    <string name="item2">Item2</string>
+    <string name="item3">Item3</string>
+    <string name="item4">Item4</string>
+    <string name="item5">Item5</string>
+    <string name="item6">Item6</string>
+    <string name="item7">Item7</string>
+    <string name="input_information_used_in_fields">Input - information used in fields</string>
+    <string name="transit">Transit</string>
+    <string name="mike">Mike</string>
+    <string name="cost">Cost</string>
+    <string name="denver">Denver</string>
+    <string name="business">Business</string>
+    <string name="chip_content">Chip Content</string>
+    <string name="save_state">Save State</string>
+
+    <!-- Profile Strings -->
+    <string name="user_info">User Info</string>
+    <string name="enter_a_password">Enter a Password</string>
+    <string name="have_you_ever_owned_any_of_these">Have you ever owned any of these?</string>
+    <string name="nexus">Nexus</string>
+    <string name="android_tv">Android TV</string>
+    <string name="android_wear">Android Wear</string>
+    <string name="which_is_your_favorite_device_manufacturer">Which is your favorite device manufacturer?</string>
+    <string name="asus">Asus</string>
+    <string name="htc">HTC</string>
+    <string name="motorola">Motorola</string>
+    <string name="one_plus_one">One Plus One</string>
+    <string name="samsung">Samsung</string>
+    <string name="where_do_you_live">Where do you live?</string>
+    <string name="rate_your_feelings_about_android">Rate your feelings about Android</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="refresh">Refresh</string>
+    <string name="find_os">Find OS</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="textscale_label_h1">H1</string>
+    <string name="textscale_label_h2">H2</string>
+    <string name="textscale_label_h3">H3</string>
+    <string name="textscale_label_h4">H4</string>
+    <string name="textscale_label_h5">H5</string>
+    <string name="textscale_label_h6">H6</string>
+    <string name="textscale_label_subtitle1">Subtitle1</string>
+    <string name="textscale_label_subtitle2">Subtitle2</string>
+    <string name="textscale_label_body1">Body1</string>
+    <string name="textscale_label_body2">Body2</string>
+    <string name="textscale_label_button">Button</string>
+    <string name="textscale_label_caption">Caption</string>
+    <string name="textscale_label_overline">Overline</string>
+    <string name="font">Font</string>
+    <string name="case_string">Case</string>
+
     <!-- Scale Text Arrays-->
     <string-array name="scaletext_array">
         <item>Headline1</item>

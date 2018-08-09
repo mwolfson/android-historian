@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:windowBackground">@color/window_background</item>
         <item name="colorSecondary">@color/color_secondary</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
     </style>
 
     <!-- Coming Soon -->
@@ -47,6 +48,11 @@
         <item name="android:background">@drawable/bg_selector</item>
         <item name="android:onClick">scaleTextItemClicked</item>
     </style>
+
+    <style name="TextAppearance.MyApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/bitter</item>
+    </style>
+
 
     <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">

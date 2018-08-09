@@ -39,6 +39,10 @@
             android:name="com.designdemo.uaha.ui.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

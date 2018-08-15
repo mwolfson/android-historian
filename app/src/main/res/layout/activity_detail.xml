@@ -41,13 +41,13 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/main_nested_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/snackbar_offset"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -57,14 +57,14 @@
             android:orientation="vertical"
             android:paddingTop="24dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/info_card"
-                cardCornerRadius="20dp"
-                cardElevation="20dp"
-                cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin">
+                android:layout_margin="@dimen/card_margin"
+                app:cardCornerRadius="@dimen/card_corner_rad"
+                app:cardElevation="@dimen/card_elevation"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     style="@style/Widget.CardContent"
@@ -87,16 +87,16 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
+                app:cardCornerRadius="@dimen/card_corner_rad"
+                app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -167,16 +167,16 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
+                app:cardCornerRadius="@dimen/card_corner_rad"
+                app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -269,16 +269,16 @@
                     </androidx.percentlayout.widget.PercentRelativeLayout>
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/card_margin"
                 android:layout_marginRight="@dimen/card_margin"
                 android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="6dp"
+                app:cardCornerRadius="@dimen/card_corner_rad"
+                app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -302,17 +302,8 @@
                         android:layout_height="fill_parent"
                         android:layout_margin="8dp" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:id="@+id/snackbar_placeholder"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar

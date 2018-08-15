@@ -34,7 +34,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$jetpackVersion"
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
     implementation "com.google.android.material:material:$jetpackVersion"
-    implementation "androidx.cardview:cardview:$jetpackVersion"
     implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
     implementation "androidx.palette:palette:$jetpackVersion"
     implementation "androidx.percentlayout:percentlayout:$jetpackVersion"

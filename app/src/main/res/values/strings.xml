@@ -135,12 +135,14 @@
     <string name="refresh">Refresh</string>
     <string name="find_os">Find OS</string>
     <string name="shuffle">Shuffle</string>
-    <string name="textscale_label_h1">H1</string>
-    <string name="textscale_label_h2">H2</string>
-    <string name="textscale_label_h3">H3</string>
-    <string name="textscale_label_h4">H4</string>
-    <string name="textscale_label_h5">H5</string>
-    <string name="textscale_label_h6">H6</string>
+
+    <!-- Text Scale -->
+    <string name="textscale_label_h1">Headline1</string>
+    <string name="textscale_label_h2">Headline2</string>
+    <string name="textscale_label_h3">Headline3</string>
+    <string name="textscale_label_h4">Headline4</string>
+    <string name="textscale_label_h5">Headline5</string>
+    <string name="textscale_label_h6">Headline6</string>
     <string name="textscale_label_subtitle1">Subtitle1</string>
     <string name="textscale_label_subtitle2">Subtitle2</string>
     <string name="textscale_label_body1">Body1</string>

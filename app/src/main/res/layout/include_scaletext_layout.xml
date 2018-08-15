@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_rounded"
+    android:elevation="@dimen/card_elevation"
     android:clipToPadding="true"
-    android:elevation="6dp"
     android:paddingBottom="96dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:showIn="@layout/activity_user">

@@ -14,4 +14,6 @@
 
     <dimen name="large_margin">32dp</dimen>
     <dimen name="snackbar_offset">64dp</dimen>
+    <dimen name="card_corner_rad">8dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
 </resources>

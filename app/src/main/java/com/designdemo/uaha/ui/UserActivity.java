@@ -4,25 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import com.designdemo.uaha.util.PrefsUtil;
-import com.designdemo.uaha.util.UiUtil;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
@@ -36,7 +17,24 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.designdemo.uaha.util.PrefsUtil;
+import com.designdemo.uaha.util.UiUtil;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.support.android.designlibdemo.R;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class UserActivity extends AppCompatActivity {
     private Activity mainActivity;
@@ -308,32 +306,32 @@ public class UserActivity extends AppCompatActivity {
         fontText.setText(UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular)));
 
         switch (scaleText) {
-            case "H1":
+            case "Headline1":
                 valueToSet = getString(R.string.st_h1);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "96"));
                 break;
-            case "H2":
+            case "Headline2":
                 valueToSet = getString(R.string.st_h2);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "60"));
                 break;
-            case "H3":
+            case "Headline3":
                 valueToSet = getString(R.string.st_h3);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "48"));
                 break;
-            case "H4":
+            case "Headline4":
                 valueToSet = getString(R.string.st_h4);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "34"));
                 break;
-            case "H5":
+            case "Headline5":
                 valueToSet = getString(R.string.st_h5);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "24"));
                 break;
-            case "H6":
+            case "Headline6":
                 valueToSet = getString(R.string.st_h6);
                 letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
                 sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "20"));

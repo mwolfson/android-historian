@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_bottom_opt1"
+        android:icon="@drawable/vct_home"
+        android:title="@string/bottomnav1" />
+
+    <item
+        android:id="@+id/nav_bottom_opt2"
+        android:icon="@drawable/vct_dashboard"
+        android:title="@string/bottomnav2" />
+
+    <item
+        android:id="@+id/nav_bottom_opt3"
+        android:icon="@drawable/vct_notifications"
+        android:title="@string/bottomnav3" />
+
+</menu>

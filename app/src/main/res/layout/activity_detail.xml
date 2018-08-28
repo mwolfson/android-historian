@@ -47,7 +47,6 @@
         android:id="@+id/main_nested_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/snackbar_offset"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -313,10 +312,12 @@
         android:layout_gravity="bottom"
         android:elevation="@dimen/toolbar_elevation"
         app:backgroundTint="@color/color_primary"
-        app:fabAlignmentMode="center"
+        app:fabAlignmentMode="end"
         app:fabCradleMargin="8dp"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-        app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+        app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:hideOnScroll="true"
+        app:layout_scrollFlags="scroll|enterAlways"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_detail"

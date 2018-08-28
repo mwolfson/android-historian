@@ -180,4 +180,10 @@
         <item>New Zealand</item>
         <item>India</item>
     </string-array>
+
+    <!-- BottomNavView -->
+    <string name="title_activity_bottom_bav">BottomBavActivity</string>
+    <string name="bottomnav1">Option1</string>
+    <string name="bottomnav2">Option2</string>
+    <string name="bottomnav3">Option3</string>
 </resources>

@@ -150,7 +150,7 @@ public class UserActivity extends AppCompatActivity {
                 String textEntered = customChipEdit.getText().toString();
                 Chip dynamicChip = new Chip(activity);
                 dynamicChip.setText(textEntered);
-                dynamicChip.setCloseIconEnabled(true);
+                dynamicChip.setCloseIconVisible(true);
                 dynamicChip.setCheckable(true);
                 dynamicChip.setChipIcon(getResources().getDrawable(R.drawable.vct_account));
                 dynamicChip.setOnCloseIconClickListener(new View.OnClickListener() {
@@ -224,20 +224,20 @@ public class UserActivity extends AppCompatActivity {
             }
 
             // Save original Values before sending, in-case user changes their mind
-            final String beforeName = PrefsUtil.getName(mainActivity.getApplicationContext());
-            final long beforePhone = PrefsUtil.getPhone(mainActivity.getApplicationContext());
+            final String beforeName = PrefsUtil.INSTANCE.getName(mainActivity.getApplicationContext());
+            final long beforePhone = PrefsUtil.INSTANCE.getPhone(mainActivity.getApplicationContext());
 
             // Store new values
             final String nameToSet = nameEnterField.getText().toString();
             String formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.getText().toString());
             final long phoneToSet = Long.valueOf(formattedNum);
 
-            PrefsUtil.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
+            PrefsUtil.INSTANCE.setProfile(mainActivity.getApplicationContext(), nameToSet, phoneToSet);
 
             Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.undo), view -> {
                         // Reset to original
-                        boolean complete = PrefsUtil.setProfile(mainActivity.getApplicationContext(), beforeName, beforePhone);
+                        boolean complete = PrefsUtil.INSTANCE.setProfile(mainActivity.getApplicationContext(), beforeName, beforePhone);
                         if (complete) {
                             setPhoneNameValues();
                         }
@@ -302,81 +302,81 @@ public class UserActivity extends AppCompatActivity {
         TextView sizeText = dialogView.findViewById(R.id.ts_size);
         TextView letterSpacingText = dialogView.findViewById(R.id.ts_letter_spacing);
 
-        caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence)));
-        fontText.setText(UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular)));
+        caseText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence)));
+        fontText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular)));
 
         switch (scaleText) {
             case "Headline1":
                 valueToSet = getString(R.string.st_h1);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "96"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "96"));
                 break;
             case "Headline2":
                 valueToSet = getString(R.string.st_h2);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "60"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "60"));
                 break;
             case "Headline3":
                 valueToSet = getString(R.string.st_h3);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "48"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "48"));
                 break;
             case "Headline4":
                 valueToSet = getString(R.string.st_h4);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "34"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "34"));
                 break;
             case "Headline5":
                 valueToSet = getString(R.string.st_h5);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "24"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "24"));
                 break;
             case "Headline6":
                 valueToSet = getString(R.string.st_h6);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "20"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "20"));
                 break;
             case "Subtitle1":
                 valueToSet = getString(R.string.st_subtitle1);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "16"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "16"));
                 break;
             case "Subtitle2":
                 valueToSet = getString(R.string.st_subtitle2);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Body1":
                 valueToSet = getString(R.string.st_body1);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_5)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "16"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_5)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "16"));
                 break;
             case "Body2":
                 valueToSet = getString(R.string.st_body2);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Button":
                 valueToSet = getString(R.string.st_button);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_75)));
-                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "14"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_75)));
+                caseText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "14"));
                 break;
             case "Caption":
                 valueToSet = getString(R.string.st_caption);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_4)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "12"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_4)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "12"));
                 break;
             case "Overline":
                 valueToSet = getString(R.string.st_overline);
-                letterSpacingText.setText(UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1dot5)));
-                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "10"));
+                letterSpacingText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1dot5)));
+                caseText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps)));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "10"));
                 break;
             default:
                 valueToSet = "Unset";
-                caseText.setText(UiUtil.applySpecialFormatting(getString(R.string.case_text), "Unset"));
-                sizeText.setText(UiUtil.applySpecialFormatting(getString(R.string.size), "Unset"));
+                caseText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.case_text), "Unset"));
+                sizeText.setText(UiUtil.INSTANCE.applySpecialFormatting(getString(R.string.size), "Unset"));
                 break;
         }
 
@@ -388,12 +388,12 @@ public class UserActivity extends AppCompatActivity {
 
 
     private void setPhoneNameValues() {
-        String name = PrefsUtil.getName(this);
-        if (!name.equals(PrefsUtil.PREFS_NAME_UNSET)) {
+        String name = PrefsUtil.INSTANCE.getName(this);
+        if (!name.equals(PrefsUtil.INSTANCE.getPREFS_NAME_UNSET())) {
             nameEnterField.setText(name);
         }
 
-        final long phone = PrefsUtil.getPhone(this);
+        final long phone = PrefsUtil.INSTANCE.getPhone(this);
         if (phone != 0) {
             phoneEnterField.setText(phone + "");
         }

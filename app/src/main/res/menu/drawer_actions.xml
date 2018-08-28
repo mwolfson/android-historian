@@ -33,4 +33,12 @@
         </menu>
     </item>
 
+    <item android:title="Demos">
+        <menu>
+            <item
+                android:id="@+id/nav_bottom_nav"
+                android:icon="@drawable/ic_link"
+                android:title="BottomNavView"/>
+        </menu>
+    </item>
 </menu>

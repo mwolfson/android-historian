@@ -1,36 +1,36 @@
 package com.designdemo.uaha.ui;
 
+import android.animation.Animator;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.designdemo.uaha.util.PrefsUtil;
 import com.designdemo.uaha.data.VersionData;
+import com.designdemo.uaha.util.PrefsUtil;
 import com.designdemo.uaha.util.UiUtil;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.annotation.UiThread;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,7 +46,7 @@ import java.io.IOException;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_NAME = "os_name";
+    public static final String EXTRA_APP_NAME = "os_name";
     public static final String EXTRA_INDEX = "os_index";
 
     private WebView regsWv;
@@ -55,16 +55,28 @@ public class DetailActivity extends AppCompatActivity {
 
     private OkHttpClient okclient;
     private int osVersion;
+    private String androidName = "unset";
 
+    private CoordinatorLayout layoutMain;
+    private CoordinatorLayout layoutContent;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         Intent intent = getIntent();
         handleIntent(intent);
 
-        final String androidName = intent.getStringExtra(EXTRA_NAME);
+        if (androidName == "unset") {
+            androidName = intent.getStringExtra(EXTRA_APP_NAME);
+        }
+        Log.d("MSW", "Name in is:" + androidName);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -105,13 +117,17 @@ public class DetailActivity extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Activity myActiviy = this;
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_appbar);
         bottomAppBar.replaceMenu(R.menu.detail_actions);
         bottomAppBar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_shuffle:
-                    Log.d("MSW", "SHUFFLE");
+                    Log.d("MSW", "SHUFFLE IT UP");
+                    this.androidName = VersionData.getRandomProductName();
+                    onResume();
+                    Log.d("MSW", "SHUFFLE DONE" + androidName);
                     return true;
             }
             return false;
@@ -124,6 +140,24 @@ public class DetailActivity extends AppCompatActivity {
         String[] parts = splitString.split("-");
         collapsingToolbar.setTitle(parts[0]);
     }
+//
+//    /**
+//     * Circular reveal exit animation
+//     */
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    private void doCircularExitAnimation() {
+//        int x = layoutContent.getRight();
+//        int y = layoutContent.getBottom();
+//
+//        int startRadius = 0;
+//        int endRadius = (int) Math.hypot(layoutMain.getWidth(), layoutMain.getHeight());
+//
+//        Animator anim = ViewAnimationUtils.createCircularReveal(layoutButtons, x, y, startRadius, endRadius);
+//
+//        anim.start();
+//
+//
+//    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -142,7 +176,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        regsWv = (WebView) findViewById(R.id.regulations_webview);
+        regsWv = findViewById(R.id.regulations_webview);
+        layoutMain = findViewById(R.id.main_content);
     }
 
 
@@ -156,15 +191,15 @@ public class DetailActivity extends AppCompatActivity {
         //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.grey_300)));
 
         fab.setOnClickListener(v -> {
-            PrefsUtil.toggleFavorite(getApplicationContext(), osVersion);
+            PrefsUtil.INSTANCE.toggleFavorite(getApplicationContext(), osVersion);
             setFabIcon();
 
             // Notify the User with a snackbar
             // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
-            float pxScreenHeight = UiUtil.getScreenHeight(this);
-            float pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this);
+            float pxScreenHeight = UiUtil.INSTANCE.getScreenHeight(this);
+            float pxToolbar = UiUtil.INSTANCE.getPxForRes(R.dimen.snackbar_offset, this);
             float pxTopOffset = pxScreenHeight - pxToolbar;
-            float sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this);
+            float sideOffset = UiUtil.INSTANCE.getPxForRes(R.dimen.large_margin, this);
 
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -185,7 +220,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setFabIcon() {
-        if (PrefsUtil.isFavorite(getApplicationContext(), osVersion)) {
+        if (PrefsUtil.INSTANCE.isFavorite(getApplicationContext(), osVersion)) {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on));
         } else {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off));

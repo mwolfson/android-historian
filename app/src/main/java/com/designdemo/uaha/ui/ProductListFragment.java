@@ -71,12 +71,12 @@ public class ProductListFragment extends Fragment {
                 LinearLayoutManager llm = new LinearLayoutManager(recyclerView.getContext());
                 recyclerView.setLayoutManager(llm);
                 recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), llm.getOrientation()));
-                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList()));
+                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList(), false));
                 break;
             case (FRAG_TYPE_DEVICE):
                 recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 2));
                 recyclerView.addItemDecoration(new GridDividerDecoration(recyclerView.getContext()));
-                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList()));
+                recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(), getActivity(), getDataList(), true));
                 break;
             case (FRAG_TYPE_FAV):
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -99,7 +99,8 @@ public class ProductListFragment extends Fragment {
                 }
                 break;
             case (FRAG_TYPE_FAV):
-                list = PrefsUtil.getFavorites(mainActivity);
+                list = PrefsUtil.INSTANCE.getFavorites(mainActivity);
+                Log.d("MSW", "List of products is sized:" + list.size());
                 break;
         }
         return list;

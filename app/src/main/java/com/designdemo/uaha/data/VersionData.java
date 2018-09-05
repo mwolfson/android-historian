@@ -1,8 +1,11 @@
 package com.designdemo.uaha.data;
 
 import android.os.Build;
+import android.util.Log;
 
 import com.support.android.designlibdemo.R;
+
+import java.util.Random;
 
 public class VersionData {
     public static final int NUM_OF_OS = 12;
@@ -170,6 +173,11 @@ public class VersionData {
     public static final int[] osVersions = {OS_CUPCAKE, OS_DONUT, OS_ECLAIR, OS_FROYO, OS_GINGERBREAD, OS_HONEYCOMB, OS_ICS, OS_JB, OS_KITKAT, OS_LOLLIPOP};
 
     public static final int[] deviceVersions = {DEVICE_G1, DEVICE_DROID, DEVICE_N1, DEVICE_NEXS, DEVICE_GNEX, DEVICE_N4, DEVICE_N5, DEVICE_N6, DEVICE_N7, DEVICE_N9};
+
+    public static final String getRandomProductName() {
+        int randInt = new Random().nextInt(osVersions.length - 1);
+        return getProductName(osVersions[randInt]);
+    }
 
     public static String getProductName(int osVersion) {
         String retStr = "";

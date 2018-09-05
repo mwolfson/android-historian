@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
@@ -8,6 +8,9 @@
         <item name="android:windowBackground">@color/window_background</item>
         <item name="colorSecondary">@color/color_secondary</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MyApp.Body1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MyApp.Subtitle2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MyApp.Caption</item>
     </style>
 
     <!-- Coming Soon -->
@@ -50,9 +53,20 @@
     </style>
 
     <style name="TextAppearance.MyApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/bitter</item>
+        <item name="fontFamily">@font/alegreya</item>
     </style>
 
+    <style name="TextAppearance.MyApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/lato</item>
+    </style>
+
+    <style name="TextAppearance.MyApp.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/lato</item>
+    </style>
+
+    <style name="TextAppearance.MyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/lato</item>
+    </style>
 
     <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">

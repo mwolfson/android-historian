@@ -7,9 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.widget.SearchView;
@@ -21,12 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.support.android.designlibdemo.BottomNavActivity;
 import com.support.android.designlibdemo.R;
 
 import java.util.ArrayList;
@@ -149,6 +146,10 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.nav_link2:
                             Intent browser2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/"));
                             startActivity(browser2);
+                            return true;
+                        case R.id.nav_bottom_nav:
+                            Intent bottomNavIntent = new Intent(getApplicationContext(), BottomNavActivity.class);
+                            startActivity(bottomNavIntent);
                             return true;
                         default:
                             return true;

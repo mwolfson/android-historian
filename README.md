@@ -53,7 +53,7 @@ Special Thanks
 --------------
 This project was originally forked from the [Cheesesquare](https://github.com/chrisbanes/cheesesquare) project. Special thanks to [Chris Banes](https://github.com/chrisbanes).  
 
-Item Decorator from [recyclerview-playground](https://github.com/devunwired/recyclerview-playground) project. Special thanks to [Dave Smith (DevUnwired](https://github.com/devunwired). 
+Item Decorator from [Simple Item Decoration](http://bignerdranch.github.io/simple-item-decoration/) project. Special thanks to [Big Nerd Ranch](http://bignerdranch.github.io/). 
 
 Pre-requisites
 --------------

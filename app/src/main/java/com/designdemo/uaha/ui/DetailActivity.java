@@ -78,8 +78,8 @@ public class DetailActivity extends AppCompatActivity {
     private int osVersion;
     private String androidName = "unset";
 
-//    private static final String TOKEN = "3564b7c851660d0155a011884aad146f3248cabe271d0aa3";
-private static final String TOKEN = FONO_API_KEY;
+    //    private static final String TOKEN = "3564b7c851660d0155a011884aad146f3248cabe271d0aa3";
+    private static final String TOKEN = FONO_API_KEY;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -284,7 +284,7 @@ private static final String TOKEN = FONO_API_KEY;
             collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
 
             if (palette.getVibrantColor(0x000000) == 0x000000) {
-                Log.d("MSW","this one is the other type");
+                Log.d("MSW", "this one is the other type");
                 iconColor = palette.getMutedColor(0x000000);
             } else {
                 iconColor = palette.getVibrantColor(0x000000);
@@ -293,8 +293,8 @@ private static final String TOKEN = FONO_API_KEY;
             //The back button should also have a better color applied to ensure it is visible,
             // Get a swatch, and get a more specific color for title from it.
             Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-            int arrowColor = ContextCompat.getColor(this,   R.color.black);
-            if(vibrantSwatch != null){
+            int arrowColor = ContextCompat.getColor(this, R.color.black);
+            if (vibrantSwatch != null) {
                 arrowColor = vibrantSwatch.getTitleTextColor();
             }
 
@@ -328,7 +328,8 @@ private static final String TOKEN = FONO_API_KEY;
             featuresCont.setText(deviceInfo.getFeatures_c());
             releaseDate.setText(UiUtil.INSTANCE.applyBoldFirstWord(getString(R.string.spec_release_date), deviceInfo.getAnnounced()));
 
-            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo.getMultitouch(), multitouch);
+            if (deviceInfo.getMultitouch() != null)
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo.getMultitouch(), multitouch);
 
             String sizeInfo = deviceInfo.getWeight() + "\n" + deviceInfo.getDimensions() + "\n" + deviceInfo.getSize();
             setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, sizeInfo, weight);
@@ -337,7 +338,7 @@ private static final String TOKEN = FONO_API_KEY;
             setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu);
 
             String cameraInfo = deviceInfo.getPrimary_() + "\n" + "Video - " + deviceInfo.getVideo();
-            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera,cameraInfo, camera);
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, cameraInfo, camera);
 
             String displayInfo = deviceInfo.getResolution() + "\n" + deviceInfo.getType();
             setupSpecItem(R.drawable.vct_display, R.string.spec_display, displayInfo, display);
@@ -351,7 +352,7 @@ private static final String TOKEN = FONO_API_KEY;
             setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "multitouch", multitouch);
             setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "sizeInfo", weight);
             setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "cpuInfo", cpu);
-            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera,"cameraInfo", camera);
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, "cameraInfo", camera);
             setupSpecItem(R.drawable.vct_display, R.string.spec_display, "displayInfo", display);
         }
 
@@ -388,6 +389,7 @@ private static final String TOKEN = FONO_API_KEY;
                 List<DeviceEntity> devices = response.body();
                 if (devices != null) {
                     for (DeviceEntity dv : devices) {
+                        Log.d("MSW", "Device Item is: " + dv.getDeviceName());
                         deviceInfo = dv;
                     }
                 }

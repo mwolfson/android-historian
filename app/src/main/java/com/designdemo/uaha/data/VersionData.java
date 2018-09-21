@@ -226,7 +226,7 @@ public class VersionData {
                 retStr = "Droid-Motorola";
                 break;
             case DEVICE_G1:
-                retStr = "G1-HTC";
+                retStr = "Dream-HTC";
                 break;
             case DEVICE_GNEX:
                 retStr = "Galaxy Nexus-Samsung";

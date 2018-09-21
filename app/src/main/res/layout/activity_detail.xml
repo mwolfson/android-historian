@@ -54,39 +54,96 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="24dp">
+            android:paddingTop="24dp"
+            android:animateLayoutChanges="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/info_card"
+            <LinearLayout
+                android:id="@+id/spec_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
-                app:cardCornerRadius="@dimen/card_corner_rad"
-                app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                android:visibility="gone"
+                android:orientation="vertical" >
 
-                <LinearLayout
-                    style="@style/Widget.CardContent"
+                <TextView
+                    android:id="@+id/spec_releasedate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:textAppearance="?textAppearanceCaption"/>
+
+                <TextView
+                    android:id="@+id/details_device_name"
+                    style="?textAppearanceHeadline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp" />
+
+                <TextView
+                    android:id="@+id/details_features"
+                    style="?textAppearanceBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp" />
+
+                <TextView
+                    android:id="@+id/details_features_c"
+                    style="?textAppearanceBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/info_card"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/card_margin"
+                    app:cardCornerRadius="@dimen/card_corner_rad"
+                    app:cardElevation="@dimen/card_elevation"
+                    app:cardUseCompatPadding="true">
 
-                    <TextView
-                        android:id="@+id/favorite_title"
+                    <LinearLayout
+                        style="@style/Widget.CardContent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/favorite_title"
-                        android:textAppearance="?textAppearanceHeadline6" />
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/favorites_content"
-                        android:textAppearance="?textAppearanceBody1" />
+                        <TextView
+                            android:id="@+id/favorite_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Specifications"
+                            android:textAppearance="?textAppearanceHeadline6" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/spec_weight"
+                            style="@style/specItemStyle" />
 
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/spec_cpu"
+                            style="@style/specItemStyle" />
+
+                        <TextView
+                            android:id="@+id/spec_camera"
+                            style="@style/specItemStyle"/>
+
+                        <TextView
+                            android:id="@+id/spec_display"
+                            style="@style/specItemStyle"/>
+
+                        <TextView
+                            android:id="@+id/spec_multitouch"
+                            style="@style/specItemStyle"/>
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -314,10 +371,10 @@
         app:backgroundTint="@color/color_primary"
         app:fabAlignmentMode="end"
         app:fabCradleMargin="8dp"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-        app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:hideOnScroll="true"
-        app:layout_scrollFlags="scroll|enterAlways"/>
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_detail"

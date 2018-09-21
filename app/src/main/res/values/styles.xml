@@ -8,6 +8,7 @@
         <item name="android:windowBackground">@color/window_background</item>
         <item name="colorSecondary">@color/color_secondary</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MyApp.Headline5</item>
         <item name="textAppearanceBody1">@style/TextAppearance.MyApp.Body1</item>
         <item name="textAppearanceSubtitle2">@style/TextAppearance.MyApp.Subtitle2</item>
         <item name="textAppearanceCaption">@style/TextAppearance.MyApp.Caption</item>
@@ -41,7 +42,7 @@
 
     <!-- Example changes the color background to use Primary color instead of default Secondary for Button Backgrounds -->
     <style name="CustomButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorSecondary</item>
     </style>
 
     <style name="TextScaleStyle">
@@ -56,6 +57,10 @@
         <item name="fontFamily">@font/alegreya</item>
     </style>
 
+    <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/alegreya</item>
+    </style>
+
     <style name="TextAppearance.MyApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/lato</item>
     </style>
@@ -66,6 +71,15 @@
 
     <style name="TextAppearance.MyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/lato</item>
+    </style>
+
+    <style name="specItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textAppearance">?textAppearanceBody1</item>
     </style>
 
     <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme

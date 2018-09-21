@@ -186,4 +186,10 @@
     <string name="bottomnav1">Option1</string>
     <string name="bottomnav2">Option2</string>
     <string name="bottomnav3">Option3</string>
+    <string name="spec_release_date">Release Date</string>
+    <string name="spec_multitouch">Multitouch</string>
+    <string name="spec_weight">Size\\Weight</string>
+    <string name="spec_cpu">CPU\\Memory</string>
+    <string name="spec_camera">Camera</string>
+    <string name="spec_display">Display</string>
 </resources>

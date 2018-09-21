@@ -30,11 +30,10 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
+                    android:background="@drawable/bg_button"
                     android:text="@string/show_text_scale_bottom_sheet"
                     app:icon="@drawable/vct_text_scale"
-                    app:iconTint="@color/white"
-                    app:strokeColor="@color/grey_200"
-                    app:strokeWidth="1dp" />
+                    app:iconTint="@color/white" />
 
                 <include layout="@layout/include_chip_card" />
 
@@ -278,6 +277,7 @@
                             android:id="@+id/profile_pic_button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/bg_button"
                             android:text="@string/change_profile_picture" />
 
                     </LinearLayout>

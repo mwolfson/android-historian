@@ -1,6 +1,5 @@
 package com.designdemo.uaha.ui;
 
-import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.SearchManager;
@@ -13,7 +12,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.designdemo.uaha.data.DeviceEntity;
 import com.designdemo.uaha.data.VersionData;
+import com.designdemo.uaha.net.FonoApiFactory;
+import com.designdemo.uaha.net.FonoApiService;
 import com.designdemo.uaha.util.PrefsUtil;
 import com.designdemo.uaha.util.UiUtil;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -21,6 +23,8 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +33,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +45,9 @@ import com.squareup.okhttp.Response;
 import com.support.android.designlibdemo.R;
 
 import java.io.IOException;
+import java.util.List;
+
+import static com.support.android.designlibdemo.BuildConfig.FONO_API_KEY;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -53,17 +58,33 @@ public class DetailActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private CollapsingToolbarLayout collapsingToolbar;
 
+    //Details Card Views
+    private int iconColor = 0;
+    private LinearLayout specLayout;
+    private TextView deviceName;
+    private TextView features;
+    private TextView featuresCont;
+    private TextView releaseDate;
+    private TextView multitouch;
+    private TextView weight;
+    private TextView cpu;
+    private TextView camera;
+    private TextView display;
+
+
+    private DeviceEntity deviceInfo = null;
+
     private OkHttpClient okclient;
     private int osVersion;
     private String androidName = "unset";
 
-    private CoordinatorLayout layoutMain;
-    private CoordinatorLayout layoutContent;
+//    private static final String TOKEN = "3564b7c851660d0155a011884aad146f3248cabe271d0aa3";
+private static final String TOKEN = FONO_API_KEY;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
     }
 
     @Override
@@ -76,11 +97,9 @@ public class DetailActivity extends AppCompatActivity {
         if (androidName == "unset") {
             androidName = intent.getStringExtra(EXTRA_APP_NAME);
         }
-        Log.d("MSW", "Name in is:" + androidName);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Log.d("MSW", "The Query is: " + query);
         }
 
         okclient = new OkHttpClient();
@@ -93,9 +112,11 @@ public class DetailActivity extends AppCompatActivity {
         loadBackdrop();
         setupViews();
         setupFab();
+        setupDetailsInfo();
         setupPalette();
-        new WikiPullTask().execute();
+        new InfoGatherTask().execute();
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -107,7 +128,6 @@ public class DetailActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Log.d("MSW", "The Query is: " + query);
         }
     }
 
@@ -124,10 +144,9 @@ public class DetailActivity extends AppCompatActivity {
         bottomAppBar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_shuffle:
-                    Log.d("MSW", "SHUFFLE IT UP");
+                    // Get a random Android product, and then refresh the UI
                     this.androidName = VersionData.getRandomProductName();
                     onResume();
-                    Log.d("MSW", "SHUFFLE DONE" + androidName);
                     return true;
             }
             return false;
@@ -177,7 +196,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setupViews() {
         regsWv = findViewById(R.id.regulations_webview);
-        layoutMain = findViewById(R.id.main_content);
     }
 
 
@@ -265,28 +283,119 @@ public class DetailActivity extends AppCompatActivity {
             //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
             collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
 
-            //The back button should also have a better color applied to ensure it is visible
-            String resName = Build.VERSION.SDK_INT >= 23 ? "abc_ic_ab_back_material" : "abc_ic_ab_back_mtrl_am_alpha";
-            int res = getResources().getIdentifier(resName, "drawable", getPackageName());
-            Drawable upArrow = getResources().getDrawable(res);
-            upArrow.setColorFilter(palette.getVibrantColor(0x000000), PorterDuff.Mode.SRC_ATOP);
-            getSupportActionBar().setHomeAsUpIndicator(upArrow);
-            collapsingToolbar.setCollapsedTitleTextColor(palette.getVibrantColor(0x000000));
+            if (palette.getVibrantColor(0x000000) == 0x000000) {
+                Log.d("MSW","this one is the other type");
+                iconColor = palette.getMutedColor(0x000000);
+            } else {
+                iconColor = palette.getVibrantColor(0x000000);
+            }
 
+            //The back button should also have a better color applied to ensure it is visible,
+            // Get a swatch, and get a more specific color for title from it.
+            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+            int arrowColor = ContextCompat.getColor(this,   R.color.black);
+            if(vibrantSwatch != null){
+                arrowColor = vibrantSwatch.getTitleTextColor();
+            }
+
+            int res = getResources().getIdentifier("abc_ic_ab_back_material", "drawable", getPackageName());
+            Drawable upArrow = getColorizedDrawable(res);
+            getSupportActionBar().setHomeAsUpIndicator(upArrow);
+            collapsingToolbar.setCollapsedTitleTextColor(arrowColor);
         };
 
         // Start this Async, because it takes some time to generate
         Palette.from(bm).generate(listener);
-
     }
 
-    //TODO - this will replaced with a proper API call (and network stack)
-    private class WikiPullTask extends AsyncTask<String, Void, String> {
+    private void setupDetailsInfo() {
+        deviceName = findViewById(R.id.details_device_name);
+        features = findViewById(R.id.details_features);
+        featuresCont = findViewById(R.id.details_features_c);
+        releaseDate = findViewById(R.id.spec_releasedate);
+        specLayout = findViewById(R.id.spec_layout);
+        multitouch = findViewById(R.id.spec_multitouch);
+        weight = findViewById(R.id.spec_weight);
+        cpu = findViewById(R.id.spec_cpu);
+        camera = findViewById(R.id.spec_camera);
+        display = findViewById(R.id.spec_display);
+    }
+
+    private void invalidateDeviceInfoViews() {
+        if (deviceInfo != null) {
+            deviceName.setText(deviceInfo.getDeviceName());
+            features.setText(deviceInfo.getFeatures());
+            featuresCont.setText(deviceInfo.getFeatures_c());
+            releaseDate.setText(UiUtil.INSTANCE.applyBoldFirstWord(getString(R.string.spec_release_date), deviceInfo.getAnnounced()));
+
+            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo.getMultitouch(), multitouch);
+
+            String sizeInfo = deviceInfo.getWeight() + "\n" + deviceInfo.getDimensions() + "\n" + deviceInfo.getSize();
+            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, sizeInfo, weight);
+
+            String cpuInfo = deviceInfo.getChipset() + "\n" + deviceInfo.getCpu() + "\n" + deviceInfo.getInternal();
+            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu);
+
+            String cameraInfo = deviceInfo.getPrimary_() + "\n" + "Video - " + deviceInfo.getVideo();
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera,cameraInfo, camera);
+
+            String displayInfo = deviceInfo.getResolution() + "\n" + deviceInfo.getType();
+            setupSpecItem(R.drawable.vct_display, R.string.spec_display, displayInfo, display);
+        } else {
+            // Set defaults
+            deviceName.setText("Device Name");
+            features.setText("Some features");
+            featuresCont.setText("More features");
+            releaseDate.setText("small date text");
+
+            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "multitouch", multitouch);
+            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "sizeInfo", weight);
+            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "cpuInfo", cpu);
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera,"cameraInfo", camera);
+            setupSpecItem(R.drawable.vct_display, R.string.spec_display, "displayInfo", display);
+        }
+
+        specLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void setupSpecItem(@DrawableRes int drawable, @StringRes int title, String info, TextView view) {
+        Drawable specDrawable = getColorizedDrawable(drawable);
+        view.setCompoundDrawablesWithIntrinsicBounds(specDrawable, null, null, null);
+        view.setText(UiUtil.INSTANCE.applyBoldFirstWord(getString(title), info));
+    }
+
+    private Drawable getColorizedDrawable(@DrawableRes int res) {
+        Drawable drawable = ContextCompat.getDrawable(this, res);
+        drawable.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+        return drawable;
+    }
+
+
+    private class InfoGatherTask extends AsyncTask<String, Void, String> {
         private String phone;
 
         @Override
         protected String doInBackground(String... params) {
             String respStr = "";
+            FonoApiService api = new FonoApiFactory().create();
+            retrofit2.Response<List<DeviceEntity>> response = null;
+
+            String[] product = VersionData.getProductName(osVersion).split("-");
+            String deviceName = product[0];
+            String manufacturer = product[1];
+            try {
+                response = api.getDevice(TOKEN, deviceName, manufacturer, null).execute();
+                List<DeviceEntity> devices = response.body();
+                if (devices != null) {
+                    for (DeviceEntity dv : devices) {
+                        deviceInfo = dv;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
 
             String req = "https://en.wikipedia.org/w/api.php?action=query&titles=" + VersionData.getWikiQuery(osVersion) + "&prop=revisions&rvprop=content&format=jsonfm";
             Log.d("NET", "WIKIPedia request: " + req);
@@ -309,6 +418,7 @@ public class DetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             regsWv.loadData(result, "text/html", null);
+            invalidateDeviceInfoViews();
         }
 
         @Override

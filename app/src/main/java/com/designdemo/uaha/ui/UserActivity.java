@@ -33,6 +33,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -142,36 +143,58 @@ public class UserActivity extends AppCompatActivity {
         EditText customChipEdit = findViewById(R.id.chip_edit);
 
         ChipGroup entryGroup = findViewById(R.id.chipgroup_entry);
+        Chip chip1 = findViewById(R.id.chip_entry1);
+        chip1.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+
+        Chip chip2 = findViewById(R.id.chip_entry2);
+        chip2.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+
+        Chip chip3 = findViewById(R.id.chip_entry3);
+        chip3.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+
+        Chip chip4 = findViewById(R.id.chip_entry4);
+        chip4.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+
+        Chip chip5 = findViewById(R.id.chip_entry5);
+        chip5.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+
         Activity activity = this;
 
         customChipEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                String textEntered = customChipEdit.getText().toString();
-                Chip dynamicChip = new Chip(activity);
-                dynamicChip.setText(textEntered);
-                dynamicChip.setCloseIconVisible(true);
-                dynamicChip.setCheckable(true);
-                dynamicChip.setChipIcon(getResources().getDrawable(R.drawable.vct_account));
-                dynamicChip.setOnCloseIconClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dynamicChip.setVisibility(View.GONE);
-                    }
-                });
-
-                entryGroup.addView(dynamicChip);
-                customChipEdit.requestFocus();
+                saveChipEntry(customChipEdit, activity, entryGroup);
                 return false;
             }
         });
 
-//        Chip chipActionCustom = findViewById(R.id.chip_action_custom);
-//        chipActionCustom.setOnClickListener(view -> {
-//            chipActionCustom.setChipDrawable(R.drawable.);
-//        });
+        Chip chipActionCustom = findViewById(R.id.chip_action_custom);
+        chipActionCustom.setOnClickListener(view -> {
+            saveChipEntry(customChipEdit, activity, entryGroup);
+        });
 
     }
+
+    private void saveChipEntry(EditText customChipEdit, Activity activity, ChipGroup entryGroup) {
+        String textEntered = customChipEdit.getText().toString();
+        Chip dynamicChip = new Chip(activity);
+        dynamicChip.setText(textEntered);
+        dynamicChip.setCloseIconVisible(true);
+        dynamicChip.setCheckable(true);
+        //Set a random color and icon for demo - but these could be set for practical reasons
+        dynamicChip.setChipIcon(ContextCompat.getDrawable(this, UiUtil.INSTANCE.getRandomDrawable()));
+        dynamicChip.setChipBackgroundColorResource(UiUtil.INSTANCE.getRandomColor());
+        dynamicChip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dynamicChip.setVisibility(View.GONE);
+            }
+        });
+
+        entryGroup.addView(dynamicChip);
+        customChipEdit.requestFocus();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -461,4 +484,5 @@ public class UserActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }

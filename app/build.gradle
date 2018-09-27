@@ -17,6 +17,9 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', 'FONO_API_KEY', project.hasProperty('fono.apikey') ? '\"' + project.property('fono.apikey') + '\"' : '\"\"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -45,6 +48,8 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:3.6.0'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation 'com.squareup.okio:okio:1.2.0'
     implementation 'com.squareup.okhttp:okhttp:2.2.0'
     implementation 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'

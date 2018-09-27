@@ -2,7 +2,6 @@ package com.designdemo.uaha.util
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -11,6 +10,8 @@ import android.text.style.AbsoluteSizeSpan
 import android.util.DisplayMetrics
 
 import androidx.annotation.DimenRes
+import com.support.android.designlibdemo.R
+import java.util.*
 
 object UiUtil {
 
@@ -93,5 +94,24 @@ object UiUtil {
         str.setSpan(android.text.style.StyleSpan(Typeface.ITALIC), word1.length + 1, str.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         return str
+    }
+
+    fun applyBoldFirstWord(word1: String, word2: String): SpannableStringBuilder {
+        val str = SpannableStringBuilder("$word1  $word2")
+        str.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        return  str
+    }
+
+    fun getRandomColor(): Int {
+        val colors = intArrayOf(R.color.red_500, R.color.pink_500, R.color.purple_500, R.color.deep_purple_500, R.color.indigo_500, R.color.blue_500, R.color.light_blue_500, R.color.cyan_500, R.color.teal_500, R.color.green_500, R.color.light_green_500, R.color.lime_500, R.color.yellow_500, R.color.amber_500, R.color.orange_500, R.color.deep_orange_500, R.color.brown_500, R.color.blue_grey_500, R.color.grey_500)
+        val randInt = Random().nextInt(colors.size)
+        return colors[randInt]
+    }
+
+    fun getRandomDrawable(): Int {
+        val drawables = intArrayOf(R.drawable.vct_location_pin, R.drawable.vct_business, R.drawable.vct_train, R.drawable.vct_cost);
+        val randInt = Random().nextInt(drawables.size)
+        return drawables[randInt]
     }
 }

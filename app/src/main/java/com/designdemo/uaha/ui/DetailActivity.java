@@ -67,9 +67,14 @@ public class DetailActivity extends AppCompatActivity {
     private TextView releaseDate;
     private TextView multitouch;
     private TextView weight;
+    private TextView size;
+    private TextView dimen;
     private TextView cpu;
+    private TextView memory;
     private TextView camera;
     private TextView display;
+    private TextView resolution;
+    private TextView video;
 
 
     private DeviceEntity deviceInfo = null;
@@ -316,47 +321,45 @@ public class DetailActivity extends AppCompatActivity {
         specLayout = findViewById(R.id.spec_layout);
         multitouch = findViewById(R.id.spec_multitouch);
         weight = findViewById(R.id.spec_weight);
+        size = findViewById(R.id.spec_size);
+        dimen = findViewById(R.id.spec_dimen);
         cpu = findViewById(R.id.spec_cpu);
+        memory = findViewById(R.id.spec_memory);
         camera = findViewById(R.id.spec_camera);
         display = findViewById(R.id.spec_display);
+        resolution = findViewById(R.id.spec_resolution);
+        video = findViewById(R.id.spec_video);
     }
 
     private void invalidateDeviceInfoViews() {
         if (deviceInfo != null) {
             deviceName.setText(deviceInfo.getDeviceName());
+            deviceName.setTextColor(iconColor);
             features.setText(deviceInfo.getFeatures());
             featuresCont.setText(deviceInfo.getFeatures_c());
-            releaseDate.setText(UiUtil.INSTANCE.applyBoldFirstWord(getString(R.string.spec_release_date), deviceInfo.getAnnounced()));
 
             if (deviceInfo.getMultitouch() != null)
                 setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo.getMultitouch(), multitouch);
+            else
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", multitouch);
 
-            String sizeInfo = deviceInfo.getWeight() + "\n" + deviceInfo.getDimensions() + "\n" + deviceInfo.getSize();
-            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, sizeInfo, weight);
-
-            String cpuInfo = deviceInfo.getChipset() + "\n" + deviceInfo.getCpu() + "\n" + deviceInfo.getInternal();
+            String cpuInfo = deviceInfo.getChipset() + "\n" +  deviceInfo.getCpu();
             setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu);
 
-            String cameraInfo = deviceInfo.getPrimary_() + "\n" + "Video - " + deviceInfo.getVideo();
-            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, cameraInfo, camera);
+            setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo.getAnnounced(), releaseDate);
+            setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo.getSize(), size);
+            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo.getWeight(), weight);
+            setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo.getDimensions(), dimen);
+            setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, deviceInfo.getInternal(), memory);
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, deviceInfo.getPrimary_(), camera);
+            setupSpecItem(R.drawable.vct_video, R.string.spec_video, deviceInfo.getVideo(), video);
+            setupSpecItem(R.drawable.vct_display, R.string.spec_display, deviceInfo.getType(), display);
+            setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, deviceInfo.getResolution(), resolution);
 
-            String displayInfo = deviceInfo.getResolution() + "\n" + deviceInfo.getType();
-            setupSpecItem(R.drawable.vct_display, R.string.spec_display, displayInfo, display);
+            specLayout.setVisibility(View.VISIBLE);
         } else {
-            // Set defaults
-            deviceName.setText("Device Name");
-            features.setText("Some features");
-            featuresCont.setText("More features");
-            releaseDate.setText("small date text");
-
-            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "multitouch", multitouch);
-            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "sizeInfo", weight);
-            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "cpuInfo", cpu);
-            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, "cameraInfo", camera);
-            setupSpecItem(R.drawable.vct_display, R.string.spec_display, "displayInfo", display);
+            specLayout.setVisibility(View.GONE);
         }
-
-        specLayout.setVisibility(View.VISIBLE);
     }
 
     private void setupSpecItem(@DrawableRes int drawable, @StringRes int title, String info, TextView view) {

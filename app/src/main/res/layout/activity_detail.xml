@@ -53,56 +53,344 @@
             android:id="@+id/detail_main_linear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="24dp"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/spec_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/spec_releasedate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="16dp"
-                    android:textAppearance="?textAppearanceCaption"/>
-
-                <TextView
-                    android:id="@+id/details_device_name"
-                    style="?textAppearanceHeadline5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp" />
-
-                <TextView
-                    android:id="@+id/details_features"
-                    style="?textAppearanceBody1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp" />
-
-                <TextView
-                    android:id="@+id/details_features_c"
-                    style="?textAppearanceBody1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/info_card"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin"
+                    android:background="@drawable/bg_gradient_lightyellow"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_deviceinfo_label"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="Device Info"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/info1_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        app:cardCornerRadius="@dimen/card_corner_rad"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp">
+
+                            <TextView
+                                android:id="@+id/details_device_name"
+                                style="?textAppearanceHeadline5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp" />
+
+                            <TextView
+                                android:id="@+id/details_features"
+                                style="?textAppearanceBody1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp" />
+
+                            <TextView
+                                android:id="@+id/details_features_c"
+                                style="@style/specItem"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                app:cardCornerRadius="@dimen/card_corner_rad"
+                                app:cardElevation="@dimen/card_elevation"
+                                app:cardUseCompatPadding="true">
+
+                                <TextView
+                                    android:id="@+id/spec_releasedate"
+                                    style="@style/specItemStyle" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="@dimen/card_corner_rad"
+                                app:cardElevation="@dimen/card_elevation"
+                                app:cardUseCompatPadding="true">
+
+                                <TextView
+                                    android:id="@+id/spec_video"
+                                    style="@style/specItem"/>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="@dimen/card_corner_rad"
+                                app:cardElevation="@dimen/card_elevation"
+                                app:cardUseCompatPadding="true">
+
+                                <TextView
+                                    android:id="@+id/spec_camera"
+                                    style="@style/specItemStyle" />
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="@dimen/card_corner_rad"
+                                app:cardElevation="@dimen/card_elevation"
+                                app:cardUseCompatPadding="true">
+
+                                <TextView
+                                    android:id="@+id/spec_multitouch"
+                                    style="@style/specItemStyle" />
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_lightred"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_spec_label"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="Specifications"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginLeft="8dp"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_cpu"
+                                            style="@style/specItemStyle" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_memory"
+                                            style="@style/specItemStyle" />
+                                    </com.google.android.material.card.MaterialCardView>
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginLeft="8dp"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_size"
+                                            style="@style/specItemStyle" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_weight"
+                                            style="@style/specItemStyle" />
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_dimen"
+                                            style="@style/specItemStyle" />
+                                    </com.google.android.material.card.MaterialCardView>
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="8dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginLeft="8dp"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_display"
+                                            style="@style/specItemStyle" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        app:cardCornerRadius="@dimen/card_corner_rad"
+                                        app:cardElevation="@dimen/card_elevation"
+                                        app:cardUseCompatPadding="true">
+
+                                        <TextView
+                                            android:id="@+id/spec_resolution"
+                                            style="@style/specItemStyle" />
+                                    </com.google.android.material.card.MaterialCardView>
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+                        </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_gradient_lightblue"
+                android:orientation="vertical">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/ChipLabel"
+                    android:layout_marginBottom="0dp"
+                    android:text="Wiki"
+                    app:chipBackgroundColor="@color/transparent"
+                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/wiki_card"
+                    style="@style/card_style"
+                    app:cardCornerRadius="@dimen/card_corner_rad"
+                    app:cardElevation="@dimen/card_elevation"
+                    android:minHeight="224dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <WebView
+                            android:id="@+id/regulations_webview"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_margin="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_gradient_lightred"
+                android:orientation="vertical">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_palatte_label"
+                    style="@style/ChipLabel"
+                    android:layout_marginBottom="0dp"
+                    android:text="Palette"
+                    app:chipBackgroundColor="@color/transparent"
+                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeWidth="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/palatte_card"
+                    style="@style/card_style"
                     app:cardCornerRadius="@dimen/card_corner_rad"
                     app:cardElevation="@dimen/card_elevation"
                     app:cardUseCompatPadding="true">
@@ -113,252 +401,185 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/favorite_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Specifications"
+                            android:layout_marginBottom="16dp"
+                            android:text="This will display the primary colors of the current image"
                             android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
-                            android:id="@+id/spec_weight"
-                            style="@style/specItemStyle" />
+                            android:id="@+id/palette_vibrant"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Vibrant"
+                            android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/spec_cpu"
-                            style="@style/specItemStyle" />
+                            android:id="@+id/palette_vibrant_dark"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Vibrant Dark"
+                            android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/spec_camera"
-                            style="@style/specItemStyle"/>
+                            android:id="@+id/palette_vibrant_light"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Vibrant Light"
+                            android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/spec_display"
-                            style="@style/specItemStyle"/>
+                            android:id="@+id/palette_muted"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Muted"
+                            android:textColor="@android:color/white" />
 
                         <TextView
-                            android:id="@+id/spec_multitouch"
-                            style="@style/specItemStyle"/>
+                            android:id="@+id/palette_muted_dark"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Muted Dark"
+                            android:textColor="@android:color/white" />
 
+                        <TextView
+                            android:id="@+id/palette_muted_light"
+                            style="?textAppearanceBody1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="Muted Light"
+                            android:textColor="@android:color/white" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="@dimen/card_corner_rad"
-                app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                android:layout_marginBottom="@dimen/toolbar_height"
+                android:background="@drawable/bg_gradient_lightgreen"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    style="@style/Widget.CardContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <com.google.android.material.chip.Chip
+                    style="@style/ChipLabel"
+                    android:layout_marginBottom="0dp"
+                    android:text="Percentage"
+                    app:chipBackgroundColor="@color/transparent"
+                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeWidth="1dp" />
 
-                    <TextView
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/percentage_card"
+                    style="@style/card_style"
+                    app:cardCornerRadius="@dimen/card_corner_rad"
+                    app:cardElevation="@dimen/card_elevation"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="Palette"
-                        android:textAppearance="?textAppearanceHeadline6" />
-
-                    <TextView
-                        android:id="@+id/palette_vibrant"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Vibrant"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/palette_vibrant_dark"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Vibrant Dark"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/palette_vibrant_light"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Vibrant Light"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/palette_muted"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Muted"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/palette_muted_dark"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Muted Dark"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/palette_muted_light"
-                        style="?textAppearanceBody1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="Muted Light"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="@dimen/card_corner_rad"
-                app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="PercentageLayout"
-                        android:textAppearance="?textAppearanceHeadline6" />
-
-
-                    <androidx.percentlayout.widget.PercentRelativeLayout
-                        android:id="@+id/perc_40_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/perc1_left"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_alignParentLeft="true"
-                            android:gravity="center"
-                            android:text="40%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="40%" />
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="This shows how to use the deprecated Percentage layout"
+                            android:textAppearance="?textAppearanceHeadline6" />
 
-                        <TextView
-                            android:id="@+id/perc1_middle"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_toRightOf="@id/perc1_left"
-                            android:gravity="center"
-                            android:text="20%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="20%" />
 
-                        <TextView
-                            android:id="@+id/perc1_right"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_alignParentRight="true"
-                            android:gravity="center"
-                            android:text="40%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="40%" />
-                    </androidx.percentlayout.widget.PercentRelativeLayout>
+                        <androidx.percentlayout.widget.PercentRelativeLayout
+                            android:id="@+id/perc_40_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                    <androidx.percentlayout.widget.PercentRelativeLayout
-                        android:id="@+id/perc_30_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/perc1_left"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_alignParentLeft="true"
+                                android:gravity="center"
+                                android:text="40%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="40%" />
 
-                        <TextView
-                            android:id="@+id/perc2_left"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_alignParentLeft="true"
-                            android:gravity="center"
-                            android:text="20%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="20%" />
+                            <TextView
+                                android:id="@+id/perc1_middle"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_toRightOf="@id/perc1_left"
+                                android:gravity="center"
+                                android:text="20%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="20%" />
 
-                        <TextView
-                            android:id="@+id/perc2_middle"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_toRightOf="@id/perc2_left"
-                            android:gravity="center"
-                            android:text="60%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="60%" />
+                            <TextView
+                                android:id="@+id/perc1_right"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:text="40%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="40%" />
+                        </androidx.percentlayout.widget.PercentRelativeLayout>
 
-                        <TextView
-                            android:id="@+id/perc2_right"
-                            style="?textAppearanceBody1"
-                            android:layout_height="64dp"
-                            android:layout_alignParentRight="true"
-                            android:gravity="center"
-                            android:text="20%"
-                            android:textColor="@color/grey_900"
-                            app:layout_widthPercent="20%" />
-                    </androidx.percentlayout.widget.PercentRelativeLayout>
-                </LinearLayout>
+                        <androidx.percentlayout.widget.PercentRelativeLayout
+                            android:id="@+id/perc_30_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-            </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:id="@+id/perc2_left"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_alignParentLeft="true"
+                                android:gravity="center"
+                                android:text="20%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="20%" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin"
-                app:cardCornerRadius="@dimen/card_corner_rad"
-                app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                            <TextView
+                                android:id="@+id/perc2_middle"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_toRightOf="@id/perc2_left"
+                                android:gravity="center"
+                                android:text="60%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="60%" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/perc2_right"
+                                style="?textAppearanceBody1"
+                                android:layout_height="64dp"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:text="20%"
+                                android:textColor="@color/grey_900"
+                                app:layout_widthPercent="20%" />
+                        </androidx.percentlayout.widget.PercentRelativeLayout>
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/regulations_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="Wikipedia Page"
-                        android:textAppearance="?textAppearanceHeadline6" />
-
-                    <WebView
-                        android:id="@+id/regulations_webview"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="8dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

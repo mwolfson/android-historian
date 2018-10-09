@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
@@ -9,6 +9,7 @@
         <item name="colorSecondary">@color/color_secondary</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
         <item name="textAppearanceHeadline5">@style/TextAppearance.MyApp.Headline5</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>
         <item name="textAppearanceBody1">@style/TextAppearance.MyApp.Body1</item>
         <item name="textAppearanceSubtitle2">@style/TextAppearance.MyApp.Subtitle2</item>
         <item name="textAppearanceCaption">@style/TextAppearance.MyApp.Caption</item>
@@ -61,6 +62,10 @@
         <item name="fontFamily">@font/alegreya</item>
     </style>
 
+    <style name="TextAppearance.MyApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/alegreya</item>
+    </style>
+
     <style name="TextAppearance.MyApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/lato</item>
     </style>
@@ -74,12 +79,47 @@
     </style>
 
     <style name="specItemStyle">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:maxWidth">224dp</item>
         <item name="android:textAppearance">?textAppearanceBody1</item>
+    </style>
+
+    <style name="card_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="ChipLabel" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="specItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+    </style>
+
+    <style name="specItemStyle.xtra">
+
     </style>
 
     <!-- then if you want to apply it to your app universally, make sure to add it to your base theme theme

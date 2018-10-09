@@ -22,266 +22,340 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <!-- Setting icon, stroke, etc direct in the button -->
-                <Button
-                    android:id="@+id/show_bottom_sheet"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/bg_button"
-                    android:text="@string/show_text_scale_bottom_sheet"
-                    app:icon="@drawable/vct_text_scale"
-                    app:iconTint="@color/white" />
+                    android:background="@drawable/bg_gradient_lightyellow"
+                    android:orientation="vertical">
 
-                <include layout="@layout/include_chip_card" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_userinfo_label"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="User Info"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_account"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/info_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_rad"
-                    app:cardElevation="@dimen/card_elevation"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        style="@style/Widget.CardContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/user_info"
-                            android:textAppearance="?textAppearanceHeadline6" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/profile_name_phone_text"
-                            android:textAppearance="?textAppearanceBody1"
-                            android:textStyle="italic" />
-
-                        <!-- There is lots you can do with the native controls -->
-                        <!-- https://material.io/develop/android/components/text-input-layout/ -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/name_editlayout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:hint="@string/profile_nickname_hint"
-                            app:counterEnabled="true"
-                            app:counterMaxLength="10">
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/name_edit"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="true"
-                                android:inputType="textPersonName"
-                                android:maxLength="20" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/phone_editlayout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:hint="@string/profile_phone_hint">
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/phone_edit"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="true"
-                                android:inputType="phone"
-                                android:maxLength="14" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/password_editlayout"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:hint="@string/enter_a_password"
-                            app:passwordToggleEnabled="true">
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/password_edit"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="true"
-                                android:inputType="textPassword"
-                                android:maxLength="8" />
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/prefs_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_rad"
-                    app:cardElevation="@dimen/card_elevation"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        style="@style/Widget.CardContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="Preferences"
-                            android:textAppearance="?textAppearanceHeadline6" />
-
-                        <TextView
-                            style="?textAppearanceBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="@string/have_you_ever_owned_any_of_these" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/info_card"
+                        app:cardCornerRadius="@dimen/card_corner_rad"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true"
+                        style="@style/card_style">
 
                         <LinearLayout
+                            style="@style/Widget.CardContent"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/nexus" />
-
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/android_tv" />
-
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/android_wear" />
-                        </LinearLayout>
-
-                        <TextView
-                            style="?textAppearanceBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="@string/which_is_your_favorite_device_manufacturer" />
-
-                        <RadioGroup
-                            android:id="@+id/manufacturer_group"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <RadioButton
-                                android:id="@+id/radioAsus"
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/asus" />
+                                android:text="@string/profile_name_phone_text"
+                                android:textAppearance="?textAppearanceBody1" />
 
-                            <RadioButton
-                                android:id="@+id/radioHtc"
-                                android:layout_width="wrap_content"
+                            <!-- There is lots you can do with the native controls -->
+                            <!-- https://material.io/develop/android/components/text-input-layout/ -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/name_editlayout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:checked="true"
-                                android:text="@string/htc" />
+                                android:layout_marginTop="16dp"
+                                android:hint="@string/profile_nickname_hint"
+                                app:counterEnabled="true"
+                                app:counterMaxLength="10">
 
-                            <RadioButton
-                                android:id="@+id/radioMoto"
-                                android:layout_width="wrap_content"
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/name_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="true"
+                                    android:inputType="textPersonName"
+                                    android:maxLength="20" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/phone_editlayout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/motorola" />
+                                android:layout_marginBottom="8dp"
+                                android:hint="@string/profile_phone_hint">
 
-                            <RadioButton
-                                android:id="@+id/radioOnePlus"
-                                android:layout_width="wrap_content"
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/phone_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="true"
+                                    android:inputType="phone"
+                                    android:maxLength="14" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/password_editlayout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/one_plus_one" />
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:hint="@string/enter_a_password"
+                                app:passwordToggleEnabled="true">
 
-                            <RadioButton
-                                android:id="@+id/radioSamsung"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/samsung" />
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/password_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="true"
+                                    android:inputType="textPassword"
+                                    android:maxLength="8" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
-                        </RadioGroup>
-
-                        <TextView
-                            style="?textAppearanceBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="@string/where_do_you_live" />
-
-                        <Spinner
-                            android:id="@+id/android_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:entries="@array/country_arrays" />
-
-                        <TextView
-                            style="?textAppearanceBody1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/activity_horizontal_margin"
-                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                            android:text="@string/rate_your_feelings_about_android" />
-
-                        <RatingBar
-                            android:id="@+id/android_rating"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/profile_pic_card"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/card_margin"
-                    app:cardCornerRadius="@dimen/card_corner_rad"
-                    app:cardElevation="@dimen/card_elevation"
-                    app:cardUseCompatPadding="true">
+                    android:background="@drawable/bg_gradient_lightred"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        style="@style/Widget.CardContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_preference_label"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="Survey"
+                        app:chipIcon="@drawable/vct_survey"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_account_lg" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/prefs_card"
+                        app:cardCornerRadius="@dimen/card_corner_rad"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true"
+                        style="@style/card_style">
 
-                        <Button
-                            android:id="@+id/profile_pic_button"
+                        <LinearLayout
+                            style="@style/Widget.CardContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                style="?textAppearanceBody1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:text="@string/have_you_ever_owned_any_of_these" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/nexus" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/android_tv" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/android_wear" />
+                            </LinearLayout>
+
+                            <TextView
+                                style="?textAppearanceBody1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:text="@string/which_is_your_favorite_device_manufacturer" />
+
+                            <RadioGroup
+                                android:id="@+id/manufacturer_group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <RadioButton
+                                    android:id="@+id/radioAsus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/asus" />
+
+                                <RadioButton
+                                    android:id="@+id/radioHtc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:text="@string/htc" />
+
+                                <RadioButton
+                                    android:id="@+id/radioMoto"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/motorola" />
+
+                                <RadioButton
+                                    android:id="@+id/radioOnePlus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/one_plus_one" />
+
+                                <RadioButton
+                                    android:id="@+id/radioSamsung"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/samsung" />
+
+                            </RadioGroup>
+
+                            <TextView
+                                style="?textAppearanceBody1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:text="@string/where_do_you_live" />
+
+                            <Spinner
+                                android:id="@+id/android_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:entries="@array/country_arrays" />
+
+                            <TextView
+                                style="?textAppearanceBody1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:text="@string/rate_your_feelings_about_android" />
+
+                            <RatingBar
+                                android:id="@+id/android_rating"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                style="?textAppearanceBody1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                                android:text="When did you get your first Android phone?" />
+
+                            <DatePicker
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_lightblue"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/profileimg_chip"
+                        style="@style/ChipLabel"
+                        android:text="Profile Picture"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_camera"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/profile_pic_card"
+                        app:cardCornerRadius="@dimen/card_corner_rad"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true"
+                        style="@style/card_style">
+
+                        <LinearLayout
+                            style="@style/Widget.CardContent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_button"
-                            android:text="@string/change_profile_picture" />
+                            android:gravity="center">
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_account_lg" />
+
+                            <Button
+                                android:id="@+id/profile_pic_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_button"
+                                android:text="@string/change_profile_picture" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_lightgreen"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/bottom_button_chip"
+                        style="@style/ChipLabel"
+                        android:text="Text Scale Demo"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_text_scale"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                    <Button
+                        android:id="@+id/show_bottom_sheet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/bg_button"
+                        android:text="@string/show_text_scale_bottom_sheet" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_lightblue"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_card_chip"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="Chip Demo"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_chip"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                    <include layout="@layout/include_chip_card" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -305,7 +379,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:src="@android:drawable/ic_dialog_email"
+            app:srcCompat="@drawable/vct_save"
             app:layout_anchor="@+id/bottom_appbar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

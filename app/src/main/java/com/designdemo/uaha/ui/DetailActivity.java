@@ -83,7 +83,6 @@ public class DetailActivity extends AppCompatActivity {
     private int osVersion;
     private String androidName = "unset";
 
-    //    private static final String TOKEN = "3564b7c851660d0155a011884aad146f3248cabe271d0aa3";
     private static final String TOKEN = FONO_API_KEY;
 
     @Override

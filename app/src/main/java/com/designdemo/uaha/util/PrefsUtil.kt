@@ -76,7 +76,7 @@ object PrefsUtil {
      * @param cxt
      * @return users name or default if not set
      */
-    fun getName(cxt: Context): String {
+    fun getName(cxt: Context): String? {
         val prefs = PreferenceManager.getDefaultSharedPreferences(cxt)
         return prefs.getString(PREFS_KEY_NAME, PREFS_NAME_UNSET)
     }
@@ -99,7 +99,7 @@ object PrefsUtil {
      * @param cxt
      * @return list of verbose product names
      */
-    fun getFavorites(cxt: Context): ArrayList<String> {
+    fun getFavorites(): ArrayList<String> {
         val list = ArrayList<String>()
 
         //TODO - get this list better! Stubbed out responses

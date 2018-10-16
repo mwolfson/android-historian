@@ -89,7 +89,7 @@ public class ProductListFragment extends Fragment {
                 }
                 break;
             case (FRAG_TYPE_FAV):
-                list = PrefsUtil.INSTANCE.getFavorites(mainActivity);
+                list = PrefsUtil.INSTANCE.getFavorites();
                 Log.d("MSW", "List of products is sized:" + list.size());
                 break;
         }

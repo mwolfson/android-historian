@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add"
-                app:chipIcon="@drawable/vct__add_circle" />
+                app:chipIcon="@drawable/vct_add" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/action2"
@@ -283,7 +283,7 @@
             android:layout_marginTop="16dp"
             android:hint="@string/chip_content"
             app:counterMaxLength="10"
-            app:passwordToggleDrawable="@drawable/vct__add_circle"
+            app:passwordToggleDrawable="@drawable/vct_add"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -308,6 +308,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_state"
-            app:chipIcon="@drawable/vct_save" />
+            android:textColor="@color/white"
+            app:chipIcon="@drawable/vct_add"
+            app:chipBackgroundColor="@color/fab_selector"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

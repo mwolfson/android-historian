@@ -1,4 +1,4 @@
-![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/appdemo1.gif)
+![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/historian2.gif)
 
 Android Ultimate Historian - Material Design Demo
 =================================================

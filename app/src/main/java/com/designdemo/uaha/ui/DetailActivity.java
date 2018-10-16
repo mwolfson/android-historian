@@ -163,24 +163,6 @@ public class DetailActivity extends AppCompatActivity {
         String[] parts = splitString.split("-");
         collapsingToolbar.setTitle(parts[0]);
     }
-//
-//    /**
-//     * Circular reveal exit animation
-//     */
-//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//    private void doCircularExitAnimation() {
-//        int x = layoutContent.getRight();
-//        int y = layoutContent.getBottom();
-//
-//        int startRadius = 0;
-//        int endRadius = (int) Math.hypot(layoutMain.getWidth(), layoutMain.getHeight());
-//
-//        Animator anim = ViewAnimationUtils.createCircularReveal(layoutButtons, x, y, startRadius, endRadius);
-//
-//        anim.start();
-//
-//
-//    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -210,7 +192,7 @@ public class DetailActivity extends AppCompatActivity {
         setFabIcon();
 
         // To over-ride the color of the FAB other then the theme color
-        //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.grey_300)));
+        //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fab_selector)));
 
         fab.setOnClickListener(v -> {
             PrefsUtil.INSTANCE.toggleFavorite(getApplicationContext(), osVersion);

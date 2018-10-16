@@ -47,7 +47,7 @@ import com.support.android.designlibdemo.R;
 import java.io.IOException;
 import java.util.List;
 
-import static com.support.android.designlibdemo.BuildConfig.FONO_API_KEY;
+//import static com.support.android.designlibdemo.BuildConfig.FONO_API_KEY;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -83,7 +83,8 @@ public class DetailActivity extends AppCompatActivity {
     private int osVersion;
     private String androidName = "unset";
 
-    private static final String TOKEN = FONO_API_KEY;
+    // TODO fix issue with FONO_API Key static import via gradle.properties
+    private static final String TOKEN = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

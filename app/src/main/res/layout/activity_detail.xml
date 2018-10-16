@@ -224,11 +224,13 @@
                                 <TextView
                                     android:id="@+id/spec_cpu"
                                     style="@style/specItemStyle"
+                                    android:paddingBottom="8dp"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/spec_memory"
                                     style="@style/specItemStyle"
+                                    android:paddingBottom="8dp"
                                     android:layout_weight="1" />
 
                             </LinearLayout>
@@ -242,11 +244,13 @@
                                 <TextView
                                     android:id="@+id/spec_display"
                                     style="@style/specItemStyle"
+                                    android:layout_marginTop="8dp"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/spec_resolution"
                                     style="@style/specItemStyle"
+                                    android:layout_marginTop="8dp"
                                     android:layout_weight="1" />
 
                             </LinearLayout>

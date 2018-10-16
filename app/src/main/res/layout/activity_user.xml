@@ -380,6 +380,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             app:srcCompat="@drawable/vct_save"
+            android:backgroundTint="@color/fab_selector"
             app:layout_anchor="@+id/bottom_appbar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

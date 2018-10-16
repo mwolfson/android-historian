@@ -20,5 +20,5 @@ allprojects {
 }
 
 ext {
-    jetpackVersion = "1.0.0-rc01"
+    jetpackVersion = "1.0.0"
 }

@@ -65,7 +65,7 @@ class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private
         val rand = Random()
         val randomNum = rand.nextInt(3)
 
-        var strRes = 0
+        var strRes: Int
         when (randomNum) {
             0 -> strRes = R.string.ipsum_med
             1 -> strRes = R.string.ipsum_long

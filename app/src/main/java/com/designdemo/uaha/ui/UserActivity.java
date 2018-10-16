@@ -171,6 +171,7 @@ public class UserActivity extends AppCompatActivity {
         Chip chipActionCustom = findViewById(R.id.chip_action_custom);
         chipActionCustom.setOnClickListener(view -> {
             saveChipEntry(customChipEdit, activity, entryGroup);
+            customChipEdit.setText("");
         });
 
     }

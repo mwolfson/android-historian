@@ -15,6 +15,23 @@
     <color name="colors_secondary_light">@color/teal_400</color>
     <color name="window_background">#ffffffff</color>
 
+    <!-- Gradient Background Colors -->
+    <color name="bluegrad_start">#64fdffff</color>
+    <color name="bluegrad_mid">#64f3ffff</color>
+    <color name="bluegrad_end">#64f1ffff</color>
+
+    <color name="redgrad_start">#64fffdff</color>
+    <color name="redgrad_mid">#64fff3ff</color>
+    <color name="redgrad_end">#64fff1ff</color>
+
+    <color name="yellowgrad_start">#64fffffd</color>
+    <color name="yellowgrad_mid">#64fffff3</color>
+    <color name="yellowgrad_end">#64ffffe9</color>
+
+    <color name="greengrad_start">#64ffffff</color>
+    <color name="greengrad_mid">#64f1fff3</color>
+    <color name="greengrad_end">#64f1fff1</color>
+
     <!-- Material Color Resources -->
     <color name="red_050">#fde0dc</color> <!-- Use with black text -->
     <color name="red_100">#f9bdbb</color> <!-- Use with black text -->

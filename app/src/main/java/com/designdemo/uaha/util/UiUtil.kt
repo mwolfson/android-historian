@@ -97,7 +97,7 @@ object UiUtil {
     }
 
     fun applyBoldFirstWord(word1: String, word2: String): SpannableStringBuilder {
-        val str = SpannableStringBuilder("$word1  $word2")
+        val str = SpannableStringBuilder("$word1\n$word2")
         str.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         return  str

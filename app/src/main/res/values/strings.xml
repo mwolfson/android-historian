@@ -188,8 +188,13 @@
     <string name="bottomnav3">Option3</string>
     <string name="spec_release_date">Release Date</string>
     <string name="spec_multitouch">Multitouch</string>
-    <string name="spec_weight">Size\\Weight</string>
-    <string name="spec_cpu">CPU\\Memory</string>
+    <string name="spec_weight">Weight</string>
+    <string name="spec_size">Size</string>
+    <string name="spec_dimen">Dimensions</string>
+    <string name="spec_cpu">CPU</string>
+    <string name="spec_memory">Memory</string>
     <string name="spec_camera">Camera</string>
+    <string name="spec_video">Video</string>
     <string name="spec_display">Display</string>
+    <string name="spec_resolution">Resolution</string>
 </resources>

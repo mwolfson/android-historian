@@ -7,6 +7,9 @@ This app is designed to demonstrate the various components of the Material Desig
 
 The [official Material site](https://material.io/develop/android/) has great information specific to Android Development.
 
+Current Build Status Is:
+[![Build Status](https://app.bitrise.io/app/185d24999f31db04/status.svg?token=H8R81uEqmKABt_zQjgNRog&branch=master)](https://app.bitrise.io/app/185d24999f31db04)
+
 July 18, 2018
 - Bottom App Bar (with inset FAB)
 - Chip

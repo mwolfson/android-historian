@@ -51,3 +51,4 @@ build/intermediates/dex-cache/cache.xml
 .gradle/buildOutputCleanup/cache.properties
 .gradle/buildOutputCleanup/cache.properties
 gradle.properties
+gradle.properties

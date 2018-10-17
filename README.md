@@ -10,6 +10,14 @@ The [official Material site](https://material.io/develop/android/) has great inf
 Current Build Status Is:
 [![Build Status](https://app.bitrise.io/app/185d24999f31db04/status.svg?token=H8R81uEqmKABt_zQjgNRog&branch=master)](https://app.bitrise.io/app/185d24999f31db04)
 
+*Modifiy gradle.properties to build locally*
+In order to build locally, you will need to copy/rename the file named gradle.properties.dist to gradle.properties - then you will enter an API key for Fono.
+[Fono API](https://fonoapi.freshpixl.com/)
+
+Oct 16, 2018
+- Added API for getting Phone information
+
+
 July 18, 2018
 - Bottom App Bar (with inset FAB)
 - Chip

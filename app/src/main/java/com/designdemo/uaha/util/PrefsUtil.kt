@@ -99,30 +99,19 @@ object PrefsUtil {
      * @param cxt
      * @return list of verbose product names
      */
-    fun getFavorites(): ArrayList<String> {
+    fun getFavorites(cxt: Context?): ArrayList<String> {
         val list = ArrayList<String>()
 
-        //TODO - get this list better! Stubbed out responses
-        list.add(VersionData.getProductName(VersionData.OS_DONUT))
-        list.add(VersionData.getProductName(VersionData.OS_ECLAIR))
-        list.add(VersionData.getProductName(VersionData.OS_FROYO))
-        list.add(VersionData.getProductName(VersionData.DEVICE_N1))
-        list.add(VersionData.getProductName(VersionData.DEVICE_N7))
-
-        //Clunky I know
-//        for (x in VersionData.osVersions) {
-//            val productInt = VersionData.osVersions[x - 2]
-//            if (isFavorite(cxt,  productInt)) {
-//                list.add(VersionData.getProductName(productInt))
-//            }
-//        }
-//
-//        for (x in VersionData.deviceVersions) {
-//            val productInt = VersionData.deviceVersions[x - 2]
-//            if (isFavorite(cxt, productInt)) {
-//                list.add(VersionData.getProductName(productInt))
-//            }
-//        }
+        for (osIndex in VersionData.osVersions) {
+            if (isFavorite(cxt!!,  osIndex)) {
+                list.add(VersionData.getProductName(osIndex))
+            }
+        }
+        for (deviceIndex in VersionData.deviceVersions) {
+            if (isFavorite(cxt!!,  deviceIndex)) {
+                list.add(VersionData.getProductName(deviceIndex))
+            }
+        }
         return list
     }
 

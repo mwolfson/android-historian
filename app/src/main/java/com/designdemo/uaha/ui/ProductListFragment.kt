@@ -64,7 +64,6 @@ class ProductListFragment : Fragment() {
         return mainView
     }
 
-    // TODO - add ItemAnimators get Staggered Layout example working better by varying the length of content more
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         when (thisFragType) {
             FRAG_TYPE_OS -> {

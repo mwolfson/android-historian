@@ -193,22 +193,18 @@ class UserActivity : AppCompatActivity() {
             val nameLen = nameEnterField!!.text?.length
             val mainView = findViewById<View>(R.id.main_content)
 
-            //TODO these FAB validations need to be fixed
+            if (nameLen in 0..3) {
+                nameEnterField!!.error = getString(R.string.at_least_4_char)
+                nameEnterField!!.requestFocus()
+                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
+            }
 
-//            if (nameLen < 4) {
-//                nameEnterField!!.error = getString(R.string.at_least_4_char)
-//                nameEnterField!!.requestFocus()
-//                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
-//
-//            }
-//
-//            val phoneLen = phoneEnterField!!.text.length
-//            if (phoneLen != 14) {
-//                phoneEnterField!!.error = getString(R.string.invalid_phone)
-//                phoneEnterField!!.requestFocus()
-//                Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
-//
-//            }
+            val phoneLen = phoneEnterField!!.text?.length
+            if (phoneLen != 14) {
+                phoneEnterField!!.error = getString(R.string.invalid_phone)
+                phoneEnterField!!.requestFocus()
+                Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
+            }
 
             // Save original Values before sending, in-case user changes their mind
             val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
@@ -235,6 +231,33 @@ class UserActivity : AppCompatActivity() {
         // Set initial values from Prefs
         setPhoneNameValues()
         userLabelChip!!.requestFocus()
+    }
+
+    private fun validateInputs(): Int {
+        var errorId = 0
+
+        val nameLen = nameEnterField!!.text?.length
+
+
+            when (nameLen) {
+
+
+            }
+
+            if (nameLen in 0..4) {
+                nameEnterField!!.error = getString(R.string.at_least_4_char)
+                nameEnterField!!.requestFocus()
+                errorId = R.string.name_input_error
+            }
+
+            val phoneLen = phoneEnterField!!.text?.length
+            if (phoneLen != 14) {
+                phoneEnterField!!.error = getString(R.string.invalid_phone)
+                phoneEnterField!!.requestFocus()
+                errorId = R.string.phone_input_error
+            }
+
+        return errorId
     }
 
     private fun setupTextScaleDialog() {

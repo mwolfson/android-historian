@@ -197,4 +197,5 @@
     <string name="spec_video">Video</string>
     <string name="spec_display">Display</string>
     <string name="spec_resolution">Resolution</string>
+    <string name="device_info">Device Info</string>
 </resources>

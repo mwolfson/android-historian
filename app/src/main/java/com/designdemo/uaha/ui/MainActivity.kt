@@ -17,13 +17,11 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
 import android.view.Menu
 import android.view.MenuItem
 
-import com.support.android.designlibdemo.BottomNavActivity
 import com.support.android.designlibdemo.R
 
 import java.util.ArrayList

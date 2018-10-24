@@ -49,7 +49,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".BottomNavActivity"
+            android:name="com.designdemo.uaha.ui.BottomNavActivity"
             android:label="@string/title_activity_bottom_bav"></activity>
     </application>
 

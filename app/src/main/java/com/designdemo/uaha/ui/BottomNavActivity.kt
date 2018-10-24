@@ -1,8 +1,9 @@
-package com.support.android.designlibdemo
+package com.designdemo.uaha.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_bottom_nav.*
 
 class BottomNavActivity : AppCompatActivity() {

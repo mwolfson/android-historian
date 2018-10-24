@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class VersionData {
     public static final int NUM_OF_OS = 12;
-    public static final int NUM_OF_DEVICES = 9;
+    public static final int NUM_OF_DEVICES = 15;
 
     public static int getOsDrawable(int osVersion) {
         int retDraw = 0;
@@ -84,6 +84,24 @@ public class VersionData {
             case DEVICE_NEXS:
                 retDraw = R.drawable.ic_device_nexs;
                 break;
+            case DEVICE_P1:
+                retDraw = R.drawable.ic_device_p;
+                break;
+            case DEVICE_P1X:
+                retDraw = R.drawable.ic_device_px;
+                break;
+            case DEVICE_P2:
+                retDraw = R.drawable.ic_device_p2;
+                break;
+            case DEVICE_P2X:
+                retDraw = R.drawable.ic_device_p2x;
+                break;
+            case DEVICE_P3:
+                retDraw = R.drawable.ic_device_p3;
+                break;
+            case DEVICE_P3X:
+                retDraw = R.drawable.ic_device_p3x;
+                break;
             default:
                 retDraw = 0;
                 break;
@@ -116,12 +134,14 @@ public class VersionData {
             return OS_LOLLIPOP;
         } else if (osName.equals(getProductName(OS_MARSHMALLOW))) {
             return OS_MARSHMALLOW;
-        }else if (osName.equals(getProductName(OS_NOUGAT))) {
+        } else if (osName.equals(getProductName(OS_NOUGAT))) {
             return OS_NOUGAT;
-        }else if (osName.equals(getProductName(OS_OREO))) {
+        } else if (osName.equals(getProductName(OS_OREO))) {
             return OS_OREO;
-        }else if (osName.equals(getProductName(DEVICE_DROID))) {
+        } else if (osName.equals(getProductName(DEVICE_DROID))) {
             return DEVICE_DROID;
+        } else if (osName.equals(getProductName(DEVICE_NEXS))) {
+            return DEVICE_NEXS;
         } else if (osName.equals(getProductName(DEVICE_G1))) {
             return DEVICE_G1;
         } else if (osName.equals(getProductName(DEVICE_GNEX))) {
@@ -138,10 +158,19 @@ public class VersionData {
             return DEVICE_N7;
         } else if (osName.equals(getProductName(DEVICE_N9))) {
             return DEVICE_N9;
-        } else if (osName.equals(getProductName(DEVICE_NEXS))) {
-            return DEVICE_NEXS;
+        } else if (osName.equals(getProductName(DEVICE_P1))) {
+            return DEVICE_P1;
+        } else if (osName.equals(getProductName(DEVICE_P1X))) {
+            return DEVICE_P1X;
+        } else if (osName.equals(getProductName(DEVICE_P2))) {
+            return DEVICE_P2;
+        } else if (osName.equals(getProductName(DEVICE_P2X))) {
+            return DEVICE_P2X;
+        } else if (osName.equals(getProductName(DEVICE_P3))) {
+            return DEVICE_P3;
+        } else if (osName.equals(getProductName(DEVICE_P3X))) {
+            return DEVICE_P3X;
         }
-
 
         return osNum;
     }
@@ -169,10 +198,16 @@ public class VersionData {
     public static final int DEVICE_N6 = 107;
     public static final int DEVICE_N7 = 108;
     public static final int DEVICE_N9 = 109;
+    public static final int DEVICE_P1 = 110;
+    public static final int DEVICE_P1X = 111;
+    public static final int DEVICE_P2 = 112;
+    public static final int DEVICE_P2X = 113;
+    public static final int DEVICE_P3 = 114;
+    public static final int DEVICE_P3X = 115;
 
     public static final int[] osVersions = {OS_CUPCAKE, OS_DONUT, OS_ECLAIR, OS_FROYO, OS_GINGERBREAD, OS_HONEYCOMB, OS_ICS, OS_JB, OS_KITKAT, OS_LOLLIPOP};
 
-    public static final int[] deviceVersions = {DEVICE_G1, DEVICE_DROID, DEVICE_N1, DEVICE_NEXS, DEVICE_GNEX, DEVICE_N4, DEVICE_N5, DEVICE_N6, DEVICE_N7, DEVICE_N9};
+    public static final int[] deviceVersions = {DEVICE_G1, DEVICE_DROID, DEVICE_N1, DEVICE_NEXS, DEVICE_GNEX, DEVICE_N4, DEVICE_N5, DEVICE_N6, DEVICE_N7, DEVICE_N9, DEVICE_P1, DEVICE_P1X, DEVICE_P2, DEVICE_P2X};
 
     public static final String getRandomProductName() {
         int randInt = new Random().nextInt(osVersions.length - 1);
@@ -252,6 +287,24 @@ public class VersionData {
             case DEVICE_NEXS:
                 retStr = "Nexus S-Samsung";
                 break;
+            case DEVICE_P1:
+                retStr = "Pixel-Google";
+                break;
+            case DEVICE_P1X:
+                retStr = "Pixel XL-Google";
+                break;
+            case DEVICE_P2:
+                retStr = "Pixel 2-Google";
+                break;
+            case DEVICE_P2X:
+                retStr = "Pixel 2 XL-Google";
+                break;
+            case DEVICE_P3:
+                retStr = "Pixel 3-Google";
+                break;
+            case DEVICE_P3X:
+                retStr = "Pixel 3 XL-Google";
+                break;
             default:
                 retStr = "None-Set";
                 break;
@@ -323,6 +376,24 @@ public class VersionData {
             case DEVICE_NEXS:
                 retStr = "Samsung%20Nexus%20S";
                 break;
+            case DEVICE_P1:
+                retStr = "Pixel-Google";
+                break;
+            case DEVICE_P1X:
+                retStr = "Pixel XL-Google";
+                break;
+            case DEVICE_P2:
+                retStr = "Pixel2-Google";
+                break;
+            case DEVICE_P2X:
+                retStr = "Pixel2 XL-Google";
+                break;
+            case DEVICE_P3:
+                retStr = "Pixel3-Google";
+                break;
+            case DEVICE_P3X:
+                retStr = "Pixel3 XL-Google";
+                break;
             default:
                 retStr = "None Set";
                 break;
@@ -356,6 +427,12 @@ public class VersionData {
             getProductName(DEVICE_N5),
             getProductName(DEVICE_N7),
             getProductName(DEVICE_N6),
-            getProductName(DEVICE_N9)
+            getProductName(DEVICE_N9),
+            getProductName(DEVICE_P1),
+            getProductName(DEVICE_P1X),
+            getProductName(DEVICE_P2),
+            getProductName(DEVICE_P2X),
+            getProductName(DEVICE_P3),
+            getProductName(DEVICE_P3X)
     };
 }

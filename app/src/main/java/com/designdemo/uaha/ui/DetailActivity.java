@@ -47,9 +47,11 @@ import com.support.android.designlibdemo.R;
 import java.io.IOException;
 import java.util.List;
 
+//In base directory copy gradle.properties.dist to gradle.properties, to assign this KEY
 //import static com.support.android.designlibdemo.BuildConfig.FONO_API_KEY;
 
 public class DetailActivity extends AppCompatActivity {
+    private static final String TAG = "DetailActivity";
 
     public static final String EXTRA_APP_NAME = "os_name";
     public static final String EXTRA_INDEX = "os_index";
@@ -83,7 +85,10 @@ public class DetailActivity extends AppCompatActivity {
     private int osVersion;
     private String androidName = "unset";
 
-    // TODO fix issue with FONO_API Key static import via gradle.properties
+    // To use the FONO API, you will need to add your own API key to the gradle.properties file
+    // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
+    // App will degrade gracefully if KEY is not found
+//    private static final String TOKEN = FONO_API_KEY;
     private static final String TOKEN = "";
 
     @Override
@@ -142,7 +147,6 @@ public class DetailActivity extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Activity myActiviy = this;
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_appbar);
         bottomAppBar.replaceMenu(R.menu.detail_actions);
@@ -271,7 +275,6 @@ public class DetailActivity extends AppCompatActivity {
             collapsingToolbar.setExpandedTitleColor(palette.getVibrantColor(0x000000));
 
             if (palette.getVibrantColor(0x000000) == 0x000000) {
-                Log.d("MSW", "this one is the other type");
                 iconColor = palette.getMutedColor(0x000000);
             } else {
                 iconColor = palette.getVibrantColor(0x000000);
@@ -325,18 +328,36 @@ public class DetailActivity extends AppCompatActivity {
             else
                 setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", multitouch);
 
-            String cpuInfo = deviceInfo.getChipset() + "\n" +  deviceInfo.getCpu();
+            String cpuInfo = deviceInfo.getChipset() + "\n" + deviceInfo.getCpu();
             setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu);
 
-            setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo.getAnnounced(), releaseDate);
-            setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo.getSize(), size);
-            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo.getWeight(), weight);
-            setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo.getDimensions(), dimen);
-            setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, deviceInfo.getInternal(), memory);
-            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, deviceInfo.getPrimary_(), camera);
-            setupSpecItem(R.drawable.vct_video, R.string.spec_video, deviceInfo.getVideo(), video);
-            setupSpecItem(R.drawable.vct_display, R.string.spec_display, deviceInfo.getType(), display);
-            setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, deviceInfo.getResolution(), resolution);
+
+            if (deviceInfo.getAnnounced() != null)
+                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo.getAnnounced(), releaseDate);
+
+            if (deviceInfo.getSize() != null)
+                setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo.getSize(), size);
+
+            if (deviceInfo.getWeight() != null)
+                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo.getWeight(), weight);
+
+            if (deviceInfo.getDimensions() != null)
+                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo.getDimensions(), dimen);
+
+            if (deviceInfo.getInternal() != null)
+                setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, deviceInfo.getInternal(), memory);
+
+            if (deviceInfo.getPrimary_() != null)
+                setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, deviceInfo.getPrimary_(), camera);
+
+            if (deviceInfo.getVideo() != null)
+                setupSpecItem(R.drawable.vct_video, R.string.spec_video, deviceInfo.getVideo(), video);
+
+            if (deviceInfo.getType() != null)
+                setupSpecItem(R.drawable.vct_display, R.string.spec_display, deviceInfo.getType(), display);
+
+            if (deviceInfo.getResolution() != null)
+                setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, deviceInfo.getResolution(), resolution);
 
             specLayout.setVisibility(View.VISIBLE);
         } else {
@@ -374,7 +395,6 @@ public class DetailActivity extends AppCompatActivity {
                 List<DeviceEntity> devices = response.body();
                 if (devices != null) {
                     for (DeviceEntity dv : devices) {
-                        Log.d("MSW", "Device Item is: " + dv.getDeviceName());
                         deviceInfo = dv;
                     }
                 }
@@ -394,7 +414,7 @@ public class DetailActivity extends AppCompatActivity {
             try {
                 Response blacklistResp = okclient.newCall(request).execute();
                 respStr = blacklistResp.body().string();
-                Log.d("NET", "WIKIPedia_RESPONSE: " + respStr);
+                Log.d(TAG, "WIKIPedia_RESPONSE: " + respStr);
             } catch (IOException e) {
                 e.printStackTrace();
             }

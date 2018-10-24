@@ -40,10 +40,10 @@ public class DetailActivityTest  {
                 }
             };
 
-//    @Test
-//    public void detailViewTest() {
-//        onView(withId(R.id.favorite_title)).check(matches(withText("Favorite")));
-//    }
+    @Test
+    public void detailViewTest() {
+        onView(withId(R.id.toolbar)).check(matches(withText("Gingerbread")));
+    }
 
 //    @Test
 //    public void fabInteractTest() {

@@ -10,7 +10,7 @@ class FonoApiFactory {
     @JvmOverloads
     fun create(okHttpClient: OkHttpClient? = null): FonoApiService = run {
         val retrofitBuilder = Retrofit.Builder()
-                .baseUrl("https://fonoapi.freshpixl.com/")
+                .baseUrl(baseUrlFono)
                 .addConverterFactory(GsonConverterFactory.create())
 
         okHttpClient?.let {
@@ -18,6 +18,10 @@ class FonoApiFactory {
         }
 
         retrofitBuilder.build().create(FonoApiService::class.java)
+    }
+
+    companion object {
+        val baseUrlFono = "https://fonoapi.freshpixl.com/"
     }
 
 }

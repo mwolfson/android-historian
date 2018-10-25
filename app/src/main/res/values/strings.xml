@@ -198,4 +198,5 @@
     <string name="spec_display">Display</string>
     <string name="spec_resolution">Resolution</string>
     <string name="device_info">Device Info</string>
+    <string name="title_activity_motion_layout">MotionLayoutActivity</string>
 </resources>

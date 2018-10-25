@@ -39,6 +39,10 @@
                 android:id="@+id/nav_bottom_nav"
                 android:icon="@drawable/ic_link"
                 android:title="BottomNavView"/>
+            <item
+                android:id="@+id/nav_motionlayout"
+                android:icon="@drawable/ic_link"
+                android:title="MotionLayout"/>
         </menu>
     </item>
 </menu>

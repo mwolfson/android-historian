@@ -146,6 +146,11 @@ class MainActivity : AppCompatActivity() {
                     startActivity(bottomNavIntent)
                     retVal = true
                 }
+                R.id.nav_motionlayout -> {
+                    val motionLayoutIntent = Intent(applicationContext, MotionLayoutActivity::class.java)
+                    startActivity(motionLayoutIntent)
+                    retVal = true
+                }
                 else -> retVal = true
             }
             retVal

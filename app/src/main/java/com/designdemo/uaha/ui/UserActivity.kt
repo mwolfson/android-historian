@@ -3,24 +3,19 @@ package com.designdemo.uaha.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.telephony.PhoneNumberUtils
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
 
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -29,33 +24,34 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import kotlinx.android.synthetic.main.activity_user.*
+import kotlinx.android.synthetic.main.dialog_picture.view.*
+import kotlinx.android.synthetic.main.dialog_textscale.view.*
 
 class UserActivity : AppCompatActivity() {
     private var mainActivity: Activity? = null
 
-    private var drawerLayout: DrawerLayout? = null
-    private var nameEnterField: AppCompatEditText? = null
-    private var phoneEnterField: AppCompatEditText? = null
-    private var fab: FloatingActionButton? = null
-    private var picButton: Button? = null
-    private var userLabelChip: Chip? = null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var nameEnterField: AppCompatEditText
+    private lateinit var phoneEnterField: AppCompatEditText
+    private lateinit var fab: FloatingActionButton
+    private lateinit var picButton: Button
+    private lateinit var userLabelChip: Chip
 
-    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         mainActivity = this
 
-        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_appbar)
+        val bottomAppBar = bottom_appbar
         setSupportActionBar(bottomAppBar)
         bottomAppBar.replaceMenu(R.menu.profile_actions)
 
@@ -67,29 +63,36 @@ class UserActivity : AppCompatActivity() {
         setupTextScaleDialog()
         setupChips()
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val navigationView = nav_view
         if (navigationView != null) {
             setupDrawerContent(navigationView)
         }
     }
 
     private fun setupChips() {
-        val chipEntry1 = findViewById<Chip>(R.id.chip_entry1)
+        // TODO Setup lambda to do these chip operations
+
+        val chipEntry1 = chip_entry1
         chipEntry1.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        chipEntry1.setChipBackgroundColorResource(UiUtil.getRandomColor())
 
-        val chipEntry2 = findViewById<Chip>(R.id.chip_entry2)
+        val chipEntry2 = chip_entry2
         chipEntry2.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        chipEntry2.setChipBackgroundColorResource(UiUtil.getRandomColor())
 
-        val chipEntry3 = findViewById<Chip>(R.id.chip_entry3)
+        val chipEntry3 = chip_entry3
         chipEntry3.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        chipEntry3.setChipBackgroundColorResource(UiUtil.getRandomColor())
 
-        val chipEntry4 = findViewById<Chip>(R.id.chip_entry4)
+        val chipEntry4 = chip_entry4
         chipEntry4.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        chipEntry4.setChipBackgroundColorResource(UiUtil.getRandomColor())
 
-        val chipEntry5 = findViewById<Chip>(R.id.chip_entry5)
+        val chipEntry5 = chip_entry5
         chipEntry5.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        chipEntry5.setChipBackgroundColorResource(UiUtil.getRandomColor())
 
-        val filter1Group = findViewById<ChipGroup>(R.id.filter1_group)
+        val filter1Group = filter1_group
         filter1Group.setOnCheckedChangeListener { chipGroup, i ->
             when (i) {
                 R.id.choice_item1 -> Log.d(TAG, "Filter1 Item 1")
@@ -98,7 +101,7 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        val filter2Group = findViewById<ChipGroup>(R.id.filter2_group)
+        val filter2Group = filter2_group
         filter2Group.setOnCheckedChangeListener { chipGroup, i ->
             when (i) {
                 R.id.filter2_item1 -> Log.d(TAG, "Filter2 Item 1")
@@ -111,23 +114,9 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        val customChipEdit = findViewById<EditText>(R.id.chip_edit)
+        val customChipEdit = chip_edit
 
-        val entryGroup = findViewById<ChipGroup>(R.id.chipgroup_entry)
-        val chip1 = findViewById<Chip>(R.id.chip_entry1)
-        chip1.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip2 = findViewById<Chip>(R.id.chip_entry2)
-        chip2.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip3 = findViewById<Chip>(R.id.chip_entry3)
-        chip3.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip4 = findViewById<Chip>(R.id.chip_entry4)
-        chip4.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip5 = findViewById<Chip>(R.id.chip_entry5)
-        chip5.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        val entryGroup = chipgroup_entry
 
         val activity = this
 
@@ -136,7 +125,7 @@ class UserActivity : AppCompatActivity() {
             false
         }
 
-        val chipActionCustom = findViewById<Chip>(R.id.chip_action_custom)
+        val chipActionCustom = chip_action_custom
         chipActionCustom.setOnClickListener { view ->
             saveChipEntry(customChipEdit, activity, entryGroup)
         }
@@ -176,33 +165,34 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        drawerLayout = findViewById(R.id.drawer_layout)
-        nameEnterField = findViewById(R.id.name_edit)
-        phoneEnterField = findViewById(R.id.phone_edit)
-        userLabelChip = findViewById(R.id.chip_userinfo_label)
+        drawerLayout = drawer_layout
+        nameEnterField = name_edit
+        phoneEnterField = phone_edit
+        userLabelChip = chip_userinfo_label
 
         //Format phone number as user is typing
-        phoneEnterField!!.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        phoneEnterField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
-        picButton = findViewById(R.id.profile_pic_button)
-        picButton!!.setOnClickListener { v -> setPictureDialog() }
+        picButton = profile_pic_button
+        picButton.setOnClickListener { v -> setPictureDialog() }
 
-        fab = findViewById(R.id.fab)
-        fab!!.setOnClickListener { v ->
+
+
+        fab = user_fab
+        fab.setOnClickListener { v ->
             //Validate values
-            val nameLen = nameEnterField!!.text?.length
-            val mainView = findViewById<View>(R.id.main_content)
+            val nameLen = nameEnterField.text?.length
+            val mainView = user_main_content
 
             if (nameLen in 0..3) {
-                nameEnterField!!.error = getString(R.string.at_least_4_char)
-                nameEnterField!!.requestFocus()
-                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
-            }
+                nameEnterField.error = getString(R.string.at_least_4_char)
+                nameEnterField.requestFocus()
+                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()            }
 
-            val phoneLen = phoneEnterField!!.text?.length
+            val phoneLen = phoneEnterField.text?.length
             if (phoneLen != 14) {
-                phoneEnterField!!.error = getString(R.string.invalid_phone)
-                phoneEnterField!!.requestFocus()
+                phoneEnterField.error = getString(R.string.invalid_phone)
+                phoneEnterField.requestFocus()
                 Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
             }
 
@@ -211,7 +201,7 @@ class UserActivity : AppCompatActivity() {
             val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
 
             // Store new values
-            val nameToSet = nameEnterField!!.text.toString()
+            val nameToSet = nameEnterField.text.toString()
             val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField!!.text.toString())
             val phoneToSet = java.lang.Long.valueOf(formattedNum)
 
@@ -230,13 +220,13 @@ class UserActivity : AppCompatActivity() {
 
         // Set initial values from Prefs
         setPhoneNameValues()
-        userLabelChip!!.requestFocus()
+        userLabelChip.requestFocus()
     }
 
     private fun validateInputs(): Int {
         var errorId = 0
 
-        val nameLen = nameEnterField!!.text?.length
+        val nameLen = nameEnterField.text?.length
 
 
             when (nameLen) {
@@ -245,15 +235,15 @@ class UserActivity : AppCompatActivity() {
             }
 
             if (nameLen in 0..4) {
-                nameEnterField!!.error = getString(R.string.at_least_4_char)
-                nameEnterField!!.requestFocus()
+                nameEnterField.error = getString(R.string.at_least_4_char)
+                nameEnterField.requestFocus()
                 errorId = R.string.name_input_error
             }
 
             val phoneLen = phoneEnterField!!.text?.length
             if (phoneLen != 14) {
-                phoneEnterField!!.error = getString(R.string.invalid_phone)
-                phoneEnterField!!.requestFocus()
+                phoneEnterField.error = getString(R.string.invalid_phone)
+                phoneEnterField.requestFocus()
                 errorId = R.string.phone_input_error
             }
 
@@ -261,22 +251,22 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun setupTextScaleDialog() {
-        val bottomSheet = findViewById<View>(R.id.bottom_sheet)
+        val bottomSheet = bottom_sheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
-        val closeButton = findViewById<ImageButton>(R.id.textscale_close)
+        val closeButton = textscale_close
         closeButton.setOnClickListener { view ->
-            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-            bottomSheetBehavior!!.setPeekHeight(0)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheetBehavior.setPeekHeight(0)
         }
 
-        val showHide = findViewById<Button>(R.id.show_bottom_sheet)
-        showHide.setOnClickListener { view -> bottomSheetBehavior!!.setPeekHeight(300) }
+        val showHide = show_bottom_sheet
+        showHide.setOnClickListener { view -> bottomSheetBehavior.setPeekHeight(300) }
 
-        bottomSheetBehavior!!.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior!!.peekHeight = 0
+                    bottomSheetBehavior.peekHeight = 0
                 }
             }
 
@@ -285,8 +275,8 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
-        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-        bottomSheetBehavior!!.peekHeight = 0
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.peekHeight = 0
     }
 
     /**
@@ -304,10 +294,10 @@ class UserActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
 
-        val caseText = dialogView.findViewById<TextView>(R.id.ts_textcase)
-        val fontText = dialogView.findViewById<TextView>(R.id.ts_font)
-        val sizeText = dialogView.findViewById<TextView>(R.id.ts_size)
-        val letterSpacingText = dialogView.findViewById<TextView>(R.id.ts_letter_spacing)
+        val caseText = dialogView.ts_textcase
+        val fontText = dialogView.ts_font
+        val sizeText = dialogView.ts_size
+        val letterSpacingText = dialogView.ts_letter_spacing
 
         caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence))
         fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular))
@@ -397,12 +387,12 @@ class UserActivity : AppCompatActivity() {
     private fun setPhoneNameValues() {
         val name = PrefsUtil.getName(this)
         if (name != PrefsUtil.PREFS_NAME_UNSET) {
-            nameEnterField!!.setText(name)
+            nameEnterField.setText(name)
         }
 
         val phone = PrefsUtil.getPhone(this)
         if (phone != 0L) {
-            phoneEnterField!!.setText(phone.toString() + "")
+            phoneEnterField.setText(phone.toString() + "")
         }
     }
 
@@ -416,7 +406,7 @@ class UserActivity : AppCompatActivity() {
         builder.setCancelable(true)
         builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { dialog, which -> Log.d("Dialog", "The positive button was pressed") }
 
-        val prefSwitch = dialogView.findViewById<View>(R.id.photo_pref_switch) as SwitchCompat
+        val prefSwitch = dialogView.photo_pref_switch
         prefSwitch.isChecked = true
         prefSwitch.setOnClickListener { v ->
             if (prefSwitch.isChecked) {
@@ -454,7 +444,7 @@ class UserActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_userinfo -> {
-                    drawerLayout!!.closeDrawers()
+                    drawerLayout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_link1 -> {

@@ -1,31 +1,24 @@
 package com.designdemo.uaha.ui
 
-import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.designdemo.uaha.data.VersionData
-import com.designdemo.uaha.ui.adapter.SimpleStaggaredRecyclerViewAdapter
-import com.designdemo.uaha.ui.adapter.SimpleStringRecyclerViewAdapter
-import com.designdemo.uaha.util.PrefsUtil
-import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration
-import com.support.android.designlibdemo.R
-
-import java.util.ArrayList
-
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.*
+import com.designdemo.uaha.data.VersionData
+import com.designdemo.uaha.ui.adapter.OsTypeAdapter
+import com.designdemo.uaha.ui.adapter.FavTypeAdapter
+import com.designdemo.uaha.ui.adapter.DeviceTypeAdapter
+import com.designdemo.uaha.util.PrefsUtil
+import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration
+import com.support.android.designlibdemo.R
+import kotlinx.android.synthetic.main.fragment_prod_list.view.*
+import java.util.*
 
 class ProductListFragment : Fragment() {
 
@@ -52,9 +45,9 @@ class ProductListFragment : Fragment() {
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val mainView = inflater!!.inflate(R.layout.fragment_prod_list, container, false)
+        val mainView = inflater.inflate(R.layout.fragment_prod_list, container, false)
 
-        val rv = mainView.findViewById<RecyclerView>(R.id.recyclerview)
+        val rv = mainView.recyclerview
 
         mainActivity = activity
 
@@ -70,17 +63,17 @@ class ProductListFragment : Fragment() {
                 val llm = LinearLayoutManager(recyclerView.context)
                 recyclerView.layoutManager = llm
                 recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, llm.orientation))
-                recyclerView.adapter = SimpleStringRecyclerViewAdapter(mainActivity!!, mainActivity!!, dataList, false)
+                recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, dataList)
             }
             FRAG_TYPE_DEVICE -> {
                 val gridDivider = ContextCompat.getDrawable(recyclerView.context, R.drawable.grid_divider)
                 recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 2)
                 recyclerView.addItemDecoration(GridDividerItemDecoration(gridDivider, gridDivider, 2))
-                recyclerView.adapter = SimpleStringRecyclerViewAdapter(mainActivity!!, mainActivity!!, dataList, true)
+                recyclerView.adapter = DeviceTypeAdapter(mainActivity!!, mainActivity!!, dataList)
             }
             FRAG_TYPE_FAV -> {
                 recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recyclerView.adapter = SimpleStaggaredRecyclerViewAdapter(mainActivity!!, dataList)
+                recyclerView.adapter = FavTypeAdapter(mainActivity!!, dataList)
             }
         }
     }

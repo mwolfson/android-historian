@@ -19,7 +19,7 @@ import java.util.Random
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private val values: List<String>) : RecyclerView.Adapter<SimpleStaggaredRecyclerViewAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<String>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -31,7 +31,7 @@ class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private
         val textView2: TextView
 
         init {
-            imageView = view.findViewById(R.id.avatar)
+            imageView = view.findViewById(R.id.device_item_avatar)
             textView = view.findViewById(R.id.text_title)
             textView2 = view.findViewById(R.id.text_content)
         }
@@ -50,11 +50,11 @@ class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleStaggaredRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavTypeAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_favorites, parent, false)
         view.setBackgroundResource(background)
-        return SimpleStaggaredRecyclerViewAdapter.ViewHolder(view)
+        return FavTypeAdapter.ViewHolder(view)
     }
 
 

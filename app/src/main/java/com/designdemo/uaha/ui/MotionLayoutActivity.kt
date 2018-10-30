@@ -15,12 +15,12 @@ class MotionLayoutActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_motion_layout)
 
-        val infoButton : Button = findViewById(R.id.launch_button)
+        val infoButton = launch_button
         infoButton.setOnClickListener{v -> launchMotionScene()}
     }
 
     private fun launchMotionScene() {
-        val motionLayout: MotionLayout = findViewById(R.id.motionlayout_demo)
+        val motionLayout = motionlayout_demo
         motionLayout.transitionToEnd()
     }
 

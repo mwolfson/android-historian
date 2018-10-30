@@ -5,36 +5,30 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
-
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-
-import android.view.Menu
-import android.view.MenuItem
-
+import com.google.android.material.navigation.NavigationView
 import com.support.android.designlibdemo.R
-
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private var drawerLayout: DrawerLayout? = null
-    private var viewPager: ViewPager? = null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_appbar)
+        val bottomAppBar = bottom_appbar
         setSupportActionBar(bottomAppBar)
         bottomAppBar.replaceMenu(R.menu.main_actions)
 
@@ -42,20 +36,20 @@ class MainActivity : AppCompatActivity() {
         ab?.setHomeAsUpIndicator(R.drawable.ic_menu)
         ab?.setDisplayHomeAsUpEnabled(true)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = drawer_layout
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val navigationView = nav_view
         if (navigationView != null) {
             setupDrawerContent(navigationView)
         }
 
-        viewPager = findViewById(R.id.viewpager)
+        viewPager = viewpager
         if (viewPager != null) {
-            setupViewPager(viewPager!!)
-            viewPager!!.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
+            setupViewPager(viewPager)
+            viewPager.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
         }
 
-        val tabLayout = findViewById<TabLayout>(R.id.tabs)
+        val tabLayout = tabs
         tabLayout.setupWithViewPager(viewPager)
     }
 
@@ -75,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                drawerLayout!!.openDrawer(GravityCompat.START)
+                drawerLayout.openDrawer(GravityCompat.START)
                 return true
             }
         }
@@ -112,18 +106,18 @@ class MainActivity : AppCompatActivity() {
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                    viewPager!!.currentItem = 0
-                    drawerLayout!!.closeDrawers()
+                    viewPager.currentItem = 0
+                    drawerLayout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_devices -> {
-                    viewPager!!.currentItem = 1
-                    drawerLayout!!.closeDrawers()
+                    viewPager.currentItem = 1
+                    drawerLayout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_favorites -> {
-                    viewPager!!.currentItem = 2
-                    drawerLayout!!.closeDrawers()
+                    viewPager.currentItem = 2
+                    drawerLayout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_userinfo -> {

@@ -1,7 +1,6 @@
 package com.designdemo.uaha.ui;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.palette.graphics.Palette;
@@ -218,7 +216,7 @@ public class DetailActivity extends AppCompatActivity {
             lp.leftMargin = (int) sideOffset;
             lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin);
 
-            View mainView = findViewById(R.id.main_content);
+            View mainView = findViewById(R.id.user_main_content);
             Snackbar snackbar = Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG);
             View snackbarLayout = snackbar.getView();
 

@@ -51,9 +51,9 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<St
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavTypeAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_favorites, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorites, parent, false)
         view.setBackgroundResource(background)
+
         return FavTypeAdapter.ViewHolder(view)
     }
 

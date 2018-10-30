@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
@@ -104,7 +105,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toEndOf="@+id/info_text"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintVertical_bias="0.010">
+            motion:layout_constraintVertical_bias="0.010"
+            tools:ignore="DuplicateIds">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="@color/black" />
@@ -133,7 +135,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintVertical_bias="1.30"/>
+            motion:layout_constraintVertical_bias="1.30"
+            tools:ignore="DuplicateIds"/>
 
         <Constraint
             android:id="@+id/nerd_text_img"
@@ -143,7 +146,8 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintVertical_bias="0.33" >
+            motion:layout_constraintVertical_bias="0.33"
+            tools:ignore="DuplicateIds">
             <CustomAttribute
                 motion:attributeName="Crossfade"
                 motion:customFloatValue="1" />

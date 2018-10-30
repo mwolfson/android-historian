@@ -30,7 +30,7 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         val imageView: ImageView = view.device_item_avatar
         val titleText: TextView = view.device_item_title
         val subTitleText: TextView = view.device_item_subtext
-        var os_version: Int = 0
+        var os_version = 0
 
         override fun toString(): String {
             return super.toString() + " '" + titleText.text
@@ -47,10 +47,9 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceTypeAdapter.ViewHolder {
-        var view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_device, parent, false)
-
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_device, parent, false)
         view.setBackgroundResource(background)
+
         return DeviceTypeAdapter.ViewHolder(view)
     }
 

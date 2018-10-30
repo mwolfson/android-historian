@@ -1,14 +1,12 @@
 package com.designdemo.uaha.ui;
 
 
-import com.designdemo.uaha.ui.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -39,9 +37,9 @@ public class DeviceListTest {
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recyclerview),
-                        withParent(allOf(withId(R.id.main_content),
+                        withParent(allOf(withId(R.id.user_main_content),
                                 withParent(allOf(withId(R.id.viewpager),
-                                        withParent(allOf(withId(R.id.main_content),
+                                        withParent(allOf(withId(R.id.user_main_content),
                                                 withParent(allOf(withId(R.id.drawer_layout),
                                                         withParent(allOf(withId(android.R.id.content),
                                                                 withParent(withId(R.id.action_bar_root)))))))))))),
@@ -49,11 +47,11 @@ public class DeviceListTest {
         recyclerView.check(matches(isDisplayed()));
 
         ViewInteraction g1View = onView(
-                allOf(withId(R.id.list_title), withText("G1"), isDisplayed()));
+                allOf(withId(R.id.device_item_title), withText("G1"), isDisplayed()));
         g1View.check(matches(withText("G1")));
 
         ViewInteraction droidView = onView(
-                allOf(withId(R.id.list_title), withText("Droid"), isDisplayed()));
+                allOf(withId(R.id.device_item_title), withText("Droid"), isDisplayed()));
         droidView.check(matches(withText("Droid")));
 
 //

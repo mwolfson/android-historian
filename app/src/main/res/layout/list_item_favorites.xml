@@ -22,28 +22,28 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/device_item_avatar"
+                android:id="@+id/fav_item_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:transitionName="@string/transition_string" />
 
             <TextView
-                android:id="@+id/text_title"
+                android:id="@+id/fav_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:layout_below="@+id/device_item_avatar"
+                android:layout_below="@+id/fav_item_avatar"
                 android:textAppearance="?textAppearanceHeadline6"/>
 
             <TextView
-                android:id="@+id/text_content"
+                android:id="@+id/fav_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_title"
+                android:layout_below="@+id/fav_item_title"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"

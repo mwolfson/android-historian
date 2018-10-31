@@ -46,6 +46,12 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
+    // Lambda to add a close listener on the chip, and also put a random background color
+    val setChipCloseAndRandomColor: (Chip) -> Unit = {
+        it.setOnCloseIconClickListener { it -> it.visibility = View.GONE }
+        it.setChipBackgroundColorResource(UiUtil.getRandomColor())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -64,33 +70,24 @@ class UserActivity : AppCompatActivity() {
         setupChips()
 
         val navigationView = nav_view
-        if (navigationView != null) {
-            setupDrawerContent(navigationView)
-        }
+        setupDrawerContent(navigationView)
     }
 
     private fun setupChips() {
-        // TODO Setup lambda to do these chip operations
-
         val chipEntry1 = chip_entry1
-        chipEntry1.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
-        chipEntry1.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        setChipCloseAndRandomColor(chipEntry1)
 
         val chipEntry2 = chip_entry2
-        chipEntry2.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
-        chipEntry2.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        setChipCloseAndRandomColor(chipEntry2)
 
         val chipEntry3 = chip_entry3
-        chipEntry3.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
-        chipEntry3.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        setChipCloseAndRandomColor(chipEntry3)
 
         val chipEntry4 = chip_entry4
-        chipEntry4.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
-        chipEntry4.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        setChipCloseAndRandomColor(chipEntry4)
 
         val chipEntry5 = chip_entry5
-        chipEntry5.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
-        chipEntry5.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        setChipCloseAndRandomColor(chipEntry5)
 
         val filter1Group = filter1_group
         filter1Group.setOnCheckedChangeListener { chipGroup, i ->
@@ -138,10 +135,10 @@ class UserActivity : AppCompatActivity() {
         dynamicChip.text = textEntered
         dynamicChip.isCloseIconVisible = true
         dynamicChip.isCheckable = true
-        //Set a random color and icon for demo - but these could be set for practical reasons
+
+        //Set a random icon for demo
         dynamicChip.chipIcon = ContextCompat.getDrawable(this, UiUtil.getRandomDrawable())
-        dynamicChip.setChipBackgroundColorResource(UiUtil.getRandomColor())
-        dynamicChip.setOnCloseIconClickListener { dynamicChip.visibility = View.GONE }
+        setChipCloseAndRandomColor(dynamicChip)
 
         entryGroup.addView(dynamicChip)
         customChipEdit.requestFocus()
@@ -157,7 +154,7 @@ class UserActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                drawerLayout!!.openDrawer(GravityCompat.START)
+                drawerLayout.openDrawer(GravityCompat.START)
                 return true
             }
         }
@@ -177,21 +174,45 @@ class UserActivity : AppCompatActivity() {
         picButton.setOnClickListener { v -> setPictureDialog() }
 
 
+        //// Lambda to set a close listener on the chip, and also put a random background color
+        //    val setChipCloseAndRandomColor: (Chip) -> Unit = {
+        //        it.setOnCloseIconClickListener { it -> it.visibility = View.GONE }
+        //        it.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        //    }
+        val mainView = user_main_content
+
+        val isNameValid: (TextView) -> Int = {
+            var retVal = 0
+            val nameLen = it.text?.length
+
+            if (nameLen in 0..3) {
+                retVal = R.string.at_least_4_char
+            }
+            retVal
+        }
+
+        val isPhoneValid: (TextView) -> Int = {
+            var retVal = 0
+            val phoneLen = phoneEnterField.text?.length
+            if (phoneLen != 14) {
+                retVal = R.string.invalid_phone
+            }
+            retVal
+        }
 
         fab = user_fab
         fab.setOnClickListener { v ->
             //Validate values
-            val nameLen = nameEnterField.text?.length
-            val mainView = user_main_content
-
-            if (nameLen in 0..3) {
-                nameEnterField.error = getString(R.string.at_least_4_char)
+            val nameError = isNameValid(nameEnterField)
+            if (nameError != 0) {
+                nameEnterField.error = getString(nameError)
                 nameEnterField.requestFocus()
-                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()            }
+                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
+            }
 
-            val phoneLen = phoneEnterField.text?.length
-            if (phoneLen != 14) {
-                phoneEnterField.error = getString(R.string.invalid_phone)
+            val phoneError = isPhoneValid(phoneEnterField)
+            if (phoneError != 0) {
+                phoneEnterField.error = getString(phoneError)
                 phoneEnterField.requestFocus()
                 Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
             }
@@ -221,33 +242,6 @@ class UserActivity : AppCompatActivity() {
         // Set initial values from Prefs
         setPhoneNameValues()
         userLabelChip.requestFocus()
-    }
-
-    private fun validateInputs(): Int {
-        var errorId = 0
-
-        val nameLen = nameEnterField.text?.length
-
-
-            when (nameLen) {
-
-
-            }
-
-            if (nameLen in 0..4) {
-                nameEnterField.error = getString(R.string.at_least_4_char)
-                nameEnterField.requestFocus()
-                errorId = R.string.name_input_error
-            }
-
-            val phoneLen = phoneEnterField!!.text?.length
-            if (phoneLen != 14) {
-                phoneEnterField.error = getString(R.string.invalid_phone)
-                phoneEnterField.requestFocus()
-                errorId = R.string.phone_input_error
-            }
-
-        return errorId
     }
 
     private fun setupTextScaleDialog() {
@@ -302,78 +296,61 @@ class UserActivity : AppCompatActivity() {
         caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence))
         fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular))
 
+        //Creates special strings to display Scale Type information in the dialog when you selected an item
+        val setupTextScaleType : (Int, Int, Int) -> Int = {
+            val1, val2, val3 ->
+            valueToSet = getString(val1)
+            letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(val2))
+            sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), getString(val3))
+            0
+        }
+
         when (scaleText) {
             "Headline1" -> {
-                valueToSet = getString(R.string.st_h1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "96")
+                setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96 )
             }
             "Headline2" -> {
-                valueToSet = getString(R.string.st_h2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "60")
+                setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60 )
             }
             "Headline3" -> {
-                valueToSet = getString(R.string.st_h3)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "48")
+                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48 )
             }
             "Headline4" -> {
-                valueToSet = getString(R.string.st_h4)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "34")
+                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34 )
             }
             "Headline5" -> {
-                valueToSet = getString(R.string.st_h5)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "24")
+                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24 )
             }
             "Headline6" -> {
-                valueToSet = getString(R.string.st_h6)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "20")
+                setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20 )
             }
             "Subtitle1" -> {
-                valueToSet = getString(R.string.st_subtitle1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "16")
+                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16 )
             }
             "Subtitle2" -> {
-                valueToSet = getString(R.string.st_subtitle2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
+                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14 )
             }
             "Body1" -> {
-                valueToSet = getString(R.string.st_body1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "16")
+                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16 )
             }
             "Body2" -> {
-                valueToSet = getString(R.string.st_body2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
+                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14 )
             }
             "Button" -> {
-                valueToSet = getString(R.string.st_button)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_75))
+                setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14 )
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
             }
             "Caption" -> {
-                valueToSet = getString(R.string.st_caption)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_4))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "12")
+                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12 )
             }
             "Overline" -> {
-                valueToSet = getString(R.string.st_overline)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1dot5))
+                setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10 )
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "10")
             }
             else -> {
                 valueToSet = "Unset"
-                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), "Unset")
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "Unset")
+                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.unset))
+                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), getString(R.string.unset))
             }
         }
 
@@ -464,7 +441,6 @@ class UserActivity : AppCompatActivity() {
     }
 
     companion object {
-
         private val TAG = "UserActivity"
     }
 

@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.designdemo.uaha.util.PrefsUtil
@@ -71,6 +72,128 @@ class UserActivity : AppCompatActivity() {
 
         val navigationView = nav_view
         setupDrawerContent(navigationView)
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.profile_actions, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupViews() {
+        drawerLayout = drawer_layout
+        nameEnterField = name_edit
+        phoneEnterField = phone_edit
+        userLabelChip = chip_userinfo_label
+
+        //Format phone number as user is typing
+        phoneEnterField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+
+        picButton = profile_pic_button
+        picButton.setOnClickListener { v -> setPictureDialog() }
+
+        val mainView = user_main_content
+
+        //TODO - this validation could use a refactor to cleanup its order of operations and duplicated code
+        //TODO Also, the Screen calculation stuff is duplicated on the DetailActivity
+        // Lambda to check is the name length fits our requirement
+        val isNameValid: (TextView) -> Int = {
+            var retVal = 0
+            val nameLen = it.text?.length
+
+            if (nameLen in 0..3) {
+                retVal = R.string.at_least_4_char
+            }
+            retVal
+        }
+
+        //Lambda to check if phone number is valid
+        val isPhoneValid: (TextView) -> Int = {
+            var retVal = 0
+            val phoneLen = phoneEnterField.text?.length
+            if (phoneLen != 14) {
+                retVal = R.string.invalid_phone
+            }
+            retVal
+        }
+
+        // Setup Snackbar, including special accomidations for BottomAppBar
+        // Notify the User with a snackbar
+        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        val pxScreenHeight = UiUtil.getScreenHeight(this)
+        val pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this)
+        val pxTopOffset = pxScreenHeight - pxToolbar
+        val sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this)
+
+        val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.topMargin = pxTopOffset.toInt()
+        lp.leftMargin = sideOffset.toInt()
+        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
+
+        fab = user_fab
+        fab.setOnClickListener { v ->
+            //Validate values
+            val nameError = isNameValid(nameEnterField)
+            if (nameError != 0) {
+                nameEnterField.error = getString(nameError)
+                nameEnterField.requestFocus()
+                val snackbar = Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT)
+                val snackbarLayout = snackbar.view
+                snackbarLayout.layoutParams = lp
+                snackbar.show()
+            }
+
+            val phoneError = isPhoneValid(phoneEnterField)
+            if (phoneError != 0) {
+                phoneEnterField.error = getString(phoneError)
+                phoneEnterField.requestFocus()
+                val snackbar = Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT)
+                val snackbarLayout = snackbar.view
+                snackbarLayout.layoutParams = lp
+                snackbar.show()
+            }
+
+            // Save original Values before sending, in-case user changes their mind
+            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
+            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
+
+            // Store new values
+            val nameToSet = nameEnterField.text.toString()
+            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.text.toString())
+            val phoneToSet = java.lang.Long.valueOf(formattedNum)
+
+            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
+
+            val snackbar = Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.undo)) { _ ->
+                        // Reset to original
+                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
+                        if (complete) {
+                            setPhoneNameValues()
+                        }
+                    }
+            val snackbarLayout = snackbar.view
+            snackbarLayout.layoutParams = lp
+            snackbar.show()
+        }
+
+        // Set initial values from Prefs
+        setPhoneNameValues()
+        userLabelChip.requestFocus()
     }
 
     private fun setupChips() {
@@ -145,105 +268,6 @@ class UserActivity : AppCompatActivity() {
         customChipEdit.setText("")
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.profile_actions, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                drawerLayout.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun setupViews() {
-        drawerLayout = drawer_layout
-        nameEnterField = name_edit
-        phoneEnterField = phone_edit
-        userLabelChip = chip_userinfo_label
-
-        //Format phone number as user is typing
-        phoneEnterField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
-        picButton = profile_pic_button
-        picButton.setOnClickListener { v -> setPictureDialog() }
-
-
-        //// Lambda to set a close listener on the chip, and also put a random background color
-        //    val setChipCloseAndRandomColor: (Chip) -> Unit = {
-        //        it.setOnCloseIconClickListener { it -> it.visibility = View.GONE }
-        //        it.setChipBackgroundColorResource(UiUtil.getRandomColor())
-        //    }
-        val mainView = user_main_content
-
-        val isNameValid: (TextView) -> Int = {
-            var retVal = 0
-            val nameLen = it.text?.length
-
-            if (nameLen in 0..3) {
-                retVal = R.string.at_least_4_char
-            }
-            retVal
-        }
-
-        val isPhoneValid: (TextView) -> Int = {
-            var retVal = 0
-            val phoneLen = phoneEnterField.text?.length
-            if (phoneLen != 14) {
-                retVal = R.string.invalid_phone
-            }
-            retVal
-        }
-
-        fab = user_fab
-        fab.setOnClickListener { v ->
-            //Validate values
-            val nameError = isNameValid(nameEnterField)
-            if (nameError != 0) {
-                nameEnterField.error = getString(nameError)
-                nameEnterField.requestFocus()
-                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
-            }
-
-            val phoneError = isPhoneValid(phoneEnterField)
-            if (phoneError != 0) {
-                phoneEnterField.error = getString(phoneError)
-                phoneEnterField.requestFocus()
-                Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
-            }
-
-            // Save original Values before sending, in-case user changes their mind
-            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
-            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
-
-            // Store new values
-            val nameToSet = nameEnterField.text.toString()
-            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField!!.text.toString())
-            val phoneToSet = java.lang.Long.valueOf(formattedNum)
-
-            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
-
-            Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.undo)) { view ->
-                        // Reset to original
-                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
-                        if (complete) {
-                            setPhoneNameValues()
-                        }
-                    }
-                    .show()
-        }
-
-        // Set initial values from Prefs
-        setPhoneNameValues()
-        userLabelChip.requestFocus()
-    }
-
     private fun setupTextScaleDialog() {
         val bottomSheet = bottom_sheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -308,9 +332,11 @@ class UserActivity : AppCompatActivity() {
         when (scaleText) {
             "Headline1" -> {
                 setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline2" -> {
                 setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline3" -> {
                 setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48 )
@@ -323,6 +349,7 @@ class UserActivity : AppCompatActivity() {
             }
             "Headline6" -> {
                 setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Subtitle1" -> {
                 setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16 )
@@ -339,6 +366,7 @@ class UserActivity : AppCompatActivity() {
             "Button" -> {
                 setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14 )
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Caption" -> {
                 setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12 )
@@ -369,7 +397,7 @@ class UserActivity : AppCompatActivity() {
 
         val phone = PrefsUtil.getPhone(this)
         if (phone != 0L) {
-            phoneEnterField.setText(phone.toString() + "")
+            phoneEnterField.setText(phone.toString())
         }
     }
 

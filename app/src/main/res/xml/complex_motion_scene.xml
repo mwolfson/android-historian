@@ -6,6 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start"
+        motion:interpolator="easeOut"
         motion:duration="1000">
         <OnSwipe
             motion:dragDirection="dragUp"

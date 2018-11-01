@@ -55,6 +55,8 @@
     <string name="sentence">Sentence</string>
     <string name="all_caps">ALL CAPS</string>
     <string name="regular">Regular</string>
+    <string name="light">Light</string>
+    <string name="medium">Medium</string>
     <string name="text_appearance_style_example">\@style/TextAppearance.MaterialComponents.%1$s\n---\nandroid:textAppearance=\"?textAppearance%1$s\"</string>
 
     <!-- Letter Spacing  -->

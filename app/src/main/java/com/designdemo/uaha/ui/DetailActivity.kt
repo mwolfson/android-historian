@@ -33,7 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
-import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
+//import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_detail.*
 import java.io.IOException
@@ -408,7 +408,7 @@ class DetailActivity : AppCompatActivity() {
         // To use the FONO API, you will need to add your own API key to the gradle.properties file
         // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
         // App will degrade gracefully if KEY is not found
-        private val TOKEN = FONO_API_KEY
-//        private val TOKEN = "NA"
+//        private val TOKEN = FONO_API_KEY
+        private val TOKEN = "NA"
     }
 }

@@ -35,7 +35,7 @@ public class DetailActivityTest  {
                     Context targetContext = InstrumentationRegistry.getInstrumentation()
                             .getTargetContext();
                     Intent result = new Intent(targetContext, DetailActivity.class);
-                    result.putExtra(DetailActivity.EXTRA_APP_NAME, VersionData.getProductName(VersionData.OS_GINGERBREAD));
+                    result.putExtra(DetailActivity.Companion.getEXTRA_APP_NAME(), VersionData.getProductName(VersionData.OS_GINGERBREAD));
                     return result;
                 }
             };

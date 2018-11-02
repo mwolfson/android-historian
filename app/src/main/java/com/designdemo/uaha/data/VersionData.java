@@ -214,6 +214,11 @@ public class VersionData {
         return getProductName(osVersions[randInt]);
     }
 
+    public static final String getRandomPhoneName() {
+        int randInt = new Random().nextInt(deviceVersions.length - 1);
+        return getProductName(deviceVersions[randInt]);
+    }
+
     public static String getProductName(int osVersion) {
         String retStr = "";
 

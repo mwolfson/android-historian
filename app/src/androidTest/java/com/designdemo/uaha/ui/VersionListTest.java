@@ -2,13 +2,10 @@ package com.designdemo.uaha.ui;
 
 
 import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.designdemo.uaha.ui.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.hamcrest.core.AllOf;
@@ -37,7 +34,7 @@ public class VersionListTest {
     public void versionListTest() {
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recyclerview),
-                        withParent(allOf(withId(R.id.main_content),
+                        withParent(allOf(withId(R.id.user_main_content),
                                 withParent(withId(R.id.viewpager)))),
                         isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
@@ -46,7 +43,7 @@ public class VersionListTest {
                 allOf(withId(R.id.backdrop),
                         withParent(allOf(withId(R.id.collapsing_toolbar),
                                 withParent(allOf(withId(R.id.appbar),
-                                        withParent(allOf(withId(R.id.main_content),
+                                        withParent(allOf(withId(R.id.user_main_content),
                                                 withParent(allOf(withId(android.R.id.content),
                                                         withParent(withId(R.id.action_bar_root)))))))))),
                         isDisplayed()));
@@ -58,9 +55,9 @@ public class VersionListTest {
     public void testListContent() {
         ViewInteraction recyclerView = onView(
                 AllOf.allOf(withId(R.id.recyclerview),
-                        withParent(AllOf.allOf(withId(R.id.main_content),
+                        withParent(AllOf.allOf(withId(R.id.user_main_content),
                                 withParent(AllOf.allOf(withId(R.id.viewpager),
-                                        withParent(AllOf.allOf(withId(R.id.main_content),
+                                        withParent(AllOf.allOf(withId(R.id.user_main_content),
                                                 withParent(AllOf.allOf(withId(R.id.drawer_layout),
                                                         withParent(AllOf.allOf(withId(android.R.id.content),
                                                                 withParent(withId(R.id.action_bar_root)))))))))))),
@@ -69,16 +66,16 @@ public class VersionListTest {
 
 //        onView(withId(R.id.recyclerview)).perform(RecyclerViewActions.actionOnItemAtPosition(0, ViewMatcher. ));
 
-        ViewInteraction viewCupcake = onView(allOf(withId(R.id.list_title), withText("Cupcake"), isDisplayed()));
+        ViewInteraction viewCupcake = onView(allOf(withId(R.id.device_item_title), withText("Cupcake"), isDisplayed()));
         viewCupcake.check(matches(withText("Cupcake")));
 
-        ViewInteraction viewDonut = onView(allOf(withId(R.id.list_title), withText("Donut"), isDisplayed()));
+        ViewInteraction viewDonut = onView(allOf(withId(R.id.device_item_title), withText("Donut"), isDisplayed()));
         viewDonut.check(matches(withText("Donut")));
 
-        ViewInteraction viewEclair = onView(allOf(withId(R.id.list_title), withText("Eclair"), isDisplayed()));
+        ViewInteraction viewEclair = onView(allOf(withId(R.id.device_item_title), withText("Eclair"), isDisplayed()));
         viewEclair.check(matches(withText("Eclair")));
         
-        ViewInteraction viewFroyo = onView(allOf(withId(R.id.list_title), withText("Froyo"), isDisplayed()));
+        ViewInteraction viewFroyo = onView(allOf(withId(R.id.device_item_title), withText("Froyo"), isDisplayed()));
         viewFroyo.check(matches(withText("Froyo")));
 
 //        ViewInteraction viewGingerbread = onView(allOf(withId(R.id.list_title), withText("Gingerbread"), isDisplayed()));

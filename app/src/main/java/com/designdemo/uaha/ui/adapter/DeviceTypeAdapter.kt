@@ -18,24 +18,19 @@ import com.support.android.designlibdemo.R
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.list_item_device.view.*
 
-class SimpleStringRecyclerViewAdapter(private val activity: Activity, context: Context, private val values: List<String>, private val IS_DEVICE: Boolean) : RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder>() {
+class DeviceTypeAdapter(private val activity: Activity, context: Context, private val values: List<String>) : RecyclerView.Adapter<DeviceTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var boundString: String? = null
-        val imageView: ImageView
-        val titleText: TextView
-        val subTitleText: TextView
-        var os_version: Int = 0
-
-        init {
-            imageView = view.findViewById(R.id.avatar)
-            titleText = view.findViewById(R.id.list_title)
-            subTitleText = view.findViewById(R.id.list_subtext)
-        }
+        val imageView: ImageView = view.device_item_avatar
+        val titleText: TextView = view.device_item_title
+        val subTitleText: TextView = view.device_item_subtext
+        var os_version = 0
 
         override fun toString(): String {
             return super.toString() + " '" + titleText.text
@@ -51,20 +46,14 @@ class SimpleStringRecyclerViewAdapter(private val activity: Activity, context: C
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleStringRecyclerViewAdapter.ViewHolder {
-        var view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_os, parent, false)
-
-        if(IS_DEVICE) {
-            view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item_device, parent, false)
-        }
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceTypeAdapter.ViewHolder {
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_device, parent, false)
         view.setBackgroundResource(background)
-        return SimpleStringRecyclerViewAdapter.ViewHolder(view)
+
+        return DeviceTypeAdapter.ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SimpleStringRecyclerViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DeviceTypeAdapter.ViewHolder, position: Int) {
         holder.boundString = values[position]
         val splitString = values[position]
         val parts = splitString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()

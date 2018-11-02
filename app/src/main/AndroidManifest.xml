@@ -42,7 +42,7 @@
         </activity>
         <activity
             android:name="com.designdemo.uaha.ui.UserActivity"
-            android:label="@string/title_activity_user"></activity>
+            android:label="@string/title_activity_user" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -50,7 +50,10 @@
 
         <activity
             android:name="com.designdemo.uaha.ui.BottomNavActivity"
-            android:label="@string/title_activity_bottom_bav"></activity>
+            android:label="@string/title_activity_bottom_bav" />
+        <activity
+            android:name="com.designdemo.uaha.ui.MotionLayoutActivity"
+            android:label="@string/title_activity_motion_layout"></activity>
     </application>
 
 </manifest>

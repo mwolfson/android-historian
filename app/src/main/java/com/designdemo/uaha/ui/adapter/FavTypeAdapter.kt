@@ -18,23 +18,18 @@ import java.util.Random
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private val values: List<String>) : RecyclerView.Adapter<SimpleStaggaredRecyclerViewAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<String>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var boundString: String? = null
-        val imageView: ImageView
-        val textView: TextView
-        val textView2: TextView
-
-        init {
-            imageView = view.findViewById(R.id.avatar)
-            textView = view.findViewById(R.id.text_title)
-            textView2 = view.findViewById(R.id.text_content)
-        }
+        val imageView: ImageView = view.fav_item_avatar
+        val textView: TextView = view.fav_item_title
+        val textView2: TextView = view.fav_item_content
 
         override fun toString(): String {
             return super.toString() + " '" + textView.text
@@ -50,11 +45,11 @@ class SimpleStaggaredRecyclerViewAdapter(private val activity: Activity, private
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleStaggaredRecyclerViewAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_favorites, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavTypeAdapter.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorites, parent, false)
         view.setBackgroundResource(background)
-        return SimpleStaggaredRecyclerViewAdapter.ViewHolder(view)
+
+        return FavTypeAdapter.ViewHolder(view)
     }
 
 

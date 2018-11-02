@@ -10,7 +10,7 @@
     android:paddingRight="16dp">
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/os_item_avatar"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:transitionName="@string/transition_string" />
@@ -21,7 +21,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/list_title"
+            android:id="@+id/os_item_title"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginLeft="8dp"
@@ -30,7 +30,7 @@
             android:textAppearance="?textAppearanceHeadline6" />
 
         <TextView
-            android:id="@+id/list_subtext"
+            android:id="@+id/os_item_subtext"
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="8dp"

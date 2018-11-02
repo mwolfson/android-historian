@@ -3,24 +3,20 @@ package com.designdemo.uaha.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.telephony.PhoneNumberUtils
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -29,33 +25,40 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import kotlinx.android.synthetic.main.activity_user.*
+import kotlinx.android.synthetic.main.dialog_picture.view.*
+import kotlinx.android.synthetic.main.dialog_textscale.view.*
 
 class UserActivity : AppCompatActivity() {
     private var mainActivity: Activity? = null
 
-    private var drawerLayout: DrawerLayout? = null
-    private var nameEnterField: AppCompatEditText? = null
-    private var phoneEnterField: AppCompatEditText? = null
-    private var fab: FloatingActionButton? = null
-    private var picButton: Button? = null
-    private var userLabelChip: Chip? = null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var nameEnterField: AppCompatEditText
+    private lateinit var phoneEnterField: AppCompatEditText
+    private lateinit var fab: FloatingActionButton
+    private lateinit var picButton: Button
+    private lateinit var userLabelChip: Chip
 
-    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+
+    // Lambda to add a close listener on the chip, and also put a random background color
+    val setChipCloseAndRandomColor: (Chip) -> Unit = {
+        it.setOnCloseIconClickListener { it -> it.visibility = View.GONE }
+        it.setChipBackgroundColorResource(UiUtil.getRandomColor())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         mainActivity = this
 
-        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_appbar)
+        val bottomAppBar = bottom_appbar
         setSupportActionBar(bottomAppBar)
         bottomAppBar.replaceMenu(R.menu.profile_actions)
 
@@ -67,29 +70,149 @@ class UserActivity : AppCompatActivity() {
         setupTextScaleDialog()
         setupChips()
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        if (navigationView != null) {
-            setupDrawerContent(navigationView)
+        val navigationView = nav_view
+        setupDrawerContent(navigationView)
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.profile_actions, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(GravityCompat.START)
+                return true
+            }
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupViews() {
+        drawerLayout = drawer_layout
+        nameEnterField = name_edit
+        phoneEnterField = phone_edit
+        userLabelChip = chip_userinfo_label
+
+        //Format phone number as user is typing
+        phoneEnterField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+
+        picButton = profile_pic_button
+        picButton.setOnClickListener { v -> setPictureDialog() }
+
+        val mainView = user_main_content
+
+        //TODO - this validation could use a refactor to cleanup its order of operations and duplicated code
+        //TODO Also, the Screen calculation stuff is duplicated on the DetailActivity
+        // Lambda to check is the name length fits our requirement
+        val isNameValid: (TextView) -> Int = {
+            var retVal = 0
+            val nameLen = it.text?.length
+
+            if (nameLen in 0..3) {
+                retVal = R.string.at_least_4_char
+            }
+            retVal
+        }
+
+        //Lambda to check if phone number is valid
+        val isPhoneValid: (TextView) -> Int = {
+            var retVal = 0
+            val phoneLen = phoneEnterField.text?.length
+            if (phoneLen != 14) {
+                retVal = R.string.invalid_phone
+            }
+            retVal
+        }
+
+        // Setup Snackbar, including special accomidations for BottomAppBar
+        // Notify the User with a snackbar
+        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        val pxScreenHeight = UiUtil.getScreenHeight(this)
+        val pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this)
+        val pxTopOffset = pxScreenHeight - pxToolbar
+        val sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this)
+
+        val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.topMargin = pxTopOffset.toInt()
+        lp.leftMargin = sideOffset.toInt()
+        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
+
+        fab = user_fab
+        fab.setOnClickListener { v ->
+            //Validate values
+            val nameError = isNameValid(nameEnterField)
+            if (nameError != 0) {
+                nameEnterField.error = getString(nameError)
+                nameEnterField.requestFocus()
+                val snackbar = Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT)
+                val snackbarLayout = snackbar.view
+                snackbarLayout.layoutParams = lp
+                snackbar.show()
+            }
+
+            val phoneError = isPhoneValid(phoneEnterField)
+            if (phoneError != 0) {
+                phoneEnterField.error = getString(phoneError)
+                phoneEnterField.requestFocus()
+                val snackbar = Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT)
+                val snackbarLayout = snackbar.view
+                snackbarLayout.layoutParams = lp
+                snackbar.show()
+            }
+
+            // Save original Values before sending, in-case user changes their mind
+            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
+            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
+
+            // Store new values
+            val nameToSet = nameEnterField.text.toString()
+            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.text.toString())
+            val phoneToSet = java.lang.Long.valueOf(formattedNum)
+
+            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
+
+            val snackbar = Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.undo)) { _ ->
+                        // Reset to original
+                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
+                        if (complete) {
+                            setPhoneNameValues()
+                        }
+                    }
+            val snackbarLayout = snackbar.view
+            snackbarLayout.layoutParams = lp
+            snackbar.show()
+        }
+
+        // Set initial values from Prefs
+        setPhoneNameValues()
+        userLabelChip.requestFocus()
     }
 
     private fun setupChips() {
-        val chipEntry1 = findViewById<Chip>(R.id.chip_entry1)
-        chipEntry1.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        val chipEntry1 = chip_entry1
+        setChipCloseAndRandomColor(chipEntry1)
 
-        val chipEntry2 = findViewById<Chip>(R.id.chip_entry2)
-        chipEntry2.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        val chipEntry2 = chip_entry2
+        setChipCloseAndRandomColor(chipEntry2)
 
-        val chipEntry3 = findViewById<Chip>(R.id.chip_entry3)
-        chipEntry3.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        val chipEntry3 = chip_entry3
+        setChipCloseAndRandomColor(chipEntry3)
 
-        val chipEntry4 = findViewById<Chip>(R.id.chip_entry4)
-        chipEntry4.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        val chipEntry4 = chip_entry4
+        setChipCloseAndRandomColor(chipEntry4)
 
-        val chipEntry5 = findViewById<Chip>(R.id.chip_entry5)
-        chipEntry5.setOnCloseIconClickListener { view -> view.visibility = View.GONE }
+        val chipEntry5 = chip_entry5
+        setChipCloseAndRandomColor(chipEntry5)
 
-        val filter1Group = findViewById<ChipGroup>(R.id.filter1_group)
+        val filter1Group = filter1_group
         filter1Group.setOnCheckedChangeListener { chipGroup, i ->
             when (i) {
                 R.id.choice_item1 -> Log.d(TAG, "Filter1 Item 1")
@@ -98,7 +221,7 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        val filter2Group = findViewById<ChipGroup>(R.id.filter2_group)
+        val filter2Group = filter2_group
         filter2Group.setOnCheckedChangeListener { chipGroup, i ->
             when (i) {
                 R.id.filter2_item1 -> Log.d(TAG, "Filter2 Item 1")
@@ -111,23 +234,9 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        val customChipEdit = findViewById<EditText>(R.id.chip_edit)
+        val customChipEdit = chip_edit
 
-        val entryGroup = findViewById<ChipGroup>(R.id.chipgroup_entry)
-        val chip1 = findViewById<Chip>(R.id.chip_entry1)
-        chip1.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip2 = findViewById<Chip>(R.id.chip_entry2)
-        chip2.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip3 = findViewById<Chip>(R.id.chip_entry3)
-        chip3.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip4 = findViewById<Chip>(R.id.chip_entry4)
-        chip4.setChipBackgroundColorResource(UiUtil.getRandomColor())
-
-        val chip5 = findViewById<Chip>(R.id.chip_entry5)
-        chip5.setChipBackgroundColorResource(UiUtil.getRandomColor())
+        val entryGroup = chipgroup_entry
 
         val activity = this
 
@@ -136,7 +245,7 @@ class UserActivity : AppCompatActivity() {
             false
         }
 
-        val chipActionCustom = findViewById<Chip>(R.id.chip_action_custom)
+        val chipActionCustom = chip_action_custom
         chipActionCustom.setOnClickListener { view ->
             saveChipEntry(customChipEdit, activity, entryGroup)
         }
@@ -149,134 +258,33 @@ class UserActivity : AppCompatActivity() {
         dynamicChip.text = textEntered
         dynamicChip.isCloseIconVisible = true
         dynamicChip.isCheckable = true
-        //Set a random color and icon for demo - but these could be set for practical reasons
+
+        //Set a random icon for demo
         dynamicChip.chipIcon = ContextCompat.getDrawable(this, UiUtil.getRandomDrawable())
-        dynamicChip.setChipBackgroundColorResource(UiUtil.getRandomColor())
-        dynamicChip.setOnCloseIconClickListener { dynamicChip.visibility = View.GONE }
+        setChipCloseAndRandomColor(dynamicChip)
 
         entryGroup.addView(dynamicChip)
         customChipEdit.requestFocus()
         customChipEdit.setText("")
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.profile_actions, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                drawerLayout!!.openDrawer(GravityCompat.START)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun setupViews() {
-        drawerLayout = findViewById(R.id.drawer_layout)
-        nameEnterField = findViewById(R.id.name_edit)
-        phoneEnterField = findViewById(R.id.phone_edit)
-        userLabelChip = findViewById(R.id.chip_userinfo_label)
-
-        //Format phone number as user is typing
-        phoneEnterField!!.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
-        picButton = findViewById(R.id.profile_pic_button)
-        picButton!!.setOnClickListener { v -> setPictureDialog() }
-
-        fab = findViewById(R.id.fab)
-        fab!!.setOnClickListener { v ->
-            //Validate values
-            val nameLen = nameEnterField!!.text?.length
-            val mainView = findViewById<View>(R.id.main_content)
-
-            if (nameLen in 0..3) {
-                nameEnterField!!.error = getString(R.string.at_least_4_char)
-                nameEnterField!!.requestFocus()
-                Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT).show()
-            }
-
-            val phoneLen = phoneEnterField!!.text?.length
-            if (phoneLen != 14) {
-                phoneEnterField!!.error = getString(R.string.invalid_phone)
-                phoneEnterField!!.requestFocus()
-                Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT).show()
-            }
-
-            // Save original Values before sending, in-case user changes their mind
-            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
-            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
-
-            // Store new values
-            val nameToSet = nameEnterField!!.text.toString()
-            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField!!.text.toString())
-            val phoneToSet = java.lang.Long.valueOf(formattedNum)
-
-            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
-
-            Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.undo)) { view ->
-                        // Reset to original
-                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
-                        if (complete) {
-                            setPhoneNameValues()
-                        }
-                    }
-                    .show()
-        }
-
-        // Set initial values from Prefs
-        setPhoneNameValues()
-        userLabelChip!!.requestFocus()
-    }
-
-    private fun validateInputs(): Int {
-        var errorId = 0
-
-        val nameLen = nameEnterField!!.text?.length
-
-
-            when (nameLen) {
-
-
-            }
-
-            if (nameLen in 0..4) {
-                nameEnterField!!.error = getString(R.string.at_least_4_char)
-                nameEnterField!!.requestFocus()
-                errorId = R.string.name_input_error
-            }
-
-            val phoneLen = phoneEnterField!!.text?.length
-            if (phoneLen != 14) {
-                phoneEnterField!!.error = getString(R.string.invalid_phone)
-                phoneEnterField!!.requestFocus()
-                errorId = R.string.phone_input_error
-            }
-
-        return errorId
-    }
-
     private fun setupTextScaleDialog() {
-        val bottomSheet = findViewById<View>(R.id.bottom_sheet)
+        val bottomSheet = bottom_sheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
-        val closeButton = findViewById<ImageButton>(R.id.textscale_close)
+        val closeButton = textscale_close
         closeButton.setOnClickListener { view ->
-            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-            bottomSheetBehavior!!.setPeekHeight(0)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheetBehavior.setPeekHeight(0)
         }
 
-        val showHide = findViewById<Button>(R.id.show_bottom_sheet)
-        showHide.setOnClickListener { view -> bottomSheetBehavior!!.setPeekHeight(300) }
+        val showHide = show_bottom_sheet
+        showHide.setOnClickListener { view -> bottomSheetBehavior.setPeekHeight(300) }
 
-        bottomSheetBehavior!!.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetBehavior!!.peekHeight = 0
+                    bottomSheetBehavior.peekHeight = 0
                 }
             }
 
@@ -285,8 +293,8 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
-        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-        bottomSheetBehavior!!.peekHeight = 0
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.peekHeight = 0
     }
 
     /**
@@ -304,86 +312,73 @@ class UserActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
 
-        val caseText = dialogView.findViewById<TextView>(R.id.ts_textcase)
-        val fontText = dialogView.findViewById<TextView>(R.id.ts_font)
-        val sizeText = dialogView.findViewById<TextView>(R.id.ts_size)
-        val letterSpacingText = dialogView.findViewById<TextView>(R.id.ts_letter_spacing)
+        val caseText = dialogView.ts_textcase
+        val fontText = dialogView.ts_font
+        val sizeText = dialogView.ts_size
+        val letterSpacingText = dialogView.ts_letter_spacing
 
         caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence))
         fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular))
 
+        //Creates special strings to display Scale Type information in the dialog when you selected an item
+        val setupTextScaleType : (Int, Int, Int) -> Int = {
+            val1, val2, val3 ->
+            valueToSet = getString(val1)
+            letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(val2))
+            sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), getString(val3))
+            0
+        }
+
         when (scaleText) {
             "Headline1" -> {
-                valueToSet = getString(R.string.st_h1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg1_5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "96")
+                setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline2" -> {
-                valueToSet = getString(R.string.st_h2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_neg5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "60")
+                setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline3" -> {
-                valueToSet = getString(R.string.st_h3)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "48")
+                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48 )
             }
             "Headline4" -> {
-                valueToSet = getString(R.string.st_h4)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "34")
+                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34 )
             }
             "Headline5" -> {
-                valueToSet = getString(R.string.st_h5)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_zero))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "24")
+                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24 )
             }
             "Headline6" -> {
-                valueToSet = getString(R.string.st_h6)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "20")
+                setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20 )
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Subtitle1" -> {
-                valueToSet = getString(R.string.st_subtitle1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_15))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "16")
+                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16 )
             }
             "Subtitle2" -> {
-                valueToSet = getString(R.string.st_subtitle2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
+                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14 )
             }
             "Body1" -> {
-                valueToSet = getString(R.string.st_body1)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_5))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "16")
+                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16 )
             }
             "Body2" -> {
-                valueToSet = getString(R.string.st_body2)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_25))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
+                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14 )
             }
             "Button" -> {
-                valueToSet = getString(R.string.st_button)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_75))
+                setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14 )
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "14")
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Caption" -> {
-                valueToSet = getString(R.string.st_caption)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_4))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "12")
+                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12 )
             }
             "Overline" -> {
-                valueToSet = getString(R.string.st_overline)
-                letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(R.string.ls_1dot5))
+                setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10 )
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "10")
             }
             else -> {
                 valueToSet = "Unset"
-                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), "Unset")
-                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), "Unset")
+                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.unset))
+                sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), getString(R.string.unset))
             }
         }
 
@@ -397,12 +392,12 @@ class UserActivity : AppCompatActivity() {
     private fun setPhoneNameValues() {
         val name = PrefsUtil.getName(this)
         if (name != PrefsUtil.PREFS_NAME_UNSET) {
-            nameEnterField!!.setText(name)
+            nameEnterField.setText(name)
         }
 
         val phone = PrefsUtil.getPhone(this)
         if (phone != 0L) {
-            phoneEnterField!!.setText(phone.toString() + "")
+            phoneEnterField.setText(phone.toString())
         }
     }
 
@@ -416,7 +411,7 @@ class UserActivity : AppCompatActivity() {
         builder.setCancelable(true)
         builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { dialog, which -> Log.d("Dialog", "The positive button was pressed") }
 
-        val prefSwitch = dialogView.findViewById<View>(R.id.photo_pref_switch) as SwitchCompat
+        val prefSwitch = dialogView.photo_pref_switch
         prefSwitch.isChecked = true
         prefSwitch.setOnClickListener { v ->
             if (prefSwitch.isChecked) {
@@ -454,7 +449,7 @@ class UserActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_userinfo -> {
-                    drawerLayout!!.closeDrawers()
+                    drawerLayout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_link1 -> {
@@ -474,7 +469,6 @@ class UserActivity : AppCompatActivity() {
     }
 
     companion object {
-
         private val TAG = "UserActivity"
     }
 

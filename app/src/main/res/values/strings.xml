@@ -55,6 +55,8 @@
     <string name="sentence">Sentence</string>
     <string name="all_caps">ALL CAPS</string>
     <string name="regular">Regular</string>
+    <string name="light">Light</string>
+    <string name="medium">Medium</string>
     <string name="text_appearance_style_example">\@style/TextAppearance.MaterialComponents.%1$s\n---\nandroid:textAppearance=\"?textAppearance%1$s\"</string>
 
     <!-- Letter Spacing  -->
@@ -152,6 +154,17 @@
     <string name="textscale_label_overline">Overline</string>
     <string name="font">Font</string>
     <string name="case_string">Case</string>
+    <string name="sp_96">96</string>
+    <string name="sp_60">60</string>
+    <string name="sp_48">48</string>
+    <string name="sp_34">34</string>
+    <string name="sp_24">24</string>
+    <string name="sp_20">20</string>
+    <string name="sp_16">16</string>
+    <string name="sp_14">14</string>
+    <string name="sp_12">12</string>
+    <string name="sp_10">10</string>
+    <string name="unset">Unset</string>
 
     <!-- Scale Text Arrays-->
     <string-array name="scaletext_array">
@@ -186,6 +199,8 @@
     <string name="bottomnav1">Option1</string>
     <string name="bottomnav2">Option2</string>
     <string name="bottomnav3">Option3</string>
+
+    <!-- Device Info -->
     <string name="spec_release_date">Release Date</string>
     <string name="spec_multitouch">Multitouch</string>
     <string name="spec_weight">Weight</string>
@@ -198,4 +213,8 @@
     <string name="spec_display">Display</string>
     <string name="spec_resolution">Resolution</string>
     <string name="device_info">Device Info</string>
+
+    <!-- Lost and Found -->
+    <string name="title_activity_motion_layout">MotionLayoutActivity</string>
+
 </resources>

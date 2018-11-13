@@ -9,11 +9,13 @@ import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -35,6 +37,7 @@ import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 //import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
+import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
 import java.io.IOException
 import java.lang.Exception
@@ -61,6 +64,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var display: TextView
     private lateinit var resolution: TextView
     private lateinit var video: TextView
+    private lateinit var progress: ProgressBar
 
     private var deviceInfo: DeviceEntity? = null
 
@@ -285,34 +289,36 @@ class DetailActivity : AppCompatActivity() {
         resolution = spec_resolution
         video = spec_video
         size = spec_size
+        progress = device_info_progress
     }
 
-    private fun invalidateDeviceInfoViews() {
+    private fun setDeviceInfoViews() {
         if (deviceInfo != null) {
+            device_info_progress.visibility = View.GONE
             deviceName.text = deviceInfo!!.deviceName
             deviceName.setTextColor(iconColor)
             features.text = deviceInfo!!.features
             featuresCont.text = deviceInfo!!.features_c
 
             if (deviceInfo!!.multitouch != null)
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo!!.multitouch, multitouch!!)
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo!!.multitouch, multitouch)
             else
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", multitouch!!)
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", multitouch)
 
             val cpuInfo = deviceInfo!!.chipset + "\n" + deviceInfo!!.cpu
-            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu!!)
+            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu)
 
             if (deviceInfo!!.announced != null)
-                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo!!.announced, releaseDate!!)
+                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo!!.announced, releaseDate)
 
             if (deviceInfo!!.size != null)
-                setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo!!.size, size!!)
+                setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo!!.size, size)
 
             if (deviceInfo!!.weight != null)
-                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo!!.weight, weight!!)
+                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo!!.weight, weight)
 
             if (deviceInfo!!.dimensions != null)
-                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo!!.dimensions, dimen!!)
+                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo!!.dimensions, dimen)
 
             if (deviceInfo!!.internal != null)
                 setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, deviceInfo!!.internal, memory!!)
@@ -333,6 +339,28 @@ class DetailActivity : AppCompatActivity() {
         } else {
             specLayout.visibility = View.GONE
         }
+    }
+
+
+    private fun clearDeviceInfoViews() {
+        device_info_progress.visibility = View.VISIBLE
+        deviceName.text = "Getting Information"
+        deviceName.setTextColor(resources.getColor(black))
+        features.text = ""
+        featuresCont.text = ""
+
+        setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "", multitouch)
+        setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "", cpu)
+        setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, "", releaseDate)
+        setupSpecItem(R.drawable.vct_size, R.string.spec_size, "", size)
+        setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "", weight)
+        setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, "", dimen)
+        setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, "", memory)
+        setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, "", camera)
+        setupSpecItem(R.drawable.vct_video, R.string.spec_video, "", video)
+        setupSpecItem(R.drawable.vct_display, R.string.spec_display, "", display)
+        setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, "", resolution)
+        specLayout.visibility = View.VISIBLE
     }
 
     private fun setupSpecItem(@DrawableRes drawable: Int, @StringRes title: Int, info: String, view: TextView) {
@@ -367,7 +395,7 @@ class DetailActivity : AppCompatActivity() {
                 }
             } catch (e: IOException) {
                 e.printStackTrace()
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
 
@@ -391,10 +419,12 @@ class DetailActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: String) {
             regsWv.loadData(result, "text/html", null)
-            invalidateDeviceInfoViews()
+            setDeviceInfoViews()
         }
 
-        override fun onPreExecute() {}
+        override fun onPreExecute() {
+            clearDeviceInfoViews()
+        }
 
         override fun onProgressUpdate(vararg values: Void) {}
     }

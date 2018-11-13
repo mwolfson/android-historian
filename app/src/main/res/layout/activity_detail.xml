@@ -90,6 +90,7 @@
                         app:cardUseCompatPadding="true">
 
                         <LinearLayout
+                            android:id="@+id/details_info_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -103,6 +104,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="16dp" />
+
+                            <ProgressBar
+                                android:id="@+id/device_info_progress"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="16dp"
+                                style="@style/Widget.AppCompat.ProgressBar"
+                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/details_features"

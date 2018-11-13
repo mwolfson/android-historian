@@ -137,6 +137,7 @@
     <string name="refresh">Refresh</string>
     <string name="find_os">Find OS</string>
     <string name="shuffle">Shuffle</string>
+    <string name="add_item">Add Item</string>
 
     <!-- Text Scale -->
     <string name="textscale_label_h1">Headline1</string>
@@ -216,5 +217,6 @@
 
     <!-- Lost and Found -->
     <string name="title_activity_motion_layout">MotionLayoutActivity</string>
+
 
 </resources>

@@ -41,7 +41,6 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
     implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
     implementation "androidx.palette:palette:$jetpackVersion"
-    implementation "androidx.percentlayout:percentlayout:$jetpackVersion"
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
 
     implementation "android.arch.lifecycle:extensions:$archComponentsVersion"

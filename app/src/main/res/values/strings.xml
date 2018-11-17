@@ -137,6 +137,7 @@
     <string name="refresh">Refresh</string>
     <string name="find_os">Find OS</string>
     <string name="shuffle">Shuffle</string>
+    <string name="add_item">Add Item</string>
 
     <!-- Text Scale -->
     <string name="textscale_label_h1">Headline1</string>
@@ -214,7 +215,18 @@
     <string name="spec_resolution">Resolution</string>
     <string name="device_info">Device Info</string>
 
+
+    <!-- Detail Info -->
+    <string name="percent_40">40%</string>
+    <string name="percent_20">20%</string>
+    <string name="percent_60">60%</string>
+    <string name="primary_colors_desc">This will display the primary colors of the current image</string>
+    <string name="percentage">Percentage</string>
+    <string name="guideline_explain">This shows how to use Guidelines, instead of the deprecated Percentage layout</string>
+
     <!-- Lost and Found -->
     <string name="title_activity_motion_layout">MotionLayoutActivity</string>
+
+
 
 </resources>

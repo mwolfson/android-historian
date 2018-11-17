@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -90,6 +91,7 @@
                         app:cardUseCompatPadding="true">
 
                         <LinearLayout
+                            android:id="@+id/details_info_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
@@ -103,6 +105,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="16dp" />
+
+                            <ProgressBar
+                                android:id="@+id/device_info_progress"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="16dp"
+                                style="@style/Widget.AppCompat.ProgressBar"
+                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/details_features"
@@ -378,7 +388,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:text="This will display the primary colors of the current image"
+                            android:text="@string/primary_colors_desc"
                             android:textAppearance="?textAppearanceHeadline6" />
 
                         <TextView
@@ -450,7 +460,7 @@
                 <com.google.android.material.chip.Chip
                     style="@style/ChipLabel"
                     android:layout_marginBottom="0dp"
-                    android:text="Percentage"
+                    android:text="@string/percentage"
                     app:chipBackgroundColor="@color/transparent"
                     app:chipStrokeColor="@color/black"
                     app:chipStrokeWidth="1dp" />
@@ -473,83 +483,119 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
-                            android:text="This shows how to use the deprecated Percentage layout"
+                            android:text="@string/guideline_explain"
                             android:textAppearance="?textAppearanceHeadline6" />
 
-
-                        <androidx.percentlayout.widget.PercentRelativeLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/perc_40_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guideline_20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".20" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guideline_40"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".40" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guideline_60"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".60" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guideline_80"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".80" />
+
                             <TextView
                                 android:id="@+id/perc1_left"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_alignParentLeft="true"
+                                android:layout_width="0.0dp"
+                                tools:background="@color/orange_500"
                                 android:gravity="center"
-                                android:text="40%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="40%" />
+                                android:text="@string/percent_40"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintEnd_toStartOf="@+id/guideline_40"
+                                app:layout_constraintStart_toStartOf="parent" />
 
                             <TextView
                                 android:id="@+id/perc1_middle"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_toRightOf="@id/perc1_left"
+                                android:layout_width="0.0dp"
+                                android:background="@color/purple_500"
                                 android:gravity="center"
-                                android:text="20%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="20%" />
+                                android:text="@string/percent_20"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintEnd_toStartOf="@+id/perc1_right"
+                                app:layout_constraintStart_toStartOf="@+id/guideline_40" />
 
                             <TextView
                                 android:id="@+id/perc1_right"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_width="0.0dp"
+                                tools:background="@color/green_500"
                                 android:gravity="center"
-                                android:text="40%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="40%" />
-                        </androidx.percentlayout.widget.PercentRelativeLayout>
-
-                        <androidx.percentlayout.widget.PercentRelativeLayout
-                            android:id="@+id/perc_30_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                                android:text="@string/percent_40"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guideline_60"/>
 
                             <TextView
                                 android:id="@+id/perc2_left"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_alignParentLeft="true"
+                                android:layout_width="0.0dp"
+                                tools:background="@color/light_blue_500"
                                 android:gravity="center"
-                                android:text="20%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="20%" />
+                                android:text="@string/percent_20"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/perc1_left"
+                                app:layout_constraintEnd_toStartOf="@+id/guideline_20"/>
 
                             <TextView
                                 android:id="@+id/perc2_middle"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_toRightOf="@id/perc2_left"
+                                android:layout_width="0.0dp"
+                                tools:background="@color/brown_500"
                                 android:gravity="center"
-                                android:text="60%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="60%" />
+                                android:text="@string/percent_60"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintEnd_toStartOf="@+id/guideline_80"
+                                app:layout_constraintStart_toEndOf="@+id/perc2_left"
+                                app:layout_constraintTop_toBottomOf="@+id/perc1_middle" />
 
                             <TextView
                                 android:id="@+id/perc2_right"
                                 style="?textAppearanceBody1"
                                 android:layout_height="64dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_width="0.0dp"
+                                tools:background="@color/pink_500"
                                 android:gravity="center"
-                                android:text="20%"
-                                android:textColor="@color/grey_900"
-                                app:layout_widthPercent="20%" />
-                        </androidx.percentlayout.widget.PercentRelativeLayout>
+                                android:text="@string/percent_20"
+                                android:textColor="@android:color/white"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guideline_80"
+                                app:layout_constraintTop_toBottomOf="@+id/perc1_right" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>

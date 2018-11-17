@@ -31,6 +31,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
 import kotlinx.android.synthetic.main.dialog_textscale.view.*
@@ -270,7 +271,7 @@ class UserActivity : AppCompatActivity() {
 
     private fun setupTextScaleDialog() {
         val bottomSheet = bottom_sheet
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior = from(bottomSheet)
 
         val closeButton = textscale_close
         closeButton.setOnClickListener { view ->

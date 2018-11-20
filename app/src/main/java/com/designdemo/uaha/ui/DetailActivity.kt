@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.webkit.WebView
@@ -26,21 +25,21 @@ import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.DeviceEntity
 import com.designdemo.uaha.data.VersionData
+import com.designdemo.uaha.data.wiki.WikiResponse
 import com.designdemo.uaha.net.FonoApiFactory
+import com.designdemo.uaha.net.WikiApiFactory
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
 //import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
+import okhttp3.OkHttpClient
 import java.io.IOException
-import java.lang.Exception
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var regsWv: WebView
@@ -71,7 +70,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var okclient: OkHttpClient
     private var osVersion: Int = 0
     private var androidName = "unset"
-    //    private static final String TOKEN = "";
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -399,19 +397,20 @@ class DetailActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            val req = "https://en.wikipedia.org/w/api.php?action=query&titles=" + VersionData.getWikiQuery(osVersion) + "&prop=revisions&rvprop=content&format=jsonfm"
-            Log.d("NET", "WIKIPedia request: $req")
-
-            val request = Request.Builder()
-                    .url(req)
-                    .build()
-
+            val wikiService = WikiApiFactory().create()
+            var wikiResponse: retrofit2.Response<WikiResponse>?= null
             try {
-                val blacklistResp = okclient!!.newCall(request).execute()
-                respStr = blacklistResp.body().string()
-                Log.d(TAG, "WIKIPedia_RESPONSE: $respStr")
-            } catch (e: IOException) {
-                e.printStackTrace()
+                wikiResponse = wikiService.getWikiResponse(deviceName, "revisions", "json", "content").execute()
+                var result = wikiResponse!!.body()
+                if (result != null) {
+
+                }
+
+
+            } catch (ioe: IOException) {
+                ioe.printStackTrace()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
             }
 
             return respStr

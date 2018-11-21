@@ -8,7 +8,7 @@ import com.support.android.designlibdemo.R;
 import java.util.Random;
 
 public class VersionData {
-    public static final int NUM_OF_OS = 12;
+    public static final int NUM_OF_OS = 13;
     public static final int NUM_OF_DEVICES = 15;
 
     public static int getOsDrawable(int osVersion) {
@@ -53,6 +53,9 @@ public class VersionData {
                 break;
             case OS_OREO:
                 retDraw = R.drawable.ic_oreo;
+                break;
+            case OS_PIE:
+                retDraw = R.drawable.ic_pie;
                 break;
             case DEVICE_DROID:
                 retDraw = R.drawable.ic_device_droid;
@@ -138,7 +141,9 @@ public class VersionData {
             return OS_NOUGAT;
         } else if (osName.equals(getProductName(OS_OREO))) {
             return OS_OREO;
-        } else if (osName.equals(getProductName(DEVICE_DROID))) {
+        } else if (osName.equals(getProductName(OS_PIE))) {
+            return OS_PIE;
+        }else if (osName.equals(getProductName(DEVICE_DROID))) {
             return DEVICE_DROID;
         } else if (osName.equals(getProductName(DEVICE_NEXS))) {
             return DEVICE_NEXS;
@@ -188,6 +193,7 @@ public class VersionData {
     public static final int OS_MARSHMALLOW = Build.VERSION_CODES.M;
     public static final int OS_NOUGAT = Build.VERSION_CODES.N;
     public static final int OS_OREO = Build.VERSION_CODES.O;
+    public static final int OS_PIE = Build.VERSION_CODES.P;
     public static final int DEVICE_G1 = 100;
     public static final int DEVICE_DROID = 101;
     public static final int DEVICE_GNEX = 102;
@@ -205,7 +211,7 @@ public class VersionData {
     public static final int DEVICE_P3 = 114;
     public static final int DEVICE_P3X = 115;
 
-    public static final int[] osVersions = {OS_CUPCAKE, OS_DONUT, OS_ECLAIR, OS_FROYO, OS_GINGERBREAD, OS_HONEYCOMB, OS_ICS, OS_JB, OS_KITKAT, OS_LOLLIPOP};
+    public static final int[] osVersions = {OS_CUPCAKE, OS_DONUT, OS_ECLAIR, OS_FROYO, OS_GINGERBREAD, OS_HONEYCOMB, OS_ICS, OS_JB, OS_KITKAT, OS_LOLLIPOP, OS_MARSHMALLOW, OS_NOUGAT, OS_OREO, OS_PIE};
 
     public static final int[] deviceVersions = {DEVICE_G1, DEVICE_DROID, DEVICE_N1, DEVICE_NEXS, DEVICE_GNEX, DEVICE_N4, DEVICE_N5, DEVICE_N6, DEVICE_N7, DEVICE_N9, DEVICE_P1, DEVICE_P1X, DEVICE_P2, DEVICE_P2X};
 
@@ -230,7 +236,7 @@ public class VersionData {
                 retStr = "Donut-API Level 4";
                 break;
             case OS_ECLAIR:
-                retStr = "Eclair-API Level 5 to 7";
+                retStr = "Eclair-API Level 5, 6, 7";
                 break;
             case OS_FROYO:
                 retStr = "Froyo-API Level 8";
@@ -239,7 +245,7 @@ public class VersionData {
                 retStr = "Gingerbread-API Level 9, 10";
                 break;
             case OS_HONEYCOMB:
-                retStr = "Honeycomb-API Level 11 to 13";
+                retStr = "Honeycomb-API Level 11, 12, 13";
                 break;
             case OS_ICS:
                 retStr = "Ice Cream Sandwich-API Level 14, 15";
@@ -251,17 +257,21 @@ public class VersionData {
                 retStr = "KitKat-API Level 19, 20";
                 break;
             case OS_LOLLIPOP:
-                retStr = "Lollipop-API Level 21";
+                retStr = "Lollipop-API Level 21, 22";
                 break;
             case OS_MARSHMALLOW:
-                retStr = "Marshmallow-API Level 22";
+                retStr = "Marshmallow-API Level 23";
                 break;
             case OS_NOUGAT:
-                retStr = "Nougat-API Level 23";
+                retStr = "Nougat-API Level 24, 25";
                 break;
             case OS_OREO:
-                retStr = "Oreo-API Level 24";
+                retStr = "Oreo-API Level 26, 27";
                 break;
+            case OS_PIE:
+                retStr = "Pie-API Level 28";
+                break;
+
             case DEVICE_DROID:
                 retStr = "Droid-Motorola";
                 break;
@@ -419,7 +429,8 @@ public class VersionData {
             getProductName(OS_LOLLIPOP),
             getProductName(OS_MARSHMALLOW),
             getProductName(OS_NOUGAT),
-            getProductName(OS_OREO)
+            getProductName(OS_OREO),
+            getProductName(OS_PIE)
     };
 
     public static final String[] deviceStrings = {

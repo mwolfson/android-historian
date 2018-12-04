@@ -37,7 +37,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:elevation="0dp"
+                app:elevation="8dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -205,7 +205,7 @@
                         android:id="@+id/chip_spec_label"
                         style="@style/ChipLabel"
                         android:layout_marginBottom="0dp"
-                        android:text="Specifications"
+                        android:text="@string/specifications"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipStrokeColor="@color/black"
                         app:chipStrokeWidth="1dp" />
@@ -330,7 +330,7 @@
                 <com.google.android.material.chip.Chip
                     style="@style/ChipLabel"
                     android:layout_marginBottom="0dp"
-                    android:text="Wiki"
+                    android:text="@string/wiki"
                     app:chipBackgroundColor="@color/transparent"
                     app:chipStrokeColor="@color/black"
                     app:chipStrokeWidth="1dp" />
@@ -367,7 +367,7 @@
                     android:id="@+id/chip_palatte_label"
                     style="@style/ChipLabel"
                     android:layout_marginBottom="0dp"
-                    android:text="Palette"
+                    android:text="@string/palette"
                     app:chipBackgroundColor="@color/transparent"
                     app:chipStrokeColor="@color/black"
                     app:chipStrokeWidth="1dp" />
@@ -397,7 +397,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Vibrant"
+                            android:text="@string/vibrant"
                             android:textColor="@android:color/white" />
 
                         <TextView
@@ -406,7 +406,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Vibrant Dark"
+                            android:text="@string/vibrant_dark"
                             android:textColor="@android:color/white" />
 
                         <TextView
@@ -415,7 +415,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Vibrant Light"
+                            android:text="@string/vibrant_light"
                             android:textColor="@android:color/white" />
 
                         <TextView
@@ -424,7 +424,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Muted"
+                            android:text="@string/muted"
                             android:textColor="@android:color/white" />
 
                         <TextView
@@ -433,7 +433,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Muted Dark"
+                            android:text="@string/muted_dark"
                             android:textColor="@android:color/white" />
 
                         <TextView
@@ -442,7 +442,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="8dp"
-                            android:text="Muted Light"
+                            android:text="@string/muted_light"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
@@ -608,7 +608,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:layout_gravity="bottom"
-        android:elevation="@dimen/toolbar_elevation"
+        app:elevation="@dimen/toolbar_elevation"
         app:backgroundTint="@color/color_primary"
         app:fabAlignmentMode="end"
         app:fabCradleMargin="8dp"
@@ -622,6 +622,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         app:layout_anchor="@+id/bottom_appbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

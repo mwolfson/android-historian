@@ -53,7 +53,7 @@
             android:label="@string/title_activity_bottom_bav" />
         <activity
             android:name="com.designdemo.uaha.ui.MotionLayoutActivity"
-            android:label="@string/title_activity_motion_layout"></activity>
+            android:label="@string/title_activity_motion_layout"/>
     </application>
 
 </manifest>

@@ -7,7 +7,10 @@
     android:gravity="center_vertical"
     android:minHeight="88dp"
     android:orientation="horizontal"
-    android:paddingRight="16dp">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin">
 
     <ImageView
         android:id="@+id/os_item_avatar"

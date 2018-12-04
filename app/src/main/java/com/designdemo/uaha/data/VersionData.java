@@ -1,7 +1,6 @@
 package com.designdemo.uaha.data;
 
 import android.os.Build;
-import android.util.Log;
 
 import com.support.android.designlibdemo.R;
 
@@ -106,7 +105,6 @@ public class VersionData {
                 retDraw = R.drawable.ic_device_p3x;
                 break;
             default:
-                retDraw = 0;
                 break;
         }
         return retDraw;
@@ -215,18 +213,18 @@ public class VersionData {
 
     public static final int[] deviceVersions = {DEVICE_G1, DEVICE_DROID, DEVICE_N1, DEVICE_NEXS, DEVICE_GNEX, DEVICE_N4, DEVICE_N5, DEVICE_N6, DEVICE_N7, DEVICE_N9, DEVICE_P1, DEVICE_P1X, DEVICE_P2, DEVICE_P2X};
 
-    public static final String getRandomProductName() {
+    public static String getRandomProductName() {
         int randInt = new Random().nextInt(osVersions.length - 1);
         return getProductName(osVersions[randInt]);
     }
 
-    public static final String getRandomPhoneName() {
+    public static String getRandomPhoneName() {
         int randInt = new Random().nextInt(deviceVersions.length - 1);
         return getProductName(deviceVersions[randInt]);
     }
 
     public static String getProductName(int osVersion) {
-        String retStr = "";
+        String retStr = "None-Set";
 
         switch (osVersion) {
             case OS_CUPCAKE:
@@ -271,7 +269,6 @@ public class VersionData {
             case OS_PIE:
                 retStr = "Pie-API Level 28";
                 break;
-
             case DEVICE_DROID:
                 retStr = "Droid-Motorola";
                 break;
@@ -321,14 +318,13 @@ public class VersionData {
                 retStr = "Pixel 3 XL-Google";
                 break;
             default:
-                retStr = "None-Set";
                 break;
         }
         return retStr;
     }
 
     public static String getWikiQuery(int osVersion) {
-        String retStr = "";
+        String retStr = "None Set";
 
         switch (osVersion) {
             case OS_CUPCAKE:
@@ -410,7 +406,6 @@ public class VersionData {
                 retStr = "Pixel3 XL-Google";
                 break;
             default:
-                retStr = "None Set";
                 break;
         }
         return retStr;

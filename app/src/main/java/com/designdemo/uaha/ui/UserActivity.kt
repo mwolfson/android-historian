@@ -470,7 +470,7 @@ class UserActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = "UserActivity"
+        const private val TAG = "UserActivity"
     }
 
 }

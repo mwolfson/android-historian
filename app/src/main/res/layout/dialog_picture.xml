@@ -25,8 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/photo_content_text"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:paddingRight="@dimen/card_margin"
+        android:paddingStart="@dimen/card_margin"
+        android:paddingLeft="@dimen/card_margin"
+        android:paddingEnd="@dimen/card_margin"
         android:layout_toRightOf="@+id/photo_pref_switch"
         style="?textAppearanceBody1"
         android:text="@string/dialog_photo_switch"/>

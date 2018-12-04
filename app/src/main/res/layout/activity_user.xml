@@ -32,7 +32,7 @@
                         android:id="@+id/chip_userinfo_label"
                         style="@style/ChipLabel"
                         android:layout_marginBottom="0dp"
-                        android:text="User Info"
+                        android:text="@string/user_info"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_account"
                         app:chipStrokeColor="@color/black"
@@ -126,7 +126,7 @@
                         android:id="@+id/chip_preference_label"
                         style="@style/ChipLabel"
                         android:layout_marginBottom="0dp"
-                        android:text="Survey"
+                        android:text="@string/survey"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_survey"
                         app:chipStrokeColor="@color/black"
@@ -256,7 +256,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                android:text="When did you get your first Android phone?" />
+                                android:text="@string/when_did_you_get_your_first_android_phone" />
 
                             <DatePicker
                                 android:layout_width="wrap_content"
@@ -275,7 +275,7 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/profileimg_chip"
                         style="@style/ChipLabel"
-                        android:text="Profile Picture"
+                        android:text="@string/profile_picture"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_camera"
                         app:chipStrokeColor="@color/black"
@@ -319,7 +319,7 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/bottom_button_chip"
                         style="@style/ChipLabel"
-                        android:text="Text Scale Demo"
+                        android:text="@string/text_scale_demo"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_text_scale"
                         app:chipStrokeColor="@color/black"
@@ -347,7 +347,7 @@
                         android:id="@+id/chip_card_chip"
                         style="@style/ChipLabel"
                         android:layout_marginBottom="0dp"
-                        android:text="Chip Demo"
+                        android:text="@string/chip_demo"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_chip"
                         app:chipStrokeColor="@color/black"
@@ -371,7 +371,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:text="Chips are compact elements that represent an input, attribute, or action"
+                                android:text="@string/chips_are_compact_elements_that_represent_an_input_attribute_or_action"
                                 android:textAppearance="?textAppearanceBody1" />
 
                             <TextView
@@ -698,7 +698,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="Text Font Scale"
+                        android:text="@string/text_font_scale"
                         android:textAppearance="?textAppearanceHeadline6" />
 
                     <ImageButton
@@ -801,7 +801,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
             android:layout_gravity="bottom"
-            android:elevation="8dp"
+            app:elevation="8dp"
             app:backgroundTint="@color/color_primary"
             app:fabAlignmentMode="center"
             app:fabCradleMargin="8dp"

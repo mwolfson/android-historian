@@ -60,11 +60,10 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<St
         val rand = Random()
         val randomNum = rand.nextInt(3)
 
-        var strRes: Int
-        when (randomNum) {
-            0 -> strRes = R.string.ipsum_med
-            1 -> strRes = R.string.ipsum_long
-            else -> strRes = R.string.ipsum_short
+        var strRes = when (randomNum) {
+            0 -> R.string.ipsum_med
+            1 -> R.string.ipsum_long
+            else -> R.string.ipsum_short
         }
 
         holder.textView2.setText(strRes)

@@ -27,7 +27,7 @@ class WikiApiFactory {
     }
 
     companion object {
-        val baseUrlWiki = "https://en.wikipedia.org/"
+        const val baseUrlWiki = "https://en.wikipedia.org/"
     }
 
 }

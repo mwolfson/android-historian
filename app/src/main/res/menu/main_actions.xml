@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/search"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/vct_search"
         app:showAsAction="collapseActionView|always"
         android:orderInCategory="98"

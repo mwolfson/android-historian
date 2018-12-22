@@ -21,7 +21,7 @@ class FonoApiFactory {
     }
 
     companion object {
-        val baseUrlFono = "https://fonoapi.freshpixl.com/"
+        const val baseUrlFono = "https://fonoapi.freshpixl.com/"
     }
 
 }

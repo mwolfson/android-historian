@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:app="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:windowBackground">@color/window_background</item>
-        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondary">@color/color_accent</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
         <item name="textAppearanceHeadline5">@style/TextAppearance.MyApp.Headline5</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>

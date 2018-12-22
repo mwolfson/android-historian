@@ -110,7 +110,7 @@ object UiUtil {
     }
 
     fun getRandomDrawable(): Int {
-        val drawables = intArrayOf(R.drawable.vct_location_pin, R.drawable.vct_business, R.drawable.vct_train, R.drawable.vct_cost);
+        val drawables = intArrayOf(R.drawable.vct_location_pin, R.drawable.vct_business, R.drawable.vct_train, R.drawable.vct_cost)
         val randInt = Random().nextInt(drawables.size)
         return drawables[randInt]
     }

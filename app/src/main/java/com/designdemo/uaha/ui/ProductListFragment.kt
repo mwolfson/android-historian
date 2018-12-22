@@ -80,11 +80,11 @@ class ProductListFragment : Fragment() {
 
     companion object {
 
-        val FRAG_TYPE_OS = 1
-        val FRAG_TYPE_DEVICE = 2
-        val FRAG_TYPE_FAV = 3
+        const val FRAG_TYPE_OS = 1
+        const val FRAG_TYPE_DEVICE = 2
+        const val FRAG_TYPE_FAV = 3
 
-        val ARG_FRAG_TYPE = "frag_arg_type"
+        const val ARG_FRAG_TYPE = "frag_arg_type"
     }
 
 }

@@ -29,7 +29,7 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         val imageView: ImageView = view.os_item_avatar
         val titleText = view.os_item_title
         val subTitleText = view.os_item_subtext
-        var os_version: Int = 0
+        var osVersion: Int = 0
 
         override fun toString(): String {
             return super.toString() + " '" + titleText.text
@@ -46,7 +46,7 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OsTypeAdapter.ViewHolder {
-        var view = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_os, parent, false)
 
         view.setBackgroundResource(background)

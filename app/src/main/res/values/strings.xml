@@ -26,7 +26,7 @@
     <string name="nav_links">Links</string>
     <string name="profile_main_text">Enter account information</string>
     <string name="profile_name_phone_text">Name and Phone are required to save</string>
-    <string name="profile_nickname_hint">Nickname (4 - 10 Chars)</string>
+    <string name="profile_nickname_hint">Nickname (4 – 10 Chars)</string>
     <string name="profile_phone_hint">Enter ANY phone number</string>
     <string name="picture_dialog_title">Profile Picture Selector</string>
     <string name="profile_saved_confirm">Your profile has been updated</string>
@@ -224,9 +224,40 @@
     <string name="percentage">Percentage</string>
     <string name="guideline_explain">This shows how to use Guidelines, instead of the deprecated Percentage layout</string>
 
-    <!-- Lost and Found -->
+    <!-- Motion Layout -->
     <string name="title_activity_motion_layout">MotionLayoutActivity</string>
+    <string name="pull_down_to_see_the_new_logo_or">Pull down to see the new logo -or-</string>
+    <string name="launch_animation">Launch Animation</string>
+    <string name="the">The</string>
 
+    <!-- Detail Activity -->
+    <string name="edit">Edit</string>
+    <string name="specifications">Specifications</string>
+    <string name="wiki">Wiki</string>
+    <string name="palette">Palette</string>
+    <string name="vibrant">Vibrant</string>
+    <string name="vibrant_dark">Vibrant Dark</string>
+    <string name="vibrant_light">Vibrant Light</string>
+    <string name="muted">Muted</string>
+    <string name="muted_dark">Muted Dark</string>
+    <string name="muted_light">Muted Light</string>
+    <string name="getting_information">Getting Information</string>
 
+    <!-- Profile Activity -->
+    <string name="survey">Survey</string>
+    <string name="when_did_you_get_your_first_android_phone">When did you get your first Android phone?</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="text_scale_demo">Text Scale Demo</string>
+    <string name="chip_demo">Chip Demo</string>
+    <string name="chips_are_compact_elements_that_represent_an_input_attribute_or_action">Chips are compact elements that represent an input, attribute, or action</string>
+    <string name="text_font_scale">Text Font Scale</string>
+    <string name="demos">Demos</string>
+
+    <!-- BottomNavView Demo -->
+    <string name="bottomnavview">BottomNavView</string>
+    <string name="motionlayout">MotionLayout</string>
+    <string name="search">Search</string>
+
+    <!-- Lost and Found -->
 
 </resources>

@@ -1,19 +1,15 @@
 package com.designdemo.uaha.util
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import android.util.Log
-
 import com.designdemo.uaha.data.VersionData
-
-import java.util.ArrayList
+import java.util.*
 
 object PrefsUtil {
-    private val PREFS_KEY_PREFIX = "prefs_favlist_"
-    private val PREFS_KEY_NAME = "prefs_name_"
-    private val PREFS_KEY_PHONE = "prefs_phone_"
-    val PREFS_NAME_UNSET = "nameunset"
+    const private val PREFS_KEY_PREFIX = "prefs_favlist_"
+    const private val PREFS_KEY_NAME = "prefs_name_"
+    const private val PREFS_KEY_PHONE = "prefs_phone_"
+    const val PREFS_NAME_UNSET = "nameunset"
 
     /**
      * Toggles the value for a product to change it's Favorite state in shared prefs

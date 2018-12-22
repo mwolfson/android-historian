@@ -175,9 +175,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
 
-        val OS_FRAG = 0
-        val DEVICE_FRAG = 1
-        val FAV_FRAG = 2
-        val EXTRA_FRAG_TYPE = "extraFragType"
+        const val OS_FRAG = 0
+        const val DEVICE_FRAG = 1
+        const val FAV_FRAG = 2
+        const val EXTRA_FRAG_TYPE = "extraFragType"
     }
 }

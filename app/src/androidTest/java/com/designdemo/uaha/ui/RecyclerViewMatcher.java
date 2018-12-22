@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Special thanks to: dannyroa for this class
  * https://github.com/dannyroa/espresso-samples
  */
-public class RecyclerViewMatcher {
+class RecyclerViewMatcher {
     private final int recyclerViewId;
 
     public RecyclerViewMatcher(int recyclerViewId) {
@@ -23,7 +23,7 @@ public class RecyclerViewMatcher {
         return atPositionOnView(position, -1);
     }
 
-    public Matcher<View> atPositionOnView(final int position, final int targetViewId) {
+    private Matcher<View> atPositionOnView(final int position, final int targetViewId) {
 
         return new TypeSafeMatcher<View>() {
             Resources resources = null;

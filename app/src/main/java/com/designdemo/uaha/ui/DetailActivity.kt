@@ -34,7 +34,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-//import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
+import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -217,51 +217,51 @@ class DetailActivity : AppCompatActivity() {
         val bm = BitmapFactory.decodeResource(resources, VersionData.getOsDrawable(osVersion))
         Palette.from(bm).generate { palette ->
             Log.d("Palette", "Palette has been generated")
-            val pal_vib = findViewById<TextView>(R.id.palette_vibrant)
+            val palVib = findViewById<TextView>(R.id.palette_vibrant)
             val perc1left = findViewById<TextView>(R.id.perc1_left)
             perc1left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
-            pal_vib.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+            palVib.setBackgroundColor(palette!!.getVibrantColor(0x000000))
 
-            val pal_vib_dark = findViewById<TextView>(R.id.palette_vibrant_dark)
+            val palVibDark = findViewById<TextView>(R.id.palette_vibrant_dark)
             val perc1mid = findViewById<TextView>(R.id.perc1_middle)
             perc1mid.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
-            pal_vib_dark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+            palVibDark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
 
-            val pal_vib_light = findViewById<TextView>(R.id.palette_vibrant_light)
+            val palVibLight = findViewById<TextView>(R.id.palette_vibrant_light)
             val perc1right = findViewById<TextView>(R.id.perc1_right)
             perc1right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
-            pal_vib_light.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+            palVibLight.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
 
-            val pal_muted = findViewById<TextView>(R.id.palette_muted)
+            val palMuted = findViewById<TextView>(R.id.palette_muted)
             val perc2left = findViewById<TextView>(R.id.perc2_left)
             perc2left.setBackgroundColor(palette!!.getMutedColor(0x000000))
-            pal_muted.setBackgroundColor(palette!!.getMutedColor(0x000000))
+            palMuted.setBackgroundColor(palette!!.getMutedColor(0x000000))
 
-            val pal_muted_dark = findViewById<TextView>(R.id.palette_muted_dark)
+            val palMutedDark = findViewById<TextView>(R.id.palette_muted_dark)
             val perc2mid = findViewById<TextView>(R.id.perc2_middle)
             perc2mid.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
-            pal_muted_dark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+            palMutedDark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
 
-            val pal_muted_light = findViewById<TextView>(R.id.palette_muted_light)
+            val palMutedLight = findViewById<TextView>(R.id.palette_muted_light)
             val perc2right = findViewById<TextView>(R.id.perc2_right)
             perc2right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
-            pal_muted_light.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+            palMutedLight.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
 
             //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
             collapsingToolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
 
-            if (palette!!.getVibrantColor(0x000000) == 0x000000) {
-                iconColor = palette!!.getMutedColor(0x000000)
+            iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
+                palette!!.getMutedColor(0x000000)
             } else {
-                iconColor = palette!!.getVibrantColor(0x000000)
+                palette!!.getVibrantColor(0x000000)
             }
 
             //The back button should also have a better color applied to ensure it is visible,
             // Get a swatch, and get a more specific color for title from it.
-            val vibrantSwatch = palette!!.getVibrantSwatch()
+            val vibrantSwatch = palette!!.vibrantSwatch
             var arrowColor = ContextCompat.getColor(this, R.color.black)
             if (vibrantSwatch != null) {
-                arrowColor = vibrantSwatch!!.getTitleTextColor()
+                arrowColor = vibrantSwatch!!.titleTextColor
             }
 
             val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
@@ -342,7 +342,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun clearDeviceInfoViews() {
         device_info_progress.visibility = View.VISIBLE
-        deviceName.text = "Getting Information"
+        deviceName.text = getString(R.string.getting_information)
         deviceName.setTextColor(resources.getColor(black))
         features.text = ""
         featuresCont.text = ""
@@ -429,15 +429,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = "DetailActivity"
+        const private val TAG = "DetailActivity"
 
-        val EXTRA_APP_NAME = "os_name"
-        val EXTRA_INDEX = "os_index"
+        const val EXTRA_APP_NAME = "os_name"
 
         // To use the FONO API, you will need to add your own API key to the gradle.properties file
         // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
         // App will degrade gracefully if KEY is not found
-//        private val TOKEN = FONO_API_KEY
-        private val TOKEN = "NA"
+        const private val TOKEN = FONO_API_KEY
+//        private val TOKEN = "NA"
     }
 }

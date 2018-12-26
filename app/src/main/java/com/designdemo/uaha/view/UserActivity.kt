@@ -14,6 +14,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.IntegerRes
+import androidx.annotation.StringRes
 
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
@@ -42,6 +44,7 @@ class UserActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var nameEnterField: AppCompatEditText
     private lateinit var phoneEnterField: AppCompatEditText
+    private lateinit var passwordEnterField: AppCompatEditText
     private lateinit var fab: FloatingActionButton
     private lateinit var picButton: Button
     private lateinit var userLabelChip: Chip
@@ -76,7 +79,6 @@ class UserActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.profile_actions, menu)
         return true
@@ -96,6 +98,7 @@ class UserActivity : AppCompatActivity() {
         drawerLayout = drawer_layout
         nameEnterField = name_edit
         phoneEnterField = phone_edit
+        passwordEnterField = password_edit
         userLabelChip = chip_userinfo_label
 
         //Format phone number as user is typing
@@ -104,23 +107,32 @@ class UserActivity : AppCompatActivity() {
         picButton = profile_pic_button
         picButton.setOnClickListener { v -> setPictureDialog() }
 
-        val mainView = user_main_content
+        fab = user_fab
+        fab.setOnClickListener { v ->
+            saveUserInfo()
+        }
 
-        //TODO - this validation could use a refactor to cleanup its order of operations and duplicated code
-        //TODO Also, the Screen calculation stuff is duplicated on the DetailActivity
+        // Set initial values from Prefs
+        setPhoneNameValues()
+        userLabelChip.requestFocus()
+    }
+
+    /**
+     * Validates and saves user info
+     */
+    private fun saveUserInfo() {
         // Lambda to check is the name length fits our requirement
-        val isNameValid: (TextView) -> Int = {
+        val isNameValid: () -> Int = {
             var retVal = 0
-            val nameLen = it.text?.length
+            val nameLen = nameEnterField.text?.length
 
-            if (nameLen in 0..3) {
+            if (!(nameLen in 4..10)) {
                 retVal = R.string.at_least_4_char
             }
             retVal
         }
 
-        //Lambda to check if phone number is valid
-        val isPhoneValid: (TextView) -> Int = {
+        val isPhoneValid: () -> Int = {
             var retVal = 0
             val phoneLen = phoneEnterField.text?.length
             if (phoneLen != 14) {
@@ -129,9 +141,80 @@ class UserActivity : AppCompatActivity() {
             retVal
         }
 
-        // Setup Snackbar, including special accomidations for BottomAppBar
-        // Notify the User with a snackbar
-        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        val isPasswordValid: () -> Int = {
+            var retVal = 0
+            val passLen = passwordEnterField.text?.length
+            if (passLen != 8) {
+                retVal = R.string.invalid_password
+            }
+            retVal
+        }
+
+        //Check if each item is valid, then show apply error as appropriate
+        val phoneError = isPhoneValid()
+        val nameError = isNameValid()
+        val passwordError = isPasswordValid()
+
+        //Validate values
+        if (phoneError != 0 || nameError != 0 || passwordError != 0) {
+            if (nameError != 0) {
+                nameEnterField.error = getString(nameError)
+                nameEnterField.requestFocus()
+                showSnackbar(nameError)
+            }
+
+            if (phoneError != 0) {
+                phoneEnterField.error = getString(phoneError)
+                phoneEnterField.requestFocus()
+                showSnackbar(phoneError)
+            }
+
+            if (passwordError != 0) {
+                passwordEnterField.error = getString(passwordError)
+                passwordEnterField.requestFocus()
+                showSnackbar(passwordError)
+            }
+        } else {
+            // Save original Values before sending, in-case user changes their mind
+            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
+            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
+
+            // Store new values
+            val nameToSet = nameEnterField.text.toString()
+            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.text.toString())
+            val phoneToSet = java.lang.Long.valueOf(formattedNum)
+
+            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
+
+            val snackbar = Snackbar.make(user_main_content, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.undo)) { _ ->
+                        // Reset to original
+                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
+                        if (complete) {
+                            setPhoneNameValues()
+                        }
+                    }
+            val snackbarLayout = snackbar.view
+            snackbarLayout.layoutParams = getSnackBarLayoutParams()
+            snackbar.show()
+        }
+    }
+
+    private fun showSnackbar(@StringRes displayString: Int) {
+        val snackbar = Snackbar.make(user_main_content, getString(displayString), Snackbar.LENGTH_SHORT)
+        val snackbarLayout = snackbar.view
+        snackbarLayout.layoutParams = getSnackBarLayoutParams()
+        snackbar.show()
+    }
+
+    /**
+     * Setup Snackbar, including special accomidations for BottomAppBar
+     * Notify the User with a snackbar
+     * Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+     * TODO sigh, also need to accomidate for if the keyboard is showing
+     *  TODO The Screen calculation stuff is duplicated on the DetailActivity
+     */
+    private fun getSnackBarLayoutParams(): LinearLayout.LayoutParams {
         val pxScreenHeight = UiUtil.getScreenHeight(this)
         val pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this)
         val pxTopOffset = pxScreenHeight - pxToolbar
@@ -144,57 +227,7 @@ class UserActivity : AppCompatActivity() {
         lp.topMargin = pxTopOffset.toInt()
         lp.leftMargin = sideOffset.toInt()
         lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
-
-        fab = user_fab
-        fab.setOnClickListener { v ->
-            //Validate values
-            val nameError = isNameValid(nameEnterField)
-            if (nameError != 0) {
-                nameEnterField.error = getString(nameError)
-                nameEnterField.requestFocus()
-                val snackbar = Snackbar.make(mainView, getString(R.string.name_input_error), Snackbar.LENGTH_SHORT)
-                val snackbarLayout = snackbar.view
-                snackbarLayout.layoutParams = lp
-                snackbar.show()
-            }
-
-            val phoneError = isPhoneValid(phoneEnterField)
-            if (phoneError != 0) {
-                phoneEnterField.error = getString(phoneError)
-                phoneEnterField.requestFocus()
-                val snackbar = Snackbar.make(mainView, getString(R.string.phone_input_error), Snackbar.LENGTH_SHORT)
-                val snackbarLayout = snackbar.view
-                snackbarLayout.layoutParams = lp
-                snackbar.show()
-            }
-
-            // Save original Values before sending, in-case user changes their mind
-            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
-            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
-
-            // Store new values
-            val nameToSet = nameEnterField.text.toString()
-            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.text.toString())
-            val phoneToSet = java.lang.Long.valueOf(formattedNum)
-
-            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
-
-            val snackbar = Snackbar.make(mainView, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.undo)) { _ ->
-                        // Reset to original
-                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
-                        if (complete) {
-                            setPhoneNameValues()
-                        }
-                    }
-            val snackbarLayout = snackbar.view
-            snackbarLayout.layoutParams = lp
-            snackbar.show()
-        }
-
-        // Set initial values from Prefs
-        setPhoneNameValues()
-        userLabelChip.requestFocus()
+        return lp
     }
 
     private fun setupChips() {
@@ -322,8 +355,7 @@ class UserActivity : AppCompatActivity() {
         fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular))
 
         //Creates special strings to display Scale Type information in the dialog when you selected an item
-        val setupTextScaleType : (Int, Int, Int) -> Int = {
-            val1, val2, val3 ->
+        val setupTextScaleType: (Int, Int, Int) -> Int = { val1, val2, val3 ->
             valueToSet = getString(val1)
             letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(val2))
             sizeText.text = UiUtil.applySpecialFormatting(getString(R.string.size), getString(val3))
@@ -332,48 +364,48 @@ class UserActivity : AppCompatActivity() {
 
         when (scaleText) {
             "Headline1" -> {
-                setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96 )
+                setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline2" -> {
-                setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60 )
+                setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
             "Headline3" -> {
-                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48 )
+                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
             }
             "Headline4" -> {
-                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34 )
+                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)
             }
             "Headline5" -> {
-                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24 )
+                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24)
             }
             "Headline6" -> {
-                setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20 )
+                setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Subtitle1" -> {
-                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16 )
+                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16)
             }
             "Subtitle2" -> {
-                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14 )
+                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14)
             }
             "Body1" -> {
-                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16 )
+                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16)
             }
             "Body2" -> {
-                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14 )
+                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14)
             }
             "Button" -> {
-                setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14 )
+                setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14)
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
             "Caption" -> {
-                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12 )
+                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12)
             }
             "Overline" -> {
-                setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10 )
+                setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10)
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
             }
             else -> {

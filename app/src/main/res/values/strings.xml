@@ -39,9 +39,10 @@
 
     <string name="transition_string">transitionString</string>
     <string name="undo">Undo</string>
-    <string name="at_least_4_char">Minimum of 4 characters</string>
+    <string name="at_least_4_char">Must be 4 - 10 characters</string>
     <string name="name_input_error">Name input error</string>
     <string name="invalid_phone">Invalid Phone</string>
+    <string name="invalid_password">Invalid Password</string>
     <string name="phone_input_error">Phone input error</string>
     <string name="os_version">OS Version</string>
     <string name="devices">Device</string>
@@ -120,7 +121,7 @@
 
     <!-- Profile Strings -->
     <string name="user_info">User Info</string>
-    <string name="enter_a_password">Enter a Password</string>
+    <string name="enter_a_password">Enter an 8 letter Password</string>
     <string name="have_you_ever_owned_any_of_these">Have you ever owned any of these?</string>
     <string name="nexus">Nexus</string>
     <string name="android_tv">Android TV</string>

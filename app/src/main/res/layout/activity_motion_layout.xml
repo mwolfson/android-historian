@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/complex_motion_scene"
     android:background="@color/window_background"
-    tools:context="com.designdemo.uaha.ui.MotionLayoutActivity">
+    tools:context="com.designdemo.uaha.view.MotionLayoutActivity">
 
     <TextView
         android:id="@+id/text_the"

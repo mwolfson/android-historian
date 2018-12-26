@@ -1,9 +1,9 @@
-package com.designdemo.uaha.ui;
+package com.designdemo.uaha.view;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.designdemo.uaha.data.VersionData;
+import com.designdemo.uaha.data.model.VersionData;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;

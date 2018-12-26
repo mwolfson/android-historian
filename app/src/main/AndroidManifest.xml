@@ -12,7 +12,7 @@
         android:theme="@style/Base.Theme.DesignDemo"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.designdemo.uaha.ui.MainActivity"
+            android:name="com.designdemo.uaha.view.MainActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.searchable"
@@ -26,22 +26,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.designdemo.uaha.ui.DetailActivity"
+            android:name="com.designdemo.uaha.view.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="com.designdemo.uaha.ui.MainActivity">
+            android:parentActivityName="com.designdemo.uaha.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.designdemo.uaha.ui.MainActivity" />
+                android:value="com.designdemo.uaha.view.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
         <activity
-            android:name="com.designdemo.uaha.ui.UserActivity"
+            android:name="com.designdemo.uaha.view.UserActivity"
             android:label="@string/title_activity_user" />
 
         <meta-data
@@ -49,10 +49,10 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.designdemo.uaha.ui.BottomNavActivity"
+            android:name="com.designdemo.uaha.view.BottomNavActivity"
             android:label="@string/title_activity_bottom_bav" />
         <activity
-            android:name="com.designdemo.uaha.ui.MotionLayoutActivity"
+            android:name="com.designdemo.uaha.view.MotionLayoutActivity"
             android:label="@string/title_activity_motion_layout"/>
     </application>
 

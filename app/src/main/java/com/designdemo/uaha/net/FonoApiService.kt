@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-import com.designdemo.uaha.data.DeviceEntity
+import com.designdemo.uaha.data.model.DeviceEntity
 //
 interface FonoApiService {
 

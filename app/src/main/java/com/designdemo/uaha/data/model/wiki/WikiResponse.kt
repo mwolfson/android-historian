@@ -1,4 +1,4 @@
-package com.designdemo.uaha.data.wiki
+package com.designdemo.uaha.data.model.wiki
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

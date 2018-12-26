@@ -2,7 +2,7 @@ package com.designdemo.uaha.util
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.designdemo.uaha.data.VersionData
+import com.designdemo.uaha.data.model.VersionData
 import java.util.*
 
 object PrefsUtil {

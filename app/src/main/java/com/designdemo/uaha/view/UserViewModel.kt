@@ -1,4 +1,4 @@
-package com.designdemo.uaha.ui
+package com.designdemo.uaha.view
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -1,4 +1,4 @@
-package com.designdemo.uaha.ui
+package com.designdemo.uaha.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

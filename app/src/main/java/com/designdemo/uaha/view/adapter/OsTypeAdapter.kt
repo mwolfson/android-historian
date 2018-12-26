@@ -1,4 +1,4 @@
-package com.designdemo.uaha.ui.adapter
+package com.designdemo.uaha.view.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.VersionData
-import com.designdemo.uaha.ui.DetailActivity
+import com.designdemo.uaha.data.model.VersionData
+import com.designdemo.uaha.view.DetailActivity
 import com.support.android.designlibdemo.R
 
 import androidx.core.app.ActivityOptionsCompat

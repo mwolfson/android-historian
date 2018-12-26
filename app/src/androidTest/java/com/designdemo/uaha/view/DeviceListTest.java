@@ -1,4 +1,4 @@
-package com.designdemo.uaha.ui;
+package com.designdemo.uaha.view;
 
 
 import com.support.android.designlibdemo.R;

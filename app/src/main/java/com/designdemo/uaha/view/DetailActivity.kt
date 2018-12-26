@@ -1,4 +1,4 @@
-package com.designdemo.uaha.ui
+package com.designdemo.uaha.view
 
 import android.annotation.TargetApi
 import android.app.SearchManager
@@ -23,9 +23,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.DeviceEntity
-import com.designdemo.uaha.data.VersionData
-import com.designdemo.uaha.data.wiki.WikiResponse
+import com.designdemo.uaha.data.model.DeviceEntity
+import com.designdemo.uaha.data.model.VersionData
+import com.designdemo.uaha.data.model.wiki.WikiResponse
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.designdemo.uaha.util.PrefsUtil
@@ -34,6 +34,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+//import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -363,7 +364,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setupSpecItem(@DrawableRes drawable: Int, @StringRes title: Int, info: String, view: TextView) {
         val specDrawable = getColorizedDrawable(drawable)
         view.setCompoundDrawablesWithIntrinsicBounds(specDrawable, null, null, null)
-        view.text = UiUtil.applyBoldFirstWord(getString(title), info)
+        view.text = UiUtil.applyBoldFirstWord(getString(title).toString(), info)
     }
 
     private fun getColorizedDrawable(@DrawableRes res: Int): Drawable? {

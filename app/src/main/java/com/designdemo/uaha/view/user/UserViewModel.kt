@@ -1,6 +1,5 @@
 package com.designdemo.uaha.view.user
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,12 +16,6 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     fun getAddUserStatus() : LiveData<Int> {
         return saveStatusCode
-    }
-
-    fun resetUserData() {
-       val users = getUserData()
-
-
     }
 
     fun addUserData(userInfo: UserInfo) {

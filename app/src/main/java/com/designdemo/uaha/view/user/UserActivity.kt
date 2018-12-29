@@ -1,11 +1,10 @@
-package com.designdemo.uaha.view
+package com.designdemo.uaha.view.user
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -14,10 +13,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.IntegerRes
 import androidx.annotation.StringRes
 
-import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -33,6 +30,11 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.designdemo.uaha.data.model.user.UserInfo
+import com.designdemo.uaha.util.InjectorUtils
+import com.designdemo.uaha.view.device.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
@@ -49,7 +51,12 @@ class UserActivity : AppCompatActivity() {
     private lateinit var picButton: Button
     private lateinit var userLabelChip: Chip
 
+    private lateinit var userViewModel: UserViewModel
+
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
+
+    //Local copy of usersInfo list, to be used when applying Undo button in snackbar
+    private lateinit var users: List<UserInfo>
 
     // Lambda to add a close listener on the chip, and also put a random background color
     val setChipCloseAndRandomColor: (Chip) -> Unit = {
@@ -62,6 +69,73 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         mainActivity = this
 
+
+        //Setup ViewModel
+        val viewModelFactory = InjectorUtils.provideProfileViewModelFactory()
+        users = listOf()
+
+        userViewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
+
+        //User Data Has Been Updated
+        userViewModel.getUserData().observe(this, Observer { usersIn ->
+            users = usersIn
+
+            if (users!!.isEmpty()) {
+                nameEnterField.setText("")
+                phoneEnterField.setText("")
+                passwordEnterField.setText("")
+            } else {
+                val userInfo = users!!.last()
+
+                nameEnterField.setText(userInfo.name)
+                phoneEnterField.setText(userInfo.phone)
+                passwordEnterField.setText(userInfo.password)
+            }
+        })
+
+        //Status results from an update attempt (validation errors handled here)
+        userViewModel.getAddUserStatus().observe(this, Observer { statusInt ->
+            when (statusInt) {
+                R.string.name_input_error -> {
+                    nameEnterField.error = getString(statusInt)
+                    nameEnterField.requestFocus()
+                    showSnackbar(statusInt)
+                }
+                R.string.phone_input_error -> {
+                    phoneEnterField.error = getString(statusInt)
+                    phoneEnterField.requestFocus()
+                    showSnackbar(statusInt)
+                }
+                R.string.invalid_password -> {
+                    passwordEnterField.error = getString(statusInt)
+                    passwordEnterField.requestFocus()
+                    showSnackbar(statusInt)
+                }
+                R.string.profile_saved_confirm -> {
+                    // If there is a value to reset show snackbar with undo option
+                    val sizeOfList = users.size
+                    if (sizeOfList > 1) {
+                        val oldUserInfo = users.get(sizeOfList - 2)
+
+                        val snackbar = Snackbar.make(user_main_content, getString(statusInt), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.undo)) { _ ->
+                                    userViewModel.addUserData(oldUserInfo)
+                                }
+                        val snackbarLayout = snackbar.view
+                        snackbarLayout.layoutParams = getSnackBarLayoutParams()
+                        snackbar.show()
+                    } else {
+                        //No backup available, so don't show undo option
+                        showSnackbar(statusInt)
+                    }
+                }
+                else -> {
+                    Log.d("AddUserError", "Unexpected status message returned: $statusInt")
+                }
+            }
+        })
+
+        //Setup BottomAppBar
         val bottomAppBar = bottom_appbar
         setSupportActionBar(bottomAppBar)
         bottomAppBar.replaceMenu(R.menu.profile_actions)
@@ -112,92 +186,31 @@ class UserActivity : AppCompatActivity() {
             saveUserInfo()
         }
 
-        // Set initial values from Prefs
-        setPhoneNameValues()
         userLabelChip.requestFocus()
+    }
+
+
+    private fun setUserInfoValues(users: List<UserInfo>) {
+        if (users!!.isEmpty()) {
+            nameEnterField.setText("")
+            phoneEnterField.setText("")
+            passwordEnterField.setText("")
+        } else {
+            val userInfo = users!!.last()
+
+            Log.d("MSW", "${userInfo.name} - ${userInfo.phone} - ${userInfo.password}")
+            nameEnterField.setText(userInfo.name)
+            phoneEnterField.setText(userInfo.phone)
+            passwordEnterField.setText(userInfo.password)
+        }
     }
 
     /**
      * Validates and saves user info
      */
     private fun saveUserInfo() {
-        // Lambda to check is the name length fits our requirement
-        val isNameValid: () -> Int = {
-            var retVal = 0
-            val nameLen = nameEnterField.text?.length
-
-            if (!(nameLen in 4..10)) {
-                retVal = R.string.at_least_4_char
-            }
-            retVal
-        }
-
-        val isPhoneValid: () -> Int = {
-            var retVal = 0
-            val phoneLen = phoneEnterField.text?.length
-            if (phoneLen != 14) {
-                retVal = R.string.invalid_phone
-            }
-            retVal
-        }
-
-        val isPasswordValid: () -> Int = {
-            var retVal = 0
-            val passLen = passwordEnterField.text?.length
-            if (passLen != 8) {
-                retVal = R.string.invalid_password
-            }
-            retVal
-        }
-
-        //Check if each item is valid, then show apply error as appropriate
-        val phoneError = isPhoneValid()
-        val nameError = isNameValid()
-        val passwordError = isPasswordValid()
-
-        //Validate values
-        if (phoneError != 0 || nameError != 0 || passwordError != 0) {
-            if (nameError != 0) {
-                nameEnterField.error = getString(nameError)
-                nameEnterField.requestFocus()
-                showSnackbar(nameError)
-            }
-
-            if (phoneError != 0) {
-                phoneEnterField.error = getString(phoneError)
-                phoneEnterField.requestFocus()
-                showSnackbar(phoneError)
-            }
-
-            if (passwordError != 0) {
-                passwordEnterField.error = getString(passwordError)
-                passwordEnterField.requestFocus()
-                showSnackbar(passwordError)
-            }
-        } else {
-            // Save original Values before sending, in-case user changes their mind
-            val beforeName = PrefsUtil.getName(mainActivity!!.applicationContext)
-            val beforePhone = PrefsUtil.getPhone(mainActivity!!.applicationContext)
-
-            // Store new values
-            val nameToSet = nameEnterField.text.toString()
-            val formattedNum = PhoneNumberUtils.stripSeparators(phoneEnterField.text.toString())
-            val phoneToSet = java.lang.Long.valueOf(formattedNum)
-
-            PrefsUtil.setProfile(mainActivity!!.applicationContext, nameToSet, phoneToSet)
-
-            val snackbar = Snackbar.make(user_main_content, getString(R.string.profile_saved_confirm), Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.undo)) { _ ->
-                        // Reset to original
-                        val complete = PrefsUtil.setProfile(mainActivity!!.applicationContext, beforeName!!, beforePhone)
-                        if (complete) {
-                            setPhoneNameValues()
-                        }
-                    }
-            val snackbarLayout = snackbar.view
-            snackbarLayout.layoutParams = getSnackBarLayoutParams()
-            snackbar.show()
-        }
+        val userInfo = UserInfo(nameEnterField.text.toString(), phoneEnterField.text.toString(), passwordEnterField.text.toString())
+        userViewModel.addUserData(userInfo)
     }
 
     private fun showSnackbar(@StringRes displayString: Int) {
@@ -421,18 +434,6 @@ class UserActivity : AppCompatActivity() {
         builder.show()
     }
 
-
-    private fun setPhoneNameValues() {
-        val name = PrefsUtil.getName(this)
-        if (name != PrefsUtil.PREFS_NAME_UNSET) {
-            nameEnterField.setText(name)
-        }
-
-        val phone = PrefsUtil.getPhone(this)
-        if (phone != 0L) {
-            phoneEnterField.setText(phone.toString())
-        }
-    }
 
     private fun setPictureDialog() {
         val photoDialog: AlertDialog

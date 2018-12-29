@@ -6,6 +6,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.designdemo.uaha.view.device.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.hamcrest.core.AllOf;

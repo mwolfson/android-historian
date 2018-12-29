@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.designdemo.uaha.data.model.VersionData;
+import com.designdemo.uaha.view.detail.DetailActivity;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;

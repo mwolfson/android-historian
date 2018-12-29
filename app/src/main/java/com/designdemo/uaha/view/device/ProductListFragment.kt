@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view
+package com.designdemo.uaha.view.device
 
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.*
 import com.designdemo.uaha.data.model.VersionData
-import com.designdemo.uaha.view.adapter.OsTypeAdapter
-import com.designdemo.uaha.view.adapter.FavTypeAdapter
-import com.designdemo.uaha.view.adapter.DeviceTypeAdapter
+import com.designdemo.uaha.view.device.adapter.OsTypeAdapter
+import com.designdemo.uaha.view.device.adapter.FavTypeAdapter
+import com.designdemo.uaha.view.device.adapter.DeviceTypeAdapter
 import com.designdemo.uaha.util.PrefsUtil
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration
 import com.support.android.designlibdemo.R

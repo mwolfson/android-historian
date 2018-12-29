@@ -12,7 +12,7 @@
         android:theme="@style/Base.Theme.DesignDemo"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.designdemo.uaha.view.MainActivity"
+            android:name="com.designdemo.uaha.view.device.MainActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.searchable"
@@ -26,22 +26,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.designdemo.uaha.view.DetailActivity"
+            android:name="com.designdemo.uaha.view.detail.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="com.designdemo.uaha.view.MainActivity">
+            android:parentActivityName="com.designdemo.uaha.view.device.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.designdemo.uaha.view.MainActivity" />
+                android:value="com.designdemo.uaha.view.device.MainActivity" />
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
         <activity
-            android:name="com.designdemo.uaha.view.UserActivity"
+            android:name="com.designdemo.uaha.view.user.UserActivity"
             android:label="@string/title_activity_user" />
 
         <meta-data

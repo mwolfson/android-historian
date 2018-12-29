@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view
+package com.designdemo.uaha.view.device
 
 import android.app.SearchManager
 import android.content.Context
@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.designdemo.uaha.view.BottomNavActivity
+import com.designdemo.uaha.view.MotionLayoutActivity
+import com.designdemo.uaha.view.user.UserActivity
 import com.google.android.material.navigation.NavigationView
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_main.*

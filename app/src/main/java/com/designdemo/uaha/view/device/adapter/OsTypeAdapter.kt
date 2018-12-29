@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view.adapter
+package com.designdemo.uaha.view.device.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -9,28 +9,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 
 import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.model.VersionData
-import com.designdemo.uaha.view.DetailActivity
+import com.designdemo.uaha.view.detail.DetailActivity
 import com.support.android.designlibdemo.R
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.list_item_device.view.*
+import kotlinx.android.synthetic.main.list_item_os.view.*
 
-class DeviceTypeAdapter(private val activity: Activity, context: Context, private val values: List<String>) : RecyclerView.Adapter<DeviceTypeAdapter.ViewHolder>() {
+class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<String>) : RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var boundString: String? = null
-        val imageView: ImageView = view.device_item_avatar
-        val titleText: TextView = view.device_item_title
-        val subTitleText: TextView = view.device_item_subtext
-        var osVersion = 0
+        val imageView: ImageView = view.os_item_avatar
+        val titleText = view.os_item_title
+        val subTitleText = view.os_item_subtext
+        var osVersion: Int = 0
 
         override fun toString(): String {
             return super.toString() + " '" + titleText.text
@@ -46,14 +45,15 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceTypeAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_device, parent, false)
-        view.setBackgroundResource(background)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OsTypeAdapter.ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.list_item_os, parent, false)
 
-        return DeviceTypeAdapter.ViewHolder(view)
+        view.setBackgroundResource(background)
+        return OsTypeAdapter.ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: DeviceTypeAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OsTypeAdapter.ViewHolder, position: Int) {
         holder.boundString = values[position]
         val splitString = values[position]
         val parts = splitString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()

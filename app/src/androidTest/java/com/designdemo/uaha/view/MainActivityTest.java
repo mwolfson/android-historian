@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.designdemo.uaha.view.device.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.hamcrest.Description;

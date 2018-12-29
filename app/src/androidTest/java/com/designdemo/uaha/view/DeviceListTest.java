@@ -1,6 +1,7 @@
 package com.designdemo.uaha.view;
 
 
+import com.designdemo.uaha.view.device.MainActivity;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;

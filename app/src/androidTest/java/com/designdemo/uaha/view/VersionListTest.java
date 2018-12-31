@@ -6,7 +6,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.designdemo.uaha.view.device.MainActivity;
+import com.designdemo.uaha.view.product.ProductActivity;
 import com.support.android.designlibdemo.R;
 
 import org.hamcrest.core.AllOf;
@@ -29,7 +29,7 @@ import static org.hamcrest.Matchers.allOf;
 public class VersionListTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<ProductActivity> mActivityTestRule = new ActivityTestRule<>(ProductActivity.class);
 
     @Test
     public void versionListTest() {

@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view.device
+package com.designdemo.uaha.view.product
 
 import android.app.SearchManager
 import android.content.Context
@@ -23,7 +23,7 @@ import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class ProductActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var viewPager: ViewPager
 
@@ -83,18 +83,18 @@ class MainActivity : AppCompatActivity() {
         val adapter = Adapter(supportFragmentManager)
 
         val args = Bundle()
-        val osFrag = ProductListFragment()
-        args.putInt(ProductListFragment.ARG_FRAG_TYPE, ProductListFragment.FRAG_TYPE_OS)
+        val osFrag = ProductFragment()
+        args.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_OS)
         osFrag.arguments = args
 
         val args1 = Bundle()
-        val deviceFrag = ProductListFragment()
-        args1.putInt(ProductListFragment.ARG_FRAG_TYPE, ProductListFragment.FRAG_TYPE_DEVICE)
+        val deviceFrag = ProductFragment()
+        args1.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_DEVICE)
         deviceFrag.arguments = args1
 
         val args2 = Bundle()
-        val favFrag = ProductListFragment()
-        args2.putInt(ProductListFragment.ARG_FRAG_TYPE, ProductListFragment.FRAG_TYPE_FAV)
+        val favFrag = ProductFragment()
+        args2.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_FAV)
         favFrag.arguments = args2
 
         adapter.addFragment(osFrag, getString(R.string.os_version))

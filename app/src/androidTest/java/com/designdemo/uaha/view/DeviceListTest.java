@@ -1,7 +1,7 @@
 package com.designdemo.uaha.view;
 
 
-import com.designdemo.uaha.view.device.MainActivity;
+import com.designdemo.uaha.view.product.ProductActivity;
 import com.support.android.designlibdemo.R;
 
 import org.junit.Rule;
@@ -27,7 +27,7 @@ import static org.hamcrest.core.AllOf.allOf;
 public class DeviceListTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<ProductActivity> mActivityTestRule = new ActivityTestRule<>(ProductActivity.class);
 
     @Test
     public void deviceListTest() {

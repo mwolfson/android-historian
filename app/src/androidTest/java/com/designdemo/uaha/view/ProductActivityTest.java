@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.designdemo.uaha.view.device.MainActivity;
+import com.designdemo.uaha.view.product.ProductActivity;
 import com.support.android.designlibdemo.R;
 
 import org.hamcrest.Description;
@@ -31,10 +31,10 @@ import static org.hamcrest.core.AllOf.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class ProductActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<ProductActivity> mActivityTestRule = new ActivityTestRule<>(ProductActivity.class);
 
     @Test
     public void drawerContentTest() {

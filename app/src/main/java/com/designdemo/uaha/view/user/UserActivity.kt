@@ -34,7 +34,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.designdemo.uaha.data.model.user.UserInfo
 import com.designdemo.uaha.util.InjectorUtils
-import com.designdemo.uaha.view.device.MainActivity
+import com.designdemo.uaha.view.product.ProductActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
@@ -465,20 +465,20 @@ class UserActivity : AppCompatActivity() {
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                    val osIntent = Intent(applicationContext, MainActivity::class.java)
-                    osIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.OS_FRAG)
+                    val osIntent = Intent(applicationContext, ProductActivity::class.java)
+                    osIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.OS_FRAG)
                     startActivity(osIntent)
                     retVal = true
                 }
                 R.id.nav_devices -> {
-                    val deviceIntent = Intent(applicationContext, MainActivity::class.java)
-                    deviceIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.DEVICE_FRAG)
+                    val deviceIntent = Intent(applicationContext, ProductActivity::class.java)
+                    deviceIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.DEVICE_FRAG)
                     startActivity(deviceIntent)
                     retVal = true
                 }
                 R.id.nav_favorites -> {
-                    val favIntent = Intent(applicationContext, MainActivity::class.java)
-                    favIntent.putExtra(MainActivity.EXTRA_FRAG_TYPE, MainActivity.FAV_FRAG)
+                    val favIntent = Intent(applicationContext, ProductActivity::class.java)
+                    favIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.FAV_FRAG)
                     startActivity(favIntent)
                     retVal = true
                 }

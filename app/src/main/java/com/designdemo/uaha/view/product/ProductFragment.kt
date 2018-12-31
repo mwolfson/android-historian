@@ -1,7 +1,6 @@
-package com.designdemo.uaha.view.device
+package com.designdemo.uaha.view.product
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,39 +8,28 @@ import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.*
-import com.designdemo.uaha.data.model.VersionData
-import com.designdemo.uaha.view.device.adapter.OsTypeAdapter
-import com.designdemo.uaha.view.device.adapter.FavTypeAdapter
-import com.designdemo.uaha.view.device.adapter.DeviceTypeAdapter
-import com.designdemo.uaha.util.PrefsUtil
+import com.designdemo.uaha.data.model.product.ProductItem
+import com.designdemo.uaha.util.InjectorUtils
+import com.designdemo.uaha.view.product.adapter.DeviceTypeAdapter
+import com.designdemo.uaha.view.product.adapter.FavTypeAdapter
+import com.designdemo.uaha.view.product.adapter.OsTypeAdapter
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.fragment_prod_list.view.*
-import java.util.*
 
-class ProductListFragment : Fragment() {
+class ProductFragment : Fragment() {
 
     private var thisFragType: Int? = 0
     private var mainActivity: FragmentActivity? = null
 
-    private val dataList: List<String>
-        get() {
-            var list = ArrayList<String>(VersionData.NUM_OF_OS)
-            when (thisFragType) {
-                FRAG_TYPE_OS -> for (x in 0..VersionData.NUM_OF_OS) {
-                    list.add(VersionData.osStrings[x])
-                }
-                FRAG_TYPE_DEVICE -> for (x in 0..VersionData.NUM_OF_DEVICES) {
-                    list.add(VersionData.deviceStrings[x])
-                }
-                FRAG_TYPE_FAV -> {
-                    list = PrefsUtil.getFavorites(context)
-                    Log.d("MSW", "List of products is sized:" + list.size)
-                }
-            }
-            return list
-        }
+    private lateinit var productViewModel: ProductViewModel
+
+    private lateinit var devices: List<ProductItem>
+    private lateinit var oses: List<ProductItem>
+    private lateinit var faves: List<ProductItem>
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -51,9 +39,33 @@ class ProductListFragment : Fragment() {
 
         mainActivity = activity
 
-        thisFragType = arguments?.getInt(ARG_FRAG_TYPE, 0)
-        setupRecyclerView(rv)
+        val viewModelFactory = InjectorUtils.provideProductViewModelFactory()
+        devices = listOf()
+        oses = listOf()
+        faves = listOf()
 
+        thisFragType = arguments?.getInt(ARG_FRAG_TYPE, 0)
+
+        productViewModel = ViewModelProviders.of(this, viewModelFactory).get(ProductViewModel::class.java)
+
+        productViewModel.initOsList()
+        productViewModel.getOsData().observe(this, Observer { osesIn ->
+            oses = osesIn
+            setupRecyclerView(rv)
+        })
+
+        //put this in a when to isolate it to only this type
+        productViewModel.initDeviceList()
+        productViewModel.getDeviceData().observe(this, Observer { devicesIn ->
+            devices = devicesIn
+            setupRecyclerView(rv)
+        })
+
+        productViewModel.initFavList(context!!)
+        productViewModel.getFavData().observe(this, Observer { favesIn ->
+            faves = favesIn
+            setupRecyclerView(rv)
+        })
         return mainView
     }
 
@@ -63,17 +75,17 @@ class ProductListFragment : Fragment() {
                 val llm = LinearLayoutManager(recyclerView.context)
                 recyclerView.layoutManager = llm
                 recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, llm.orientation))
-                recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, dataList)
+                recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, oses)
             }
             FRAG_TYPE_DEVICE -> {
                 val gridDivider = ContextCompat.getDrawable(recyclerView.context, R.drawable.grid_divider)
                 recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 2)
                 recyclerView.addItemDecoration(GridDividerItemDecoration(gridDivider, gridDivider, 2))
-                recyclerView.adapter = DeviceTypeAdapter(mainActivity!!, mainActivity!!, dataList)
+                recyclerView.adapter = DeviceTypeAdapter(mainActivity!!, mainActivity!!, devices)
             }
             FRAG_TYPE_FAV -> {
                 recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recyclerView.adapter = FavTypeAdapter(mainActivity!!, dataList)
+                recyclerView.adapter = FavTypeAdapter(mainActivity!!, faves)
             }
         }
     }

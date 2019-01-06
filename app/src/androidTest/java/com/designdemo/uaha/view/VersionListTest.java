@@ -36,7 +36,7 @@ public class VersionListTest {
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recyclerview),
                         withParent(allOf(withId(R.id.user_main_content),
-                                withParent(withId(R.id.viewpager)))),
+                                withParent(withId(R.id.product_viewpager)))),
                         isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
@@ -57,7 +57,7 @@ public class VersionListTest {
         ViewInteraction recyclerView = onView(
                 AllOf.allOf(withId(R.id.recyclerview),
                         withParent(AllOf.allOf(withId(R.id.user_main_content),
-                                withParent(AllOf.allOf(withId(R.id.viewpager),
+                                withParent(AllOf.allOf(withId(R.id.product_viewpager),
                                         withParent(AllOf.allOf(withId(R.id.user_main_content),
                                                 withParent(AllOf.allOf(withId(R.id.drawer_layout),
                                                         withParent(AllOf.allOf(withId(android.R.id.content),

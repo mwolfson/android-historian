@@ -10,7 +10,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -24,8 +23,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class ProductActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,21 +36,15 @@ class ProductActivity : AppCompatActivity() {
         ab?.setHomeAsUpIndicator(R.drawable.ic_menu)
         ab?.setDisplayHomeAsUpEnabled(true)
 
-        drawerLayout = drawer_layout
-
         val navigationView = nav_view
         if (navigationView != null) {
             setupDrawerContent(navigationView)
         }
 
-        viewPager = viewpager
-        if (viewPager != null) {
-            setupViewPager(viewPager)
-            viewPager.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
-        }
+        setupViewPager(product_viewpager)
+        product_viewpager.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
 
-        val tabLayout = tabs
-        tabLayout.setupWithViewPager(viewPager)
+        product_tabs.setupWithViewPager(product_viewpager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -72,7 +63,7 @@ class ProductActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                drawerLayout.openDrawer(GravityCompat.START)
+                drawer_layout.openDrawer(GravityCompat.START)
                 return true
             }
         }
@@ -109,18 +100,18 @@ class ProductActivity : AppCompatActivity() {
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_home -> {
-                    viewPager.currentItem = 0
-                    drawerLayout.closeDrawers()
+                    product_viewpager.currentItem = 0
+                    drawer_layout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_devices -> {
-                    viewPager.currentItem = 1
-                    drawerLayout.closeDrawers()
+                    product_viewpager.currentItem = 1
+                    drawer_layout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_favorites -> {
-                    viewPager.currentItem = 2
-                    drawerLayout.closeDrawers()
+                    product_viewpager.currentItem = 2
+                    drawer_layout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_userinfo -> {

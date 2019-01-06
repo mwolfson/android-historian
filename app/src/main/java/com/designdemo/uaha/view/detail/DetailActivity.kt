@@ -11,10 +11,8 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -25,17 +23,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.VersionData
+import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.wiki.WikiResponse
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.designdemo.uaha.util.InjectorUtils
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 //import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
@@ -45,27 +40,9 @@ import okhttp3.OkHttpClient
 import java.io.IOException
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var fab: FloatingActionButton
-    private lateinit var collapsingToolbar: CollapsingToolbarLayout
 
     //Details Card Views
     private var iconColor = 0
-//    private lateinit var specLayout: LinearLayout
-//    private lateinit var deviceName: TextView
-//    private lateinit var features: TextView
-//    private lateinit var featuresCont: TextView
-//    private lateinit var releaseDate: TextView
-//    private lateinit var multitouch: TextView
-//    private lateinit var weight: TextView
-//    private lateinit var size: TextView
-//    private lateinit var dimen: TextView
-//    private lateinit var cpu: TextView
-//    private lateinit var memory: TextView
-//    private lateinit var camera: TextView
-//    private lateinit var display: TextView
-//    private lateinit var resolution: TextView
-//    private lateinit var video: TextView
-//    private lateinit var progress: ProgressBar
 
     private var detailInfo: DetailEntity? = null
 
@@ -86,13 +63,13 @@ class DetailActivity : AppCompatActivity() {
         val viewModelFactory = InjectorUtils.provideDetailViewModelFactory()
         detailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
 
-
-
         okclient = OkHttpClient()
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
         }
+
+        spec_layout.visibility = View.GONE
     }
 
     override fun onResume() {
@@ -156,12 +133,10 @@ class DetailActivity : AppCompatActivity() {
             false
         }
 
-        collapsingToolbar = collapsing_toolbar
-
         //Split the and Version to display better
         val splitString = VersionData.getProductName(osVersion)
         val parts = splitString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        collapsingToolbar.title = parts[0]
+        collapsing_toolbar.title = parts[0]
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -180,14 +155,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupFab() {
-        fab = fab_detail
 
         // Set initial state based on pref
         setFabIcon()
 
         // To over-ride the color of the FAB other then the theme color
         //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fab_selector)));
-        fab.setOnClickListener { v ->
+        fab_detail.setOnClickListener { v ->
             PrefsUtil.toggleFavorite(applicationContext, osVersion)
             setFabIcon()
 
@@ -218,9 +192,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setFabIcon() {
         if (PrefsUtil.isFavorite(applicationContext, osVersion)) {
-            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on))
+            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on))
         } else {
-            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off))
+            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off))
         }
     }
 
@@ -260,7 +234,7 @@ class DetailActivity : AppCompatActivity() {
             palMutedLight.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
 
             //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
-            collapsingToolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
+            collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
 
             iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
                 palette!!.getMutedColor(0x000000)
@@ -279,7 +253,7 @@ class DetailActivity : AppCompatActivity() {
             val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
             val upArrow = getColorizedDrawable(res)
             supportActionBar?.setHomeAsUpIndicator(upArrow)
-            collapsingToolbar.setCollapsedTitleTextColor(arrowColor)
+            collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
         }
     }
 

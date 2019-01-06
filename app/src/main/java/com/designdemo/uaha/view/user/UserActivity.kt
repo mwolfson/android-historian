@@ -9,47 +9,33 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
-
-import com.designdemo.uaha.util.UiUtil
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
-import com.support.android.designlibdemo.R
-
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.designdemo.uaha.data.model.user.UserInfo
 import com.designdemo.uaha.util.InjectorUtils
+import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.product.ProductActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
 import kotlinx.android.synthetic.main.dialog_textscale.view.*
 
 class UserActivity : AppCompatActivity() {
     private var mainActivity: Activity? = null
-
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var nameEnterField: AppCompatEditText
-    private lateinit var phoneEnterField: AppCompatEditText
-    private lateinit var passwordEnterField: AppCompatEditText
-    private lateinit var fab: FloatingActionButton
-    private lateinit var picButton: Button
-    private lateinit var userLabelChip: Chip
 
     private lateinit var userViewModel: UserViewModel
 
@@ -69,7 +55,6 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         mainActivity = this
 
-
         //Setup ViewModel
         val viewModelFactory = InjectorUtils.provideProfileViewModelFactory()
         users = listOf()
@@ -81,15 +66,15 @@ class UserActivity : AppCompatActivity() {
             users = usersIn
 
             if (users!!.isEmpty()) {
-                nameEnterField.setText("")
-                phoneEnterField.setText("")
-                passwordEnterField.setText("")
+                name_edit.setText("")
+                phone_edit.setText("")
+                password_edit.setText("")
             } else {
                 val userInfo = users!!.last()
 
-                nameEnterField.setText(userInfo.name)
-                phoneEnterField.setText(userInfo.phone)
-                passwordEnterField.setText(userInfo.password)
+                name_edit.setText(userInfo.name)
+                phone_edit.setText(userInfo.phone)
+                password_edit.setText(userInfo.password)
             }
         })
 
@@ -97,18 +82,18 @@ class UserActivity : AppCompatActivity() {
         userViewModel.getAddUserStatus().observe(this, Observer { statusInt ->
             when (statusInt) {
                 R.string.name_input_error -> {
-                    nameEnterField.error = getString(statusInt)
-                    nameEnterField.requestFocus()
+                    name_edit.error = getString(statusInt)
+                    name_edit.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.phone_input_error -> {
-                    phoneEnterField.error = getString(statusInt)
-                    phoneEnterField.requestFocus()
+                    phone_edit.error = getString(statusInt)
+                    phone_edit.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.invalid_password -> {
-                    passwordEnterField.error = getString(statusInt)
-                    passwordEnterField.requestFocus()
+                    password_edit.error = getString(statusInt)
+                    password_edit.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.profile_saved_confirm -> {
@@ -136,9 +121,8 @@ class UserActivity : AppCompatActivity() {
         })
 
         //Setup BottomAppBar
-        val bottomAppBar = bottom_appbar
-        setSupportActionBar(bottomAppBar)
-        bottomAppBar.replaceMenu(R.menu.profile_actions)
+        setSupportActionBar(bottom_appbar)
+        bottom_appbar.replaceMenu(R.menu.profile_actions)
 
         val ab = supportActionBar
         ab?.setHomeAsUpIndicator(R.drawable.ic_menu)
@@ -161,7 +145,7 @@ class UserActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                drawerLayout.openDrawer(GravityCompat.START)
+                drawer_layout.openDrawer(GravityCompat.START)
                 return true
             }
         }
@@ -169,39 +153,30 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        drawerLayout = drawer_layout
-        nameEnterField = name_edit
-        phoneEnterField = phone_edit
-        passwordEnterField = password_edit
-        userLabelChip = chip_userinfo_label
-
         //Format phone number as user is typing
-        phoneEnterField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        phone_edit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
-        picButton = profile_pic_button
-        picButton.setOnClickListener { v -> setPictureDialog() }
+        profile_pic_button.setOnClickListener { v -> setPictureDialog() }
 
-        fab = user_fab
-        fab.setOnClickListener { v ->
+        user_fab.setOnClickListener { v ->
             saveUserInfo()
         }
 
-        userLabelChip.requestFocus()
+        chip_userinfo_label.requestFocus()
     }
 
 
     private fun setUserInfoValues(users: List<UserInfo>) {
         if (users!!.isEmpty()) {
-            nameEnterField.setText("")
-            phoneEnterField.setText("")
-            passwordEnterField.setText("")
+            name_edit.setText("")
+            phone_edit.setText("")
+            password_edit.setText("")
         } else {
             val userInfo = users!!.last()
 
-            Log.d("MSW", "${userInfo.name} - ${userInfo.phone} - ${userInfo.password}")
-            nameEnterField.setText(userInfo.name)
-            phoneEnterField.setText(userInfo.phone)
-            passwordEnterField.setText(userInfo.password)
+            name_edit.setText(userInfo.name)
+            phone_edit.setText(userInfo.phone)
+            password_edit.setText(userInfo.password)
         }
     }
 
@@ -209,7 +184,7 @@ class UserActivity : AppCompatActivity() {
      * Validates and saves user info
      */
     private fun saveUserInfo() {
-        val userInfo = UserInfo(nameEnterField.text.toString(), phoneEnterField.text.toString(), passwordEnterField.text.toString())
+        val userInfo = UserInfo(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
         userViewModel.addUserData(userInfo)
     }
 
@@ -483,7 +458,7 @@ class UserActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_userinfo -> {
-                    drawerLayout.closeDrawers()
+                    drawer_layout.closeDrawers()
                     retVal = true
                 }
                 R.id.nav_link1 -> {

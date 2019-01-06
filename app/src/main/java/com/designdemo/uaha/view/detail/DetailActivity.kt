@@ -21,13 +21,16 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.DeviceEntity
+import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.data.model.wiki.WikiResponse
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
+import com.designdemo.uaha.util.InjectorUtils
 import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -42,30 +45,31 @@ import okhttp3.OkHttpClient
 import java.io.IOException
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var regsWv: WebView
     private lateinit var fab: FloatingActionButton
     private lateinit var collapsingToolbar: CollapsingToolbarLayout
 
     //Details Card Views
     private var iconColor = 0
-    private lateinit var specLayout: LinearLayout
-    private lateinit var deviceName: TextView
-    private lateinit var features: TextView
-    private lateinit var featuresCont: TextView
-    private lateinit var releaseDate: TextView
-    private lateinit var multitouch: TextView
-    private lateinit var weight: TextView
-    private lateinit var size: TextView
-    private lateinit var dimen: TextView
-    private lateinit var cpu: TextView
-    private lateinit var memory: TextView
-    private lateinit var camera: TextView
-    private lateinit var display: TextView
-    private lateinit var resolution: TextView
-    private lateinit var video: TextView
-    private lateinit var progress: ProgressBar
+//    private lateinit var specLayout: LinearLayout
+//    private lateinit var deviceName: TextView
+//    private lateinit var features: TextView
+//    private lateinit var featuresCont: TextView
+//    private lateinit var releaseDate: TextView
+//    private lateinit var multitouch: TextView
+//    private lateinit var weight: TextView
+//    private lateinit var size: TextView
+//    private lateinit var dimen: TextView
+//    private lateinit var cpu: TextView
+//    private lateinit var memory: TextView
+//    private lateinit var camera: TextView
+//    private lateinit var display: TextView
+//    private lateinit var resolution: TextView
+//    private lateinit var video: TextView
+//    private lateinit var progress: ProgressBar
 
-    private var deviceInfo: DeviceEntity? = null
+    private var detailInfo: DetailEntity? = null
+
+    private lateinit var detailViewModel: DetailViewModel
 
     private lateinit var okclient: OkHttpClient
     private var osVersion: Int = 0
@@ -74,6 +78,21 @@ class DetailActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        if (androidName === "unset") {
+            androidName = intent.getStringExtra(EXTRA_APP_NAME)
+        }
+
+        val viewModelFactory = InjectorUtils.provideDetailViewModelFactory()
+        detailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
+
+
+
+        okclient = OkHttpClient()
+
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+        }
     }
 
     override fun onResume() {
@@ -82,26 +101,26 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         handleIntent(intent)
 
-        if (androidName === "unset") {
-            androidName = intent.getStringExtra(EXTRA_APP_NAME)
-        }
-
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-        }
-
-        okclient = OkHttpClient()
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition()
         }
 
         setupToolbar(androidName)
         loadBackdrop()
-        setupViews()
         setupFab()
-        setupDetailsInfo()
         setupPalette()
+
+        detailViewModel.getDetailData().observe(this, Observer { detailMapIn ->
+            device_info_progress.visibility = View.GONE
+            if (detailMapIn.size!=0 && detailMapIn.containsKey(androidName)) {
+                Log.d("MSW","We have a hit!!! $androidName");
+                val deviceToSend = detailMapIn.get(androidName)
+                setDeviceInfoViews(deviceToSend!!)
+            } else {
+                Log.d("MSW","This was NOT a hit $androidName");
+                spec_layout.visibility = View.GONE
+            }
+        })
         InfoGatherTask().execute()
     }
 
@@ -109,7 +128,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         setIntent(intent)
         handleIntent(intent)
-
     }
 
     private fun handleIntent(intent: Intent) {
@@ -125,9 +143,8 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottom_appbar)
-        bottomAppBar.replaceMenu(R.menu.detail_actions)
-        bottomAppBar.setOnMenuItemClickListener { item ->
+        bottom_appbar.replaceMenu(R.menu.detail_actions)
+        bottom_appbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.menu_shuffle -> {
                     // Get a random Android product, and then refresh the UI
@@ -161,11 +178,6 @@ class DetailActivity : AppCompatActivity() {
         val imageView = findViewById<View>(R.id.backdrop) as ImageView
         Glide.with(this).load(VersionData.getOsDrawable(osVersion)).centerCrop().into(imageView)
     }
-
-    private fun setupViews() {
-        regsWv = regulations_webview
-    }
-
 
     private fun setupFab() {
         fab = fab_detail
@@ -271,94 +283,72 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupDetailsInfo() {
-        deviceName = details_device_name
-        features = details_features
-        featuresCont = details_features_c
-        releaseDate = spec_releasedate
-        specLayout = spec_layout
-        multitouch = spec_multitouch
-        weight = spec_weight
-        dimen = spec_dimen
-        cpu = spec_cpu
-        memory = spec_memory
-        camera = spec_camera
-        display = spec_display
-        resolution = spec_resolution
-        video = spec_video
-        size = spec_size
-        progress = device_info_progress
-    }
 
-    private fun setDeviceInfoViews() {
-        if (deviceInfo != null) {
-            device_info_progress.visibility = View.GONE
-            deviceName.text = deviceInfo!!.deviceName
-            deviceName.setTextColor(iconColor)
-            features.text = deviceInfo!!.features
-            featuresCont.text = deviceInfo!!.features_c
+    private fun setDeviceInfoViews(detailItem: DetailEntity) {
 
-            if (deviceInfo!!.multitouch != null)
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, deviceInfo!!.multitouch, multitouch)
+        details_device_name.text = detailItem.deviceName
+        details_device_name.setTextColor(iconColor)
+        details_features.text = detailItem.features
+        details_features_c.text = detailItem.features_c
+
+            if (detailItem.multitouch != null)
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, detailItem.multitouch, spec_multitouch)
             else
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", multitouch)
+                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", spec_multitouch)
 
-            val cpuInfo = deviceInfo!!.chipset + "\n" + deviceInfo!!.cpu
-            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, cpu)
+            val cpuInfo = detailItem.chipset + "\n" + detailItem.cpu
+            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, spec_cpu)
 
-            if (deviceInfo!!.announced != null)
-                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, deviceInfo!!.announced, releaseDate)
+            if (detailItem.announced != null)
+                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, detailItem.announced, spec_releasedate)
 
-            if (deviceInfo!!.size != null)
-                setupSpecItem(R.drawable.vct_size, R.string.spec_size, deviceInfo!!.size, size)
+            if (detailItem.size != null)
+                setupSpecItem(R.drawable.vct_size, R.string.spec_size,detailItem.size, spec_size)
 
-            if (deviceInfo!!.weight != null)
-                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, deviceInfo!!.weight, weight)
+            if (detailItem.weight != null)
+                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, detailItem.weight, spec_weight)
 
-            if (deviceInfo!!.dimensions != null)
-                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, deviceInfo!!.dimensions, dimen)
+            if (detailItem.dimensions != null)
+                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, detailItem.dimensions, spec_dimen)
 
-            if (deviceInfo!!.internal != null)
-                setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, deviceInfo!!.internal, memory!!)
+            if (detailItem.internal != null)
+                setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, detailItem.internal, spec_memory)
 
-            if (deviceInfo!!.primary_ != null)
-                setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, deviceInfo!!.primary_, camera!!)
+            if (detailItem.primary_ != null)
+                setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, detailItem.primary_, spec_camera)
 
-            if (deviceInfo!!.video != null)
-                setupSpecItem(R.drawable.vct_video, R.string.spec_video, deviceInfo!!.video, video!!)
+            if (detailItem.video != null)
+                setupSpecItem(R.drawable.vct_video, R.string.spec_video, detailItem.video, spec_video)
 
-            if (deviceInfo!!.type != null)
-                setupSpecItem(R.drawable.vct_display, R.string.spec_display, deviceInfo!!.type, display!!)
+            if (detailItem.type != null)
+                setupSpecItem(R.drawable.vct_display, R.string.spec_display, detailItem.type, spec_display)
 
-            if (deviceInfo!!.resolution != null)
-                setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, deviceInfo!!.resolution, resolution!!)
+            if (detailItem.resolution != null)
+                setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, detailItem.resolution, spec_resolution)
 
-            specLayout.visibility = View.VISIBLE
-        } else {
-            specLayout.visibility = View.GONE
-        }
+        spec_layout.visibility = View.VISIBLE
+
     }
-
 
     private fun clearDeviceInfoViews() {
         device_info_progress.visibility = View.VISIBLE
-        deviceName.text = getString(R.string.getting_information)
-        deviceName.setTextColor(resources.getColor(black))
-        features.text = ""
-        featuresCont.text = ""
+        details_device_name.text = getString(R.string.getting_information)
+        details_device_name.setTextColor(resources.getColor(black))
+        details_features.text = ""
+        details_features_c.text = ""
 
-        setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "", multitouch)
-        setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "", cpu)
-        setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, "", releaseDate)
-        setupSpecItem(R.drawable.vct_size, R.string.spec_size, "", size)
-        setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "", weight)
-        setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, "", dimen)
-        setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, "", memory)
-        setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, "", camera)
-        setupSpecItem(R.drawable.vct_video, R.string.spec_video, "", video)
-        setupSpecItem(R.drawable.vct_display, R.string.spec_display, "", display)
-        setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, "", resolution)
-        specLayout.visibility = View.VISIBLE
+        setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "", spec_multitouch)
+        setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, "", spec_cpu)
+        setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, "", spec_releasedate)
+        setupSpecItem(R.drawable.vct_size, R.string.spec_size, "", spec_size)
+        setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, "", spec_weight)
+        setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, "", spec_dimen)
+        setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, "", spec_memory)
+        setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, "", spec_camera)
+        setupSpecItem(R.drawable.vct_video, R.string.spec_video, "", spec_video)
+        setupSpecItem(R.drawable.vct_display, R.string.spec_display, "", spec_display)
+        setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, "", spec_resolution)
+        spec_layout.visibility = View.VISIBLE
     }
 
     private fun setupSpecItem(@DrawableRes drawable: Int, @StringRes title: Int, info: String, view: TextView) {
@@ -378,7 +368,7 @@ class DetailActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String): String {
             var respStr = ""
             val api = FonoApiFactory().create()
-            var response: retrofit2.Response<List<DeviceEntity>>? = null
+            var response: retrofit2.Response<List<DetailEntity>>? = null
 
             val product = VersionData.getProductName(osVersion).split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             val deviceName = product[0]
@@ -388,7 +378,7 @@ class DetailActivity : AppCompatActivity() {
                 val devices = response!!.body()
                 if (devices != null) {
                     for (dv in devices) {
-                        deviceInfo = dv
+                        detailInfo = dv
                     }
                 }
             } catch (e: IOException) {
@@ -398,15 +388,13 @@ class DetailActivity : AppCompatActivity() {
             }
 
             val wikiService = WikiApiFactory().create()
-            var wikiResponse: retrofit2.Response<WikiResponse>?= null
+            var wikiResponse: retrofit2.Response<WikiResponse>? = null
             try {
                 wikiResponse = wikiService.getWikiResponse(deviceName, "revisions", "json", "content").execute()
                 var result = wikiResponse!!.body()
                 if (result != null) {
-
+                    respStr = result!!.toString()
                 }
-
-
             } catch (ioe: IOException) {
                 ioe.printStackTrace()
             } catch (ex: Exception) {
@@ -417,8 +405,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: String) {
-            regsWv.loadData(result, "text/html", null)
-            setDeviceInfoViews()
+            regulations_webview.loadData(result, "text/html", null)
+            if (detailInfo != null) {
+                detailViewModel.addDetail(androidName, detailInfo!!)
+            }
         }
 
         override fun onPreExecute() {

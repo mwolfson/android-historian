@@ -1,14 +1,25 @@
-package com.designdemo.uaha.data.model.user
+package com.designdemo.uaha.data
 
-class UserDataStore private constructor() {
+import com.designdemo.uaha.data.model.detail.DetailEntityDao
+import com.designdemo.uaha.data.model.product.ProductItemDao
+import com.designdemo.uaha.data.model.user.UserInfoDao
 
-    // All the DAOs go here!
+class DataStore private constructor() {
+
+    var productDao = ProductItemDao()
+        private set
+
     var userDao = UserInfoDao()
+        private set
+
+    var detailDao = DetailEntityDao()
         private set
 
     companion object {
         // @Volatile - Writes to this property are immediately visible to other threads
-        @Volatile private var instance: UserDataStore? = null
+        @Volatile
+        private var instance: DataStore? = null
+
 
         // The only way to get hold of the FakeDatabase object
         fun getInstance() =
@@ -17,7 +28,8 @@ class UserDataStore private constructor() {
                 instance ?: synchronized(this) {
                     // If it's still not instantiated, finally create an object
                     // also set the "instance" property to be the currently created one
-                    instance ?: UserDataStore().also { instance = it }
+                    instance
+                            ?: DataStore().also { instance = it }
                 }
     }
 }

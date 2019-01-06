@@ -1,8 +1,8 @@
-package com.designdemo.uaha.data.model
+package com.designdemo.uaha.data.model.detail
 
 import com.google.gson.annotations.SerializedName
 
-data class DeviceEntity(
+data class DetailEntity(
         @SerializedName("DeviceName") val deviceName: String,
         @SerializedName("Brand") val brand: String,
         @SerializedName("technology") val technology: String,

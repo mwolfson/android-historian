@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-import com.designdemo.uaha.data.model.DeviceEntity
+import com.designdemo.uaha.data.model.detail.DetailEntity
 //
 interface FonoApiService {
 
@@ -22,7 +22,7 @@ interface FonoApiService {
             @Query("device") device: String,
             @Query( "brand") brand: String? = null,
             @Query("position") position: Int? = null
-    ): Call<List<DeviceEntity>>
+    ): Call<List<DetailEntity>>
 
     /*
      * Get a list of the latest devices that were asdded
@@ -36,6 +36,6 @@ interface FonoApiService {
             @Query("token") token: String,
             @Query("brand") brand: String,
             @Query("limit") limit: Int? = null
-    ): Call<List<DeviceEntity>>
+    ): Call<List<DetailEntity>>
 //
 }

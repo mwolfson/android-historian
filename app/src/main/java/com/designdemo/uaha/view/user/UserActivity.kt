@@ -55,15 +55,12 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         mainActivity = this
 
-        //Setup ViewModel
-        val viewModelFactory = InjectorUtils.provideProfileViewModelFactory()
         users = listOf()
 
-        userViewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
-        //User Data Has Been Updated
-        userViewModel.getUserData().observe(this, Observer { usersIn ->
-            users = usersIn
+        userViewModel.allUserInfo.observe(this, Observer { userInfo ->
+            users = userInfo
 
             if (users!!.isEmpty()) {
                 name_edit.setText("")
@@ -165,20 +162,6 @@ class UserActivity : AppCompatActivity() {
         chip_userinfo_label.requestFocus()
     }
 
-
-    private fun setUserInfoValues(users: List<UserInfo>) {
-        if (users!!.isEmpty()) {
-            name_edit.setText("")
-            phone_edit.setText("")
-            password_edit.setText("")
-        } else {
-            val userInfo = users!!.last()
-
-            name_edit.setText(userInfo.name)
-            phone_edit.setText(userInfo.phone)
-            password_edit.setText(userInfo.password)
-        }
-    }
 
     /**
      * Validates and saves user info

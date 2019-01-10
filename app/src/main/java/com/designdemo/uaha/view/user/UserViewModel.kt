@@ -1,17 +1,42 @@
 package com.designdemo.uaha.view.user
 
-import android.util.Log
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.user.UserInfo
 import com.designdemo.uaha.data.model.user.UserRepository
 import com.support.android.designlibdemo.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
+class UserViewModel(application: Application) : AndroidViewModel(application) {
+    private var parentJob = Job()
+    private val couroutineContext
+        get() = parentJob + Dispatchers.Main
+    private val scope = CoroutineScope(couroutineContext)
 
-    //This method provides way for View to observe repository live data
-    fun getUserData() = userRepository.getUserData()
+    val repository : UserRepository
+    val allUserInfo: LiveData<List<UserInfo>>
+
+    init {
+        val userInfoDao = InfoDatabase.getDatabase(application, scope).userDao()
+        repository = UserRepository(userInfoDao)
+        allUserInfo = repository.allUserInfo
+    }
+
+    //Note, we are calling this from the addUserData, after validation is performed
+    fun insert(userInfo: UserInfo) = scope.launch(Dispatchers.IO){
+        repository.insert(userInfo)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        parentJob.cancel()
+    }
 
     private val saveStatusCode = MutableLiveData<Int>()
 
@@ -19,6 +44,9 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
         return saveStatusCode
     }
 
+    /**
+     * This method will validate the input, and either return a error
+     */
     fun addUserData(userInfo: UserInfo) {
         val isNameValid: () -> Int = {
             var retVal = 0
@@ -58,8 +86,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
                 saveStatusCode.postValue(passwordError)
             }
         } else {
-            //There weren't validation issues, so move forward
-            userRepository.addUser(userInfo)
+            insert(userInfo)
             saveStatusCode.postValue(R.string.profile_saved_confirm)
 
         }

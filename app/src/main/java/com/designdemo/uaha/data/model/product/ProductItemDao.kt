@@ -18,12 +18,22 @@ interface ProductItemDao {
     @Query("SELECT * FROM product_table WHERE product_type = 2 ORDER BY title ASC")
     fun getAllDevices(): LiveData<List<ProductItem>>
 
-    @Query("SELECT * FROM product_table WHERE isFav = 1  ORDER BY title ASC")
+    @Query("SELECT * FROM product_table WHERE isFav = 1 ORDER BY title ASC")
     fun getAllFaves(): LiveData<List<ProductItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(productItem: ProductItem)
 
-    @Query("DELETE FROM product_table")
-    fun deleteAll()
+    @Query("DELETE FROM product_table WHERE product_type = 1")
+    fun deleteAllOS()
+
+    @Query("DELETE FROM product_table WHERE product_type = 2")
+    fun deleteAllDevices()
+
+    // These are only used in  DB, LiveData objects should be used for most other cases
+    @Query("SELECT * FROM product_table  WHERE product_type = 1 ORDER BY title ASC")
+    fun getOsItems(): List<ProductItem>
+
+    @Query("SELECT * FROM product_table  WHERE product_type = 2 ORDER BY title ASC")
+    fun getDeviceItems(): List<ProductItem>
 }

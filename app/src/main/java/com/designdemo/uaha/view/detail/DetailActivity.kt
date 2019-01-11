@@ -52,6 +52,18 @@ class DetailActivity : AppCompatActivity() {
     private var osVersion: Int = 0
     private var androidName = "unset"
 
+    companion object {
+        const private val TAG = "DetailActivity"
+
+        const val EXTRA_APP_NAME = "os_name"
+
+        // To use the FONO API, you will need to add your own API key to the gradle.properties file
+        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
+        // App will degrade gracefully if KEY is not found
+//        const private val TOKEN = FONO_API_KEY
+        private val TOKEN = "NA"
+    }
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -89,12 +101,12 @@ class DetailActivity : AppCompatActivity() {
 
         detailViewModel.getDetailData().observe(this, Observer { detailMapIn ->
             device_info_progress.visibility = View.GONE
-            if (detailMapIn.size!=0 && detailMapIn.containsKey(androidName)) {
-                Log.d("MSW","We have a hit!!! $androidName");
+            if (detailMapIn.size != 0 && detailMapIn.containsKey(androidName)) {
+                Log.d("MSW", "We have a hit!!! $androidName");
                 val deviceToSend = detailMapIn.get(androidName)
                 setDeviceInfoViews(deviceToSend!!)
             } else {
-                Log.d("MSW","This was NOT a hit $androidName");
+                Log.d("MSW", "This was NOT a hit $androidName");
                 spec_layout.visibility = View.GONE
             }
         })
@@ -201,59 +213,66 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupPalette() {
         val bm = BitmapFactory.decodeResource(resources, VersionData.getOsDrawable(osVersion))
-        Palette.from(bm).generate { palette ->
-            Log.d("Palette", "Palette has been generated")
-            val palVib = findViewById<TextView>(R.id.palette_vibrant)
-            val perc1left = findViewById<TextView>(R.id.perc1_left)
-            perc1left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
-            palVib.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+        try {
 
-            val palVibDark = findViewById<TextView>(R.id.palette_vibrant_dark)
-            val perc1mid = findViewById<TextView>(R.id.perc1_middle)
-            perc1mid.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
-            palVibDark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
 
-            val palVibLight = findViewById<TextView>(R.id.palette_vibrant_light)
-            val perc1right = findViewById<TextView>(R.id.perc1_right)
-            perc1right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
-            palVibLight.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+            Palette.from(bm).generate { palette ->
+                Log.d("Palette", "Palette has been generated")
+                val palVib = findViewById<TextView>(R.id.palette_vibrant)
+                val perc1left = findViewById<TextView>(R.id.perc1_left)
+                perc1left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+                palVib.setBackgroundColor(palette!!.getVibrantColor(0x000000))
 
-            val palMuted = findViewById<TextView>(R.id.palette_muted)
-            val perc2left = findViewById<TextView>(R.id.perc2_left)
-            perc2left.setBackgroundColor(palette!!.getMutedColor(0x000000))
-            palMuted.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                val palVibDark = findViewById<TextView>(R.id.palette_vibrant_dark)
+                val perc1mid = findViewById<TextView>(R.id.perc1_middle)
+                perc1mid.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+                palVibDark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
 
-            val palMutedDark = findViewById<TextView>(R.id.palette_muted_dark)
-            val perc2mid = findViewById<TextView>(R.id.perc2_middle)
-            perc2mid.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
-            palMutedDark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                val palVibLight = findViewById<TextView>(R.id.palette_vibrant_light)
+                val perc1right = findViewById<TextView>(R.id.perc1_right)
+                perc1right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+                palVibLight.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
 
-            val palMutedLight = findViewById<TextView>(R.id.palette_muted_light)
-            val perc2right = findViewById<TextView>(R.id.perc2_right)
-            perc2right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
-            palMutedLight.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                val palMuted = findViewById<TextView>(R.id.palette_muted)
+                val perc2left = findViewById<TextView>(R.id.perc2_left)
+                perc2left.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                palMuted.setBackgroundColor(palette!!.getMutedColor(0x000000))
 
-            //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
-            collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
+                val palMutedDark = findViewById<TextView>(R.id.palette_muted_dark)
+                val perc2mid = findViewById<TextView>(R.id.perc2_middle)
+                perc2mid.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                palMutedDark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
 
-            iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
-                palette!!.getMutedColor(0x000000)
-            } else {
-                palette!!.getVibrantColor(0x000000)
+                val palMutedLight = findViewById<TextView>(R.id.palette_muted_light)
+                val perc2right = findViewById<TextView>(R.id.perc2_right)
+                perc2right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                palMutedLight.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+
+                //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
+                collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
+
+                iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
+                    palette!!.getMutedColor(0x000000)
+                } else {
+                    palette!!.getVibrantColor(0x000000)
+                }
+
+
+                //The back button should also have a better color applied to ensure it is visible,
+                // Get a swatch, and get a more specific color for title from it.
+                val vibrantSwatch = palette!!.vibrantSwatch
+                var arrowColor = ContextCompat.getColor(this, R.color.black)
+                if (vibrantSwatch != null) {
+                    arrowColor = vibrantSwatch!!.titleTextColor
+                }
+
+                val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
+                val upArrow = getColorizedDrawable(res)
+                supportActionBar?.setHomeAsUpIndicator(upArrow)
+                collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
             }
-
-            //The back button should also have a better color applied to ensure it is visible,
-            // Get a swatch, and get a more specific color for title from it.
-            val vibrantSwatch = palette!!.vibrantSwatch
-            var arrowColor = ContextCompat.getColor(this, R.color.black)
-            if (vibrantSwatch != null) {
-                arrowColor = vibrantSwatch!!.titleTextColor
-            }
-
-            val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
-            val upArrow = getColorizedDrawable(res)
-            supportActionBar?.setHomeAsUpIndicator(upArrow)
-            collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
+        } catch (e: Exception) {
+            Log.e("MSW", "Error with image! + ${e.toString()}", e)
         }
     }
 
@@ -265,40 +284,40 @@ class DetailActivity : AppCompatActivity() {
         details_features.text = detailItem.features
         details_features_c.text = detailItem.features_c
 
-            if (detailItem.multitouch != null)
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, detailItem.multitouch, spec_multitouch)
-            else
-                setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", spec_multitouch)
+        if (detailItem.multitouch != null)
+            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, detailItem.multitouch, spec_multitouch)
+        else
+            setupSpecItem(R.drawable.vct_multitouch, R.string.spec_multitouch, "NA", spec_multitouch)
 
-            val cpuInfo = detailItem.chipset + "\n" + detailItem.cpu
-            setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, spec_cpu)
+        val cpuInfo = detailItem.chipset + "\n" + detailItem.cpu
+        setupSpecItem(R.drawable.vct_cpu, R.string.spec_cpu, cpuInfo, spec_cpu)
 
-            if (detailItem.announced != null)
-                setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, detailItem.announced, spec_releasedate)
+        if (detailItem.announced != null)
+            setupSpecItem(R.drawable.vct_date, R.string.spec_release_date, detailItem.announced, spec_releasedate)
 
-            if (detailItem.size != null)
-                setupSpecItem(R.drawable.vct_size, R.string.spec_size,detailItem.size, spec_size)
+        if (detailItem.size != null)
+            setupSpecItem(R.drawable.vct_size, R.string.spec_size, detailItem.size, spec_size)
 
-            if (detailItem.weight != null)
-                setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, detailItem.weight, spec_weight)
+        if (detailItem.weight != null)
+            setupSpecItem(R.drawable.vct_weight, R.string.spec_weight, detailItem.weight, spec_weight)
 
-            if (detailItem.dimensions != null)
-                setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, detailItem.dimensions, spec_dimen)
+        if (detailItem.dimensions != null)
+            setupSpecItem(R.drawable.vct_dimen, R.string.spec_dimen, detailItem.dimensions, spec_dimen)
 
-            if (detailItem.internal != null)
-                setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, detailItem.internal, spec_memory)
+        if (detailItem.internal != null)
+            setupSpecItem(R.drawable.vct_memory, R.string.spec_memory, detailItem.internal, spec_memory)
 
-            if (detailItem.primary_ != null)
-                setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, detailItem.primary_, spec_camera)
+        if (detailItem.primary_ != null)
+            setupSpecItem(R.drawable.vct_camera, R.string.spec_camera, detailItem.primary_, spec_camera)
 
-            if (detailItem.video != null)
-                setupSpecItem(R.drawable.vct_video, R.string.spec_video, detailItem.video, spec_video)
+        if (detailItem.video != null)
+            setupSpecItem(R.drawable.vct_video, R.string.spec_video, detailItem.video, spec_video)
 
-            if (detailItem.type != null)
-                setupSpecItem(R.drawable.vct_display, R.string.spec_display, detailItem.type, spec_display)
+        if (detailItem.type != null)
+            setupSpecItem(R.drawable.vct_display, R.string.spec_display, detailItem.type, spec_display)
 
-            if (detailItem.resolution != null)
-                setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, detailItem.resolution, spec_resolution)
+        if (detailItem.resolution != null)
+            setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, detailItem.resolution, spec_resolution)
 
         spec_layout.visibility = View.VISIBLE
 
@@ -392,15 +411,4 @@ class DetailActivity : AppCompatActivity() {
         override fun onProgressUpdate(vararg values: Void) {}
     }
 
-    companion object {
-        const private val TAG = "DetailActivity"
-
-        const val EXTRA_APP_NAME = "os_name"
-
-        // To use the FONO API, you will need to add your own API key to the gradle.properties file
-        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
-        // App will degrade gracefully if KEY is not found
-//        const private val TOKEN = FONO_API_KEY
-        private val TOKEN = "NA"
-    }
 }

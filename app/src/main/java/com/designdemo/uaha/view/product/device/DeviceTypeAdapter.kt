@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view.product.adapter
+package com.designdemo.uaha.view.product.device
 
 import android.app.Activity
 import android.content.Context
@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.view.detail.DetailActivity
 import com.support.android.designlibdemo.R
 
@@ -47,14 +46,14 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceTypeAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_device, parent, false)
         view.setBackgroundResource(background)
 
-        return DeviceTypeAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: DeviceTypeAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.boundString = values[position].title
         holder.titleText.text = values[position].title
         holder.subTitleText.text = values[position].subTitle

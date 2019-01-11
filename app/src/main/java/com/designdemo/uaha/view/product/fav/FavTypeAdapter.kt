@@ -1,7 +1,6 @@
-package com.designdemo.uaha.view.product.adapter
+package com.designdemo.uaha.view.product.fav
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.TypedValue
@@ -9,31 +8,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.view.detail.DetailActivity
 import com.support.android.designlibdemo.R
+import java.util.Random
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductItem
-import kotlinx.android.synthetic.main.list_item_os.view.*
+import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductItem>) : RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<ProductItem>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var boundString: String? = null
-        val imageView: ImageView = view.os_item_avatar
-        val titleText = view.os_item_title
-        val subTitleText = view.os_item_subtext
-        var osVersion: Int = 0
+        val imageView: ImageView = view.fav_item_avatar
+        val textView: TextView = view.fav_item_title
+        val textView2: TextView = view.fav_item_content
 
         override fun toString(): String {
-            return super.toString() + " '" + titleText.text
+            return super.toString() + " '" + textView.text
         }
     }
 
@@ -42,22 +41,32 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
     }
 
     init {
-        context.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
+        activity.applicationContext.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OsTypeAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_item_os, parent, false)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorites, parent, false)
         view.setBackgroundResource(background)
-        return OsTypeAdapter.ViewHolder(view)
+
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: OsTypeAdapter.ViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.boundString = values[position].title
-        holder.titleText.text = values[position].title
-        holder.subTitleText.text = values[position].subTitle
+        holder.textView.text = values[position].title
+        // We will set random length text to offset this view for staggarred effect
+        val rand = Random()
+        val randomNum = rand.nextInt(3)
+
+        var strRes = when (randomNum) {
+            0 -> R.string.ipsum_med
+            1 -> R.string.ipsum_long
+            else -> R.string.ipsum_short
+        }
+
+        holder.textView2.setText(strRes)
 
         holder.view.setOnClickListener { v ->
             val context = v.context

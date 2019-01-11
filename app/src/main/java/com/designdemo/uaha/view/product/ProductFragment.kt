@@ -39,33 +39,48 @@ class ProductFragment : Fragment() {
 
         mainActivity = activity
 
-        val viewModelFactory = InjectorUtils.provideProductViewModelFactory()
         devices = listOf()
         oses = listOf()
         faves = listOf()
 
         thisFragType = arguments?.getInt(ARG_FRAG_TYPE, 0)
 
-        productViewModel = ViewModelProviders.of(this, viewModelFactory).get(ProductViewModel::class.java)
+        productViewModel = ViewModelProviders.of(this).get(ProductViewModel::class.java)
 
-        productViewModel.initOsList()
-        productViewModel.getOsData().observe(this, Observer { osesIn ->
-            oses = osesIn
+        productViewModel.allOses.observe(this, Observer { osList ->
+            oses = osList
             setupRecyclerView(rv)
         })
 
-        //put this in a when to isolate it to only this type
-        productViewModel.initDeviceList()
-        productViewModel.getDeviceData().observe(this, Observer { devicesIn ->
-            devices = devicesIn
+        productViewModel.allDevices.observe(this, Observer { deviceList ->
+            devices = deviceList
             setupRecyclerView(rv)
         })
 
-        productViewModel.initFavList(context!!)
-        productViewModel.getFavData().observe(this, Observer { favesIn ->
-            faves = favesIn
+        productViewModel.allFaves.observe(this, Observer { favList ->
+            faves = favList
             setupRecyclerView(rv)
         })
+
+
+//        productViewModel.initOsList()
+//        productViewModel.getOsData().observe(this, Observer { osesIn ->
+//            oses = osesIn
+//            setupRecyclerView(rv)
+//        })
+//
+//        //put this in a when to isolate it to only this type
+//        productViewModel.initDeviceList()
+//        productViewModel.getDeviceData().observe(this, Observer { devicesIn ->
+//            devices = devicesIn
+//            setupRecyclerView(rv)
+//        })
+//
+//        productViewModel.initFavList(context!!)
+//        productViewModel.getFavData().observe(this, Observer { favesIn ->
+//            faves = favesIn
+//            setupRecyclerView(rv)
+//        })
         return mainView
     }
 

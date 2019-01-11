@@ -1,48 +1,29 @@
 package com.designdemo.uaha.data.model.product
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
-class ProductItemDao {
+@Dao
+interface ProductItemDao {
 
-    private val deviceListLocal = mutableListOf<ProductItem>()
-    private val osListLocal = mutableListOf<ProductItem>()
-    private val favListLocal = mutableListOf<ProductItem>()
+    @Query("SELECT * FROM product_table ORDER BY title ASC")
+    fun getAllProductInfo(): LiveData<List<ProductItem>>
 
-    private val deviceList = MutableLiveData<List<ProductItem>>()
-    private val osList = MutableLiveData<List<ProductItem>>()
-    private val favList = MutableLiveData<List<ProductItem>>()
+    @Query("SELECT * FROM product_table WHERE product_type = 1 ORDER BY title ASC")
+    fun getAllOses(): LiveData<List<ProductItem>>
 
-    init {
-        deviceList.value = deviceListLocal
-        osList.value = osListLocal
-        favList.value = favListLocal
-    }
+    @Query("SELECT * FROM product_table WHERE product_type = 2 ORDER BY title ASC")
+    fun getAllDevices(): LiveData<List<ProductItem>>
 
-    fun initDeviceList(deviceListIn: List<ProductItem>) {
-        deviceListLocal.clear()
-        deviceListLocal.addAll(deviceListIn)
+    @Query("SELECT * FROM product_table WHERE isFav = 1  ORDER BY title ASC")
+    fun getAllFaves(): LiveData<List<ProductItem>>
 
-        deviceList.value = deviceListLocal
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertItem(productItem: ProductItem)
 
-    fun initOsList(osListIn: List<ProductItem>) {
-        osListLocal.clear()
-        osListLocal.addAll(osListIn)
-
-        osList.value = osListLocal
-    }
-
-    fun initFavList(favListIn: List<ProductItem>) {
-        favListLocal.clear()
-        favListLocal.addAll(favListIn)
-
-        favList.value = favListLocal
-    }
-
-    fun getDeviceData() = deviceList as LiveData<List<ProductItem>>
-
-    fun getOsData() = osList as LiveData<List<ProductItem>>
-
-    fun getFavData() = favList as LiveData<List<ProductItem>>
+    @Query("DELETE FROM product_table")
+    fun deleteAll()
 }

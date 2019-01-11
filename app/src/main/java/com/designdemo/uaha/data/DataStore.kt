@@ -5,9 +5,6 @@ import com.designdemo.uaha.data.model.product.ProductItemDao
 
 class DataStore private constructor() {
 
-    var productDao = ProductItemDao()
-        private set
-
     var detailDao = DetailEntityDao()
         private set
 

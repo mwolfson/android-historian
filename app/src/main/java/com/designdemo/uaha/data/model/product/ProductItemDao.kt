@@ -24,6 +24,9 @@ interface ProductItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(productItem: ProductItem)
 
+    @Query("DELETE FROM product_table")
+    fun deleteAll()
+
     @Query("DELETE FROM product_table WHERE product_type = 1")
     fun deleteAllOS()
 

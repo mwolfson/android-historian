@@ -66,9 +66,10 @@ abstract class InfoDatabase : RoomDatabase() {
             userDao.deleteAll()
             userDao.insert(UserInfo("Preset","5555555555","presetPW"))
 
-            //Device Items Pre-load
-            if(productItemDao.getDeviceItems().isEmpty()) {
-                productItemDao.deleteAllDevices()
+            productItemDao.deleteAll()
+//            //Device Items Pre-load
+//            if(productItemDao.getDeviceItems().isEmpty()) {
+//                productItemDao.deleteAllDevices()
                 productItemDao.insertItem(ProductItem("Dream","HTC", R.drawable.ic_device_g1, "HTC%20G1", 2))
                 productItemDao.insertItem(ProductItem("Droid","Motorola", R.drawable.ic_device_droid, "Motorola%20Droid", 2))
                 productItemDao.insertItem(ProductItem("Nexus One","HTC", R.drawable.ic_device_n1, "Samsung%20Galaxy%20Nexus", 2))
@@ -85,11 +86,11 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductItem("Pixel2 XL","Google", R.drawable.ic_device_p2x, "Pixel2 XL-Google", 2))
                 productItemDao.insertItem(ProductItem("Pixel3","Google", R.drawable.ic_device_p3, "Pixel3-Google", 2))
                 productItemDao.insertItem(ProductItem("Pixel3 XL","Google", R.drawable.ic_device_p3x, "HTC%20Nexus%209", 2, 1))
-            }
-
-            // OS Items Pre-load
-            if(productItemDao.getOsItems().isEmpty()) {
-                productItemDao.deleteAllOS()
+//            }
+//
+//            // OS Items Pre-load
+//            if(productItemDao.getOsItems().isEmpty()) {
+//                productItemDao.deleteAllOS()
                 productItemDao.insertItem(ProductItem("Cupcake","API Level 3", R.drawable.ic_cupcake, "Android%20Cupcake", 1, 1))
                 productItemDao.insertItem(ProductItem("Donut","API Level 4", R.drawable.ic_donut, "Android%20Donut", 1))
                 productItemDao.insertItem(ProductItem("Eclair","API Level 5,6,7", R.drawable.ic_eclair, "Android%20Eclair", 1))
@@ -104,7 +105,7 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductItem("Nougat","API Level 24, 25", R.drawable.ic_nougat, "Android%20Nougat", 1))
                 productItemDao.insertItem(ProductItem("Oreo","API Level 26, 27", R.drawable.ic_oreo, "Android%20Oreo", 1))
                 productItemDao.insertItem(ProductItem("Pie","API Level 28", R.drawable.ic_pie, "Android%20Pie", 1))
-            }
+//            }
         }
     }
 }

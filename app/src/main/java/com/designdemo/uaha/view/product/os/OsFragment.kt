@@ -35,7 +35,9 @@ class OsFragment : Fragment() {
 
         osViewModel = ViewModelProviders.of(this).get(OsViewModel::class.java)
         osViewModel.getOsData().observe(this, Observer { osList ->
-            setupRecyclerView(rv, osList)
+            if (osList.isNotEmpty()) {
+                setupRecyclerView(rv, osList)
+            }
         })
 
         return mainView

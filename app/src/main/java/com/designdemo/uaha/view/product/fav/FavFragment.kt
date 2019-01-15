@@ -35,7 +35,9 @@ class FavFragment : Fragment() {
 
         favViewModel = ViewModelProviders.of(this).get(FavViewModel::class.java)
         favViewModel.getFavData().observe(this, Observer { favList ->
-            setupRecyclerView(rv, favList)
+            if (favList.isNotEmpty()) {
+                setupRecyclerView(rv, favList)
+            }
         })
 
         return mainView

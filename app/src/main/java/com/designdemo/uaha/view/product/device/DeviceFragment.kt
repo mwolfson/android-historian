@@ -35,7 +35,9 @@ class DeviceFragment : Fragment() {
 
         deviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel::class.java)
         deviceViewModel.getDeviceData().observe(this, Observer { devList ->
-            setupRecyclerView(rv, devList)
+            if (devList.isNotEmpty()) {
+                setupRecyclerView(rv, devList)
+            }
         })
 
         return mainView

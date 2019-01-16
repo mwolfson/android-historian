@@ -70,8 +70,8 @@ abstract class InfoDatabase : RoomDatabase() {
 
             productItemDao.deleteAll()
 //            //Device Items Pre-load
-//            if(productItemDao.getDeviceItems().isEmpty()) {
-//                productItemDao.deleteAllDevices()
+            if(productItemDao.getDeviceItems().isEmpty()) {
+                productItemDao.deleteAllDevices()
                 productItemDao.insertItem(ProductEntity("Dream","HTC", R.drawable.ic_device_g1, "HTC%20G1", 2))
                 productItemDao.insertItem(ProductEntity("Droid","Motorola", R.drawable.ic_device_droid, "Motorola%20Droid", 2))
                 productItemDao.insertItem(ProductEntity("Nexus One","HTC", R.drawable.ic_device_n1, "Samsung%20Galaxy%20Nexus", 2))
@@ -88,11 +88,11 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductEntity("Pixel2 XL","Google", R.drawable.ic_device_p2x, "Pixel2 XL-Google", 2))
                 productItemDao.insertItem(ProductEntity("Pixel3","Google", R.drawable.ic_device_p3, "Pixel3-Google", 2))
                 productItemDao.insertItem(ProductEntity("Pixel3 XL","Google", R.drawable.ic_device_p3x, "HTC%20Nexus%209", 2))
-//            }
+            }
 //
 //            // OS Items Pre-load
-//            if(productItemDao.getOsItems().isEmpty()) {
-//                productItemDao.deleteAllOS()
+            if(productItemDao.getOsItems().isEmpty()) {
+                productItemDao.deleteAllOS()
                 productItemDao.insertItem(ProductEntity("Cupcake","API Level 3", R.drawable.ic_cupcake, "Android%20Cupcake", 1))
                 productItemDao.insertItem(ProductEntity("Donut","API Level 4", R.drawable.ic_donut, "Android%20Donut", 1))
                 productItemDao.insertItem(ProductEntity("Eclair","API Level 5,6,7", R.drawable.ic_eclair, "Android%20Eclair", 1))
@@ -107,7 +107,7 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductEntity("Nougat","API Level 24, 25", R.drawable.ic_nougat, "Android%20Nougat", 1))
                 productItemDao.insertItem(ProductEntity("Oreo","API Level 26, 27", R.drawable.ic_oreo, "Android%20Oreo", 1))
                 productItemDao.insertItem(ProductEntity("Pie","API Level 28", R.drawable.ic_pie, "Android%20Pie", 1))
-//            }
+            }
         }
     }
 }

@@ -16,10 +16,10 @@ import com.support.android.designlibdemo.R
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.designdemo.uaha.data.model.product.ProductItem
+import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_os.view.*
 
-class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductItem>) : RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
+class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductEntity>) : RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -36,7 +36,7 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         }
     }
 
-    fun getValueAt(position: Int): ProductItem {
+    fun getValueAt(position: Int): ProductEntity {
         return values[position]
     }
 

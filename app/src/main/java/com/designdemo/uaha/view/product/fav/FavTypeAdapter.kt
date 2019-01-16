@@ -17,10 +17,10 @@ import java.util.Random
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.designdemo.uaha.data.model.product.ProductItem
+import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class FavTypeAdapter(private val activity: Activity, private val values: List<ProductItem>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -36,7 +36,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         }
     }
 
-    fun getValueAt(position: Int): ProductItem {
+    fun getValueAt(position: Int): ProductEntity {
         return values[position]
     }
 

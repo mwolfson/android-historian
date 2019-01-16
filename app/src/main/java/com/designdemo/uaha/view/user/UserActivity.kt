@@ -19,8 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.designdemo.uaha.data.model.user.UserInfo
-import com.designdemo.uaha.util.InjectorUtils
+import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.product.ProductActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -42,7 +41,7 @@ class UserActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
     //Local copy of usersInfo list, to be used when applying Undo button in snackbar
-    private lateinit var users: List<UserInfo>
+    private lateinit var users: List<UserEntity>
 
     // Lambda to add a close listener on the chip, and also put a random background color
     val setChipCloseAndRandomColor: (Chip) -> Unit = {
@@ -59,7 +58,7 @@ class UserActivity : AppCompatActivity() {
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
-        userViewModel.allUserInfo.observe(this, Observer { userInfo ->
+        userViewModel.allUserEntity.observe(this, Observer { userInfo ->
             users = userInfo
 
             if (users!!.isEmpty()) {
@@ -167,7 +166,7 @@ class UserActivity : AppCompatActivity() {
      * Validates and saves user info
      */
     private fun saveUserInfo() {
-        val userInfo = UserInfo(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
+        val userInfo = UserEntity(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
         userViewModel.addUserData(userInfo)
     }
 

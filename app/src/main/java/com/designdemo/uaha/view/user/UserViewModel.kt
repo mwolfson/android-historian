@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.designdemo.uaha.data.InfoDatabase
-import com.designdemo.uaha.data.model.user.UserInfo
+import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.data.model.user.UserRepository
 import com.support.android.designlibdemo.R
 import kotlinx.coroutines.CoroutineScope
@@ -20,17 +20,17 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     private val scope = CoroutineScope(couroutineContext)
 
     val repository : UserRepository
-    val allUserInfo: LiveData<List<UserInfo>>
+    val allUserEntity: LiveData<List<UserEntity>>
 
     init {
         val userInfoDao = InfoDatabase.getDatabase(application, scope).userDao()
         repository = UserRepository(userInfoDao)
-        allUserInfo = repository.allUserInfo
+        allUserEntity = repository.allUserEntity
     }
 
     //Note, we are calling this from the addUserData, after validation is performed
-    fun insert(userInfo: UserInfo) = scope.launch(Dispatchers.IO){
-        repository.insert(userInfo)
+    fun insert(userEntity: UserEntity) = scope.launch(Dispatchers.IO){
+        repository.insert(userEntity)
     }
 
     override fun onCleared() {
@@ -47,10 +47,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * This method will validate the input, and either return a error
      */
-    fun addUserData(userInfo: UserInfo) {
+    fun addUserData(userEntity: UserEntity) {
         val isNameValid: () -> Int = {
             var retVal = 0
-            if (!(userInfo.name.length in 4..10)) {
+            if (!(userEntity.name.length in 4..10)) {
                 retVal = R.string.name_input_error
             }
             retVal
@@ -58,7 +58,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         val isPhoneValid: () -> Int = {
             var retVal = 0
-            if (userInfo.phone.length != 14) {
+            if (userEntity.phone.length != 14) {
                 retVal = R.string.phone_input_error
             }
             retVal
@@ -66,7 +66,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         val isPasswordValid: () -> Int = {
             var retVal = 0
-            if (userInfo.password.length != 8) {
+            if (userEntity.password.length != 8) {
                 retVal = R.string.invalid_password
             }
             retVal
@@ -86,7 +86,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                 saveStatusCode.postValue(passwordError)
             }
         } else {
-            insert(userInfo)
+            insert(userEntity)
             saveStatusCode.postValue(R.string.profile_saved_confirm)
 
         }

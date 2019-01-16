@@ -10,19 +10,22 @@ import androidx.room.Query
 interface ProductItemDao {
 
     @Query("SELECT * FROM product_table ORDER BY title ASC")
-    fun getAllProductInfo(): LiveData<List<ProductItem>>
+    fun getAllProductInfo(): LiveData<List<ProductEntity>>
 
     @Query("SELECT * FROM product_table WHERE product_type = 1 ORDER BY title ASC")
-    fun getAllOses(): LiveData<List<ProductItem>>
+    fun getAllOses(): LiveData<List<ProductEntity>>
 
     @Query("SELECT * FROM product_table WHERE product_type = 2 ORDER BY title ASC")
-    fun getAllDevices(): LiveData<List<ProductItem>>
+    fun getAllDevices(): LiveData<List<ProductEntity>>
 
     @Query("SELECT * FROM product_table WHERE isFav = 1 ORDER BY title ASC")
-    fun getAllFaves(): LiveData<List<ProductItem>>
+    fun getAllFaves(): LiveData<List<ProductEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertItem(productItem: ProductItem)
+    fun insertItem(productEntity: ProductEntity)
+
+    @Query("SELECT * FROM product_table WHERE title = :prodNameIn LIMIT 1")
+    fun getProductItem(prodNameIn : String) : LiveData<ProductEntity>
 
     @Query("DELETE FROM product_table")
     fun deleteAll()
@@ -35,8 +38,8 @@ interface ProductItemDao {
 
     // These are only used in  DB, LiveData objects should be used for most other cases
     @Query("SELECT * FROM product_table  WHERE product_type = 1 ORDER BY title ASC")
-    fun getOsItems(): List<ProductItem>
+    fun getOsItems(): List<ProductEntity>
 
     @Query("SELECT * FROM product_table  WHERE product_type = 2 ORDER BY title ASC")
-    fun getDeviceItems(): List<ProductItem>
+    fun getDeviceItems(): List<ProductEntity>
 }

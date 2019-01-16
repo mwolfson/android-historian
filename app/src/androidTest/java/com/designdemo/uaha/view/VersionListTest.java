@@ -34,7 +34,7 @@ public class VersionListTest {
     @Test
     public void versionListTest() {
         ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recyclerview),
+                allOf(withId(R.id.product_recyclerview),
                         withParent(allOf(withId(R.id.user_main_content),
                                 withParent(withId(R.id.product_viewpager)))),
                         isDisplayed()));
@@ -55,7 +55,7 @@ public class VersionListTest {
     @Test
     public void testListContent() {
         ViewInteraction recyclerView = onView(
-                AllOf.allOf(withId(R.id.recyclerview),
+                AllOf.allOf(withId(R.id.product_recyclerview),
                         withParent(AllOf.allOf(withId(R.id.user_main_content),
                                 withParent(AllOf.allOf(withId(R.id.product_viewpager),
                                         withParent(AllOf.allOf(withId(R.id.user_main_content),

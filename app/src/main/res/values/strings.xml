@@ -215,6 +215,10 @@
     <string name="spec_display">Display</string>
     <string name="spec_resolution">Resolution</string>
     <string name="device_info">Device Info</string>
+    <string name="add_fav_text">Add favorites from the Details Screen</string>
+    <string name="getting_os_info">Getting OS Info</string>
+    <string name="getting_device_info">Getting Device Info</string>
+    <string name="gathering_data">Gathering Data</string>
 
 
     <!-- Detail Info -->

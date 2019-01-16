@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -25,11 +24,10 @@ import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.data.model.detail.DetailEntity
+import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.data.model.wiki.WikiResponse
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
-import com.designdemo.uaha.util.InjectorUtils
-import com.designdemo.uaha.util.PrefsUtil
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.snackbar.Snackbar
 //import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
@@ -45,6 +43,7 @@ class DetailActivity : AppCompatActivity() {
     private var iconColor = 0
 
     private var detailInfo: DetailEntity? = null
+    private var localProdItem: ProductEntity? = null
 
     private lateinit var detailViewModel: DetailViewModel
 
@@ -72,8 +71,7 @@ class DetailActivity : AppCompatActivity() {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)
         }
 
-        val viewModelFactory = InjectorUtils.provideDetailViewModelFactory()
-        detailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         okclient = OkHttpClient()
 
@@ -95,21 +93,25 @@ class DetailActivity : AppCompatActivity() {
         }
 
         setupToolbar(androidName)
-        loadBackdrop()
         setupFab()
-        setupPalette()
 
-        detailViewModel.getDetailData().observe(this, Observer { detailMapIn ->
-            device_info_progress.visibility = View.GONE
-            if (detailMapIn.size != 0 && detailMapIn.containsKey(androidName)) {
-                Log.d("MSW", "We have a hit!!! $androidName");
-                val deviceToSend = detailMapIn.get(androidName)
-                setDeviceInfoViews(deviceToSend!!)
-            } else {
-                Log.d("MSW", "This was NOT a hit $androidName");
-                spec_layout.visibility = View.GONE
+        val product = androidName.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        detailViewModel.getProductForName(product[0]).observe(this, Observer { prodItem ->
+            prodItem?.let{
+                localProdItem = prodItem
+                Glide.with(this).load(prodItem.imgId).centerCrop().into(backdrop)
+                setFabIcon()
+                setupPalette()
             }
         })
+
+        detailViewModel.getDetailsForItem(androidName).observe(this, Observer { detailsForItem ->
+            detailsForItem?.let{
+                device_info_progress.visibility = View.GONE
+                setDeviceInfoViews(detailsForItem)
+            }
+        })
+
         InfoGatherTask().execute()
     }
 
@@ -125,6 +127,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    //TODO, setup this better
     private fun setupToolbar(androidName: String) {
         osVersion = VersionData.getOsNum(androidName)
 
@@ -161,21 +164,16 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadBackdrop() {
-        val imageView = findViewById<View>(R.id.backdrop) as ImageView
-        Glide.with(this).load(VersionData.getOsDrawable(osVersion)).centerCrop().into(imageView)
-    }
-
     private fun setupFab() {
-
-        // Set initial state based on pref
-        setFabIcon()
-
-        // To over-ride the color of the FAB other then the theme color
-        //fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.fab_selector)));
         fab_detail.setOnClickListener { v ->
-            PrefsUtil.toggleFavorite(applicationContext, osVersion)
-            setFabIcon()
+            //Toggle the value to be opposite of what it is, to set
+            var toSetFav = 1
+            if (localProdItem?.isFav == 1) {
+                toSetFav = 0
+            }
+
+            val prodFaved = localProdItem?.copy(isFav = toSetFav)
+            detailViewModel.insertFav(prodFaved!!)
 
             // Notify the User with a snackbar
             // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
@@ -203,7 +201,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setFabIcon() {
-        if (PrefsUtil.isFavorite(applicationContext, osVersion)) {
+        if (localProdItem!!.isFav == 1) {
             fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on))
         } else {
             fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off))
@@ -214,8 +212,6 @@ class DetailActivity : AppCompatActivity() {
     private fun setupPalette() {
         val bm = BitmapFactory.decodeResource(resources, VersionData.getOsDrawable(osVersion))
         try {
-
-
             Palette.from(bm).generate { palette ->
                 Log.d("Palette", "Palette has been generated")
                 val palVib = findViewById<TextView>(R.id.palette_vibrant)
@@ -272,14 +268,13 @@ class DetailActivity : AppCompatActivity() {
                 collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
             }
         } catch (e: Exception) {
-            Log.e("MSW", "Error with image! + ${e.toString()}", e)
+            Log.e("DetailActivity", "Error with image! + ${e.toString()}", e)
         }
     }
 
 
     private fun setDeviceInfoViews(detailItem: DetailEntity) {
-
-        details_device_name.text = detailItem.deviceName
+        details_device_name.text = detailItem.DeviceName
         details_device_name.setTextColor(iconColor)
         details_features.text = detailItem.features
         details_features_c.text = detailItem.features_c
@@ -347,7 +342,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setupSpecItem(@DrawableRes drawable: Int, @StringRes title: Int, info: String, view: TextView) {
         val specDrawable = getColorizedDrawable(drawable)
         view.setCompoundDrawablesWithIntrinsicBounds(specDrawable, null, null, null)
-        view.text = UiUtil.applyBoldFirstWord(getString(title).toString(), info)
+        view.text = UiUtil.applyBoldFirstWord(getTitle().toString(), info)
     }
 
     private fun getColorizedDrawable(@DrawableRes res: Int): Drawable? {
@@ -400,7 +395,8 @@ class DetailActivity : AppCompatActivity() {
         override fun onPostExecute(result: String) {
             regulations_webview.loadData(result, "text/html", null)
             if (detailInfo != null) {
-                detailViewModel.addDetail(androidName, detailInfo!!)
+                val detailToSave = detailInfo!!.copy(productKey = androidName)
+                detailViewModel.insert(detailToSave)
             }
         }
 

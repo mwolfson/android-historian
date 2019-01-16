@@ -1,19 +1,19 @@
 package com.designdemo.uaha.data.model.detail
 
-class DetailRepository private constructor(private val detailEntityDao: DetailEntityDao){
+import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 
-    fun addDetail(mapName: String, detailItem: DetailEntity) {
-        detailEntityDao.addDetail(mapName, detailItem)
+class DetailRepository(private val detailEntityDao: DetailEntityDao) {
+
+    val allDetailInfo: LiveData<List<DetailEntity>> = detailEntityDao.getAllDetailItems()
+
+    fun getDetailItem(deviceName:String ) : LiveData<DetailEntity> {
+        return detailEntityDao.getDetailItem(deviceName)
     }
 
-    fun getDetailData() = detailEntityDao.getDetailData()
-
-    companion object {
-        @Volatile private var instance: DetailRepository?= null
-
-        fun getInstance(detailEntityDao: DetailEntityDao) =
-                instance ?: synchronized(this) {
-                    instance ?: DetailRepository(detailEntityDao). also { instance = it }
-                }
+    @WorkerThread
+    suspend fun insertDetailItem(detailItem: DetailEntity) {
+        detailEntityDao.addDetailItem(detailItem)
     }
+
 }

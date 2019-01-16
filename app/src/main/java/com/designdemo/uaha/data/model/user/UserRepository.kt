@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 
 class UserRepository(private val userInfoDao: UserInfoDao) {
 
-    val allUserInfo: LiveData<List<UserInfo>> = userInfoDao.getAllUserInfo()
+    val allUserEntity: LiveData<List<UserEntity>> = userInfoDao.getAllUserInfo()
 
     @WorkerThread
-    suspend fun insert(userInfo: UserInfo) {
-        userInfoDao.insert(userInfo)
+    suspend fun insert(userEntity: UserEntity) {
+        userInfoDao.insert(userEntity)
     }
 
 }

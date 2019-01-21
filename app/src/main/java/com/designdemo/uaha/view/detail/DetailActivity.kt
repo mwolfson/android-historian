@@ -42,7 +42,6 @@ class DetailActivity : AppCompatActivity() {
     //Details Card Views
     private var iconColor = 0
 
-    private var detailInfo: DetailEntity? = null
     private var localProdItem: ProductEntity? = null
 
     private lateinit var detailViewModel: DetailViewModel
@@ -59,8 +58,8 @@ class DetailActivity : AppCompatActivity() {
         // To use the FONO API, you will need to add your own API key to the gradle.properties file
         // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
         // App will degrade gracefully if KEY is not found
-//        const private val TOKEN = FONO_API_KEY
-        private val TOKEN = "NA"
+//        const val TOKEN = FONO_API_KEY
+        const val TOKEN = "NA"
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,6 +101,7 @@ class DetailActivity : AppCompatActivity() {
                 Glide.with(this).load(prodItem.imgId).centerCrop().into(backdrop)
                 setFabIcon()
                 setupPalette()
+
             }
         })
 
@@ -112,7 +112,8 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        InfoGatherTask().execute()
+        //Retrieve the phone info from net, and put in DB when found
+        detailViewModel.getFonoNetInfo(androidName)
     }
 
 
@@ -131,7 +132,6 @@ class DetailActivity : AppCompatActivity() {
     private fun setupToolbar(androidName: String) {
         osVersion = VersionData.getOsNum(androidName)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -140,6 +140,7 @@ class DetailActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_shuffle -> {
                     // Get a random Android product, and then refresh the UI
+                    clearDeviceInfoViews()
                     this.androidName = VersionData.getRandomPhoneName()
                     onResume()
                     true
@@ -342,69 +343,13 @@ class DetailActivity : AppCompatActivity() {
     private fun setupSpecItem(@DrawableRes drawable: Int, @StringRes title: Int, info: String, view: TextView) {
         val specDrawable = getColorizedDrawable(drawable)
         view.setCompoundDrawablesWithIntrinsicBounds(specDrawable, null, null, null)
-        view.text = UiUtil.applyBoldFirstWord(getTitle().toString(), info)
+        view.text = UiUtil.applyBoldFirstWord(getString(title), info)
     }
 
     private fun getColorizedDrawable(@DrawableRes res: Int): Drawable? {
         val drawable = ContextCompat.getDrawable(this, res)
         drawable?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
         return drawable
-    }
-
-
-    private inner class InfoGatherTask : AsyncTask<String, Void, String>() {
-        override fun doInBackground(vararg params: String): String {
-            var respStr = ""
-            val api = FonoApiFactory().create()
-            var response: retrofit2.Response<List<DetailEntity>>? = null
-
-            val product = VersionData.getProductName(osVersion).split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            val deviceName = product[0]
-            val manufacturer = product[1]
-            try {
-                response = api.getDevice(TOKEN, deviceName, manufacturer, null).execute()
-                val devices = response!!.body()
-                if (devices != null) {
-                    for (dv in devices) {
-                        detailInfo = dv
-                    }
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            val wikiService = WikiApiFactory().create()
-            var wikiResponse: retrofit2.Response<WikiResponse>? = null
-            try {
-                wikiResponse = wikiService.getWikiResponse(deviceName, "revisions", "json", "content").execute()
-                var result = wikiResponse!!.body()
-                if (result != null) {
-                    respStr = result!!.toString()
-                }
-            } catch (ioe: IOException) {
-                ioe.printStackTrace()
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-
-            return respStr
-        }
-
-        override fun onPostExecute(result: String) {
-            regulations_webview.loadData(result, "text/html", null)
-            if (detailInfo != null) {
-                val detailToSave = detailInfo!!.copy(productKey = androidName)
-                detailViewModel.insert(detailToSave)
-            }
-        }
-
-        override fun onPreExecute() {
-            clearDeviceInfoViews()
-        }
-
-        override fun onProgressUpdate(vararg values: Void) {}
     }
 
 }

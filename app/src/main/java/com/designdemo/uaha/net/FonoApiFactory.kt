@@ -1,5 +1,6 @@
 package com.designdemo.uaha.net
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
@@ -10,6 +11,7 @@ class FonoApiFactory {
     @JvmOverloads
     fun create(okHttpClient: OkHttpClient? = null): FonoApiService = run {
         val retrofitBuilder = Retrofit.Builder()
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .baseUrl(baseUrlFono)
                 .addConverterFactory(GsonConverterFactory.create())
 

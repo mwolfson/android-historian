@@ -49,10 +49,10 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.designdemo.uaha.view.BottomNavActivity"
+            android:name="com.designdemo.uaha.view.demo.BottomNavActivity"
             android:label="@string/title_activity_bottom_bav" />
         <activity
-            android:name="com.designdemo.uaha.view.MotionLayoutActivity"
+            android:name="com.designdemo.uaha.view.demo.MotionLayoutActivity"
             android:label="@string/title_activity_motion_layout"/>
     </application>
 

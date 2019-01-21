@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view.product.adapter
+package com.designdemo.uaha.view.product.fav
 
 import android.app.Activity
 import android.content.Intent
@@ -11,17 +11,16 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.view.detail.DetailActivity
 import com.support.android.designlibdemo.R
 import java.util.Random
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.designdemo.uaha.data.model.product.ProductItem
+import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class FavTypeAdapter(private val activity: Activity, private val values: List<ProductItem>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -37,7 +36,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         }
     }
 
-    fun getValueAt(position: Int): ProductItem {
+    fun getValueAt(position: Int): ProductEntity {
         return values[position]
     }
 
@@ -46,11 +45,11 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavTypeAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorites, parent, false)
         view.setBackgroundResource(background)
 
-        return FavTypeAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
 

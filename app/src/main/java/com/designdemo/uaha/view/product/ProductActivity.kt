@@ -14,8 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.designdemo.uaha.view.BottomNavActivity
-import com.designdemo.uaha.view.MotionLayoutActivity
+import com.designdemo.uaha.view.demo.BottomNavActivity
+import com.designdemo.uaha.view.demo.MotionLayoutActivity
+import com.designdemo.uaha.view.product.device.DeviceFragment
+import com.designdemo.uaha.view.product.fav.FavFragment
+import com.designdemo.uaha.view.product.os.OsFragment
 import com.designdemo.uaha.view.user.UserActivity
 import com.google.android.material.navigation.NavigationView
 import com.support.android.designlibdemo.R
@@ -73,20 +76,11 @@ class ProductActivity : AppCompatActivity() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = Adapter(supportFragmentManager)
 
-        val args = Bundle()
-        val osFrag = ProductFragment()
-        args.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_OS)
-        osFrag.arguments = args
+        val osFrag = OsFragment()
 
-        val args1 = Bundle()
-        val deviceFrag = ProductFragment()
-        args1.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_DEVICE)
-        deviceFrag.arguments = args1
+        val deviceFrag = DeviceFragment()
 
-        val args2 = Bundle()
-        val favFrag = ProductFragment()
-        args2.putInt(ProductFragment.ARG_FRAG_TYPE, ProductFragment.FRAG_TYPE_FAV)
-        favFrag.arguments = args2
+        val favFrag = FavFragment()
 
         adapter.addFragment(osFrag, getString(R.string.os_version))
         adapter.addFragment(deviceFrag, getString(R.string.devices))

@@ -37,7 +37,7 @@ public class DeviceListTest {
         appCompatTextView.perform(click());
 
         ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recyclerview),
+                allOf(withId(R.id.product_recyclerview),
                         withParent(allOf(withId(R.id.user_main_content),
                                 withParent(allOf(withId(R.id.product_viewpager),
                                         withParent(allOf(withId(R.id.user_main_content),

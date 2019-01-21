@@ -5,6 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 import com.designdemo.uaha.data.model.detail.DetailEntity
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
+
 //
 interface FonoApiService {
 
@@ -22,7 +25,7 @@ interface FonoApiService {
             @Query("device") device: String,
             @Query( "brand") brand: String? = null,
             @Query("position") position: Int? = null
-    ): Call<List<DetailEntity>>
+    ): Deferred<Response<List<DetailEntity>>>
 
     /*
      * Get a list of the latest devices that were asdded

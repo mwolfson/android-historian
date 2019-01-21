@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view
+package com.designdemo.uaha.view.demo
 
 import android.app.Activity
 import android.os.Bundle

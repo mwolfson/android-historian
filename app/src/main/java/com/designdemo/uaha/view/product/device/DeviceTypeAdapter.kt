@@ -1,4 +1,4 @@
-package com.designdemo.uaha.view.product.adapter
+package com.designdemo.uaha.view.product.device
 
 import android.app.Activity
 import android.content.Context
@@ -12,16 +12,15 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.view.detail.DetailActivity
 import com.support.android.designlibdemo.R
 
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.designdemo.uaha.data.model.product.ProductItem
+import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_device.view.*
 
-class DeviceTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductItem>) : RecyclerView.Adapter<DeviceTypeAdapter.ViewHolder>() {
+class DeviceTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductEntity>) : RecyclerView.Adapter<DeviceTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -38,7 +37,7 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         }
     }
 
-    fun getValueAt(position: Int): ProductItem {
+    fun getValueAt(position: Int): ProductEntity {
         return values[position]
     }
 
@@ -47,14 +46,14 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         background = typedValue.resourceId
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceTypeAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_device, parent, false)
         view.setBackgroundResource(background)
 
-        return DeviceTypeAdapter.ViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: DeviceTypeAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.boundString = values[position].title
         holder.titleText.text = values[position].title
         holder.subTitleText.text = values[position].subTitle

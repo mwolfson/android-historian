@@ -1,33 +1,21 @@
 package com.designdemo.uaha.data.model.product
 
-class ProductRepository private constructor(private val productItemDao: ProductItemDao) {
+import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 
-    fun initDeviceData(deviceList: List<ProductItem>) {
-        productItemDao.initDeviceList(deviceList)
+class ProductRepository(private val productItemDao: ProductItemDao) {
+
+    val allDeviceInfo: LiveData<List<ProductEntity>> = productItemDao.getAllDevices()
+    val allOsInfo: LiveData<List<ProductEntity>> = productItemDao.getAllOses()
+    val allFaveInfo: LiveData<List<ProductEntity>> = productItemDao.getAllFaves()
+
+    fun getProductItem(prodName: String): LiveData<ProductEntity> {
+        return productItemDao.getProductItem(prodName)
     }
 
-    fun initOsList(osList: List<ProductItem>) {
-        productItemDao.initOsList(osList)
+    @WorkerThread
+    suspend fun insertItem(productEntity: ProductEntity) {
+        productItemDao.insertItem(productEntity)
     }
-
-    fun initFavesList(osList: List<ProductItem>) {
-        productItemDao.initFavList(osList)
-    }
-
-    fun getDeviceData() = productItemDao.getDeviceData()
-
-    fun getOsData() = productItemDao.getOsData()
-
-    fun getFavData() = productItemDao.getFavData()
-
-    companion object {
-        @Volatile private var instance: ProductRepository? = null
-
-        fun getInstance(quoteDao: ProductItemDao) =
-                instance ?: synchronized(this) {
-                    instance ?: ProductRepository(quoteDao).also { instance = it }
-                }
-    }
-
 
 }

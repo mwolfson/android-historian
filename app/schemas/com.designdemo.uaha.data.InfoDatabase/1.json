@@ -1,0 +1,505 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b2c9f1701e7b33611fe15439e1dd311f",
+    "entities": [
+      {
+        "tableName": "user_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `phone` TEXT NOT NULL, `password` TEXT NOT NULL, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "product_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`title` TEXT NOT NULL, `subtitle` TEXT, `img_id` INTEGER, `wiki_query` TEXT, `product_type` INTEGER, `isFav` INTEGER, PRIMARY KEY(`title`))",
+        "fields": [
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subTitle",
+            "columnName": "subtitle",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imgId",
+            "columnName": "img_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wikiQuery",
+            "columnName": "wiki_query",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "productType",
+            "columnName": "product_type",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isFav",
+            "columnName": "isFav",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "title"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "detail_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productKey` TEXT NOT NULL, `DeviceName` TEXT, `Brand` TEXT, `technology` TEXT, `gprs` TEXT, `edge` TEXT, `announced` TEXT, `status` TEXT, `dimensions` TEXT, `weight` TEXT, `sim` TEXT, `type` TEXT, `size` TEXT, `resolution` TEXT, `card_slot` TEXT, `phonebook` TEXT, `call_records` TEXT, `camera_c` TEXT, `alert_types` TEXT, `loudspeaker_` TEXT, `_3_5mm_jack_` TEXT, `sound_c` TEXT, `wlan` TEXT, `bluetooth` TEXT, `gps` TEXT, `infrared_port` TEXT, `radio` TEXT, `usb` TEXT, `messaging` TEXT, `browser` TEXT, `clock` TEXT, `alarm` TEXT, `games` TEXT, `languages` TEXT, `java` TEXT, `features_c` TEXT, `battery_c` TEXT, `stand_by` TEXT, `talk_time` TEXT, `colors` TEXT, `sensors` TEXT, `cpu` TEXT, `internal` TEXT, `os` TEXT, `body_c` TEXT, `keyboard` TEXT, `primary_` TEXT, `video` TEXT, `secondary` TEXT, `speed` TEXT, `network_c` TEXT, `chipset` TEXT, `features` TEXT, `music_play` TEXT, `protection` TEXT, `gpu` TEXT, `multitouch` TEXT, `loudspeaker` TEXT, `audio_quality` TEXT, `nfc` TEXT, `camera` TEXT, `display` TEXT, `battery_life` TEXT, `_2g_bands` TEXT, `_3g_bands` TEXT, `_4g_bands` TEXT, PRIMARY KEY(`productKey`))",
+        "fields": [
+          {
+            "fieldPath": "productKey",
+            "columnName": "productKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "DeviceName",
+            "columnName": "DeviceName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Brand",
+            "columnName": "Brand",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "technology",
+            "columnName": "technology",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gprs",
+            "columnName": "gprs",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "edge",
+            "columnName": "edge",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "announced",
+            "columnName": "announced",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dimensions",
+            "columnName": "dimensions",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sim",
+            "columnName": "sim",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "resolution",
+            "columnName": "resolution",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "card_slot",
+            "columnName": "card_slot",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phonebook",
+            "columnName": "phonebook",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "call_records",
+            "columnName": "call_records",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "camera_c",
+            "columnName": "camera_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "alert_types",
+            "columnName": "alert_types",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "loudspeaker_",
+            "columnName": "loudspeaker_",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_3_5mm_jack_",
+            "columnName": "_3_5mm_jack_",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sound_c",
+            "columnName": "sound_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wlan",
+            "columnName": "wlan",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bluetooth",
+            "columnName": "bluetooth",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gps",
+            "columnName": "gps",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "infrared_port",
+            "columnName": "infrared_port",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "radio",
+            "columnName": "radio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "usb",
+            "columnName": "usb",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "messaging",
+            "columnName": "messaging",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "browser",
+            "columnName": "browser",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clock",
+            "columnName": "clock",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "alarm",
+            "columnName": "alarm",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "games",
+            "columnName": "games",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "languages",
+            "columnName": "languages",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "java",
+            "columnName": "java",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "features_c",
+            "columnName": "features_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "battery_c",
+            "columnName": "battery_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stand_by",
+            "columnName": "stand_by",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "talk_time",
+            "columnName": "talk_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "colors",
+            "columnName": "colors",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sensors",
+            "columnName": "sensors",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cpu",
+            "columnName": "cpu",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "internal",
+            "columnName": "internal",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "os",
+            "columnName": "os",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "body_c",
+            "columnName": "body_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "keyboard",
+            "columnName": "keyboard",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "primary_",
+            "columnName": "primary_",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "video",
+            "columnName": "video",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "secondary",
+            "columnName": "secondary",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "network_c",
+            "columnName": "network_c",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "chipset",
+            "columnName": "chipset",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "features",
+            "columnName": "features",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "music_play",
+            "columnName": "music_play",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "protection",
+            "columnName": "protection",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gpu",
+            "columnName": "gpu",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "multitouch",
+            "columnName": "multitouch",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "loudspeaker",
+            "columnName": "loudspeaker",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "audio_quality",
+            "columnName": "audio_quality",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nfc",
+            "columnName": "nfc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "camera",
+            "columnName": "camera",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "display",
+            "columnName": "display",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "battery_life",
+            "columnName": "battery_life",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_2g_bands",
+            "columnName": "_2g_bands",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_3g_bands",
+            "columnName": "_3g_bands",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "_4g_bands",
+            "columnName": "_4g_bands",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "productKey"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b2c9f1701e7b33611fe15439e1dd311f\")"
+    ]
+  }
+}

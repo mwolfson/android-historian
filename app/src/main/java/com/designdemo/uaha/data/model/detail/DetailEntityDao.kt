@@ -2,22 +2,24 @@ package com.designdemo.uaha.data.model.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
-class DetailEntityDao {
+@Dao
+interface DetailEntityDao {
 
-    private val detailEntityLocal = mutableMapOf<String, DetailEntity>()
+    @Query("SELECT * FROM detail_table ORDER BY DeviceName ASC")
+    fun getAllDetailItems(): LiveData<List<DetailEntity>>
 
-    private val detailList = MutableLiveData<Map<String, DetailEntity>>()
+    @Query("SELECT * FROM detail_table WHERE productKey = :deviceNameIn LIMIT 1")
+    fun getDetailItem(deviceNameIn: String): LiveData<DetailEntity>
 
-    init {
-        detailList.value = detailEntityLocal
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addDetailItem(detailItem: DetailEntity)
 
-    fun addDetail(mapName: String, detailItem: DetailEntity) {
-        detailEntityLocal.put(mapName, detailItem)
+    @Query("DELETE FROM detail_table")
+    fun deleteAll()
 
-        detailList.value = detailEntityLocal
-    }
-
-    fun getDetailData() = detailList as LiveData<Map<String, DetailEntity>>
 }

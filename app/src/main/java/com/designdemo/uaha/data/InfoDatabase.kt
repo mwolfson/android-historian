@@ -82,12 +82,12 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductEntity("Nexus 6","Motorola", R.drawable.ic_device_n6, "Motorola%20Nexus%206", 2))
                 productItemDao.insertItem(ProductEntity("Nexus 7","Asus", R.drawable.ic_device_n7, "ASUS%20Nexus%207", 2))
                 productItemDao.insertItem(ProductEntity("Nexus 9","HTC", R.drawable.ic_device_n9, "HTC%20Nexus%209", 2))
-                productItemDao.insertItem(ProductEntity("Pixel","Google", R.drawable.ic_device_p, "Pixel-Google", 2))
-                productItemDao.insertItem(ProductEntity("Pixel XL","Google", R.drawable.ic_device_px, "Pixel XL-Google", 2))
-                productItemDao.insertItem(ProductEntity("Pixel2","Google", R.drawable.ic_device_p2, "Pixel2-Google", 2))
-                productItemDao.insertItem(ProductEntity("Pixel2 XL","Google", R.drawable.ic_device_p2x, "Pixel2 XL-Google", 2))
-                productItemDao.insertItem(ProductEntity("Pixel3","Google", R.drawable.ic_device_p3, "Pixel3-Google", 2))
-                productItemDao.insertItem(ProductEntity("Pixel3 XL","Google", R.drawable.ic_device_p3x, "HTC%20Nexus%209", 2))
+                productItemDao.insertItem(ProductEntity("Pixel","Google", R.drawable.ic_device_p, "Pixel%20Google", 2))
+                productItemDao.insertItem(ProductEntity("Pixel XL","Google", R.drawable.ic_device_px, "Pixel%20XL%20Google", 2))
+                productItemDao.insertItem(ProductEntity("Pixel 2","Google", R.drawable.ic_device_p2, "Pixel%202%20Google", 2))
+                productItemDao.insertItem(ProductEntity("Pixel 2 XL","Google", R.drawable.ic_device_p2x, "Pixel2%20XL%20Google", 2))
+                productItemDao.insertItem(ProductEntity("Pixel 3","Google", R.drawable.ic_device_p3, "Pixel3%20Google", 2))
+                productItemDao.insertItem(ProductEntity("Pixel 3 XL","Google", R.drawable.ic_device_p3x, "Pixel%203%20Google", 2))
             }
 //
 //            // OS Items Pre-load

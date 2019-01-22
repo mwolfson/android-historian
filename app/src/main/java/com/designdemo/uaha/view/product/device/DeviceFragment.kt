@@ -29,6 +29,7 @@ class DeviceFragment : Fragment() {
 
         val rv = mainView.product_recyclerview
         val noText = mainView.product_nodata_text
+        val noLayout = mainView.product_nodata_layout
 
         mainActivity = activity
 
@@ -37,11 +38,11 @@ class DeviceFragment : Fragment() {
             if (devList.isNotEmpty()) {
                 setupRecyclerView(rv, devList)
                 product_recyclerview.setVisibility(View.VISIBLE)
-                noText.setVisibility(View.GONE)
+                noLayout.setVisibility(View.GONE)
             } else {
                 noText.setText(getString(R.string.getting_device_info))
                 product_recyclerview.setVisibility(View.GONE)
-                noText.setVisibility(View.VISIBLE)
+                noLayout.setVisibility(View.VISIBLE)
             }
         })
 

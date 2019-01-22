@@ -27,6 +27,9 @@ class FavFragment : Fragment() {
 
         val rv = mainView.product_recyclerview
         val noText = mainView.product_nodata_text
+        val noLayout = mainView.product_nodata_layout
+        val noTextImg = mainView.product_nodata_img
+
 
         mainActivity = activity
 
@@ -35,12 +38,11 @@ class FavFragment : Fragment() {
             if (favList.isNotEmpty()) {
                 setupRecyclerView(rv, favList)
                 product_recyclerview.setVisibility(View.VISIBLE)
-                noText.setVisibility(View.GONE)
+                noLayout.setVisibility(View.GONE)
             } else {
                 noText.setText(getString(R.string.add_fav_text))
-                val drawable = mainView.context.resources.getDrawable(R.drawable.ic_favorite_green)
-                noText.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null)
-                noText.setVisibility(View.VISIBLE)
+                noTextImg.setVisibility(View.VISIBLE)
+                noLayout.setVisibility(View.VISIBLE)
                 product_recyclerview.setVisibility(View.GONE)
             }
         })

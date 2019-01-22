@@ -295,9 +295,10 @@
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_account_lg" />
+                                android:layout_width="72dp"
+                                android:layout_height="72dp"
+                                android:layout_marginBottom="16dp"
+                                app:srcCompat="@drawable/vct_account_circle" />
 
                             <Button
                                 android:id="@+id/profile_pic_button"

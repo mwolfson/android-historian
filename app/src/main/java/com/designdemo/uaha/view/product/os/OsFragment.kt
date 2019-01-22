@@ -27,6 +27,7 @@ class OsFragment : Fragment() {
 
         val rv = mainView.product_recyclerview
         val noText = mainView.product_nodata_text
+        val noLayout = mainView.product_nodata_layout
 
         mainActivity = activity
 
@@ -35,11 +36,11 @@ class OsFragment : Fragment() {
             if (osList.isNotEmpty()) {
                 setupRecyclerView(rv, osList)
                 product_recyclerview.setVisibility(View.VISIBLE)
-                noText.setVisibility(View.GONE)
+                noLayout.setVisibility(View.GONE)
             } else {
                 noText.setText(getString(R.string.getting_os_info))
                 product_recyclerview.setVisibility(View.GONE)
-                noText.setVisibility(View.VISIBLE)
+                noLayout.setVisibility(View.VISIBLE)
             }
         })
 

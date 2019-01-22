@@ -16,4 +16,6 @@
     <dimen name="snackbar_offset">64dp</dimen>
     <dimen name="card_corner_rad">12dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
+
+    <integer name="anim_duration">300</integer>
 </resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <set xmlns:android="http://schemas.android.com/apk/res/android">
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleX"
+                android:valueTo="1.525"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleY"
+                android:valueTo="1.525"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="translationZ"
+                android:valueTo="4dp"
+                android:valueType="floatType" />
+
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleX"
+                android:valueTo="1.0"
+                android:startOffset="@integer/anim_duration"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleY"
+                android:startOffset="@integer/anim_duration"
+                android:valueTo="1.0"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="translationZ"
+                android:startOffset="@integer/anim_duration"
+                android:valueTo="0dp"
+                android:valueType="floatType" />
+        </set>
+    </item>
+
+    <item>
+        <set>
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleX"
+                android:valueTo="1.525"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleY"
+                android:valueTo="1.525"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="translationZ"
+                android:valueTo="4dp"
+                android:valueType="floatType" />
+
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleX"
+                android:valueTo="1.0"
+                android:startOffset="@integer/anim_duration"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="scaleY"
+                android:startOffset="@integer/anim_duration"
+                android:valueTo="1.0"
+                android:valueType="floatType" />
+            <objectAnimator
+                android:duration="@integer/anim_duration"
+                android:propertyName="translationZ"
+                android:startOffset="@integer/anim_duration"
+                android:valueTo="0dp"
+                android:valueType="floatType" />
+        </set>
+    </item>
+</selector>

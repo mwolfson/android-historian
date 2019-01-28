@@ -30,7 +30,7 @@ import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.snackbar.Snackbar
-//import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
+import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -54,12 +54,6 @@ class DetailActivity : AppCompatActivity() {
         const private val TAG = "DetailActivity"
 
         const val EXTRA_APP_NAME = "os_name"
-
-        // To use the FONO API, you will need to add your own API key to the gradle.properties file
-        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
-        // App will degrade gracefully if KEY is not found
-//        const val TOKEN = FONO_API_KEY
-        const val TOKEN = "NA"
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {

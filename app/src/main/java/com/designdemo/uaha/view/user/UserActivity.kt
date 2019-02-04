@@ -102,7 +102,7 @@ class UserActivity : AppCompatActivity() {
                                     userViewModel.addUserData(oldUserInfo)
                                 }
                         val snackbarLayout = snackbar.view
-                        snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
+                        snackbar.setAnchorView(user_fab)
                         snackbar.show()
                     } else {
                         //No backup available, so don't show undo option
@@ -173,8 +173,7 @@ class UserActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(user_main_scroll_layout, getString(displayString), Snackbar.LENGTH_SHORT)
         val snackbarLayout = snackbar.view
         //Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
-        //TODO sigh, also need to accomidate for if the keyboard is showing
-        snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
+        snackbar.setAnchorView(user_fab)
         snackbar.show()
     }
 

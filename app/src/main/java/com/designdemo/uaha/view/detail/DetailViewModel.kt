@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.detail.DetailRepository
@@ -24,6 +25,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     private val detailRepository: DetailRepository
     private val prodRepository: ProductRepository
     private val allDetails: LiveData<List<DetailEntity>>
+
 
     companion object {
         val TAG = "DetailViewModel"
@@ -54,6 +56,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     }
 
     fun getFonoNetInfo(productKeyIn: String) {
+        progressBarVisibility.postValue(true)
         launch(Dispatchers.IO) {
             try {
                 val product = productKeyIn.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -64,9 +67,11 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
 
                         val detailToSave = resultList.last().copy(productKey = productKeyIn)
                         insertDetail(detailToSave)
+                        progressBarVisibility.postValue(false)
                     }
                 }
             } catch (e: Exception) {
+                progressBarVisibility.postValue(false)
                 Log.e(TAG, "Dang what is the exception ${e.toString()}", e)
             }
         }
@@ -92,6 +97,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     }
 
 
+
     fun insertFav(productEntity: ProductEntity) = launch(Dispatchers.IO) {
         prodRepository.insertItem(productEntity)
     }
@@ -99,6 +105,12 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     fun getDetailsForItem(deviceName: String): LiveData<DetailEntity> = detailRepository.getDetailItem(deviceName)
 
     fun getProductForName(deviceName: String): LiveData<ProductEntity> = prodRepository.getProductItem(deviceName)
+
+    private var progressBarVisibility = MutableLiveData<Boolean>()
+
+    fun getProgressBarVisibility() : LiveData<Boolean> {
+        return progressBarVisibility
+    }
 
     override fun onCleared() {
         super.onCleared()

@@ -68,8 +68,6 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         handleIntent(intent)
 
-
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition()
         }
@@ -82,24 +80,22 @@ class DetailActivity : AppCompatActivity() {
                 localProdItem = prodItem
                 Glide.with(this).load(prodItem.imgId).centerCrop().into(backdrop)
                 setFabIcon()
-
-                val nonNullableInt: Int
-                val nullableInt: Int? = localProdItem!!.imgId
-                if (nullableInt != null) {
-                    nonNullableInt = nullableInt
-                } else {
-                    nonNullableInt = 0
-                }
-                setupPalette(nonNullableInt)
+                setupPalette(prodItem.imgId!!)
                 setupToolbar()
-
             }
         })
 
         detailViewModel.getDetailsForItem(androidName).observe(this, Observer { detailsForItem ->
             detailsForItem?.let {
-                device_info_progress.visibility = View.GONE
                 setDeviceInfoViews(detailsForItem)
+            }
+        })
+
+        detailViewModel.getProgressBarVisibility().observe(this, Observer { progVisibility ->
+            if (progVisibility) {
+                details_progress_layout.visibility = View.VISIBLE
+            } else {
+                details_progress_layout.visibility = View.GONE
             }
         })
 
@@ -173,13 +169,10 @@ class DetailActivity : AppCompatActivity() {
             }
 
             // Notify the User with a snackbar
-            val snackbar = Snackbar.make(detail_main_linear, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
-
-            // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the Material Spec
-            val snackbarLayout = snackbar.view
-            snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
-
-            snackbar.show()
+            // Need to set the FAB as the anchor view, so this appears higher then the BottomAppBar per the Material Spec
+            Snackbar.make(detail_main_linear, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
+                    .setAnchorView(fab_detail)
+                    .show()
         }
     }
 
@@ -291,7 +284,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun clearDeviceInfoViews() {
-        device_info_progress.visibility = View.VISIBLE
         details_device_name.text = getString(R.string.getting_information)
         details_device_name.setTextColor(resources.getColor(black))
         details_features.text = ""

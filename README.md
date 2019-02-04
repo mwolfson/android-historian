@@ -15,6 +15,14 @@ _Modifiy gradle.properties to build locally_
 In order to build locally, you will need to copy/rename the file named gradle.properties.dist to gradle.properties - then you will enter an API key for Fono.
 [Fono API](https://fonoapi.freshpixl.com/)
 
+Feb 2, 2019
+"Modern Android" Update
+- 100% Kotlin 
+- Converted to MVVM
+    - LiveData
+- Room Database
+- Coroutines
+
 Oct 16, 2018
 - Added API for getting Phone information
 

@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.util.DisplayMetrics
+import android.widget.LinearLayout
 
 import androidx.annotation.DimenRes
 import com.support.android.designlibdemo.R
@@ -94,6 +95,23 @@ object UiUtil {
         str.setSpan(android.text.style.StyleSpan(Typeface.ITALIC), word1.length + 1, str.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         return str
+    }
+
+    fun getSnackbarLpOffset(cxt: Activity): LinearLayout.LayoutParams {
+        val pxScreenHeight = getScreenHeight(cxt)
+        val pxToolbar = getPxForRes(R.dimen.snackbar_offset, cxt)
+        val pxTopOffset = pxScreenHeight - pxToolbar
+        val sideOffset = getPxForRes(R.dimen.large_margin, cxt)
+
+        val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.topMargin = pxTopOffset.toInt()
+        lp.leftMargin = sideOffset.toInt()
+        lp.rightMargin = sideOffset.toInt()
+        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
+        return lp
     }
 
     fun applyBoldFirstWord(word1: String, word2: String): SpannableStringBuilder {

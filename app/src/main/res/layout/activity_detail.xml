@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/user_main_content"
+    android:id="@+id/user_main_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -45,7 +45,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/main_nested_scroll"
+        android:id="@+id/detail_nested_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -451,6 +451,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/detail_percentage_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/toolbar_height"
@@ -600,6 +601,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -623,6 +625,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        app:tint="@color/white"
         app:layout_anchor="@+id/bottom_appbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

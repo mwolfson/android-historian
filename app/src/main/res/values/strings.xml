@@ -196,6 +196,23 @@
         <item>India</item>
     </string-array>
 
+    <string-array name="device_names">
+        <item>HTC%20G1</item>
+        <item>Samsung%20Galaxy%20Nexus</item>
+        <item>HTC%20Nexus%201</item>
+        <item>LG%20Nexus%204</item>
+        <item>LG%20Nexus%205</item>
+        <item>ASUS%20Nexus%207</item>
+        <item>HTC%20Nexus%209</item>
+        <item>Samsung%20Nexus%20S</item>
+        <item>Pixel-Google</item>
+        <item>Pixel XL-Google</item>
+        <item>Pixel2-Google</item>
+        <item>Pixel2 XL-Google</item>
+        <item>Pixel3-Google</item>
+        <item>Pixel3 XL-Google</item>
+    </string-array>
+
     <!-- BottomNavView -->
     <string name="title_activity_bottom_bav">BottomBavActivity</string>
     <string name="bottomnav1">Option1</string>

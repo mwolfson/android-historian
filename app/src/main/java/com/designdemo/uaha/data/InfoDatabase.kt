@@ -68,8 +68,7 @@ abstract class InfoDatabase : RoomDatabase() {
             userDao.deleteAll()
             userDao.insert(UserEntity("Preset","5555555555","presetPW"))
 
-            productItemDao.deleteAll()
-//            //Device Items Pre-load
+//          Device Items Pre-load
             if(productItemDao.getDeviceItems().isEmpty()) {
                 productItemDao.deleteAllDevices()
                 productItemDao.insertItem(ProductEntity("Dream","HTC", R.drawable.ic_device_g1, "HTC%20G1", 2))
@@ -89,8 +88,8 @@ abstract class InfoDatabase : RoomDatabase() {
                 productItemDao.insertItem(ProductEntity("Pixel 3","Google", R.drawable.ic_device_p3, "Pixel3%20Google", 2))
                 productItemDao.insertItem(ProductEntity("Pixel 3 XL","Google", R.drawable.ic_device_p3x, "Pixel%203%20Google", 2))
             }
-//
-//            // OS Items Pre-load
+
+//          OS Items Pre-load
             if(productItemDao.getOsItems().isEmpty()) {
                 productItemDao.deleteAllOS()
                 productItemDao.insertItem(ProductEntity("Cupcake","API Level 3", R.drawable.ic_cupcake, "Android%20Cupcake", 1))

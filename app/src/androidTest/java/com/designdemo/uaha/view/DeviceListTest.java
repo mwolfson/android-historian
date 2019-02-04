@@ -38,9 +38,9 @@ public class DeviceListTest {
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.product_recyclerview),
-                        withParent(allOf(withId(R.id.user_main_content),
+                        withParent(allOf(withId(R.id.user_main_coordinator),
                                 withParent(allOf(withId(R.id.product_viewpager),
-                                        withParent(allOf(withId(R.id.user_main_content),
+                                        withParent(allOf(withId(R.id.user_main_coordinator),
                                                 withParent(allOf(withId(R.id.drawer_layout),
                                                         withParent(allOf(withId(android.R.id.content),
                                                                 withParent(withId(R.id.action_bar_root)))))))))))),

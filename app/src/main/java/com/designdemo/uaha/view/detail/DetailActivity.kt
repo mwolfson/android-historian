@@ -6,36 +6,27 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.designdemo.uaha.data.model.VersionData
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
-import com.designdemo.uaha.data.model.wiki.WikiResponse
-import com.designdemo.uaha.net.FonoApiFactory
-import com.designdemo.uaha.net.WikiApiFactory
 import com.designdemo.uaha.util.UiUtil
 import com.google.android.material.snackbar.Snackbar
-//import com.support.android.designlibdemo.BuildConfig.FONO_API_KEY
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
 import kotlinx.android.synthetic.main.activity_detail.*
-import okhttp3.OkHttpClient
-import java.io.IOException
+import kotlin.random.Random
 
 class DetailActivity : AppCompatActivity() {
 
@@ -46,20 +37,12 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var detailViewModel: DetailViewModel
 
-    private lateinit var okclient: OkHttpClient
-    private var osVersion: Int = 0
     private var androidName = "unset"
 
     companion object {
         const private val TAG = "DetailActivity"
 
         const val EXTRA_APP_NAME = "os_name"
-
-        // To use the FONO API, you will need to add your own API key to the gradle.properties file
-        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
-        // App will degrade gracefully if KEY is not found
-//        const val TOKEN = FONO_API_KEY
-        const val TOKEN = "NA"
     }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,8 +54,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
         detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-
-        okclient = OkHttpClient()
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
@@ -87,33 +68,44 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         handleIntent(intent)
 
+
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition()
         }
 
-        setupToolbar(androidName)
         setupFab()
 
         val product = androidName.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         detailViewModel.getProductForName(product[0]).observe(this, Observer { prodItem ->
-            prodItem?.let{
+            prodItem?.let {
                 localProdItem = prodItem
                 Glide.with(this).load(prodItem.imgId).centerCrop().into(backdrop)
                 setFabIcon()
-                setupPalette()
+
+                val nonNullableInt: Int
+                val nullableInt: Int? = localProdItem!!.imgId
+                if (nullableInt != null) {
+                    nonNullableInt = nullableInt
+                } else {
+                    nonNullableInt = 0
+                }
+                setupPalette(nonNullableInt)
+                setupToolbar()
 
             }
         })
 
         detailViewModel.getDetailsForItem(androidName).observe(this, Observer { detailsForItem ->
-            detailsForItem?.let{
+            detailsForItem?.let {
                 device_info_progress.visibility = View.GONE
                 setDeviceInfoViews(detailsForItem)
             }
         })
 
-        //Retrieve the phone info from net, and put in DB when found
+        //Retrieve the phone and WIKI info from net, and put in DB when found
         detailViewModel.getFonoNetInfo(androidName)
+//        detailViewModel.getWikiNetInfo("Android Oreo")
     }
 
 
@@ -124,14 +116,13 @@ class DetailActivity : AppCompatActivity() {
 
     private fun handleIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
+            Log.d(TAG, "The search query is happenning ${intent.getStringExtra(SearchManager.QUERY)}");
             val query = intent.getStringExtra(SearchManager.QUERY)
         }
     }
 
     //TODO, setup this better
-    private fun setupToolbar(androidName: String) {
-        osVersion = VersionData.getOsNum(androidName)
-
+    private fun setupToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -140,19 +131,21 @@ class DetailActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_shuffle -> {
                     // Get a random Android product, and then refresh the UI
+                    // TODO need to move to VM, because it is broken here
                     clearDeviceInfoViews()
-                    this.androidName = VersionData.getRandomPhoneName()
-                    onResume()
+                    val deviceStrings = resources.getStringArray(R.array.device_names)
+                    val randInt = Random.nextInt(deviceStrings.size - 1)
+                    //TODO Send this value to VM, and the force a refresh of views with data from this item
+                    detailViewModel.updateProductFromRefresh(deviceStrings[randInt])
+                    this.androidName = deviceStrings[randInt]
+//                    onResume()
                     true
                 }
             }
             false
         }
 
-        //Split the and Version to display better
-        val splitString = VersionData.getProductName(osVersion)
-        val parts = splitString.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        collapsing_toolbar.title = parts[0]
+        collapsing_toolbar.title = localProdItem!!.title
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -173,77 +166,55 @@ class DetailActivity : AppCompatActivity() {
                 toSetFav = 0
             }
 
-            val prodFaved = localProdItem?.copy(isFav = toSetFav)
-            detailViewModel.insertFav(prodFaved!!)
+            localProdItem?.apply {
+                isFav = toSetFav
+            }?.let { item ->
+                detailViewModel.insertFav(item)
+            }
 
             // Notify the User with a snackbar
-            // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
-            val pxScreenHeight = UiUtil.getScreenHeight(this)
-            val pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this)
-            val pxTopOffset = pxScreenHeight - pxToolbar
-            val sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this)
+            val snackbar = Snackbar.make(detail_main_linear, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
 
-            val lp = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            lp.topMargin = pxTopOffset.toInt()
-            lp.leftMargin = sideOffset.toInt()
-            lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
-
-            val mainView = findViewById<View>(R.id.user_main_content)
-            val snackbar = Snackbar.make(mainView, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
+            // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the Material Spec
             val snackbarLayout = snackbar.view
+            snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
 
-            // Set the Layout Params we calculated before showing the Snackbar
-            snackbarLayout.layoutParams = lp
             snackbar.show()
         }
     }
 
     private fun setFabIcon() {
         if (localProdItem!!.isFav == 1) {
-            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_on))
+            fab_detail.isSelected = true
+            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.vct_fav_white_sel))
         } else {
-            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_off))
+            fab_detail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.vct_fav_white_unsel))
         }
     }
 
 
-    private fun setupPalette() {
-        val bm = BitmapFactory.decodeResource(resources, VersionData.getOsDrawable(osVersion))
+    private fun setupPalette(imgId: Int) {
+        val bm = BitmapFactory.decodeResource(resources, imgId)
         try {
             Palette.from(bm).generate { palette ->
-                Log.d("Palette", "Palette has been generated")
-                val palVib = findViewById<TextView>(R.id.palette_vibrant)
-                val perc1left = findViewById<TextView>(R.id.perc1_left)
-                perc1left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
-                palVib.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+                Log.d(TAG, "Palette has been generated")
+                perc1_left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+                palette_vibrant.setBackgroundColor(palette!!.getVibrantColor(0x000000))
 
-                val palVibDark = findViewById<TextView>(R.id.palette_vibrant_dark)
-                val perc1mid = findViewById<TextView>(R.id.perc1_middle)
-                perc1mid.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
-                palVibDark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+                perc1_middle.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+                palette_vibrant_dark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
 
-                val palVibLight = findViewById<TextView>(R.id.palette_vibrant_light)
-                val perc1right = findViewById<TextView>(R.id.perc1_right)
-                perc1right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
-                palVibLight.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+                perc1_right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+                palette_vibrant_light.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
 
-                val palMuted = findViewById<TextView>(R.id.palette_muted)
-                val perc2left = findViewById<TextView>(R.id.perc2_left)
-                perc2left.setBackgroundColor(palette!!.getMutedColor(0x000000))
-                palMuted.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                perc2_left.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                palette_muted.setBackgroundColor(palette!!.getMutedColor(0x000000))
 
-                val palMutedDark = findViewById<TextView>(R.id.palette_muted_dark)
-                val perc2mid = findViewById<TextView>(R.id.perc2_middle)
-                perc2mid.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
-                palMutedDark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                perc2_middle.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                palette_muted_dark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
 
-                val palMutedLight = findViewById<TextView>(R.id.palette_muted_light)
-                val perc2right = findViewById<TextView>(R.id.perc2_right)
-                perc2right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
-                palMutedLight.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                perc2_right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                palette_muted_light.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
 
                 //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
                 collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
@@ -269,7 +240,7 @@ class DetailActivity : AppCompatActivity() {
                 collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
             }
         } catch (e: Exception) {
-            Log.e("DetailActivity", "Error with image! + ${e.toString()}", e)
+            Log.e(TAG, "Error with image! + ${e.toString()}", e)
         }
     }
 

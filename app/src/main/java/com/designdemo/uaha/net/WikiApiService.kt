@@ -1,10 +1,11 @@
 package com.designdemo.uaha.net
-//
-import retrofit2.Call
+
+import com.designdemo.uaha.data.model.wiki.WikiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-import com.designdemo.uaha.data.model.wiki.WikiResponse
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
 
 interface WikiApiService {
 
@@ -18,6 +19,5 @@ interface WikiApiService {
             @Query("prop") propIn: String = "revisions",
             @Query("format") formatIn: String = "json",
             @Query("rvprop") rvPropIn: String = "content"
-    ): Call<WikiResponse>
-
+    ): Deferred<Response<WikiResponse>>
 }

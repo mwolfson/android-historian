@@ -3,7 +3,6 @@ package com.designdemo.uaha.view;
 import android.content.Context;
 import android.content.Intent;
 
-import com.designdemo.uaha.data.model.VersionData;
 import com.designdemo.uaha.view.detail.DetailActivity;
 import com.support.android.designlibdemo.R;
 
@@ -34,14 +33,14 @@ public class DetailActivityTest  {
                     Context targetContext = InstrumentationRegistry.getInstrumentation()
                             .getTargetContext();
                     Intent result = new Intent(targetContext, DetailActivity.class);
-                    result.putExtra("os_name", VersionData.getProductName(VersionData.OS_GINGERBREAD));
+                    result.putExtra("os_name", "Cupcake-API Level 3");
                     return result;
                 }
             };
 
     @Test
     public void detailViewTest() {
-        onView(withId(R.id.toolbar)).check(matches(withText("Gingerbread")));
+        onView(withId(R.id.toolbar)).check(matches(withText("Cupcake")));
     }
 
 //    @Test

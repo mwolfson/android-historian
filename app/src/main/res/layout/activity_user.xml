@@ -8,11 +8,12 @@
     android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/user_main_content"
+        android:id="@+id/user_main_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/user_main_scroll_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="48dp">
@@ -813,10 +814,9 @@
             android:id="@+id/user_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:backgroundTint="@color/fab_selector"
             app:layout_anchor="@+id/bottom_appbar"
-            app:srcCompat="@drawable/vct_save" />
+            app:tint="@color/white"
+            app:srcCompat="@drawable/vct_save"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

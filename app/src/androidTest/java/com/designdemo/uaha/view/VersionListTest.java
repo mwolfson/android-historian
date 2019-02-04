@@ -35,7 +35,7 @@ public class VersionListTest {
     public void versionListTest() {
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.product_recyclerview),
-                        withParent(allOf(withId(R.id.user_main_content),
+                        withParent(allOf(withId(R.id.user_main_coordinator),
                                 withParent(withId(R.id.product_viewpager)))),
                         isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
@@ -44,7 +44,7 @@ public class VersionListTest {
                 allOf(withId(R.id.backdrop),
                         withParent(allOf(withId(R.id.collapsing_toolbar),
                                 withParent(allOf(withId(R.id.appbar),
-                                        withParent(allOf(withId(R.id.user_main_content),
+                                        withParent(allOf(withId(R.id.user_main_coordinator),
                                                 withParent(allOf(withId(android.R.id.content),
                                                         withParent(withId(R.id.action_bar_root)))))))))),
                         isDisplayed()));
@@ -56,9 +56,9 @@ public class VersionListTest {
     public void testListContent() {
         ViewInteraction recyclerView = onView(
                 AllOf.allOf(withId(R.id.product_recyclerview),
-                        withParent(AllOf.allOf(withId(R.id.user_main_content),
+                        withParent(AllOf.allOf(withId(R.id.user_main_coordinator),
                                 withParent(AllOf.allOf(withId(R.id.product_viewpager),
-                                        withParent(AllOf.allOf(withId(R.id.user_main_content),
+                                        withParent(AllOf.allOf(withId(R.id.user_main_coordinator),
                                                 withParent(AllOf.allOf(withId(R.id.drawer_layout),
                                                         withParent(AllOf.allOf(withId(android.R.id.content),
                                                                 withParent(withId(R.id.action_bar_root)))))))))))),

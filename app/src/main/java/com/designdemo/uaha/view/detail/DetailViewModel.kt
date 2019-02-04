@@ -10,6 +10,8 @@ import com.designdemo.uaha.data.model.detail.DetailRepository
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.data.model.product.ProductRepository
 import com.designdemo.uaha.net.FonoApiFactory
+import com.designdemo.uaha.net.WikiApiFactory
+//import com.support.android.designlibdemo.BuildConfig
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -22,6 +24,15 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     private val detailRepository: DetailRepository
     private val prodRepository: ProductRepository
     private val allDetails: LiveData<List<DetailEntity>>
+
+    companion object {
+        val TAG = "DetailViewModel"
+        // To use the FONO API, you will need to add your own API key to the gradle.properties file
+        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
+        // App will degrade gracefully if KEY is not found
+//        const val TOKEN = BuildConfig.FONO_API_KEY
+        const val TOKEN = "NA"
+    }
 
     init {
         val detailItemDao = InfoDatabase.getDatabase(application, this).detailDao()
@@ -37,11 +48,16 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
         detailRepository.insertDetailItem(detailItem)
     }
 
+    fun updateProductFromRefresh(productIn: String) {
+        val product = productIn.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        getFonoNetInfo(product[0])
+    }
+
     fun getFonoNetInfo(productKeyIn: String) {
         launch(Dispatchers.IO) {
             try {
                 val product = productKeyIn.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                val result = FonoApiFactory().create().getDevice(DetailActivity.TOKEN, product[0], product[1], null).await()
+                val result = FonoApiFactory().create().getDevice(TOKEN, product[0], product[1], null).await()
                 if (result.isSuccessful) {
                     withContext(Dispatchers.Main) {
                         val resultList = result.body()!!
@@ -51,9 +67,28 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
                     }
                 }
             } catch (e: Exception) {
-                Log.d("DetailActivityViewModel", "Dang what is the exception ${e.toString()}", e)
+                Log.e(TAG, "Dang what is the exception ${e.toString()}", e)
             }
         }
+    }
+
+    fun getWikiNetInfo(queryIn: String) {
+        launch(Dispatchers.IO) {
+            try {
+                val result = WikiApiFactory().create().getWikiResponse(queryIn).await()
+
+                if (result.isSuccessful) {
+                    val wikiItem = result.body()!!
+
+                    Log.d(TAG, "The wiki response did return ${wikiItem.toString()}")
+                } else {
+                    Log.d(TAG,"WIKI response DIDN'T work");
+                }
+            } catch (ex: Exception) {
+                Log.e(TAG, "Dang WIKI response wasn't right ${ex.toString()}", ex)
+            }
+        }
+
     }
 
 

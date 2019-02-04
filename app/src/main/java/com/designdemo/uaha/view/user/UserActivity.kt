@@ -41,7 +41,7 @@ class UserActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
     //Local copy of usersInfo list, to be used when applying Undo button in snackbar
-    private lateinit var users: List<UserEntity>
+    private var users = listOf<UserEntity>()
 
     // Lambda to add a close listener on the chip, and also put a random background color
     val setChipCloseAndRandomColor: (Chip) -> Unit = {
@@ -53,8 +53,6 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
         mainActivity = this
-
-        users = listOf()
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
@@ -98,12 +96,13 @@ class UserActivity : AppCompatActivity() {
                     if (sizeOfList > 1) {
                         val oldUserInfo = users.get(sizeOfList - 2)
 
-                        val snackbar = Snackbar.make(user_main_content, getString(statusInt), Snackbar.LENGTH_LONG)
+                        //Show snackbar, and include the option to Undo the previous operation
+                        val snackbar = Snackbar.make(user_main_coordinator, getString(statusInt), Snackbar.LENGTH_LONG)
                                 .setAction(getString(R.string.undo)) { _ ->
                                     userViewModel.addUserData(oldUserInfo)
                                 }
                         val snackbarLayout = snackbar.view
-                        snackbarLayout.layoutParams = getSnackBarLayoutParams()
+                        snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
                         snackbar.show()
                     } else {
                         //No backup available, so don't show undo option
@@ -171,33 +170,12 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun showSnackbar(@StringRes displayString: Int) {
-        val snackbar = Snackbar.make(user_main_content, getString(displayString), Snackbar.LENGTH_SHORT)
+        val snackbar = Snackbar.make(user_main_scroll_layout, getString(displayString), Snackbar.LENGTH_SHORT)
         val snackbarLayout = snackbar.view
-        snackbarLayout.layoutParams = getSnackBarLayoutParams()
+        //Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        //TODO sigh, also need to accomidate for if the keyboard is showing
+        snackbarLayout.layoutParams = UiUtil.getSnackbarLpOffset(this)
         snackbar.show()
-    }
-
-    /**
-     * Setup Snackbar, including special accomidations for BottomAppBar
-     * Notify the User with a snackbar
-     * Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
-     * TODO sigh, also need to accomidate for if the keyboard is showing
-     *  TODO The Screen calculation stuff is duplicated on the DetailActivity
-     */
-    private fun getSnackBarLayoutParams(): LinearLayout.LayoutParams {
-        val pxScreenHeight = UiUtil.getScreenHeight(this)
-        val pxToolbar = UiUtil.getPxForRes(R.dimen.snackbar_offset, this)
-        val pxTopOffset = pxScreenHeight - pxToolbar
-        val sideOffset = UiUtil.getPxForRes(R.dimen.large_margin, this)
-
-        val lp = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        lp.topMargin = pxTopOffset.toInt()
-        lp.leftMargin = sideOffset.toInt()
-        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
-        return lp
     }
 
     private fun setupChips() {

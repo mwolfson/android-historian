@@ -97,23 +97,6 @@ object UiUtil {
         return str
     }
 
-    fun getSnackbarLpOffset(cxt: Activity): LinearLayout.LayoutParams {
-        val pxScreenHeight = getScreenHeight(cxt)
-        val pxToolbar = getPxForRes(R.dimen.snackbar_offset, cxt)
-        val pxTopOffset = pxScreenHeight - pxToolbar
-        val sideOffset = getPxForRes(R.dimen.large_margin, cxt)
-
-        val lp = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        lp.topMargin = pxTopOffset.toInt()
-        lp.leftMargin = sideOffset.toInt()
-        lp.rightMargin = sideOffset.toInt()
-        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
-        return lp
-    }
-
     fun applyBoldFirstWord(word1: String, word2: String): SpannableStringBuilder {
         val str = SpannableStringBuilder("$word1\n$word2")
         str.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

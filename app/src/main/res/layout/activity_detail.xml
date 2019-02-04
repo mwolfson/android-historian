@@ -58,6 +58,28 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/details_progress_layout"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:orientation="horizontal"
+                android:background="@color/grey_200"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginLeft="64dp"
+                    android:text="Getting info"/>
+
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/Widget.AppCompat.ProgressBar"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/spec_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,14 +127,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="16dp" />
-
-                            <ProgressBar
-                                android:id="@+id/device_info_progress"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="16dp"
-                                style="@style/Widget.AppCompat.ProgressBar"
-                                android:visibility="gone"/>
 
                             <TextView
                                 android:id="@+id/details_features"

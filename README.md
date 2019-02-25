@@ -22,6 +22,7 @@ Feb 2, 2019
     - LiveData
 - Room Database
 - Coroutines
+- Jetpack Dependencies
 
 Oct 16, 2018
 - Added API for getting Phone information

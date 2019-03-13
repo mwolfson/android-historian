@@ -279,6 +279,7 @@
     <string name="bottomnavview">BottomNavView</string>
     <string name="motionlayout">MotionLayout</string>
     <string name="search">Search</string>
+    <string name="os_and_device_historian">OS and Device Historian</string>
 
     <!-- Lost and Found -->
 

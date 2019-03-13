@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
@@ -21,6 +23,7 @@ import com.designdemo.uaha.view.product.fav.FavFragment
 import com.designdemo.uaha.view.product.os.OsFragment
 import com.designdemo.uaha.view.user.UserActivity
 import com.google.android.material.navigation.NavigationView
+import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -42,6 +45,17 @@ class ProductActivity : AppCompatActivity() {
         val navigationView = nav_view
         if (navigationView != null) {
             setupDrawerContent(navigationView)
+            val headerView = navigationView.getHeaderView(0)
+            if (headerView != null) {
+                val versionText = headerView.findViewById<TextView>(R.id.header_versioninfo)
+                versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+
+                val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
+                appTitleText.setOnClickListener { text ->
+                    val playStore = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
+                    startActivity(playStore)
+                }
+            }
         }
 
         setupViewPager(product_viewpager)
@@ -90,7 +104,7 @@ class ProductActivity : AppCompatActivity() {
 
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            var retVal = false
+            var retVal: Boolean
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_home -> {
@@ -133,7 +147,7 @@ class ProductActivity : AppCompatActivity() {
                     startActivity(motionLayoutIntent)
                     retVal = true
                 }
-                else -> retVal = true
+                else -> retVal = false
             }
             retVal
         }

@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -28,6 +27,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
@@ -128,7 +128,21 @@ class UserActivity : AppCompatActivity() {
         setupChips()
 
         val navigationView = nav_view
-        setupDrawerContent(navigationView)
+        if (navigationView != null) {
+            setupDrawerContent(navigationView)
+            val headerView = navigationView.getHeaderView(0)
+            if (headerView != null) {
+                val versionText = headerView.findViewById<TextView>(R.id.header_versioninfo)
+                versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+
+                val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
+                appTitleText.setOnClickListener { text ->
+                    val playStore = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
+                    startActivity(playStore)
+                }
+            }
+        }
+
     }
 
 

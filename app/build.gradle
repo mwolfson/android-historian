@@ -8,12 +8,12 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.support.android.designlibdemo"
+        applicationId "com.ableandroid.historian"
         minSdkVersion 14
         targetSdkVersion 28
 
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.0.4"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
@@ -44,7 +44,7 @@ repositories {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha03'
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
     implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
     implementation "androidx.palette:palette:$jetpackVersion"

@@ -29,4 +29,5 @@ ext {
     archComponentsVersion = "1.1.1"
     roomVersion = '2.0.0'
     coroutines = '1.1.0'
+    workManager = "1.0.0"
 }

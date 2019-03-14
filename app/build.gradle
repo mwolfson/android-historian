@@ -49,6 +49,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
     implementation "androidx.palette:palette:$jetpackVersion"
     implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
+    implementation "android.arch.work:work-runtime-ktx:$workManager"
 
     //ConstraintLayout
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'

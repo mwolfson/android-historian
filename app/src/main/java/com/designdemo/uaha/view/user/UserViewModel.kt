@@ -4,14 +4,20 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.data.model.user.UserRepository
+import com.designdemo.uaha.util.TAG_WORK_NOTIF
+import com.designdemo.uaha.workers.NotifWorker
 import com.support.android.designlibdemo.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
     private var parentJob = Job()
@@ -22,10 +28,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val repository : UserRepository
     val allUserEntity: LiveData<List<UserEntity>>
 
+    internal val outputWorkInfos: LiveData<List<WorkInfo>>
+
+    private val workManager: WorkManager = WorkManager.getInstance()
+
     init {
         val userInfoDao = InfoDatabase.getDatabase(application, scope).userDao()
         repository = UserRepository(userInfoDao)
         allUserEntity = repository.allUserEntity
+        outputWorkInfos = workManager.getWorkInfosByTagLiveData(TAG_WORK_NOTIF)
     }
 
     //Note, we are calling this from the addUserData, after validation is performed
@@ -90,6 +101,20 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             saveStatusCode.postValue(R.string.profile_saved_confirm)
 
         }
+    }
+
+    fun startNotif() {
+        val notifRequest =
+                PeriodicWorkRequestBuilder<NotifWorker>(15, TimeUnit.MINUTES)
+                        .addTag(TAG_WORK_NOTIF)
+                        .build()
+
+       workManager.enqueue(notifRequest)
+    }
+
+    fun cancelNotif() {
+        workManager.cancelAllWorkByTag(TAG_WORK_NOTIF)
+
     }
 
 }

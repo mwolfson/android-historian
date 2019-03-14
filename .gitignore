@@ -53,3 +53,8 @@ build/intermediates/dex-cache/cache.xml
 gradle.properties
 gradle.properties
 gradle.properties
+.gradle/vcs-1/gc.properties
+.gradle/4.10.1/gc.properties
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties

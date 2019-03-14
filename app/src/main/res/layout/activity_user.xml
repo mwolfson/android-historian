@@ -319,6 +319,58 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/notification_chip"
+                        style="@style/ChipLabel"
+                        android:text="Notifications"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_notifications"
+                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeWidth="1dp" />
+
+                    <TextView
+                        style="?textAppearanceBody1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/notif_at_intervals"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/notifstart_button_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/bg_button"
+                            android:text="@string/start_notifications"
+                            android:layout_weight="1"/>
+
+                        <Button
+                            android:id="@+id/notifstart_button_end"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/bg_button"
+                            android:text="@string/stop_notifications"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_lightgreen"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.chip.Chip
                         android:id="@+id/bottom_button_chip"
                         style="@style/ChipLabel"
                         android:text="@string/text_scale_demo"

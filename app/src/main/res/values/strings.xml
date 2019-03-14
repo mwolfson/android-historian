@@ -279,6 +279,10 @@
     <string name="bottomnavview">BottomNavView</string>
     <string name="motionlayout">MotionLayout</string>
     <string name="search">Search</string>
+    <string name="os_and_device_historian">OS and Device Historian</string>
+    <string name="notif_at_intervals">This will send a notification at around 15 minute intervals</string>
+    <string name="start_notifications">Start Notifications</string>
+    <string name="stop_notifications">Stop Notifications</string>
 
     <!-- Lost and Found -->
 

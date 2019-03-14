@@ -114,7 +114,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     fun cancelNotif() {
         workManager.cancelAllWorkByTag(TAG_WORK_NOTIF)
-
     }
 
 }

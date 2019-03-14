@@ -18,7 +18,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.work.WorkInfo
 import com.designdemo.uaha.data.model.user.UserEntity
+import com.designdemo.uaha.util.NotifUtil
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.product.ProductActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -143,6 +145,32 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
+        //Observe status of Notification Worker
+        userViewModel.outputWorkInfos.observe(this, workInfosObserver())
+    }
+
+    private fun workInfosObserver(): Observer<List<WorkInfo>> {
+        return Observer { listOfWorkInfo ->
+            // If there are no matching work info, do nothing
+            if (listOfWorkInfo.isNullOrEmpty()) {
+                return@Observer
+            }
+
+            val workInfo = listOfWorkInfo[0]
+
+            Log.d("UserActivity","Work info state is: ${workInfo.state}");
+
+            if (workInfo.state == WorkInfo.State.ENQUEUED) {
+                Log.d("UserActivity", "IS ENQUEUED")
+//                notifstart_button_start.isEnabled = false
+//                notifstart_button_end.isEnabled = true
+            } else {
+                Log.d("UserActivity", "IS not scheduled")
+//                notifstart_button_start.isEnabled = true
+//                notifstart_button_end.isEnabled = false
+            }
+
+        }
     }
 
 
@@ -172,6 +200,14 @@ class UserActivity : AppCompatActivity() {
         }
 
         chip_userinfo_label.requestFocus()
+
+        notifstart_button_start.setOnClickListener {
+            userViewModel.startNotif()
+        }
+
+        notifstart_button_end.setOnClickListener {
+            userViewModel.cancelNotif()
+        }
     }
 
 

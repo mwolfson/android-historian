@@ -2,10 +2,14 @@ package com.designdemo.uaha.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.TaskStackBuilder
+import com.designdemo.uaha.view.product.ProductActivity
 import com.support.android.designlibdemo.R
 
 object NotifUtil {
@@ -34,13 +38,18 @@ object NotifUtil {
             notificationManager?.createNotificationChannel(channel)
         }
 
-
+        val productIntent = Intent(context, ProductActivity::class.java)
+        val pendingIntent: PendingIntent? = TaskStackBuilder.create(context).run {
+            addNextIntentWithParentStack(productIntent)
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
         // Create the notification
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.vct_notif)
                 .setContentTitle(NOTIFICATION_TITLE)
                 .setContentText(message)
+                .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(LongArray(0))
 

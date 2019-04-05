@@ -15,6 +15,10 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MyApp.Caption</item>
     </style>
 
+    <style name="Base.Theme.DesignDemo.Launcher">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
     <!-- Coming Soon -->
     <!--<item name="colorSecondary">@color/color_secondary</item>-->
     <!--<item name="colorSecondaryDark">@color/color_secondary_dark</item>-->

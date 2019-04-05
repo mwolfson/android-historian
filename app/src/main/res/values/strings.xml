@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android Historian</string>
+    <string name="app_name">Historian</string>
 
     <string name="ipsum_short">Android rocks!</string>
     <string name="ipsum_med">Android has 80% of global market-share and continues to grow</string>

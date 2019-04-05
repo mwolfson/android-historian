@@ -32,6 +32,7 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Base_Theme_DesignDemo);
         setContentView(R.layout.activity_main)
 
         val bottomAppBar = bottom_appbar

@@ -13,6 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.designdemo.uaha.view.product.ProductActivity"
+            android:theme="@style/Base.Theme.DesignDemo.Launcher"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.searchable"

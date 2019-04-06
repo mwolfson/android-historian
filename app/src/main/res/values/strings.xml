@@ -22,7 +22,7 @@
     <string name="nav_fav">Favorites</string>
     <string name="nav_account">Profile</string>
     <string name="nav_link1">Android Home Page</string>
-    <string name="nav_link2">Developer Home</string>
+    <string name="nav_link2">Material Design</string>
     <string name="nav_links">Links</string>
     <string name="profile_main_text">Enter account information</string>
     <string name="profile_name_phone_text">Name and Phone are required to save</string>
@@ -283,6 +283,8 @@
     <string name="notif_at_intervals">This will send a notification at around 15 minute intervals</string>
     <string name="start_notifications">Start Notifications</string>
     <string name="stop_notifications">Stop Notifications</string>
+    <string name="play_store_beta">Play Store Beta</string>
+    <string name="mikewolfson_com">AbleAndroid.com</string>
 
     <!-- Lost and Found -->
 

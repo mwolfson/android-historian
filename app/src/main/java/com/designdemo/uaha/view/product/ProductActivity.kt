@@ -108,21 +108,6 @@ class ProductActivity : AppCompatActivity() {
             var retVal: Boolean
             menuItem.isChecked = true
             when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    product_viewpager.currentItem = 0
-                    drawer_layout.closeDrawers()
-                    retVal = true
-                }
-                R.id.nav_devices -> {
-                    product_viewpager.currentItem = 1
-                    drawer_layout.closeDrawers()
-                    retVal = true
-                }
-                R.id.nav_favorites -> {
-                    product_viewpager.currentItem = 2
-                    drawer_layout.closeDrawers()
-                    retVal = true
-                }
                 R.id.nav_userinfo -> {
                     val intent = Intent(applicationContext, UserActivity::class.java)
                     startActivity(intent)
@@ -134,7 +119,7 @@ class ProductActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_link2 -> {
-                    val browser2 = Intent(Intent.ACTION_VIEW, Uri.parse("http://developer.android.com/"))
+                    val browser2 = Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"))
                     startActivity(browser2)
                     retVal = true
                 }
@@ -146,6 +131,16 @@ class ProductActivity : AppCompatActivity() {
                 R.id.nav_motionlayout -> {
                     val motionLayoutIntent = Intent(applicationContext, MotionLayoutActivity::class.java)
                     startActivity(motionLayoutIntent)
+                    retVal = true
+                }
+                R.id.nav_homepage -> {
+                    val browser3 = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/"))
+                    startActivity(browser3)
+                    retVal = true
+                }
+                R.id.nav_playlink -> {
+                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian"))
+                    startActivity(browser4)
                     retVal = true
                 }
                 else -> retVal = false

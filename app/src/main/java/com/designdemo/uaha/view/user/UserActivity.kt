@@ -470,6 +470,16 @@ class UserActivity : AppCompatActivity() {
                     drawer_layout.closeDrawers()
                     retVal = true
                 }
+                R.id.nav_homepage -> {
+                    val browser3 = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/"))
+                    startActivity(browser3)
+                    retVal = true
+                }
+                R.id.nav_playlink -> {
+                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian"))
+                    startActivity(browser4)
+                    retVal = true
+                }
                 R.id.nav_link1 -> {
                     val browser1 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"))
                     startActivity(browser1)
@@ -480,6 +490,7 @@ class UserActivity : AppCompatActivity() {
                     startActivity(browser2)
                     retVal = true
                 }
+
                 else -> retVal = true
             }
             retVal

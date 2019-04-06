@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_userinfo"
+            android:icon="@drawable/vct_account_circle"
+            android:title="@string/nav_account"/>
+    </group>
+
+    <item android:title="@string/demos">
+        <menu>
+            <item
+                android:id="@+id/nav_bottom_nav"
+                android:icon="@drawable/vct_bottomnav"
+                android:title="@string/bottomnavview"/>
+            <item
+                android:id="@+id/nav_motionlayout"
+                android:icon="@drawable/vct_motionlayout"
+                android:title="@string/motionlayout"/>
+        </menu>
+    </item>
+
+    <item android:title="Developer Links">
+        <menu>
+            <item
+                android:id="@+id/nav_homepage"
+                android:icon="@drawable/vct_ableandroid_icon"
+                android:title="@string/mikewolfson_com"/>
+
+            <item
+                android:id="@+id/nav_playlink"
+                android:icon="@drawable/vct_vikinghelmet"
+                android:title="@string/play_store_beta" />
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_links">
+        <menu>
+            <item
+                android:id="@+id/nav_link1"
+                android:icon="@drawable/ic_link"
+                android:title="@string/nav_link1"/>
+            <item
+                android:id="@+id/nav_link2"
+                android:icon="@drawable/ic_link"
+                android:title="@string/nav_link2"/>
+        </menu>
+    </item>
+</menu>

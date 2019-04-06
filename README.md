@@ -15,6 +15,12 @@ _Modifiy gradle.properties to build locally_
 In order to build locally, you will need to copy/rename the file named gradle.properties.dist to gradle.properties - then you will enter an API key for Fono.
 [Fono API](https://fonoapi.freshpixl.com/)
 
+Now you can download this app from the Play Store (You must [join The Beta Distribution Channel](https://play.google.com/apps/testing/com.ableandroid.historian) )
+
+Apr 6, 2019
+- Adaptive Icon, w/ Custom Vector Logo
+- WorkManager Example (sending periodic notifications)
+
 Feb 2, 2019
 "Modern Android" Update
 - 100% Kotlin 
@@ -26,7 +32,6 @@ Feb 2, 2019
 
 Oct 16, 2018
 - Added API for getting Phone information
-
 
 July 18, 2018
 - Bottom App Bar (with inset FAB)

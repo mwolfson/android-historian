@@ -68,12 +68,7 @@ class ProductActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_actions, menu)
 
-        // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(componentName))
-        searchView.isSubmitButtonEnabled = true
+
 
         return true
     }
@@ -83,6 +78,10 @@ class ProductActivity : AppCompatActivity() {
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 return true
+            }
+            R.id.menu_help -> {
+                val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
+                startActivity(bottomNavIntent)
             }
         }
         return super.onOptionsItemSelected(item)

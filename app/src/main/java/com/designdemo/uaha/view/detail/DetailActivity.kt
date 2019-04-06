@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.util.UiUtil
+import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
@@ -136,6 +137,10 @@ class DetailActivity : AppCompatActivity() {
                     this.androidName = deviceStrings[randInt]
 //                    onResume()
                     true
+                }
+                R.id.menu_help -> {
+                    val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
+                    startActivity(bottomNavIntent)
                 }
             }
             false

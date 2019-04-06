@@ -3,17 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_search"
-        android:title="@string/find_os"
-        android:icon="@drawable/vct_search"
-        app:showAsAction="collapseActionView|ifRoom"
-        android:orderInCategory="98"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        tools:ignore="AppCompatResource" />
-
     <item android:id="@+id/menu_shuffle"
         android:title="@string/shuffle"
         android:icon="@drawable/vct_shuffle"
+        android:orderInCategory="98"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource"/>
+
+    <item android:id="@+id/menu_help"
+        android:title="@string/help"
+        android:icon="@drawable/vct_help"
         android:orderInCategory="99"
         app:showAsAction="ifRoom"
         tools:ignore="AppCompatResource"/>

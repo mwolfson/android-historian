@@ -20,8 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.work.WorkInfo
 import com.designdemo.uaha.data.model.user.UserEntity
-import com.designdemo.uaha.util.NotifUtil
 import com.designdemo.uaha.util.UiUtil
+import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.designdemo.uaha.view.product.ProductActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
@@ -184,6 +184,10 @@ class UserActivity : AppCompatActivity() {
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 return true
+            }
+            R.id.menu_help -> {
+                val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
+                startActivity(bottomNavIntent)
             }
         }
         return super.onOptionsItemSelected(item)

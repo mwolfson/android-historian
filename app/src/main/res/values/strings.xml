@@ -214,10 +214,13 @@
     </string-array>
 
     <!-- BottomNavView -->
-    <string name="title_activity_bottom_bav">BottomBavActivity</string>
-    <string name="bottomnav1">Option1</string>
-    <string name="bottomnav2">Option2</string>
-    <string name="bottomnav3">Option3</string>
+    <string name="title_activity_bottom_bav">Fake Help Activity</string>
+    <string name="bottomnav1">Help1</string>
+    <string name="bottomnav2">Help2</string>
+    <string name="bottomnav3">Help3</string>
+    <string name="bottomnavtext1">If this was a real App, there would be Help feedback here!</string>
+    <string name="bottomnavtext2">Hopefully the app is clear enough that you do not need help</string>
+    <string name="bottomnavtext3">If you do need help, feel free to contact me directly</string>
 
     <!-- Device Info -->
     <string name="spec_release_date">Release Date</string>
@@ -285,6 +288,7 @@
     <string name="stop_notifications">Stop Notifications</string>
     <string name="play_store_beta">Play Store Beta</string>
     <string name="mikewolfson_com">AbleAndroid.com</string>
+    <string name="help">Help</string>
 
     <!-- Lost and Found -->
 

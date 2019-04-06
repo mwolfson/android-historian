@@ -879,6 +879,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_actions" />
+        app:menu="@menu/drawer_profile_actions" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

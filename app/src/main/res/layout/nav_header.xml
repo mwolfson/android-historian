@@ -13,7 +13,7 @@
         android:id="@+id/header_apptitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/os_and_device_historian"
+        android:text="@string/app_name"
         android:textAppearance="?textAppearanceHeadline6"/>
 
     <TextView

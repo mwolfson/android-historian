@@ -20,8 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.work.WorkInfo
 import com.designdemo.uaha.data.model.user.UserEntity
-import com.designdemo.uaha.util.NotifUtil
 import com.designdemo.uaha.util.UiUtil
+import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.designdemo.uaha.view.product.ProductActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
@@ -184,6 +184,10 @@ class UserActivity : AppCompatActivity() {
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 return true
+            }
+            R.id.menu_help -> {
+                val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
+                startActivity(bottomNavIntent)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -470,6 +474,16 @@ class UserActivity : AppCompatActivity() {
                     drawer_layout.closeDrawers()
                     retVal = true
                 }
+                R.id.nav_homepage -> {
+                    val browser3 = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/"))
+                    startActivity(browser3)
+                    retVal = true
+                }
+                R.id.nav_playlink -> {
+                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian"))
+                    startActivity(browser4)
+                    retVal = true
+                }
                 R.id.nav_link1 -> {
                     val browser1 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"))
                     startActivity(browser1)
@@ -480,6 +494,7 @@ class UserActivity : AppCompatActivity() {
                     startActivity(browser2)
                     retVal = true
                 }
+
                 else -> retVal = true
             }
             retVal

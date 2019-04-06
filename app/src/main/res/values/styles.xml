@@ -15,6 +15,10 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MyApp.Caption</item>
     </style>
 
+    <style name="Base.Theme.DesignDemo.Launcher">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
     <!-- Coming Soon -->
     <!--<item name="colorSecondary">@color/color_secondary</item>-->
     <!--<item name="colorSecondaryDark">@color/color_secondary_dark</item>-->
@@ -55,27 +59,27 @@
     </style>
 
     <style name="TextAppearance.MyApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="TextAppearance.MyApp.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="TextAppearance.MyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="specItemStyle">
@@ -105,6 +109,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">16dp</item>
+        <item name="android:clickable">false</item>
     </style>
 
     <style name="specItem">

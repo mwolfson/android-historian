@@ -58,3 +58,4 @@ gradle.properties
 .gradle/buildOutputCleanup/cache.properties
 .gradle/buildOutputCleanup/cache.properties
 .gradle/buildOutputCleanup/cache.properties
+app/release/output.json

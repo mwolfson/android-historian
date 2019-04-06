@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.util.UiUtil
+import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
@@ -137,6 +138,10 @@ class DetailActivity : AppCompatActivity() {
 //                    onResume()
                     true
                 }
+                R.id.menu_help -> {
+                    val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
+                    startActivity(bottomNavIntent)
+                }
             }
             false
         }
@@ -240,7 +245,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDeviceInfoViews(detailItem: DetailEntity) {
         details_device_name.text = detailItem.DeviceName
-        details_device_name.setTextColor(iconColor)
         details_features.text = detailItem.features
         details_features_c.text = detailItem.features_c
 

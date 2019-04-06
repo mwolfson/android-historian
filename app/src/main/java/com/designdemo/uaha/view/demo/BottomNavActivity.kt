@@ -11,15 +11,15 @@ class BottomNavActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_bottom_opt1 -> {
-                message.setText(R.string.bottomnav1)
+                message.setText(R.string.bottomnavtext1)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_bottom_opt2 -> {
-                message.setText(R.string.bottomnav2)
+                message.setText(R.string.bottomnavtext2)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.nav_bottom_opt3 -> {
-                message.setText(R.string.bottomnav3)
+                message.setText(R.string.bottomnavtext3)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -31,5 +31,6 @@ class BottomNavActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bottom_nav)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        message.setText(R.string.bottomnavtext1)
     }
 }

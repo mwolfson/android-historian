@@ -27,8 +27,8 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 app:tabSelectedTextColor="@color/grey_300"
-                app:tabIndicatorColor="@color/color_accent"
-                app:tabIndicatorHeight="4dp"
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorHeight="3dp"
                 app:tabTextColor="@color/white" />
 
             <androidx.viewpager.widget.ViewPager
@@ -59,6 +59,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_actions"/>
+        app:menu="@menu/drawer_main_actions"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

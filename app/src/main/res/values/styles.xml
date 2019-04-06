@@ -59,27 +59,27 @@
     </style>
 
     <style name="TextAppearance.MyApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/alegreya</item>
+        <item name="fontFamily">@font/raleway</item>
     </style>
 
     <style name="TextAppearance.MyApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="TextAppearance.MyApp.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="TextAppearance.MyApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/robotoslab</item>
     </style>
 
     <style name="specItemStyle">

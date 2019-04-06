@@ -240,7 +240,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setDeviceInfoViews(detailItem: DetailEntity) {
         details_device_name.text = detailItem.DeviceName
-        details_device_name.setTextColor(iconColor)
         details_features.text = detailItem.features
         details_features_c.text = detailItem.features_c
 

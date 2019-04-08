@@ -37,7 +37,7 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:layout_below="@+id/fav_item_avatar"
-                android:textAppearance="?textAppearanceHeadline6"/>
+                android:textAppearance="?textAppearanceHeadline5"/>
 
             <TextView
                 android:id="@+id/fav_item_content"

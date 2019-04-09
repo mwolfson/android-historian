@@ -12,7 +12,7 @@ Current Build Status Is:
 
 _Modifiy gradle.properties to build locally_
 
-In order to build locally, you will need to copy/rename the file named gradle.properties.dist to gradle.properties - then you will enter an API key for Fono.
+In order to use some the API functionality in code, you will need add your own API key to `gradle.properties`
 [Fono API](https://fonoapi.freshpixl.com/)
 
 Now you can download this app from the Play Store (You must [join The Beta Distribution Channel](https://play.google.com/apps/testing/com.ableandroid.historian) )
@@ -77,9 +77,8 @@ Sept 15, 2015
 
 Special Thanks
 --------------
-This project was originally forked from the [Cheesesquare](https://github.com/chrisbanes/cheesesquare) project. Special thanks to [Chris Banes](https://github.com/chrisbanes).  
 
-Item Decorator from [Simple Item Decoration](http://bignerdranch.github.io/simple-item-decoration/) project. Special thanks to [Big Nerd Ranch](http://bignerdranch.github.io/). 
+Item Decorator from [Stacey Devino](https://twitter.com/doesitpew/)
 
 Pre-requisites
 --------------

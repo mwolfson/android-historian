@@ -12,7 +12,7 @@ import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.data.model.product.ProductRepository
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
-//import com.support.android.designlibdemo.BuildConfig
+import com.support.android.designlibdemo.BuildConfig
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -30,10 +30,8 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     companion object {
         val TAG = "DetailViewModel"
         // To use the FONO API, you will need to add your own API key to the gradle.properties file
-        // Copy the file named gradle.properties.dist (in project base) to gradle.properties to define this variable
         // App will degrade gracefully if KEY is not found
-//        const val TOKEN = BuildConfig.FONO_API_KEY
-        const val TOKEN = "NA"
+        const val TOKEN = BuildConfig.FONO_API_KEY
     }
 
     init {

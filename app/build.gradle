@@ -31,6 +31,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'FONO_API_KEY', project.hasProperty('fono.apikey') ? '\"' + project.property('fono.apikey') + '\"' : '\"\"'
         }
     }
     compileOptions {

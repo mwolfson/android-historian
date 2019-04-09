@@ -48,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(com.support.android.designlibdemo.R.layout.activity_detail)
 
         if (androidName === "unset") {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)

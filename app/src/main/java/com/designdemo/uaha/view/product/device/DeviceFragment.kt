@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.view.ui.GridDividerItemDecoration
 import com.support.android.designlibdemo.R

@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview

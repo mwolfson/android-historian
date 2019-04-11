@@ -13,7 +13,11 @@ import com.designdemo.uaha.data.model.product.ProductRepository
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.support.android.designlibdemo.BuildConfig
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import kotlin.coroutines.CoroutineContext
 

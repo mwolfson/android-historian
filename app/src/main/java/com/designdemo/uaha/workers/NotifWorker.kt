@@ -7,7 +7,8 @@ import androidx.work.WorkerParameters
 import com.designdemo.uaha.util.KEY_NOTIF_LASTDATE
 import com.designdemo.uaha.util.NotifUtil
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class NotifWorker(cxt: Context, params: WorkerParameters) : Worker(cxt, params) {
 

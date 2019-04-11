@@ -11,7 +11,7 @@ import android.util.DisplayMetrics
 
 import androidx.annotation.DimenRes
 import com.support.android.designlibdemo.R
-import java.util.*
+import java.util.Random
 
 object UiUtil {
 

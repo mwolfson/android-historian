@@ -15,9 +15,9 @@ interface WikiApiService {
      */
     @GET("/w/api.php?action=query")
     fun getWikiResponse(
-            @Query("titles") queryTitle: String = "Android",
-            @Query("prop") propIn: String = "revisions",
-            @Query("format") formatIn: String = "json",
-            @Query("rvprop") rvPropIn: String = "content"
+        @Query("titles") queryTitle: String = "Android",
+        @Query("prop") propIn: String = "revisions",
+        @Query("format") formatIn: String = "json",
+        @Query("rvprop") rvPropIn: String = "content"
     ): Deferred<Response<WikiResponse>>
 }

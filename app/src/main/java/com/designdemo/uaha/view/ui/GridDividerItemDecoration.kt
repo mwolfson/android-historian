@@ -17,12 +17,11 @@ class GridDividerItemDecoration
  * @param verticalDivider A divider `Drawable` to be drawn on the
  * columns of the grid of the RecyclerView
  * @param numColumns The number of columns in the grid of the RecyclerView
- */
-(
-        private val horizontalDivider: Drawable,
-        private val verticalDivider: Drawable,
-        private val numColumns: Int
-) : RecyclerView.ItemDecoration() {
+ */(
+     private val horizontalDivider: Drawable,
+     private val verticalDivider: Drawable,
+     private val numColumns: Int
+ ) : RecyclerView.ItemDecoration() {
 
     /**
      * Draws horizontal and/or vertical dividers onto the parent RecyclerView.
@@ -32,9 +31,9 @@ class GridDividerItemDecoration
      * @param state The current RecyclerView.State of the RecyclerView
      */
     override fun onDraw(
-            canvas: Canvas,
-            parent: RecyclerView,
-            state: State
+        canvas: Canvas,
+        parent: RecyclerView,
+        state: State
     ) {
         drawHorizontalDividers(canvas, parent)
         drawVerticalDividers(canvas, parent)
@@ -51,10 +50,10 @@ class GridDividerItemDecoration
      */
 
     override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: State
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
 
@@ -77,8 +76,8 @@ class GridDividerItemDecoration
      * @param parent The RecyclerView onto which dividers are being added
      */
     private fun drawHorizontalDividers(
-            canvas: Canvas,
-            parent: RecyclerView
+        canvas: Canvas,
+        parent: RecyclerView
     ) {
         val parentTop = parent.paddingTop
         val parentBottom = parent.height - parent.paddingBottom
@@ -103,8 +102,8 @@ class GridDividerItemDecoration
      * @param parent The RecyclerView onto which dividers are being added
      */
     private fun drawVerticalDividers(
-            canvas: Canvas,
-            parent: RecyclerView
+        canvas: Canvas,
+        parent: RecyclerView
     ) {
         val parentLeft = parent.paddingLeft
         val parentRight = parent.width - parent.paddingRight

@@ -14,6 +14,7 @@ import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.support.android.designlibdemo.BuildConfig
 import kotlinx.coroutines.*
+
 import kotlin.coroutines.CoroutineContext
 
 class DetailViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
@@ -25,7 +26,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
     private val detailRepository: DetailRepository
     private val prodRepository: ProductRepository
     private val allDetails: LiveData<List<DetailEntity>>
-
 
     companion object {
         val TAG = "DetailViewModel"
@@ -70,7 +70,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
                 }
             } catch (e: Exception) {
                 progressBarVisibility.postValue(false)
-                Log.e(TAG, "Dang what is the exception ${e.toString()}", e)
+                Log.e(TAG, "Dang what is the exception $e", e)
             }
         }
     }
@@ -83,18 +83,15 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
                 if (result.isSuccessful) {
                     val wikiItem = result.body()!!
 
-                    Log.d(TAG, "The wiki response did return ${wikiItem.toString()}")
+                    Log.d(TAG, "The wiki response did return $wikiItem")
                 } else {
-                    Log.d(TAG,"WIKI response DIDN'T work");
+                    Log.d(TAG, "WIKI response DIDN'T work")
                 }
             } catch (ex: Exception) {
-                Log.e(TAG, "Dang WIKI response wasn't right ${ex.toString()}", ex)
+                Log.e(TAG, "Dang WIKI response wasn't right $ex", ex)
             }
         }
-
     }
-
-
 
     fun insertFav(productEntity: ProductEntity) = launch(Dispatchers.IO) {
         prodRepository.insertItem(productEntity)
@@ -106,7 +103,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
 
     private var progressBarVisibility = MutableLiveData<Boolean>()
 
-    fun getProgressBarVisibility() : LiveData<Boolean> {
+    fun getProgressBarVisibility(): LiveData<Boolean> {
         return progressBarVisibility
     }
 
@@ -114,5 +111,4 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
         super.onCleared()
         parentJob.cancel()
     }
-
 }

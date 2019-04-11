@@ -14,5 +14,4 @@ class WikiResponse {
     @SerializedName("query")
     @Expose
     var query: Query? = null
-
 }

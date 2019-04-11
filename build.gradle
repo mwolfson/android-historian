@@ -22,6 +22,7 @@ allprojects {
         jcenter()
         google()
     }
+    apply from: "$rootDir/ktlint.gradle"
 }
 
 ext {

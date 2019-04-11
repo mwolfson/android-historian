@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.*
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.view.ui.GridDividerItemDecoration
 import com.support.android.designlibdemo.R
-import kotlinx.android.synthetic.main.fragment_prod_list.*
-import kotlinx.android.synthetic.main.fragment_prod_list.view.*
+import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_recyclerview
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_text
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_layout
 
 class DeviceFragment : Fragment() {
 
@@ -49,7 +51,7 @@ class DeviceFragment : Fragment() {
         return mainView
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView, devList : List<ProductEntity>) {
+    private fun setupRecyclerView(recyclerView: RecyclerView, devList: List<ProductEntity>) {
         val gridDivider = ContextCompat.getDrawable(recyclerView.context, R.drawable.grid_divider)
         recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 2)
         gridDivider?.let { GridDividerItemDecoration(it, gridDivider, 2) }
@@ -60,6 +62,4 @@ class DeviceFragment : Fragment() {
                 }
         recyclerView.adapter = DeviceTypeAdapter(mainActivity!!, mainActivity!!, devList)
     }
-
-
 }

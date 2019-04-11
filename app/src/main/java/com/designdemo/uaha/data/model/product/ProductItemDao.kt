@@ -28,7 +28,7 @@ interface ProductItemDao {
     fun insertItemList(entities: List<ProductEntity>)
 
     @Query("SELECT * FROM product_table WHERE title = :prodNameIn LIMIT 1")
-    fun getProductItem(prodNameIn : String) : LiveData<ProductEntity>
+    fun getProductItem(prodNameIn: String): LiveData<ProductEntity>
 
     @Query("DELETE FROM product_table")
     fun deleteAll()

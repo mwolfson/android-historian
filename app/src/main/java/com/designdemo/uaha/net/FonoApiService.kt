@@ -18,9 +18,9 @@ interface FonoApiService {
      */
     @GET("/v1/getdevice")
     fun getDevice(
-            @Query("token") token: String,
-            @Query("device") device: String,
-            @Query( "brand") brand: String? = null,
-            @Query("position") position: Int? = null
+        @Query("token") token: String,
+        @Query("device") device: String,
+        @Query("brand") brand: String? = null,
+        @Query("position") position: Int? = null
     ): Deferred<Response<List<DetailEntity>>>
 }

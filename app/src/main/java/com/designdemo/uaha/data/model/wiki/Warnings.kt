@@ -11,5 +11,4 @@ class Warnings {
     @SerializedName("revisions")
     @Expose
     var revisions: Revisions? = null
-
 }

@@ -8,5 +8,4 @@ class Main {
     @SerializedName("warnings")
     @Expose
     var warnings: String? = null
-
 }

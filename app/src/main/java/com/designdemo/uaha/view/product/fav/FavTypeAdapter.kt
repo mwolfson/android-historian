@@ -52,7 +52,6 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         return ViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.boundString = values[position].title
         holder.textView.text = values[position].title

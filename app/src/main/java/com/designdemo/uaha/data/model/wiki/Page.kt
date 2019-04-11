@@ -17,5 +17,4 @@ class Page {
     @SerializedName("revisions")
     @Expose
     var revisions: List<Revision>? = null
-
 }

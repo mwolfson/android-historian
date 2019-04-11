@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 class DetailActivity : AppCompatActivity() {
 
-    //Details Card Views
+    // Details Card Views
     private var iconColor = 0
 
     private var localProdItem: ProductEntity? = null
@@ -41,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
     private var androidName = "unset"
 
     companion object {
-        const private val TAG = "DetailActivity"
+        private const val TAG = "DetailActivity"
 
         const val EXTRA_APP_NAME = "os_name"
     }
@@ -100,11 +100,10 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        //Retrieve the phone and WIKI info from net, and put in DB when found
+        // Retrieve the phone and WIKI info from net, and put in DB when found
         detailViewModel.getFonoNetInfo(androidName)
 //        detailViewModel.getWikiNetInfo("Android Oreo")
     }
-
 
     override fun onNewIntent(intent: Intent) {
         setIntent(intent)
@@ -113,12 +112,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun handleIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
-            Log.d(TAG, "The search query is happenning ${intent.getStringExtra(SearchManager.QUERY)}");
+            Log.d(TAG, "The search query is happenning ${intent.getStringExtra(SearchManager.QUERY)}")
             val query = intent.getStringExtra(SearchManager.QUERY)
         }
     }
 
-    //TODO, setup this better
+    // TODO, setup this better
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -132,7 +131,7 @@ class DetailActivity : AppCompatActivity() {
                     clearDeviceInfoViews()
                     val deviceStrings = resources.getStringArray(R.array.device_names)
                     val randInt = Random.nextInt(deviceStrings.size - 1)
-                    //TODO Send this value to VM, and the force a refresh of views with data from this item
+                    // TODO Send this value to VM, and the force a refresh of views with data from this item
                     detailViewModel.updateProductFromRefresh(deviceStrings[randInt])
                     this.androidName = deviceStrings[randInt]
 //                    onResume()
@@ -161,7 +160,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupFab() {
         fab_detail.setOnClickListener { v ->
-            //Toggle the value to be opposite of what it is, to set
+            // Toggle the value to be opposite of what it is, to set
             var toSetFav = 1
             if (localProdItem?.isFav == 1) {
                 toSetFav = 0
@@ -190,7 +189,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupPalette(imgId: Int) {
         val bm = BitmapFactory.decodeResource(resources, imgId)
         try {
@@ -214,7 +212,7 @@ class DetailActivity : AppCompatActivity() {
                 perc2_right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
                 palette_muted_light.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
 
-                //Noticed the Expanded white doesn't show everywhere, use Palette to fix this
+                // Noticed the Expanded white doesn't show everywhere, use Palette to fix this
                 collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
 
                 iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
@@ -223,8 +221,7 @@ class DetailActivity : AppCompatActivity() {
                     palette!!.getVibrantColor(0x000000)
                 }
 
-
-                //The back button should also have a better color applied to ensure it is visible,
+                // The back button should also have a better color applied to ensure it is visible,
                 // Get a swatch, and get a more specific color for title from it.
                 val vibrantSwatch = palette!!.vibrantSwatch
                 var arrowColor = ContextCompat.getColor(this, R.color.black)
@@ -238,10 +235,9 @@ class DetailActivity : AppCompatActivity() {
                 collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error with image! + ${e.toString()}", e)
+            Log.e(TAG, "Error with image! + $e", e)
         }
     }
-
 
     private fun setDeviceInfoViews(detailItem: DetailEntity) {
         details_device_name.text = detailItem.DeviceName
@@ -284,7 +280,6 @@ class DetailActivity : AppCompatActivity() {
             setupSpecItem(R.drawable.vct_resolution, R.string.spec_resolution, detailItem.resolution, spec_resolution)
 
         spec_layout.visibility = View.VISIBLE
-
     }
 
     private fun clearDeviceInfoViews() {
@@ -318,5 +313,4 @@ class DetailActivity : AppCompatActivity() {
         drawable?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
         return drawable
     }
-
 }

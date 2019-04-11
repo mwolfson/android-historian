@@ -25,7 +25,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(couroutineContext)
 
-    val repository : UserRepository
+    val repository: UserRepository
     val allUserEntity: LiveData<List<UserEntity>>
 
     internal val outputWorkInfos: LiveData<List<WorkInfo>>
@@ -39,8 +39,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         outputWorkInfos = workManager.getWorkInfosByTagLiveData(TAG_WORK_NOTIF)
     }
 
-    //Note, we are calling this from the addUserData, after validation is performed
-    fun insert(userEntity: UserEntity) = scope.launch(Dispatchers.IO){
+    // Note, we are calling this from the addUserData, after validation is performed
+    fun insert(userEntity: UserEntity) = scope.launch(Dispatchers.IO) {
         repository.insert(userEntity)
     }
 
@@ -51,7 +51,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val saveStatusCode = MutableLiveData<Int>()
 
-    fun getAddUserStatus() : LiveData<Int> {
+    fun getAddUserStatus(): LiveData<Int> {
         return saveStatusCode
     }
 
@@ -83,7 +83,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             retVal
         }
 
-        //Check if each item is valid, then show apply error as appropriate
+        // Check if each item is valid, then show apply error as appropriate
         val phoneError = isPhoneValid()
         val nameError = isNameValid()
         val passwordError = isPasswordValid()
@@ -93,13 +93,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                 saveStatusCode.postValue(nameError)
             } else if (phoneError != 0) {
                 saveStatusCode.postValue(phoneError)
-            } else if ( passwordError != 0) {
+            } else if (passwordError != 0) {
                 saveStatusCode.postValue(passwordError)
             }
         } else {
             insert(userEntity)
             saveStatusCode.postValue(R.string.profile_saved_confirm)
-
         }
     }
 
@@ -109,11 +108,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
                         .addTag(TAG_WORK_NOTIF)
                         .build()
 
-       workManager.enqueue(notifRequest)
+        workManager.enqueue(notifRequest)
     }
 
     fun cancelNotif() {
         workManager.cancelAllWorkByTag(TAG_WORK_NOTIF)
     }
-
 }

@@ -7,7 +7,7 @@ class DetailRepository(private val detailEntityDao: DetailEntityDao) {
 
     val allDetailInfo: LiveData<List<DetailEntity>> = detailEntityDao.getAllDetailItems()
 
-    fun getDetailItem(deviceName:String ) : LiveData<DetailEntity> {
+    fun getDetailItem(deviceName: String): LiveData<DetailEntity> {
         return detailEntityDao.getDetailItem(deviceName)
     }
 
@@ -15,5 +15,4 @@ class DetailRepository(private val detailEntityDao: DetailEntityDao) {
     suspend fun insertDetailItem(detailItem: DetailEntity) {
         detailEntityDao.addDetailItem(detailItem)
     }
-
 }

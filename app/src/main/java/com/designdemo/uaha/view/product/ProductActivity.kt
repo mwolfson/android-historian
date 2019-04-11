@@ -1,16 +1,12 @@
 package com.designdemo.uaha.view.product
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -25,14 +21,17 @@ import com.designdemo.uaha.view.user.UserActivity
 import com.google.android.material.navigation.NavigationView
 import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_detail.bottom_appbar
+import kotlinx.android.synthetic.main.activity_main.nav_view
+import kotlinx.android.synthetic.main.activity_main.product_viewpager
+import kotlinx.android.synthetic.main.activity_main.product_tabs
+import kotlinx.android.synthetic.main.activity_main.drawer_layout
 
 class ProductActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Base_Theme_DesignDemo);
+        setTheme(R.style.Base_Theme_DesignDemo)
         setContentView(R.layout.activity_main)
 
         val bottomAppBar = bottom_appbar
@@ -67,8 +66,6 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_actions, menu)
-
-
 
         return true
     }

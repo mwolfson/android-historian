@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_table")
-data class UserEntity(@PrimaryKey @ColumnInfo(name="name")val name: String,
-                      @ColumnInfo(name="phone")val phone: String,
-                      @ColumnInfo(name="password")val password: String)
+data class UserEntity(
+    @PrimaryKey @ColumnInfo(name = "name")val name: String,
+    @ColumnInfo(name = "phone")val phone: String,
+    @ColumnInfo(name = "password")val password: String
+)

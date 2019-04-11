@@ -12,13 +12,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class DeviceViewModel(application: Application) : AndroidViewModel(application), CoroutineScope  {
+class DeviceViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private var parentJob = Job()
 
-    private val repository : ProductRepository
-    private val allDevices : LiveData<List<ProductEntity>>
+    private val repository: ProductRepository
+    private val allDevices: LiveData<List<ProductEntity>>
 
     init {
         val productItemDao = InfoDatabase.getDatabase(application, this).productDao()
@@ -27,7 +27,7 @@ class DeviceViewModel(application: Application) : AndroidViewModel(application),
         allDevices = repository.allDeviceInfo
     }
 
-    fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO){
+    fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO) {
         repository.insertItem(productEntity)
     }
 
@@ -37,6 +37,4 @@ class DeviceViewModel(application: Application) : AndroidViewModel(application),
     }
 
     fun getDeviceData() = allDevices
-
-
 }

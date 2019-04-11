@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WikiApiFactory {
 
-
     @JvmOverloads
     fun create(okHttpClient: OkHttpClient? = null): WikiApiService = run {
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -29,5 +28,4 @@ class WikiApiFactory {
     companion object {
         const val baseUrlWiki = "https://en.wikipedia.org/"
     }
-
 }

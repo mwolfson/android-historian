@@ -19,11 +19,10 @@
 package com.designdemo.uaha.util
 
 // Notification Channel constants
-@JvmField val NOTIFICATION_CHANNEL_NAME: CharSequence ="Historian Notifications"
+@JvmField val NOTIFICATION_CHANNEL_NAME: CharSequence = "Historian Notifications"
 const val NOTIFICATION_CHANNEL_DESCRIPTION = "Notifications with info about OS or Devices"
 @JvmField val NOTIFICATION_TITLE: CharSequence = "Historian Notification"
 const val CHANNEL_ID = "HISTORIAN_NOTIFICATION"
 const val NOTIFICATION_ID = 1
 const val KEY_NOTIF_LASTDATE = "WORKRESP_LASTDATE"
 const val TAG_WORK_NOTIF = "TagWorkNotif"
-

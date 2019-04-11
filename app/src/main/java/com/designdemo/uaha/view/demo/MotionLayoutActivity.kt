@@ -12,12 +12,11 @@ class MotionLayoutActivity : Activity() {
         setContentView(R.layout.activity_motion_layout)
 
         val infoButton = launch_button
-        infoButton.setOnClickListener{v -> launchMotionScene()}
+        infoButton.setOnClickListener { v -> launchMotionScene() }
     }
 
     private fun launchMotionScene() {
         val motionLayout = motionlayout_demo
         motionLayout.transitionToEnd()
     }
-
 }

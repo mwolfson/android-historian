@@ -9,11 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.support.android.designlibdemo.R
-import kotlinx.android.synthetic.main.fragment_prod_list.*
-import kotlinx.android.synthetic.main.fragment_prod_list.view.*
+import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_recyclerview
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_text
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_layout
+import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_img
 
 class FavFragment : Fragment() {
 
@@ -29,7 +33,6 @@ class FavFragment : Fragment() {
         val noText = mainView.product_nodata_text
         val noLayout = mainView.product_nodata_layout
         val noTextImg = mainView.product_nodata_img
-
 
         mainActivity = activity
 
@@ -50,10 +53,8 @@ class FavFragment : Fragment() {
         return mainView
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView, devList : List<ProductEntity>) {
+    private fun setupRecyclerView(recyclerView: RecyclerView, devList: List<ProductEntity>) {
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = FavTypeAdapter(mainActivity!!, favViewModel.getFavData().value!!)
     }
-
-
 }

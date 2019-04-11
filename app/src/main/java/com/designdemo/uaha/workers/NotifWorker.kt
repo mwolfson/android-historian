@@ -1,17 +1,14 @@
 package com.designdemo.uaha.workers
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.designdemo.uaha.data.InfoDatabase
-import com.designdemo.uaha.data.model.product.ProductEntity
-import com.designdemo.uaha.data.model.product.ProductRepository
 import com.designdemo.uaha.util.KEY_NOTIF_LASTDATE
 import com.designdemo.uaha.util.NotifUtil
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class NotifWorker(cxt: Context, params: WorkerParameters) : Worker(cxt, params) {
 
@@ -36,6 +33,4 @@ class NotifWorker(cxt: Context, params: WorkerParameters) : Worker(cxt, params) 
         )
         return Result.success(outputData)
     }
-
-
 }

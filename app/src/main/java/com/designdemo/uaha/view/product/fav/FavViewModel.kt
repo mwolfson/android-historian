@@ -12,13 +12,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class FavViewModel(application: Application) : AndroidViewModel(application), CoroutineScope  {
+class FavViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private var parentJob = Job()
 
-    private val repository : ProductRepository
-    private val allFaves : LiveData<List<ProductEntity>>
+    private val repository: ProductRepository
+    private val allFaves: LiveData<List<ProductEntity>>
 
     init {
         val productItemDao = InfoDatabase.getDatabase(application, this).productDao()
@@ -27,7 +27,7 @@ class FavViewModel(application: Application) : AndroidViewModel(application), Co
         allFaves = repository.allFaveInfo
     }
 
-    fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO){
+    fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO) {
         repository.insertItem(productEntity)
     }
 
@@ -37,6 +37,4 @@ class FavViewModel(application: Application) : AndroidViewModel(application), Co
     }
 
     fun getFavData() = allFaves
-
-
 }

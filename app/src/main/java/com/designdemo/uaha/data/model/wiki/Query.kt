@@ -8,5 +8,4 @@ class Query {
     @SerializedName("pages")
     @Expose
     var pages: List<Page>? = null
-
 }

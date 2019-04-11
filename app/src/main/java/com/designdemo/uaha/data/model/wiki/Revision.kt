@@ -14,5 +14,4 @@ class Revision {
     @SerializedName("content")
     @Expose
     var content: String? = null
-
 }

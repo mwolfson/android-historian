@@ -42,7 +42,7 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
-    //Local copy of usersInfo list, to be used when applying Undo button in snackbar
+    // Local copy of usersInfo list, to be used when applying Undo button in snackbar
     private var users = listOf<UserEntity>()
 
     // Lambda to add a close listener on the chip, and also put a random background color
@@ -74,7 +74,7 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
-        //Status results from an update attempt (validation errors handled here)
+        // Status results from an update attempt (validation errors handled here)
         userViewModel.getAddUserStatus().observe(this, Observer { statusInt ->
             when (statusInt) {
                 R.string.name_input_error -> {
@@ -98,7 +98,7 @@ class UserActivity : AppCompatActivity() {
                     if (sizeOfList > 1) {
                         val oldUserInfo = users.get(sizeOfList - 2)
 
-                        //Show snackbar, and include the option to Undo the previous operation
+                        // Show snackbar, and include the option to Undo the previous operation
                         val snackbar = Snackbar.make(user_main_coordinator, getString(statusInt), Snackbar.LENGTH_LONG)
                                 .setAction(getString(R.string.undo)) { _ ->
                                     userViewModel.addUserData(oldUserInfo)
@@ -107,7 +107,7 @@ class UserActivity : AppCompatActivity() {
                         snackbar.setAnchorView(user_fab)
                         snackbar.show()
                     } else {
-                        //No backup available, so don't show undo option
+                        // No backup available, so don't show undo option
                         showSnackbar(statusInt)
                     }
                 }
@@ -117,7 +117,7 @@ class UserActivity : AppCompatActivity() {
             }
         })
 
-        //Setup BottomAppBar
+        // Setup BottomAppBar
         setSupportActionBar(bottom_appbar)
         bottom_appbar.replaceMenu(R.menu.profile_actions)
 
@@ -145,7 +145,7 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        //Observe status of Notification Worker
+        // Observe status of Notification Worker
         userViewModel.outputWorkInfos.observe(this, workInfosObserver())
     }
 
@@ -158,7 +158,7 @@ class UserActivity : AppCompatActivity() {
 
             val workInfo = listOfWorkInfo[0]
 
-            Log.d("UserActivity","Work info state is: ${workInfo.state}");
+            Log.d("UserActivity", "Work info state is: ${workInfo.state}")
 
             if (workInfo.state == WorkInfo.State.ENQUEUED) {
                 Log.d("UserActivity", "IS ENQUEUED")
@@ -169,10 +169,8 @@ class UserActivity : AppCompatActivity() {
 //                notifstart_button_start.isEnabled = true
 //                notifstart_button_end.isEnabled = false
             }
-
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.profile_actions, menu)
@@ -194,7 +192,7 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        //Format phone number as user is typing
+        // Format phone number as user is typing
         phone_edit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         profile_pic_button.setOnClickListener { v -> setPictureDialog() }
@@ -214,7 +212,6 @@ class UserActivity : AppCompatActivity() {
         }
     }
 
-
     /**
      * Validates and saves user info
      */
@@ -226,7 +223,7 @@ class UserActivity : AppCompatActivity() {
     private fun showSnackbar(@StringRes displayString: Int) {
         val snackbar = Snackbar.make(user_main_scroll_layout, getString(displayString), Snackbar.LENGTH_SHORT)
         val snackbarLayout = snackbar.view
-        //Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
         snackbar.setAnchorView(user_fab)
         snackbar.show()
     }
@@ -284,7 +281,6 @@ class UserActivity : AppCompatActivity() {
         chipActionCustom.setOnClickListener { view ->
             saveChipEntry(customChipEdit, activity, entryGroup)
         }
-
     }
 
     private fun saveChipEntry(customChipEdit: EditText, activity: Activity, entryGroup: ChipGroup) {
@@ -294,7 +290,7 @@ class UserActivity : AppCompatActivity() {
         dynamicChip.isCloseIconVisible = true
         dynamicChip.isCheckable = true
 
-        //Set a random icon for demo
+        // Set a random icon for demo
         dynamicChip.chipIcon = ContextCompat.getDrawable(this, UiUtil.getRandomDrawable())
         setChipCloseAndRandomColor(dynamicChip)
 
@@ -342,7 +338,7 @@ class UserActivity : AppCompatActivity() {
         val scaleText = temp.text.toString()
         var valueToSet = "No Value"
 
-        //Sets custom text in the dialog
+        // Sets custom text in the dialog
         val dialogView = layoutInflater.inflate(R.layout.dialog_textscale, null)
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
@@ -355,7 +351,7 @@ class UserActivity : AppCompatActivity() {
         caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.sentence))
         fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.regular))
 
-        //Creates special strings to display Scale Type information in the dialog when you selected an item
+        // Creates special strings to display Scale Type information in the dialog when you selected an item
         val setupTextScaleType: (Int, Int, Int) -> Int = { val1, val2, val3 ->
             valueToSet = getString(val1)
             letterSpacingText.text = UiUtil.applySpecialFormatting(getString(R.string.letter_spacing), getString(val2))
@@ -421,7 +417,6 @@ class UserActivity : AppCompatActivity() {
         builder.create()
         builder.show()
     }
-
 
     private fun setPictureDialog() {
         val photoDialog: AlertDialog
@@ -502,7 +497,6 @@ class UserActivity : AppCompatActivity() {
     }
 
     companion object {
-        const private val TAG = "UserActivity"
+        private const val TAG = "UserActivity"
     }
-
 }

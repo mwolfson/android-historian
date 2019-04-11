@@ -8,11 +8,10 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.util.DisplayMetrics
-import android.widget.LinearLayout
 
 import androidx.annotation.DimenRes
 import com.support.android.designlibdemo.R
-import java.util.*
+import java.util.Random
 
 object UiUtil {
 
@@ -101,7 +100,7 @@ object UiUtil {
         val str = SpannableStringBuilder("$word1\n$word2")
         str.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, word1.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        return  str
+        return str
     }
 
     fun getRandomColor(): Int {

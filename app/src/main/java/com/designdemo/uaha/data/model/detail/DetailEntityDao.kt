@@ -1,7 +1,6 @@
 package com.designdemo.uaha.data.model.detail
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -21,5 +20,4 @@ interface DetailEntityDao {
 
     @Query("DELETE FROM detail_table")
     fun deleteAll()
-
 }

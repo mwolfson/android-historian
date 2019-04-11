@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-
 @Dao
 interface UserInfoDao {
 
@@ -18,5 +17,4 @@ interface UserInfoDao {
 
     @Query("DELETE FROM user_table")
     fun deleteAll()
-
 }

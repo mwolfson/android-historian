@@ -14,7 +14,6 @@ import com.support.android.designlibdemo.R
 
 object NotifUtil {
 
-
     /**
      * @param message Msg to display in Notification
      * @param context Context

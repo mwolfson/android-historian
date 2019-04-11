@@ -1,7 +1,5 @@
-![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/historian2.gif)
-
-Android Ultimate Historian - Material Design Demo
-=================================================
+Android Historian - Material Design Demo
+========================================
 
 This app is designed to demonstrate the various components of the Material Design Components, in particular, showing how to implement Material design into your app, using these controls.
 
@@ -16,6 +14,8 @@ In order to use some the API functionality in code, you will need add your own A
 [Fono API](https://fonoapi.freshpixl.com/)
 
 Now you can download this app from the Play Store (You must [join The Beta Distribution Channel](https://play.google.com/apps/testing/com.ableandroid.historian) )
+
+![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/historian2.gif)
 
 Apr 6, 2019
 - Adaptive Icon, w/ Custom Vector Logo

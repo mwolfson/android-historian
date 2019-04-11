@@ -24,6 +24,9 @@ interface ProductItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(productEntity: ProductEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertItemList(entities: List<ProductEntity>)
+
     @Query("SELECT * FROM product_table WHERE title = :prodNameIn LIMIT 1")
     fun getProductItem(prodNameIn : String) : LiveData<ProductEntity>
 

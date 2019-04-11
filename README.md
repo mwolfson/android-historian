@@ -3,6 +3,8 @@ Android Historian - Material Design Demo
 
 This app is designed to demonstrate the various components of the Material Design Components, in particular, showing how to implement Material design into your app, using these controls.
 
+The UI is has specific considerations to demonstrate certain interactions of the components, so may have certain unusual interactions (and patterns).
+
 The [official Material site](https://material.io/develop/android/) has great information specific to Android Development.
 
 Current Build Status Is:

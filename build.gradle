@@ -14,15 +14,22 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.0.0-RC14"
+}
+
 // run the dependency check plugin: ./gradlew dependencyCheckAnalyze
 apply plugin: 'org.owasp.dependencycheck'
 
 allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
     apply from: "$rootDir/ktlint.gradle"
+    apply from: "$rootDir/detekt.gradle"
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+        google()
+        jcenter()
+    }
 }
 
 ext {

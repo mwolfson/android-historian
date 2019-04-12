@@ -30,11 +30,12 @@ abstract class InfoDatabase : RoomDatabase() {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(context.applicationContext, InfoDatabase::class.java, "user_database")
-                        // Wipes and rebuilds instead of migrating if no Migration object.
-                        .fallbackToDestructiveMigration()
-                        .addCallback(InfoDatabaseCallback(scope))
-                        .build()
+                val instance =
+                    Room.databaseBuilder(context.applicationContext, InfoDatabase::class.java,"user_database")
+                    // Wipes and rebuilds instead of migrating if no Migration object.
+                    .fallbackToDestructiveMigration()
+                    .addCallback(InfoDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 // return instance
                 instance
@@ -66,7 +67,6 @@ abstract class InfoDatabase : RoomDatabase() {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
             userDao.deleteAll()
-//            userDao.insert(UserEntity("Preset","5555555555","presetPW"))
 
             // Device Items Pre-load
             if (productItemDao.getDeviceItems().isEmpty()) {

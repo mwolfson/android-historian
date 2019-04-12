@@ -52,7 +52,8 @@ class ProductActivity : AppCompatActivity() {
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
                 appTitleText.setOnClickListener { text ->
-                    val playStore = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
+                    val playStore = Intent(Intent.ACTION_VIEW, Uri.parse(
+                            "https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
                     startActivity(playStore)
                 }
             }
@@ -135,7 +136,8 @@ class ProductActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_playlink -> {
-                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian"))
+                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse(
+                            "https://play.google.com/apps/testing/com.ableandroid.historian"))
                     startActivity(browser4)
                     retVal = true
                 }

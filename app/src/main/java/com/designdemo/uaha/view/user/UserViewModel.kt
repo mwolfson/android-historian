@@ -10,7 +10,7 @@ import androidx.work.WorkManager
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.data.model.user.UserRepository
-import com.designdemo.uaha.util.TAG_WORK_NOTIF
+import com.designdemo.uaha.util.*
 import com.designdemo.uaha.workers.NotifWorker
 import com.support.android.designlibdemo.R
 import kotlinx.coroutines.CoroutineScope
@@ -61,7 +61,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun addUserData(userEntity: UserEntity) {
         val isNameValid: () -> Int = {
             var retVal = 0
-            if (!(userEntity.name.length in 4..10)) {
+            if (!(userEntity.name.length in NAME_MIN..NAME_MAX)) {
                 retVal = R.string.name_input_error
             }
             retVal
@@ -69,7 +69,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         val isPhoneValid: () -> Int = {
             var retVal = 0
-            if (userEntity.phone.length != 14) {
+            if (userEntity.phone.length != PHONE_LENGTH) {
                 retVal = R.string.phone_input_error
             }
             retVal
@@ -77,7 +77,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         val isPasswordValid: () -> Int = {
             var retVal = 0
-            if (userEntity.password.length != 8) {
+            if (userEntity.password.length != PASSWORD_MIN) {
                 retVal = R.string.invalid_password
             }
             retVal

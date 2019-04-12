@@ -10,7 +10,8 @@ import retrofit2.Response
 interface WikiApiService {
 
     /**
-     * val req = "https://en.wikipedia.org/w/api.php?action=query&titles=" + VersionData.getWikiQuery(osVersion) + "&prop=revisions&rvprop=content&format=json"
+     * val req = "https://en.wikipedia.org/w/api.php?action=query&titles=" +
+     * VersionData.getWikiQuery(osVersion) + "&prop=revisions&rvprop=content&format=json"
      *
      */
     @GET("/w/api.php?action=query")

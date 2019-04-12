@@ -20,7 +20,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) :
+        RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -75,7 +76,10 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val transitionName = context.getString(R.string.transition_string)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity,
+                        holder.imageView,
+                        transitionName)
                 context.startActivity(intent, options.toBundle())
             } else {
                 context.startActivity(intent)

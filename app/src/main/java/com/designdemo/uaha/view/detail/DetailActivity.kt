@@ -173,7 +173,7 @@ class DetailActivity : AppCompatActivity() {
             }
 
             // Notify the User with a snackbar
-            // Need to set the FAB as the anchor view, so this appears higher then the BottomAppBar per the Material Spec
+            // Need to set the FAB as the anchor view, so this appears higher then the BottomAppBar per Material Spec
             Snackbar.make(detail_main_linear, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
                     .setAnchorView(fab_detail)
                     .show()

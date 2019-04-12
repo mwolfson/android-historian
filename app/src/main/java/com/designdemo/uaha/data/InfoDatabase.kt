@@ -32,7 +32,7 @@ abstract class InfoDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(this) {
                 val instance =
                     Room.databaseBuilder(context.applicationContext, InfoDatabase::class.java,"user_database")
-                    // Wipes and rebuilds instead of migrating if no Migration object.
+                    // Wipes and rebuilds instead of migrating if no M¬igration object.
                     .fallbackToDestructiveMigration()
                     .addCallback(InfoDatabaseCallback(scope))
                     .build()

@@ -51,9 +51,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val saveStatusCode = MutableLiveData<Int>()
 
-    fun getAddUserStatus(): LiveData<Int> {
-        return saveStatusCode
-    }
+    fun getAddUserStatus()= saveStatusCode
 
     /**
      * This method will validate the input, and either return a error

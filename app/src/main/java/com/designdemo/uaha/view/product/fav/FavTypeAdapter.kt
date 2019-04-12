@@ -32,14 +32,10 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         val textView: TextView = view.fav_item_title
         val textView2: TextView = view.fav_item_content
 
-        override fun toString(): String {
-            return super.toString() + " '" + textView.text
-        }
+        override fun toString()= super.toString() + " '" + textView.text
     }
 
-    fun getValueAt(position: Int): ProductEntity {
-        return values[position]
-    }
+    fun getValueAt(position: Int) = values[position]
 
     init {
         activity.applicationContext.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
@@ -60,7 +56,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         val rand = Random()
         val randomNum = rand.nextInt(3)
 
-        var strRes = when (randomNum) {
+        val strRes = when (randomNum) {
             0 -> R.string.ipsum_med
             1 -> R.string.ipsum_long
             else -> R.string.ipsum_short
@@ -92,7 +88,5 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
                 .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
-    }
+    override fun getItemCount() = values.size
 }

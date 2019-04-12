@@ -9,9 +9,7 @@ class ProductRepository(private val productItemDao: ProductItemDao) {
     val allOsInfo: LiveData<List<ProductEntity>> = productItemDao.getAllOses()
     val allFaveInfo: LiveData<List<ProductEntity>> = productItemDao.getAllFaves()
 
-    fun getProductItem(prodName: String): LiveData<ProductEntity> {
-        return productItemDao.getProductItem(prodName)
-    }
+    fun getProductItem(prodName: String) = productItemDao.getProductItem(prodName)
 
     @WorkerThread
     suspend fun insertItem(productEntity: ProductEntity) {

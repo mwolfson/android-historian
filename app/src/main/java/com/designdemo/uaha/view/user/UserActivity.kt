@@ -112,9 +112,7 @@ class UserActivity : AppCompatActivity() {
                         showSnackbar(statusInt)
                     }
                 }
-                else -> {
-                    Log.d("AddUserError", "Unexpected status message returned: $statusInt")
-                }
+                else ->  Log.d("AddUserError", "Unexpected status message returned: $statusInt")
             }
         })
 
@@ -370,40 +368,24 @@ class UserActivity : AppCompatActivity() {
                 setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
-            "Headline3" -> {
-                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
-            }
-            "Headline4" -> {
-                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)
-            }
-            "Headline5" -> {
-                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24)
-            }
+            "Headline3" -> setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
+            "Headline4" -> setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)
+            "Headline5" -> setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24)
             "Headline6" -> {
                 setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
-            "Subtitle1" -> {
-                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16)
-            }
-            "Subtitle2" -> {
-                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14)
-            }
-            "Body1" -> {
-                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16)
-            }
-            "Body2" -> {
-                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14)
-            }
+            "Subtitle1" -> setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16)
+            "Subtitle2" -> setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14)
+            "Body1" -> setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16)
+            "Body2" -> setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14)
             "Button" -> {
                 setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14)
                 caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text),
                         getString(R.string.all_caps))
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
-            "Caption" -> {
-                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12)
-            }
+            "Caption" -> setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12)
             "Overline" -> {
                 setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10)
                 caseText.text = UiUtil.applySpecialFormatting(

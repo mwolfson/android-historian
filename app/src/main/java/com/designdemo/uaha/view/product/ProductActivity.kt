@@ -156,17 +156,11 @@ class ProductActivity : AppCompatActivity() {
             fragmentTitles.add(title)
         }
 
-        override fun getItem(position: Int): Fragment {
-            return fragments[position]
-        }
+        override fun getItem(position: Int) = fragments[position]
 
-        override fun getCount(): Int {
-            return fragments.size
-        }
+        override fun getCount() = fragments.size
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return fragmentTitles[position]
-        }
+        override fun getPageTitle(position: Int) = fragmentTitles[position]
     }
 
     companion object {

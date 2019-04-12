@@ -107,9 +107,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application),
 
     private var progressBarVisibility = MutableLiveData<Boolean>()
 
-    fun getProgressBarVisibility(): LiveData<Boolean> {
-        return progressBarVisibility
-    }
+    fun getProgressBarVisibility() = progressBarVisibility
 
     override fun onCleared() {
         super.onCleared()

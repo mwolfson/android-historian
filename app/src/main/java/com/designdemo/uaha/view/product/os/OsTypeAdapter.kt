@@ -32,14 +32,10 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         val subTitleText = view.os_item_subtext
         var osVersion: Int = 0
 
-        override fun toString(): String {
-            return super.toString() + " '" + titleText.text
-        }
+        override fun toString() = super.toString() + " '" + titleText.text
     }
 
-    fun getValueAt(position: Int): ProductEntity {
-        return values[position]
-    }
+    fun getValueAt(position: Int) = values[position]
 
     init {
         context.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
@@ -83,7 +79,5 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
                 .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
-    }
+    override fun getItemCount() = values.size
 }

@@ -33,14 +33,10 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         val subTitleText: TextView = view.device_item_subtext
         var osVersion = 0
 
-        override fun toString(): String {
-            return super.toString() + " '" + titleText.text
-        }
+        override fun toString() = super.toString() + " '" + titleText.text
     }
 
-    fun getValueAt(position: Int): ProductEntity {
-        return values[position]
-    }
+    fun getValueAt(position: Int) = values[position]
 
     init {
         context.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
@@ -83,7 +79,5 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
                 .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
-    }
+    override fun getItemCount() = values.size
 }

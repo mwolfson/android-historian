@@ -20,6 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.work.WorkInfo
 import com.designdemo.uaha.data.model.user.UserEntity
+import com.designdemo.uaha.util.ROTATION_180
+import com.designdemo.uaha.util.PEEK_HEIGHT_PIXEL
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.designdemo.uaha.view.product.ProductActivity
@@ -47,7 +49,7 @@ class UserActivity : AppCompatActivity() {
 
     // Lambda to add a close listener on the chip, and also put a random background color
     val setChipCloseAndRandomColor: (Chip) -> Unit = {
-        it.setOnCloseIconClickListener { it -> it.visibility = View.GONE }
+        it.setOnCloseIconClickListener { chipIn -> chipIn.visibility = View.GONE }
         it.setChipBackgroundColorResource(UiUtil.getRandomColor())
     }
 
@@ -103,7 +105,6 @@ class UserActivity : AppCompatActivity() {
                                 .setAction(getString(R.string.undo)) { _ ->
                                     userViewModel.addUserData(oldUserInfo)
                                 }
-                        val snackbarLayout = snackbar.view
                         snackbar.setAnchorView(user_fab)
                         snackbar.show()
                     } else {
@@ -111,9 +112,7 @@ class UserActivity : AppCompatActivity() {
                         showSnackbar(statusInt)
                     }
                 }
-                else -> {
-                    Log.d("AddUserError", "Unexpected status message returned: $statusInt")
-                }
+                else ->  Log.d("AddUserError", "Unexpected status message returned: $statusInt")
             }
         })
 
@@ -139,7 +138,9 @@ class UserActivity : AppCompatActivity() {
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
                 appTitleText.setOnClickListener { text ->
-                    val playStore = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
+                    val playStore = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
                     startActivity(playStore)
                 }
             }
@@ -222,8 +223,7 @@ class UserActivity : AppCompatActivity() {
 
     private fun showSnackbar(@StringRes displayString: Int) {
         val snackbar = Snackbar.make(user_main_scroll_layout, getString(displayString), Snackbar.LENGTH_SHORT)
-        val snackbarLayout = snackbar.view
-        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per the specification
+        // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per spec
         snackbar.setAnchorView(user_fab)
         snackbar.show()
     }
@@ -310,7 +310,7 @@ class UserActivity : AppCompatActivity() {
         }
 
         val showHide = show_bottom_sheet
-        showHide.setOnClickListener { view -> bottomSheetBehavior.setPeekHeight(300) }
+        showHide.setOnClickListener { view -> bottomSheetBehavior.setPeekHeight(PEEK_HEIGHT_PIXEL) }
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -320,7 +320,7 @@ class UserActivity : AppCompatActivity() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                closeButton.rotation = slideOffset * -180
+                closeButton.rotation = slideOffset * ROTATION_180
             }
         })
 
@@ -368,42 +368,29 @@ class UserActivity : AppCompatActivity() {
                 setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
             }
-            "Headline3" -> {
-                setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
-            }
-            "Headline4" -> {
-                setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)
-            }
-            "Headline5" -> {
-                setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24)
-            }
+            "Headline3" -> setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
+            "Headline4" -> setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)
+            "Headline5" -> setupTextScaleType(R.string.st_h5, R.string.ls_zero, R.string.sp_24)
             "Headline6" -> {
                 setupTextScaleType(R.string.st_h6, R.string.ls_15, R.string.sp_20)
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
-            "Subtitle1" -> {
-                setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16)
-            }
-            "Subtitle2" -> {
-                setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14)
-            }
-            "Body1" -> {
-                setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16)
-            }
-            "Body2" -> {
-                setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14)
-            }
+            "Subtitle1" -> setupTextScaleType(R.string.st_subtitle1, R.string.ls_15, R.string.sp_16)
+            "Subtitle2" -> setupTextScaleType(R.string.st_subtitle2, R.string.ls_1, R.string.sp_14)
+            "Body1" -> setupTextScaleType(R.string.st_body1, R.string.ls_5, R.string.sp_16)
+            "Body2" -> setupTextScaleType(R.string.st_body2, R.string.ls_25, R.string.sp_14)
             "Button" -> {
                 setupTextScaleType(R.string.st_button, R.string.ls_75, R.string.sp_14)
-                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
+                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text),
+                        getString(R.string.all_caps))
                 fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.medium))
             }
-            "Caption" -> {
-                setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12)
-            }
+            "Caption" -> setupTextScaleType(R.string.st_caption, R.string.ls_4, R.string.sp_12)
             "Overline" -> {
                 setupTextScaleType(R.string.st_overline, R.string.ls_1dot5, R.string.sp_10)
-                caseText.text = UiUtil.applySpecialFormatting(getString(R.string.case_text), getString(R.string.all_caps))
+                caseText.text = UiUtil.applySpecialFormatting(
+                        getString(R.string.case_text),
+                        getString(R.string.all_caps))
             }
             else -> {
                 valueToSet = "Unset"
@@ -426,7 +413,8 @@ class UserActivity : AppCompatActivity() {
         builder.setView(dialogView)
         builder.setTitle(mainActivity!!.getString(R.string.picture_dialog_title))
         builder.setCancelable(true)
-        builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { dialog, which -> Log.d("Dialog", "The positive button was pressed") }
+        builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { dialog, which ->
+            Log.d("Dialog", "Positive button pressed") }
 
         val prefSwitch = dialogView.photo_pref_switch
         prefSwitch.isChecked = true
@@ -475,7 +463,8 @@ class UserActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_playlink -> {
-                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian"))
+                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse(
+                            "https://play.google.com/apps/testing/com.ableandroid.historian"))
                     startActivity(browser4)
                     retVal = true
                 }

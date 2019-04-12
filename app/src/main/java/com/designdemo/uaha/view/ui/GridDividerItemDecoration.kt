@@ -111,7 +111,8 @@ class GridDividerItemDecoration
         val childCount = parent.childCount
         val numChildrenOnLastRow = childCount % numColumns
         var numRows = childCount / numColumns
-        if (numChildrenOnLastRow == 0) { // TODO: Replace this with math
+
+        if (numChildrenOnLastRow == 0) {
             numRows--
         }
         for (i in 0 until numRows) {

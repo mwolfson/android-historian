@@ -19,7 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_os.view.*
 
-class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductEntity>) : RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
+class OsTypeAdapter(private val activity: Activity, context: Context, private val values: List<ProductEntity>) :
+        RecyclerView.Adapter<OsTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -31,14 +32,10 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         val subTitleText = view.os_item_subtext
         var osVersion: Int = 0
 
-        override fun toString(): String {
-            return super.toString() + " '" + titleText.text
-        }
+        override fun toString() = super.toString() + " '" + titleText.text
     }
 
-    fun getValueAt(position: Int): ProductEntity {
-        return values[position]
-    }
+    fun getValueAt(position: Int) = values[position]
 
     init {
         context.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
@@ -66,7 +63,10 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val transitionName = context.getString(R.string.transition_string)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity,
+                        holder.imageView,
+                        transitionName)
                 context.startActivity(intent, options.toBundle())
             } else {
                 context.startActivity(intent)
@@ -79,7 +79,5 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
                 .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
-    }
+    override fun getItemCount() = values.size
 }

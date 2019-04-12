@@ -18,4 +18,6 @@
     <dimen name="card_elevation">6dp</dimen>
 
     <integer name="anim_duration">300</integer>
+
+    <integer name="text_special_size">16</integer>
 </resources>

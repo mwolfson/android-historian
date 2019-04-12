@@ -151,10 +151,8 @@ class DetailActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (hasFocus) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus ) {
                 startPostponedEnterTransition()
-            }
         }
     }
 
@@ -173,7 +171,7 @@ class DetailActivity : AppCompatActivity() {
             }
 
             // Notify the User with a snackbar
-            // Need to set the FAB as the anchor view, so this appears higher then the BottomAppBar per the Material Spec
+            // Need to set the FAB as the anchor view, so this appears higher then the BottomAppBar per Material Spec
             Snackbar.make(detail_main_linear, R.string.favorite_confirm, Snackbar.LENGTH_LONG)
                     .setAnchorView(fab_detail)
                     .show()

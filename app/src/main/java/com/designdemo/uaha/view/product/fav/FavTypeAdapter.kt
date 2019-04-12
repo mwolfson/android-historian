@@ -20,7 +20,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.android.synthetic.main.list_item_favorites.view.*
 
-class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) : RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
+class FavTypeAdapter(private val activity: Activity, private val values: List<ProductEntity>) :
+        RecyclerView.Adapter<FavTypeAdapter.ViewHolder>() {
 
     private val typedValue = TypedValue()
     private val background: Int
@@ -31,14 +32,10 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         val textView: TextView = view.fav_item_title
         val textView2: TextView = view.fav_item_content
 
-        override fun toString(): String {
-            return super.toString() + " '" + textView.text
-        }
+        override fun toString()= super.toString() + " '" + textView.text
     }
 
-    fun getValueAt(position: Int): ProductEntity {
-        return values[position]
-    }
+    fun getValueAt(position: Int) = values[position]
 
     init {
         activity.applicationContext.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
@@ -59,7 +56,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         val rand = Random()
         val randomNum = rand.nextInt(3)
 
-        var strRes = when (randomNum) {
+        val strRes = when (randomNum) {
             0 -> R.string.ipsum_med
             1 -> R.string.ipsum_long
             else -> R.string.ipsum_short
@@ -75,7 +72,10 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val transitionName = context.getString(R.string.transition_string)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, holder.imageView, transitionName)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity,
+                        holder.imageView,
+                        transitionName)
                 context.startActivity(intent, options.toBundle())
             } else {
                 context.startActivity(intent)
@@ -88,7 +88,5 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
                 .into(holder.imageView)
     }
 
-    override fun getItemCount(): Int {
-        return values.size
-    }
+    override fun getItemCount() = values.size
 }

@@ -7,9 +7,7 @@ class DetailRepository(private val detailEntityDao: DetailEntityDao) {
 
     val allDetailInfo: LiveData<List<DetailEntity>> = detailEntityDao.getAllDetailItems()
 
-    fun getDetailItem(deviceName: String): LiveData<DetailEntity> {
-        return detailEntityDao.getDetailItem(deviceName)
-    }
+    fun getDetailItem(deviceName: String) = detailEntityDao.getDetailItem(deviceName)
 
     @WorkerThread
     suspend fun insertDetailItem(detailItem: DetailEntity) {

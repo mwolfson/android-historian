@@ -69,7 +69,7 @@ comments:
     active: false
 
 complexity:
-  active: true
+  active: false
   ComplexCondition:
     active: true
     threshold: 4
@@ -183,7 +183,6 @@ exceptions:
     exceptionNames:
     - ArrayIndexOutOfBoundsException
     - Error
-    - Exception
     - IllegalMonitorStateException
     - NullPointerException
     - IndexOutOfBoundsException
@@ -221,7 +220,7 @@ formatting:
     indentSize: 4
     continuationIndentSize: 4
   MaximumLineLength:
-    active: true
+    active: false
     maxLineLength: 120
   ModifierOrdering:
     active: true
@@ -444,7 +443,7 @@ style:
   MandatoryBracesIfStatements:
     active: false
   MaxLineLength:
-    active: true
+    active: false
     maxLineLength: 120
     excludePackageStatements: true
     excludeImportStatements: true

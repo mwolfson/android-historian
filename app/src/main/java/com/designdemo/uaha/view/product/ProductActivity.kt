@@ -39,7 +39,7 @@ class ProductActivity : AppCompatActivity() {
         bottomAppBar.replaceMenu(R.menu.main_actions)
 
         val ab = supportActionBar
-        ab?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        ab?.setHomeAsUpIndicator(R.drawable.vct_menu)
         ab?.setDisplayHomeAsUpEnabled(true)
 
         val navigationView = nav_view
@@ -60,9 +60,9 @@ class ProductActivity : AppCompatActivity() {
         }
 
         setupViewPager(product_viewpager)
-        product_viewpager.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
+        product_viewpager?.currentItem = intent.getIntExtra(EXTRA_FRAG_TYPE, OS_FRAG)
 
-        product_tabs.setupWithViewPager(product_viewpager)
+        product_tabs?.setupWithViewPager(product_viewpager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -106,39 +106,35 @@ class ProductActivity : AppCompatActivity() {
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_userinfo -> {
-                    val intent = Intent(applicationContext, UserActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(applicationContext, UserActivity::class.java))
                     retVal = true
                 }
                 R.id.nav_link1 -> {
-                    val browser1 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"))
-                    startActivity(browser1)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/")))
                     retVal = true
                 }
                 R.id.nav_link2 -> {
-                    val browser2 = Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"))
-                    startActivity(browser2)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/")))
                     retVal = true
                 }
                 R.id.nav_bottom_nav -> {
-                    val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
-                    startActivity(bottomNavIntent)
+                    startActivity(Intent(applicationContext, BottomNavActivity::class.java))
                     retVal = true
                 }
                 R.id.nav_motionlayout -> {
-                    val motionLayoutIntent = Intent(applicationContext, MotionLayoutActivity::class.java)
-                    startActivity(motionLayoutIntent)
+                    startActivity(Intent(applicationContext, MotionLayoutActivity::class.java))
                     retVal = true
                 }
                 R.id.nav_homepage -> {
-                    val browser3 = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/"))
-                    startActivity(browser3)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/")))
                     retVal = true
                 }
                 R.id.nav_playlink -> {
-                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse(
-                            "https://play.google.com/apps/testing/com.ableandroid.historian"))
-                    startActivity(browser4)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian")))
+                    retVal = true
+                }
+                R.id.nav_githublink -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mwolfson/android-historian")))
                     retVal = true
                 }
                 else -> retVal = false

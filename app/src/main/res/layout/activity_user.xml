@@ -713,7 +713,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/save_state"
-                                android:textColor="@color/white"
+                                android:textColor="@color/white_bluetint"
                                 app:chipBackgroundColor="@color/fab_selector"
                                 app:chipIcon="@drawable/vct_add" />
                         </LinearLayout>
@@ -867,7 +867,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@+id/bottom_appbar"
-            app:tint="@color/white"
+            app:tint="@color/white_bluetint"
             app:srcCompat="@drawable/vct_save"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

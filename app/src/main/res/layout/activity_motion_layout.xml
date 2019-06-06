@@ -72,7 +72,7 @@
         android:paddingEnd="8dp"
         android:paddingRight="8dp"
         android:background="@color/special_teal"
-        android:textColor="@color/white"
+        android:textColor="@color/white_bluetint"
         android:text="@string/launch_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

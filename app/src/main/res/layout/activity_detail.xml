@@ -639,7 +639,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        app:tint="@color/white"
+        app:tint="@color/white_bluetint"
         app:layout_anchor="@+id/bottom_appbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

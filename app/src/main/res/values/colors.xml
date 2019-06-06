@@ -3,17 +3,22 @@
 
     <color name="card_background">@color/grey_200</color>
 
-    <color name="white">#FFF5FFFF</color>
+    <color name="white_bluetint">#FFF5FFFF</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color>
+    <color name="white_pure">#FFFFFFFF</color>
 
     <color name="color_primary">#476600</color>
-    <color name="color_primary_dark">#364D00</color>
+    <color name="color_primary_variant">#364D00</color>
     <color name="color_accent">#2E60C8</color>
-    <color name="color_secondary">@color/teal_500</color>
-    <color name="color_secondary_dark">@color/teal_700</color>
+    <color name="color_error">@color/red_700</color>
+    <color name="color_surface">@color/white_pure</color>
+    <color name="color_secondary">@color/color_accent</color>
+    <color name="color_secondary_dark">#1a4399</color>
     <color name="colors_secondary_light">@color/teal_400</color>
     <color name="window_background">#ffffffff</color>
+
+    <color name="color_background">#e0e0e0</color>
 
     <color name="special_teal">#007B89</color>
 

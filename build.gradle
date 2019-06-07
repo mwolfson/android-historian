@@ -33,9 +33,16 @@ allprojects {
 }
 
 ext {
-    jetpackVersion = '1.0.0'
+    appcompat = '1.1.0-beta01'
     archComponentsVersion = '2.1.0-alpha04'
-    roomVersion = '2.1.0-alpha06'
+    corektx = '1.0.1'
     coroutines = '1.1.0'
+    glide = '4.9.0'
+    jetpackVersion = '1.0.0'
+    mdc = '1.1.0-alpha07'
+    multidex = '2.0.1'
+    roomVersion = '2.1.0-alpha06'
+    vectordrawable = '1.0.1'
     workManager = '2.0.0'
+
 }

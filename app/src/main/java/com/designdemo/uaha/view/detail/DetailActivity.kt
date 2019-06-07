@@ -4,9 +4,7 @@ import android.annotation.TargetApi
 import android.app.SearchManager
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -231,11 +229,10 @@ class DetailActivity : AppCompatActivity() {
                 //This applies the custom color to the home button, when expanded, and white when collapsed
                 appbar?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout: AppBarLayout, offset: Int ->
                     val isCollapsed = (offset == (-1 * appBarLayout.getTotalScrollRange()))
-                        if (!isCollapsed) {
+                        if (!isCollapsed)
                             supportActionBar?.setHomeAsUpIndicator(upArrow)
-                        } else {
+                        else
                             supportActionBar?.setHomeAsUpIndicator(whiteArrow)
-                        }
                 })
             }
         } catch (e: Exception) {

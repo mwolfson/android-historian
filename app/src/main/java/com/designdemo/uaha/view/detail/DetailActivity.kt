@@ -153,8 +153,8 @@ class DetailActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus ) {
-                startPostponedEnterTransition()
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus) {
+            startPostponedEnterTransition()
         }
     }
 
@@ -189,37 +189,38 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UnnecessaryParentheses")
     private fun setupPalette(imgId: Int) {
         val bm = BitmapFactory.decodeResource(resources, imgId)
         try {
             Palette.from(bm).generate { palette ->
                 Log.d(TAG, "Palette has been generated")
                 perc1_left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
-                palette_vibrant.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+                palette_vibrant.setBackgroundColor(palette.getVibrantColor(0x000000))
 
-                perc1_middle.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
-                palette_vibrant_dark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+                perc1_middle.setBackgroundColor(palette.getDarkVibrantColor(0x000000))
+                palette_vibrant_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000))
 
-                perc1_right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
-                palette_vibrant_light.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+                perc1_right.setBackgroundColor(palette.getLightVibrantColor(0x000000))
+                palette_vibrant_light.setBackgroundColor(palette.getLightVibrantColor(0x000000))
 
-                perc2_left.setBackgroundColor(palette!!.getMutedColor(0x000000))
-                palette_muted.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                perc2_left.setBackgroundColor(palette.getMutedColor(0x000000))
+                palette_muted.setBackgroundColor(palette.getMutedColor(0x000000))
 
-                perc2_middle.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
-                palette_muted_dark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                perc2_middle.setBackgroundColor(palette.getDarkMutedColor(0x000000))
+                palette_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000))
 
-                perc2_right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
-                palette_muted_light.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                perc2_right.setBackgroundColor(palette.getLightMutedColor(0x000000))
+                palette_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000))
 
                 // Noticed the Expanded white doesn't show everywhere, use Palette to fix this
-                collapsing_toolbar?.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
+                collapsing_toolbar?.setExpandedTitleColor(palette.getVibrantColor(0x000000))
 
-                iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
-                    palette!!.getMutedColor(0x000000)
-                } else {
-                    palette!!.getVibrantColor(0x000000)
-                }
+                iconColor = if (palette.getVibrantColor(0x000000) == 0x000000)
+                    palette.getMutedColor(0x000000)
+                else
+                    palette.getVibrantColor(0x000000)
+
 
                 // The back button should also have a better color applied to ensure it is visible,
                 val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
@@ -227,12 +228,13 @@ class DetailActivity : AppCompatActivity() {
                 val whiteArrow = getColorizedDrawable(res, R.color.white_pure)
 
                 //This applies the custom color to the home button, when expanded, and white when collapsed
-                appbar?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout: AppBarLayout, offset: Int ->
-                    val isCollapsed = (offset == (-1 * appBarLayout.getTotalScrollRange()))
-                        if (!isCollapsed)
-                            supportActionBar?.setHomeAsUpIndicator(upArrow)
-                        else
-                            supportActionBar?.setHomeAsUpIndicator(whiteArrow)
+                appbar?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener {
+                    appBarLayout: AppBarLayout, offset: Int ->
+                    val isCollapsed = (offset == (-1 * appBarLayout.totalScrollRange))
+                    if (!isCollapsed)
+                        supportActionBar?.setHomeAsUpIndicator(upArrow)
+                    else
+                        supportActionBar?.setHomeAsUpIndicator(whiteArrow)
                 })
             }
         } catch (e: Exception) {

@@ -221,7 +221,6 @@ class DetailActivity : AppCompatActivity() {
                 else
                     palette.getVibrantColor(0x000000)
 
-
                 // The back button should also have a better color applied to ensure it is visible,
                 val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
                 val upArrow = getColorizedDrawable(res)

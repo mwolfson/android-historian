@@ -224,9 +224,9 @@ class DetailActivity : AppCompatActivity() {
                 // The back button should also have a better color applied to ensure it is visible,
                 val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
                 val upArrow = getColorizedDrawable(res)
-                val whiteArrow = getColorizedDrawable(res, R.color.white_pure)
+                val whiteArrow = getColorizedDrawable(res, R.color.white_grey)
 
-                //This applies the custom color to the home button, when expanded, and white when collapsed
+                // This applies the custom color to the home button, when expanded, and white when collapsed
                 appbar?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener {
                     appBarLayout: AppBarLayout, offset: Int ->
                     val isCollapsed = (offset == (-1 * appBarLayout.totalScrollRange))

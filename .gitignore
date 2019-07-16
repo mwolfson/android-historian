@@ -52,3 +52,4 @@ app/release/output.json
 .gradle/buildOutputCleanup/cache.properties
 .gradle/buildOutputCleanup/cache.properties
 .gradle/buildOutputCleanup/cache.properties
+.cache/ktlint

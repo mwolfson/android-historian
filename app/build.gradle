@@ -53,7 +53,7 @@ dependencies {
     //Material UI
     implementation "com.google.android.material:material:$mdc"
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
-    implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
+    implementation "androidx.recyclerview:recyclerview:$recycler"
     implementation "androidx.palette:palette:$jetpackVersion"
     implementation "androidx.vectordrawable:vectordrawable:$vectordrawable"
 

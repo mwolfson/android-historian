@@ -23,6 +23,7 @@ import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.demo.BottomNavActivity
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.support.android.designlibdemo.R
 import com.support.android.designlibdemo.R.color.black
@@ -106,6 +107,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
         setIntent(intent)
         handleIntent(intent)
     }
@@ -152,7 +154,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus) {
-                startPostponedEnterTransition()
+            startPostponedEnterTransition()
         }
     }
 
@@ -187,50 +189,52 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UnnecessaryParentheses")
     private fun setupPalette(imgId: Int) {
         val bm = BitmapFactory.decodeResource(resources, imgId)
         try {
             Palette.from(bm).generate { palette ->
                 Log.d(TAG, "Palette has been generated")
                 perc1_left.setBackgroundColor(palette!!.getVibrantColor(0x000000))
-                palette_vibrant.setBackgroundColor(palette!!.getVibrantColor(0x000000))
+                palette_vibrant.setBackgroundColor(palette.getVibrantColor(0x000000))
 
-                perc1_middle.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
-                palette_vibrant_dark.setBackgroundColor(palette!!.getDarkVibrantColor(0x000000))
+                perc1_middle.setBackgroundColor(palette.getDarkVibrantColor(0x000000))
+                palette_vibrant_dark.setBackgroundColor(palette.getDarkVibrantColor(0x000000))
 
-                perc1_right.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
-                palette_vibrant_light.setBackgroundColor(palette!!.getLightVibrantColor(0x000000))
+                perc1_right.setBackgroundColor(palette.getLightVibrantColor(0x000000))
+                palette_vibrant_light.setBackgroundColor(palette.getLightVibrantColor(0x000000))
 
-                perc2_left.setBackgroundColor(palette!!.getMutedColor(0x000000))
-                palette_muted.setBackgroundColor(palette!!.getMutedColor(0x000000))
+                perc2_left.setBackgroundColor(palette.getMutedColor(0x000000))
+                palette_muted.setBackgroundColor(palette.getMutedColor(0x000000))
 
-                perc2_middle.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
-                palette_muted_dark.setBackgroundColor(palette!!.getDarkMutedColor(0x000000))
+                perc2_middle.setBackgroundColor(palette.getDarkMutedColor(0x000000))
+                palette_muted_dark.setBackgroundColor(palette.getDarkMutedColor(0x000000))
 
-                perc2_right.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
-                palette_muted_light.setBackgroundColor(palette!!.getLightMutedColor(0x000000))
+                perc2_right.setBackgroundColor(palette.getLightMutedColor(0x000000))
+                palette_muted_light.setBackgroundColor(palette.getLightMutedColor(0x000000))
 
                 // Noticed the Expanded white doesn't show everywhere, use Palette to fix this
-                collapsing_toolbar.setExpandedTitleColor(palette!!.getVibrantColor(0x000000))
+                collapsing_toolbar?.setExpandedTitleColor(palette.getVibrantColor(0x000000))
 
-                iconColor = if (palette!!.getVibrantColor(0x000000) == 0x000000) {
-                    palette!!.getMutedColor(0x000000)
-                } else {
-                    palette!!.getVibrantColor(0x000000)
-                }
+                iconColor = if (palette.getVibrantColor(0x000000) == 0x000000)
+                    palette.getMutedColor(0x000000)
+                else
+                    palette.getVibrantColor(0x000000)
 
                 // The back button should also have a better color applied to ensure it is visible,
-                // Get a swatch, and get a more specific color for title from it.
-                val vibrantSwatch = palette!!.vibrantSwatch
-                var arrowColor = ContextCompat.getColor(this, R.color.black)
-                if (vibrantSwatch != null) {
-                    arrowColor = vibrantSwatch!!.titleTextColor
-                }
-
                 val res = resources.getIdentifier("abc_ic_ab_back_material", "drawable", packageName)
                 val upArrow = getColorizedDrawable(res)
-                supportActionBar?.setHomeAsUpIndicator(upArrow)
-                collapsing_toolbar.setCollapsedTitleTextColor(arrowColor)
+                val whiteArrow = getColorizedDrawable(res, R.color.white_grey)
+
+                // This applies the custom color to the home button, when expanded, and white when collapsed
+                appbar?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener {
+                    appBarLayout: AppBarLayout, offset: Int ->
+                    val isCollapsed = (offset == (-1 * appBarLayout.totalScrollRange))
+                    if (!isCollapsed)
+                        supportActionBar?.setHomeAsUpIndicator(upArrow)
+                    else
+                        supportActionBar?.setHomeAsUpIndicator(whiteArrow)
+                })
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error with image! + $e", e)
@@ -309,6 +313,12 @@ class DetailActivity : AppCompatActivity() {
     private fun getColorizedDrawable(@DrawableRes res: Int): Drawable? {
         val drawable = ContextCompat.getDrawable(this, res)
         drawable?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
+        return drawable
+    }
+
+    private fun getColorizedDrawable(@DrawableRes res: Int, color: Int): Drawable? {
+        val drawable = ContextCompat.getDrawable(this, res)
+        drawable?.setColorFilter(resources.getColor(color), PorterDuff.Mode.SRC_ATOP)
         return drawable
     }
 }

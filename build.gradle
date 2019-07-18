@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.5.0-beta01'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.owasp:dependency-check-gradle:4.0.0'
     }
@@ -33,9 +33,17 @@ allprojects {
 }
 
 ext {
-    jetpackVersion = '1.0.0'
-    archComponentsVersion = '2.1.0-alpha04'
-    roomVersion = '2.1.0-alpha06'
+    appcompat = '1.1.0-rc01'
+    archComponentsVersion = '2.2.0-alpha02'
+    corektx = '1.2.0-alpha02'
     coroutines = '1.1.0'
+    glide = '4.9.0'
+    jetpackVersion = '1.0.0'
+    recycler = '1.1.0-beta01'
+    mdc = '1.1.0-alpha08'
+    multidex = '2.0.1'
+    roomVersion = '2.2.0-alpha01'
+    vectordrawable = '1.0.1'
     workManager = '2.0.0'
+
 }

@@ -38,6 +38,10 @@ import kotlinx.android.synthetic.main.dialog_picture.view.*
 import kotlinx.android.synthetic.main.dialog_textscale.view.*
 
 class UserActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG = "UserActivity"
+    }
+
     private var mainActivity: Activity? = null
 
     private lateinit var userViewModel: UserViewModel
@@ -63,16 +67,16 @@ class UserActivity : AppCompatActivity() {
         userViewModel.allUserEntity.observe(this, Observer { userInfo ->
             users = userInfo
 
-            if (users!!.isEmpty()) {
-                name_edit.setText("")
-                phone_edit.setText("")
-                password_edit.setText("")
+            if (users.isEmpty()) {
+                name_edit?.setText("")
+                phone_edit?.setText("")
+                password_edit?.setText("")
             } else {
-                val userInfo = users!!.last()
+                val userInfo = users.last()
 
-                name_edit.setText(userInfo.name)
-                phone_edit.setText(userInfo.phone)
-                password_edit.setText(userInfo.password)
+                name_edit?.setText(userInfo.name)
+                phone_edit?.setText(userInfo.phone)
+                password_edit?.setText(userInfo.password)
             }
         })
 
@@ -80,18 +84,18 @@ class UserActivity : AppCompatActivity() {
         userViewModel.getAddUserStatus().observe(this, Observer { statusInt ->
             when (statusInt) {
                 R.string.name_input_error -> {
-                    name_edit.error = getString(statusInt)
-                    name_edit.requestFocus()
+                    name_edit?.error = getString(statusInt)
+                    name_edit?.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.phone_input_error -> {
-                    phone_edit.error = getString(statusInt)
-                    phone_edit.requestFocus()
+                    phone_edit?.error = getString(statusInt)
+                    phone_edit?.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.invalid_password -> {
-                    password_edit.error = getString(statusInt)
-                    password_edit.requestFocus()
+                    password_edit?.error = getString(statusInt)
+                    password_edit?.requestFocus()
                     showSnackbar(statusInt)
                 }
                 R.string.profile_saved_confirm -> {
@@ -121,7 +125,7 @@ class UserActivity : AppCompatActivity() {
         bottom_appbar.replaceMenu(R.menu.profile_actions)
 
         val ab = supportActionBar
-        ab?.setHomeAsUpIndicator(R.drawable.ic_menu)
+        ab?.setHomeAsUpIndicator(R.drawable.vct_menu)
         ab?.setDisplayHomeAsUpEnabled(true)
 
         setupViews()
@@ -196,19 +200,19 @@ class UserActivity : AppCompatActivity() {
         // Format phone number as user is typing
         phone_edit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
-        profile_pic_button.setOnClickListener { v -> setPictureDialog() }
+        profile_pic_button?.setOnClickListener { v -> setPictureDialog() }
 
-        user_fab.setOnClickListener { v ->
+        user_fab?.setOnClickListener { v ->
             saveUserInfo()
         }
 
         chip_userinfo_label.requestFocus()
 
-        notifstart_button_start.setOnClickListener {
+        notifstart_button_start?.setOnClickListener {
             userViewModel.startNotif()
         }
 
-        notifstart_button_end.setOnClickListener {
+        notifstart_button_end?.setOnClickListener {
             userViewModel.cancelNotif()
         }
 
@@ -471,24 +475,23 @@ class UserActivity : AppCompatActivity() {
                     retVal = true
                 }
                 R.id.nav_homepage -> {
-                    val browser3 = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/"))
-                    startActivity(browser3)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/")))
                     retVal = true
                 }
                 R.id.nav_playlink -> {
-                    val browser4 = Intent(Intent.ACTION_VIEW, Uri.parse(
-                            "https://play.google.com/apps/testing/com.ableandroid.historian"))
-                    startActivity(browser4)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian")))
+                    retVal = true
+                }
+                R.id.nav_githublink -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mwolfson/android-historian")))
                     retVal = true
                 }
                 R.id.nav_link1 -> {
-                    val browser1 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/"))
-                    startActivity(browser1)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/")))
                     retVal = true
                 }
                 R.id.nav_link2 -> {
-                    val browser2 = Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/"))
-                    startActivity(browser2)
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/")))
                     retVal = true
                 }
 
@@ -496,9 +499,5 @@ class UserActivity : AppCompatActivity() {
             }
             retVal
         }
-    }
-
-    companion object {
-        private const val TAG = "UserActivity"
     }
 }

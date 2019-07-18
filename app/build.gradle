@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.0'
 
     defaultConfig {
         applicationId "com.ableandroid.historian"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         multiDexEnabled true
 
         versionCode 9
@@ -46,16 +46,16 @@ repositories {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.1'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.core:core-ktx:$corektx"
+    implementation "androidx.multidex:multidex:$multidex"
 
     //Material UI
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation "com.google.android.material:material:$mdc"
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
-    implementation "androidx.recyclerview:recyclerview:$jetpackVersion"
+    implementation "androidx.recyclerview:recyclerview:$recycler"
     implementation "androidx.palette:palette:$jetpackVersion"
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.1'
+    implementation "androidx.vectordrawable:vectordrawable:$vectordrawable"
 
     //WorkManager
     implementation("androidx.work:work-runtime:$workManager"){
@@ -87,10 +87,10 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
 
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"

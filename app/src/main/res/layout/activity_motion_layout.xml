@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/complex_motion_scene"
-    android:background="@color/window_background"
+    android:background="?attr/colorSurface"
     tools:context="com.designdemo.uaha.view.demo.MotionLayoutActivity">
 
     <TextView
@@ -72,7 +72,7 @@
         android:paddingEnd="8dp"
         android:paddingRight="8dp"
         android:background="@color/special_teal"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnSecondary"
         android:text="@string/launch_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

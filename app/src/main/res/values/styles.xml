@@ -2,10 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="colorSecondary">@color/color_accent</item>
+        <item name="colorPrimaryDark">@color/color_primary_variant</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorOnSurface">@color/color_on_surface</item>
+
+        <item name="colorError">@color/color_error</item>
+        <item name="colorOnError">#ffffff</item>
+
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
         <item name="textAppearanceHeadline5">@style/TextAppearance.MyApp.Headline5</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MyApp.Headline1</item>
@@ -17,7 +26,6 @@
     <style name="Base.Theme.DesignDemo.Launcher">
         <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
-
 
     <!--Create custom style for a Component, that will be applied manually-->
     <style name="Widget.CardContent" parent="android:Widget">

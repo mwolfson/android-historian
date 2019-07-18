@@ -4,5 +4,5 @@
     <item android:color="@color/grey_300" android:state_focused="true"/>
     <item android:color="@color/grey_300" android:state_selected="true"/>
     <item android:color="@color/grey_300" android:state_enabled="false"/>
-    <item android:color="@color/color_accent"/>
+    <item android:color="?attr/colorSecondary"/>
 </selector>

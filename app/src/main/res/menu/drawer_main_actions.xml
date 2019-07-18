@@ -32,6 +32,11 @@
                 android:id="@+id/nav_playlink"
                 android:icon="@drawable/vct_vikinghelmet"
                 android:title="@string/play_store_beta" />
+
+            <item
+                android:id="@+id/nav_githublink"
+                android:icon="@drawable/vct_github"
+                android:title="@string/source_code" />
         </menu>
     </item>
 
@@ -39,11 +44,11 @@
         <menu>
             <item
                 android:id="@+id/nav_link1"
-                android:icon="@drawable/ic_link"
+                android:icon="@drawable/vct_link"
                 android:title="@string/nav_link1"/>
             <item
                 android:id="@+id/nav_link2"
-                android:icon="@drawable/ic_link"
+                android:icon="@drawable/vct_link"
                 android:title="@string/nav_link2"/>
         </menu>
     </item>

@@ -48,3 +48,8 @@ build/intermediates/dex-cache/cache.xml
 .gradle/4.10.1/gc.properties
 .gradle/buildOutputCleanup/cache.properties
 app/release/output.json
+.gradle/5.4-rc-1/gc.properties
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/cache.properties
+.cache/ktlint

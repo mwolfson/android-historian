@@ -5,6 +5,7 @@
     android:id="@+id/user_main_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/window_background"
+            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -62,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:orientation="horizontal"
-                android:background="@color/grey_200"
+                android:background="?attr/colorSurface"
                 android:gravity="center"
                 android:visibility="gone">
 
@@ -89,7 +90,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_gradient_lightyellow"
                     android:orientation="vertical">
 
                     <com.google.android.material.chip.Chip
@@ -98,7 +98,7 @@
                         android:layout_marginBottom="0dp"
                         android:text="@string/device_info"
                         app:chipBackgroundColor="@color/transparent"
-                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -212,7 +212,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_gradient_lightred"
                     android:orientation="vertical">
 
                     <com.google.android.material.chip.Chip
@@ -221,9 +220,8 @@
                         android:layout_marginBottom="0dp"
                         android:text="@string/specifications"
                         app:chipBackgroundColor="@color/transparent"
-                        app:chipStrokeColor="@color/black"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
-
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
@@ -338,7 +336,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_gradient_lightblue"
                 android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
@@ -346,7 +343,7 @@
                     android:layout_marginBottom="0dp"
                     android:text="@string/wiki"
                     app:chipBackgroundColor="@color/transparent"
-                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeColor="?attr/colorOnSurface"
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -374,7 +371,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_gradient_lightred"
                 android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
@@ -383,7 +379,7 @@
                     android:layout_marginBottom="0dp"
                     android:text="@string/palette"
                     app:chipBackgroundColor="@color/transparent"
-                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeColor="?attr/colorOnSurface"
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -469,7 +465,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/toolbar_height"
-                android:background="@drawable/bg_gradient_lightgreen"
                 android:orientation="vertical">
 
                 <com.google.android.material.chip.Chip
@@ -477,7 +472,7 @@
                     android:layout_marginBottom="0dp"
                     android:text="@string/percentage"
                     app:chipBackgroundColor="@color/transparent"
-                    app:chipStrokeColor="@color/black"
+                    app:chipStrokeColor="?attr/colorOnSurface"
                     app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -625,7 +620,7 @@
         android:layout_height="@dimen/toolbar_height"
         android:layout_gravity="bottom"
         app:elevation="@dimen/toolbar_elevation"
-        app:backgroundTint="@color/color_primary"
+        app:backgroundTint="?attr/colorPrimary"
         app:fabAlignmentMode="end"
         app:fabCradleMargin="8dp"
         app:hideOnScroll="true"
@@ -639,7 +634,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        app:tint="@color/white"
+        app:tint="?attr/colorOnSecondary"
         app:layout_anchor="@+id/bottom_appbar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

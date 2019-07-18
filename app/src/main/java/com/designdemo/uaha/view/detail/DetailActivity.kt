@@ -119,7 +119,7 @@ class DetailActivity : AppCompatActivity() {
 
     // TODO, setup this better
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         bottom_appbar.replaceMenu(R.menu.detail_actions)
@@ -151,7 +151,7 @@ class DetailActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus ) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus) {
                 startPostponedEnterTransition()
         }
     }

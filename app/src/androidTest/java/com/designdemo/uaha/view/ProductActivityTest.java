@@ -41,7 +41,7 @@ public class ProductActivityTest {
         ViewInteraction appCompatImageButton2 = onView(
                 allOf(withContentDescription("Navigate up"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
+                                allOf(withId(R.id.detail_toolbar),
                                         childAtPosition(
                                                 withId(R.id.appbar),
                                                 0)),

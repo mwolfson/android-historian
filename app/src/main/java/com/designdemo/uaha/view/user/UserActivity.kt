@@ -112,7 +112,7 @@ class UserActivity : AppCompatActivity() {
                         showSnackbar(statusInt)
                     }
                 }
-                else ->  Log.d("AddUserError", "Unexpected status message returned: $statusInt")
+                else -> Log.d("AddUserError", "Unexpected status message returned: $statusInt")
             }
         })
 
@@ -210,6 +210,19 @@ class UserActivity : AppCompatActivity() {
 
         notifstart_button_end.setOnClickListener {
             userViewModel.cancelNotif()
+        }
+
+        darkmode_group.setOnCheckedChangeListener { myGroup, radioClicked ->
+
+            // Check which radio button was clicked
+            when (radioClicked) {
+                R.id.radio_dark ->
+                    Log.d(TAG, "Dark pressed " + radioClicked)
+                R.id.radio_light ->
+                    Log.d(TAG, "Light pressed " + radioClicked)
+                R.id.radio_setting ->
+                    Log.d(TAG, "Setting pressed " + radioClicked)
+            }
         }
     }
 
@@ -362,11 +375,11 @@ class UserActivity : AppCompatActivity() {
         when (scaleText) {
             "Headline1" -> {
                 setupTextScaleType(R.string.st_h1, R.string.ls_neg1_5, R.string.sp_96)
-                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light_font))
             }
             "Headline2" -> {
                 setupTextScaleType(R.string.st_h2, R.string.ls_neg5, R.string.sp_60)
-                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light))
+                fontText.text = UiUtil.applySpecialFormatting(getString(R.string.font_text), getString(R.string.light_font))
             }
             "Headline3" -> setupTextScaleType(R.string.st_h3, R.string.ls_zero, R.string.sp_48)
             "Headline4" -> setupTextScaleType(R.string.st_h4, R.string.ls_25, R.string.sp_34)

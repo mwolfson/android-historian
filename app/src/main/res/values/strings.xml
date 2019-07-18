@@ -56,7 +56,7 @@
     <string name="sentence">Sentence</string>
     <string name="all_caps">ALL CAPS</string>
     <string name="regular">Regular</string>
-    <string name="light">Light</string>
+    <string name="light_font">Light</string>
     <string name="medium">Medium</string>
     <string name="text_appearance_style_example">\@style/TextAppearance.MaterialComponents.%1$s\n---\nandroid:textAppearance=\"?textAppearance%1$s\"</string>
 
@@ -122,11 +122,11 @@
     <!-- Profile Strings -->
     <string name="user_info">User Info</string>
     <string name="enter_a_password">Enter an 8 letter Password</string>
+    <string name="dark_mode_preference">Which mode do you prefer?</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system_setting">System Controlled</string>
     <string name="have_you_ever_owned_any_of_these">Have you ever owned any of these?</string>
-    <string name="nexus">Nexus</string>
-    <string name="android_tv">Android TV</string>
-    <string name="android_wear">Android Wear</string>
-    <string name="which_is_your_favorite_device_manufacturer">Which is your favorite device manufacturer?</string>
     <string name="asus">Asus</string>
     <string name="htc">HTC</string>
     <string name="motorola">Motorola</string>

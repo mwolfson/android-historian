@@ -151,7 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                android:text="@string/have_you_ever_owned_any_of_these" />
+                                android:text="@string/dark_mode_preference" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -159,23 +159,32 @@
                                 android:orientation="horizontal"
                                 android:weightSum="3">
 
-                                <CheckBox
+                                <RadioGroup
+                                    android:id="@+id/darkmode_group"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/nexus" />
+                                    android:layout_height="wrap_content">
 
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/android_tv" />
+                                    <RadioButton
+                                        android:id="@+id/radio_light"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/light" />
 
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/android_wear" />
+                                    <RadioButton
+                                        android:id="@+id/radio_dark"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        android:text="@string/dark" />
+
+                                    <RadioButton
+                                        android:id="@+id/radio_setting"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/system_setting" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <TextView
@@ -184,45 +193,32 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                                 android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                                android:text="@string/which_is_your_favorite_device_manufacturer" />
+                                android:text="@string/have_you_ever_owned_any_of_these" />
 
-                            <RadioGroup
-                                android:id="@+id/manufacturer_group"
+                            <CheckBox
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:text="@string/asus" />
 
-                                <RadioButton
-                                    android:id="@+id/radioAsus"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/asus" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/htc" />
 
-                                <RadioButton
-                                    android:id="@+id/radioHtc"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:text="@string/htc" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/motorola" />
 
-                                <RadioButton
-                                    android:id="@+id/radioMoto"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/motorola" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/one_plus_one" />
 
-                                <RadioButton
-                                    android:id="@+id/radioOnePlus"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/one_plus_one" />
-
-                                <RadioButton
-                                    android:id="@+id/radioSamsung"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/samsung" />
-
-                            </RadioGroup>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/samsung" />
 
                             <TextView
                                 style="?textAppearanceBody1"
@@ -332,7 +328,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:text="@string/notif_at_intervals"/>
+                        android:text="@string/notif_at_intervals" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -346,9 +342,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="8dp"
+                            android:layout_weight="1"
                             android:background="@drawable/bg_button"
-                            android:text="@string/start_notifications"
-                            android:layout_weight="1"/>
+                            android:text="@string/start_notifications" />
 
                         <Button
                             android:id="@+id/notifstart_button_end"
@@ -356,9 +352,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="16dp"
+                            android:layout_weight="1"
                             android:background="@drawable/bg_button"
-                            android:text="@string/stop_notifications"
-                            android:layout_weight="1"/>
+                            android:text="@string/stop_notifications" />
                     </LinearLayout>
 
 
@@ -855,8 +851,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbar_height"
             android:layout_gravity="bottom"
+            app:backgroundTint="?attr/colorPrimary"
             app:elevation="8dp"
-            app:backgroundTint="@color/color_primary"
             app:fabAlignmentMode="center"
             app:fabCradleMargin="8dp"
             app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
@@ -866,9 +862,10 @@
             android:id="@+id/user_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="?attr/colorSecondary"
             app:layout_anchor="@+id/bottom_appbar"
-            app:tint="@color/white"
-            app:srcCompat="@drawable/vct_save"/>
+            app:srcCompat="@drawable/vct_save"
+            app:tint="?attr/colorOnSecondary" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

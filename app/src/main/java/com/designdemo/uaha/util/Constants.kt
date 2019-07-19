@@ -19,3 +19,4 @@ const val PHONE_LENGTH = 14
 // Bottom Sheet Constants
 const val PEEK_HEIGHT_PIXEL = 300
 const val ROTATION_180 = -180
+// END CONSTANTS

@@ -32,7 +32,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         val textView: TextView = view.fav_item_title
         val textView2: TextView = view.fav_item_content
 
-        override fun toString()= super.toString() + " '" + textView.text
+        override fun toString() = super.toString() + " '" + textView.text
     }
 
     fun getValueAt(position: Int) = values[position]

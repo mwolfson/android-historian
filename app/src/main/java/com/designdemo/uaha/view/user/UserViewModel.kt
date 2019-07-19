@@ -10,7 +10,11 @@ import androidx.work.WorkManager
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.data.model.user.UserRepository
-import com.designdemo.uaha.util.*
+import com.designdemo.uaha.util.NAME_MAX
+import com.designdemo.uaha.util.NAME_MIN
+import com.designdemo.uaha.util.PASSWORD_MIN
+import com.designdemo.uaha.util.PHONE_LENGTH
+import com.designdemo.uaha.util.TAG_WORK_NOTIF
 import com.designdemo.uaha.workers.NotifWorker
 import com.support.android.designlibdemo.R
 import kotlinx.coroutines.CoroutineScope
@@ -51,7 +55,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val saveStatusCode = MutableLiveData<Int>()
 
-    fun getAddUserStatus()= saveStatusCode
+    fun getAddUserStatus() = saveStatusCode
 
     /**
      * This method will validate the input, and either return a error

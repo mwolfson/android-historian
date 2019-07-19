@@ -96,14 +96,9 @@ object UiUtil {
                 word1.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         str.setSpan(
-                AbsoluteSizeSpan(R.integer.text_special_size,true),
-                word1.length + 1,
-                str.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                AbsoluteSizeSpan(R.integer.text_special_size, true), word1.length + 1, str.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         str.setSpan(
-                android.text.style.StyleSpan(Typeface.ITALIC),
-                word1.length + 1,
-                str.length,
+                android.text.style.StyleSpan(Typeface.ITALIC), word1.length + 1, str.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         return str
     }

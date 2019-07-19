@@ -36,7 +36,7 @@
                         android:text="@string/user_info"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_account"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -129,7 +129,7 @@
                         android:text="@string/survey"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_survey"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -273,7 +273,7 @@
                         android:text="@string/profile_picture"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_camera"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -317,7 +317,7 @@
                         android:text="Notifications"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_notifications"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <TextView
@@ -368,7 +368,7 @@
                         android:text="@string/text_scale_demo"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_text_scale"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <Button
@@ -395,7 +395,7 @@
                         android:text="@string/chip_demo"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_chip"
-                        app:chipStrokeColor="?attr/colorOnPrimary"
+                        app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView

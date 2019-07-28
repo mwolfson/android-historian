@@ -23,7 +23,7 @@ class OsFragment : Fragment() {
 
     private var mainActivity: FragmentActivity? = null
 
-    private lateinit var osViewModel: OsViewModel
+    private lateinit var osViewModelImpl: OsViewModelImpl
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -35,8 +35,8 @@ class OsFragment : Fragment() {
 
         mainActivity = activity
 
-        osViewModel = ViewModelProviders.of(this).get(OsViewModel::class.java)
-        osViewModel.getOsData().observe(this, Observer { osList ->
+        osViewModelImpl = ViewModelProviders.of(this).get(OsViewModelImpl::class.java)
+        osViewModelImpl.getOsData().observe(this, Observer { osList ->
             if (osList.isNotEmpty()) {
                 setupRecyclerView(rv, osList)
                 product_recyclerview.setVisibility(View.VISIBLE)
@@ -55,6 +55,6 @@ class OsFragment : Fragment() {
         val llm = LinearLayoutManager(recyclerView.context)
         recyclerView.layoutManager = llm
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, llm.orientation))
-        recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, osViewModel.getOsData().value!!)
+        recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, osViewModelImpl.getOsData().value!!)
     }
 }

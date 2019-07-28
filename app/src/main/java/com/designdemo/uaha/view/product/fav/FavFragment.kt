@@ -23,7 +23,7 @@ class FavFragment : Fragment() {
 
     private var mainActivity: FragmentActivity? = null
 
-    private lateinit var favViewModel: FavViewModel
+    private lateinit var favViewModelImpl: FavViewModelImpl
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -36,8 +36,8 @@ class FavFragment : Fragment() {
 
         mainActivity = activity
 
-        favViewModel = ViewModelProviders.of(this).get(FavViewModel::class.java)
-        favViewModel.getFavData().observe(this, Observer { favList ->
+        favViewModelImpl = ViewModelProviders.of(this).get(FavViewModelImpl::class.java)
+        favViewModelImpl.getFavData().observe(this, Observer { favList ->
             if (favList.isNotEmpty()) {
                 setupRecyclerView(rv, favList)
                 product_recyclerview.setVisibility(View.VISIBLE)
@@ -55,6 +55,6 @@ class FavFragment : Fragment() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView, devList: List<ProductEntity>) {
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.adapter = FavTypeAdapter(mainActivity!!, favViewModel.getFavData().value!!)
+        recyclerView.adapter = FavTypeAdapter(mainActivity!!, favViewModelImpl.getFavData().value!!)
     }
 }

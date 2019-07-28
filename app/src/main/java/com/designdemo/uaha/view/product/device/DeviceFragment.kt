@@ -24,7 +24,7 @@ class DeviceFragment : Fragment() {
 
     private var mainActivity: FragmentActivity? = null
 
-    private lateinit var deviceViewModel: DeviceViewModel
+    private lateinit var deviceViewModelImpl: DeviceViewModelImpl
 
     @Nullable
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -36,8 +36,8 @@ class DeviceFragment : Fragment() {
 
         mainActivity = activity
 
-        deviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel::class.java)
-        deviceViewModel.getDeviceData().observe(this, Observer { devList ->
+        deviceViewModelImpl = ViewModelProviders.of(this).get(DeviceViewModelImpl::class.java)
+        deviceViewModelImpl.getDeviceData().observe(this, Observer { devList ->
             if (devList.isNotEmpty()) {
                 setupRecyclerView(rv, devList)
                 product_recyclerview.setVisibility(View.VISIBLE)

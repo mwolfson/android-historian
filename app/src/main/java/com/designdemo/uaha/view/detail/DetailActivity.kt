@@ -37,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
 
     private var localProdItem: ProductEntity? = null
 
-    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var detailViewModelImpl: DetailViewModelImpl
 
     private var androidName = "unset"
 
@@ -55,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)
         }
 
-        detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        detailViewModelImpl = ViewModelProviders.of(this).get(DetailViewModelImpl::class.java)
 
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
@@ -77,7 +77,7 @@ class DetailActivity : AppCompatActivity() {
         setupFab()
 
         val product = androidName.split("-".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        detailViewModel.getProductForName(product[0]).observe(this, Observer { prodItem ->
+        detailViewModelImpl.getProductForName(product[0]).observe(this, Observer { prodItem ->
             prodItem?.let {
                 localProdItem = prodItem
                 Glide.with(this).load(prodItem.imgId).centerCrop().into(backdrop)
@@ -87,13 +87,13 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        detailViewModel.getDetailsForItem(androidName).observe(this, Observer { detailsForItem ->
+        detailViewModelImpl.getDetailsForItem(androidName).observe(this, Observer { detailsForItem ->
             detailsForItem?.let {
                 setDeviceInfoViews(detailsForItem)
             }
         })
 
-        detailViewModel.getProgressBarVisibility().observe(this, Observer { progVisibility ->
+        detailViewModelImpl.getProgressBarVisibility().observe(this, Observer { progVisibility ->
             if (progVisibility) {
                 details_progress_layout.visibility = View.VISIBLE
             } else {
@@ -102,8 +102,8 @@ class DetailActivity : AppCompatActivity() {
         })
 
         // Retrieve the phone and WIKI info from net, and put in DB when found
-        detailViewModel.getFonoNetInfo(androidName)
-//        detailViewModel.getWikiNetInfo("Android Oreo")
+        detailViewModelImpl.getFonoNetInfo(androidName)
+//        detailViewModelImpl.getWikiNetInfo("Android Oreo")
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -134,7 +134,7 @@ class DetailActivity : AppCompatActivity() {
                     val deviceStrings = resources.getStringArray(R.array.device_names)
                     val randInt = Random.nextInt(deviceStrings.size - 1)
                     // TODO Send this value to VM, and the force a refresh of views with data from this item
-                    detailViewModel.updateProductFromRefresh(deviceStrings[randInt])
+                    detailViewModelImpl.updateProductFromRefresh(deviceStrings[randInt])
                     this.androidName = deviceStrings[randInt]
 //                    onResume()
                     true
@@ -169,7 +169,7 @@ class DetailActivity : AppCompatActivity() {
             localProdItem?.apply {
                 isFav = toSetFav
             }?.let { item ->
-                detailViewModel.insertFav(item)
+                detailViewModelImpl.insertFav(item)
             }
 
             // Notify the User with a snackbar

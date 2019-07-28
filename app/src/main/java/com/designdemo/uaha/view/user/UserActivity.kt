@@ -44,7 +44,7 @@ class UserActivity : AppCompatActivity() {
 
     private var mainActivity: Activity? = null
 
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var userViewModel: UserViewModelImpl
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 
@@ -62,7 +62,7 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
         mainActivity = this
 
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        userViewModel = ViewModelProviders.of(this).get(UserViewModelImpl::class.java)
 
         userViewModel.allUserEntity.observe(this, Observer { userInfo ->
             users = userInfo

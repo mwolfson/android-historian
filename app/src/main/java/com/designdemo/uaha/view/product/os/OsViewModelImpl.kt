@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class OsViewModelImpl(application: Application) : AndroidViewModel(application), CoroutineScope {
+class OsViewModelImpl(application: Application) : AndroidViewModel(application), CoroutineScope, OsViewModel {
     override val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private var parentJob = Job()
@@ -27,7 +27,7 @@ class OsViewModelImpl(application: Application) : AndroidViewModel(application),
         allOses = repository.allOsInfo
     }
 
-    fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO) {
+    override fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO) {
         repository.insertItem(productEntity)
     }
 
@@ -36,5 +36,5 @@ class OsViewModelImpl(application: Application) : AndroidViewModel(application),
         parentJob.cancel()
     }
 
-    fun getOsData() = allOses
+    override fun getOsData() = allOses
 }

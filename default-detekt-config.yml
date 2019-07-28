@@ -15,6 +15,7 @@ test-pattern: # Configure exclusions for test sources
   - 'WildcardImport'
   - 'MagicNumber'
   - 'MaxLineLength'
+  - 'NewLineAtEndOfFile'
   - 'LateinitUsage'
   - 'StringLiteralDuplication'
   - 'SpreadOperator'

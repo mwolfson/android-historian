@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.coroutines.Job
 
-@Suppress("NewLineAtEndOfFile")
 interface OsViewModel {
 
     fun insert(productEntity: ProductEntity): Job

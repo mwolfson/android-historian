@@ -15,7 +15,6 @@ test-pattern: # Configure exclusions for test sources
   - 'WildcardImport'
   - 'MagicNumber'
   - 'MaxLineLength'
-  - 'NewLineAtEndOfFile'
   - 'LateinitUsage'
   - 'StringLiteralDuplication'
   - 'SpreadOperator'
@@ -211,7 +210,7 @@ formatting:
   Filename:
     active: true
   FinalNewline:
-    active: true
+    active: false
     autoCorrect: true
   ImportOrdering:
     active: true
@@ -456,7 +455,7 @@ style:
   NestedClassesVisibility:
     active: true
   NewLineAtEndOfFile:
-    active: true
+    active: false
   NoTabs:
     active: true
   OptionalAbstractKeyword:

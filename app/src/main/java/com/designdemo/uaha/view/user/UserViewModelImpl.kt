@@ -23,6 +23,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+@Suppress("NewLineAtEndOfFile")
 class UserViewModelImpl(application: Application) : AndroidViewModel(application), UserViewModel {
     private var parentJob = Job()
     private val couroutineContext

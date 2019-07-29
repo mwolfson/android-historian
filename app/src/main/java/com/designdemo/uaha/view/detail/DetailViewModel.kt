@@ -6,6 +6,7 @@ import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.product.ProductEntity
 import kotlinx.coroutines.Job
 
+@Suppress("NewLineAtEndOfFile")
 interface DetailViewModel {
     fun insertDetail(detailItem: DetailEntity): Job
     fun updateProductFromRefresh(productIn: String)

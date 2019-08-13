@@ -1,1 +1,9 @@
 include ':app'
+
+ext.isCIBuild = System.getenv().containsKey('CI')
+
+buildCache {
+  local {
+    enabled = !isCIBuild
+  }
+}

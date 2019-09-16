@@ -23,7 +23,7 @@ class ViewModelFactory
 
         if (creator == null) throw IllegalArgumentException("unknown model class " + modelClass)
 
-        @Suppress("UNCHECKED_CAST")
+        @Suppress("UNCHECKED_CAST", "TooGenericExceptionThrown")
         return try {
             creator.get() as T
         } catch (e: Exception) {

@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.product.ProductEntity
-import com.designdemo.uaha.data.model.product.ProductRepository
+import com.designdemo.uaha.data.model.product.ProductRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,18 +17,18 @@ class OsViewModelImpl(application: Application) : AndroidViewModel(application),
         get() = parentJob + Dispatchers.Main
     private var parentJob = Job()
 
-    private val repository: ProductRepository
+    private val repositoryImpl: ProductRepositoryImpl
     private val allOses: LiveData<List<ProductEntity>>
 
     init {
         val productItemDao = InfoDatabase.getDatabase(application, this).productDao()
-        repository = ProductRepository(productItemDao)
+        repositoryImpl = ProductRepositoryImpl(productItemDao)
 
-        allOses = repository.allOsInfo
+        allOses = repositoryImpl.allOsInfo
     }
 
     override fun insert(productEntity: ProductEntity) = launch(Dispatchers.IO) {
-        repository.insertItem(productEntity)
+        repositoryImpl.insertItem(productEntity)
     }
 
     override fun onCleared() {

@@ -159,7 +159,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupFab() {
-        fab_detail.setOnClickListener { v ->
+        fab_detail.setOnClickListener { _ ->
             // Toggle the value to be opposite of what it is, to set
             var toSetFav = 1
             if (localProdItem?.isFav == 1) {

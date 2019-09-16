@@ -9,7 +9,7 @@ import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.detail.DetailEntity
 import com.designdemo.uaha.data.model.detail.DetailRepository
 import com.designdemo.uaha.data.model.product.ProductEntity
-import com.designdemo.uaha.data.model.product.ProductRepository
+import com.designdemo.uaha.data.model.product.ProductRepositoryImpl
 import com.designdemo.uaha.net.FonoApiFactory
 import com.designdemo.uaha.net.WikiApiFactory
 import com.support.android.designlibdemo.BuildConfig
@@ -28,7 +28,7 @@ class DetailViewModelImpl(application: Application) : AndroidViewModel(applicati
     private var parentJob = Job()
 
     private val detailRepository: DetailRepository
-    private val prodRepository: ProductRepository
+    private val prodRepositoryImpl: ProductRepositoryImpl
     private val allDetails: LiveData<List<DetailEntity>>
 
     companion object {
@@ -43,7 +43,7 @@ class DetailViewModelImpl(application: Application) : AndroidViewModel(applicati
         detailRepository = DetailRepository(detailItemDao)
 
         val prodItemDao = InfoDatabase.getDatabase(application, this).productDao()
-        prodRepository = ProductRepository(prodItemDao)
+        prodRepositoryImpl = ProductRepositoryImpl(prodItemDao)
 
         allDetails = detailRepository.allDetailInfo
     }
@@ -98,12 +98,12 @@ class DetailViewModelImpl(application: Application) : AndroidViewModel(applicati
     }
 
     override fun insertFav(productEntity: ProductEntity) = launch(Dispatchers.IO) {
-        prodRepository.insertItem(productEntity)
+        prodRepositoryImpl.insertItem(productEntity)
     }
 
     override fun getDetailsForItem(deviceName: String) = detailRepository.getDetailItem(deviceName)
 
-    override fun getProductForName(deviceName: String) = prodRepository.getProductItem(deviceName)
+    override fun getProductForName(deviceName: String) = prodRepositoryImpl.getProductItem(deviceName)
 
     private var progressBarVisibility = MutableLiveData<Boolean>()
 

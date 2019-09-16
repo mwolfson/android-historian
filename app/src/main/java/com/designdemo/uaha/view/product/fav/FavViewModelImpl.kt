@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.designdemo.uaha.data.InfoDatabase
-import com.designdemo.uaha.data.model.product.ProductEntity
 import com.designdemo.uaha.data.model.product.ProductRepository
+import com.designdemo.uaha.data.model.product.ProductEntity
+import com.designdemo.uaha.data.model.product.ProductRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,12 +18,12 @@ class FavViewModelImpl(application: Application) : AndroidViewModel(application)
         get() = parentJob + Dispatchers.Main
     private var parentJob = Job()
 
-    private val repository: ProductRepository
+    var repository: ProductRepository
     private val allFaves: LiveData<List<ProductEntity>>
 
     init {
         val productItemDao = InfoDatabase.getDatabase(application, this).productDao()
-        repository = ProductRepository(productItemDao)
+        repository = ProductRepositoryImpl(productItemDao)
 
         allFaves = repository.allFaveInfo
     }

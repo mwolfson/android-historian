@@ -3,16 +3,12 @@ package com.designdemo.uaha.data.model.product
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 
-class ProductRepository(private val productItemDao: ProductItemDao) {
-
-    val allDeviceInfo: LiveData<List<ProductEntity>> = productItemDao.getAllDevices()
-    val allOsInfo: LiveData<List<ProductEntity>> = productItemDao.getAllOses()
-    val allFaveInfo: LiveData<List<ProductEntity>> = productItemDao.getAllFaves()
-
-    fun getProductItem(prodName: String) = productItemDao.getProductItem(prodName)
+interface ProductRepository {
+    val allDeviceInfo: LiveData<List<ProductEntity>>
+    val allOsInfo: LiveData<List<ProductEntity>>
+    val allFaveInfo: LiveData<List<ProductEntity>>
+    fun getProductItem(prodName: String): LiveData<ProductEntity>
 
     @WorkerThread
-    suspend fun insertItem(productEntity: ProductEntity) {
-        productItemDao.insertItem(productEntity)
-    }
+    suspend fun insertItem(productEntity: ProductEntity)
 }

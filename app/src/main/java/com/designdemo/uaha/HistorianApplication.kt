@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import com.designdemo.uaha.util.PREF_DARK_MODE
 import com.designdemo.uaha.util.PREF_FILE
 
-@Suppress("NewLineAtEndOfFile")
 class HistorianApplication : Application() {
 
     companion object {

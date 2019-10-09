@@ -40,6 +40,7 @@ import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
 import kotlinx.android.synthetic.main.dialog_textscale.view.*
 
+@Suppress("NewLineAtEndOfFile")
 class UserActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "UserActivity"

@@ -14,14 +14,17 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.work.WorkInfo
 import com.designdemo.uaha.data.model.user.UserEntity
-import com.designdemo.uaha.util.ROTATION_180
 import com.designdemo.uaha.util.PEEK_HEIGHT_PIXEL
+import com.designdemo.uaha.util.ROTATION_180
 import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.designdemo.uaha.view.product.ProductActivity
@@ -203,7 +206,8 @@ class UserActivity : AppCompatActivity() {
         profile_pic_button?.setOnClickListener { v -> setPictureDialog() }
 
         user_fab?.setOnClickListener { v ->
-            saveUserInfo()
+            val userInfo = UserEntity(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
+            userViewModel.addUserData(userInfo)
         }
 
         chip_userinfo_label.requestFocus()
@@ -217,25 +221,15 @@ class UserActivity : AppCompatActivity() {
         }
 
         darkmode_group.setOnCheckedChangeListener { myGroup, radioClicked ->
-
-            // Check which radio button was clicked
-            when (radioClicked) {
-                R.id.radio_dark ->
-                    Log.d(TAG, "Dark pressed " + radioClicked)
-                R.id.radio_light ->
-                    Log.d(TAG, "Light pressed " + radioClicked)
-                R.id.radio_setting ->
-                    Log.d(TAG, "Setting pressed " + radioClicked)
-            }
+            userViewModel.setDarkMode(radioClicked, this)
         }
-    }
 
-    /**
-     * Validates and saves user info
-     */
-    private fun saveUserInfo() {
-        val userInfo = UserEntity(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
-        userViewModel.addUserData(userInfo)
+        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+        when (currentNightMode) {
+            MODE_NIGHT_NO -> darkmode_group.check(R.id.radio_light)
+            MODE_NIGHT_YES -> darkmode_group.check(R.id.radio_dark)
+            else -> darkmode_group.check(R.id.radio_setting)
+        }
     }
 
     private fun showSnackbar(@StringRes displayString: Int) {

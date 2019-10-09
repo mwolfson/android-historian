@@ -126,14 +126,14 @@
                         android:id="@+id/chip_preference_label"
                         style="@style/ChipLabel"
                         android:layout_marginBottom="0dp"
-                        android:text="@string/survey"
+                        android:text="@string/darkmode"
                         app:chipBackgroundColor="@color/transparent"
-                        app:chipIcon="@drawable/vct_survey"
+                        app:chipIcon="@drawable/vct_brightness"
                         app:chipStrokeColor="?attr/colorOnSurface"
                         app:chipStrokeWidth="1dp" />
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/prefs_card"
+                        android:id="@+id/darkmode_card"
                         style="@style/card_style"
                         app:cardCornerRadius="@dimen/card_corner_rad"
                         app:cardElevation="@dimen/card_elevation"
@@ -183,8 +183,32 @@
                                         android:text="@string/system_setting" />
 
                                 </RadioGroup>
-
                             </LinearLayout>
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_survey_label"
+                        style="@style/ChipLabel"
+                        android:layout_marginBottom="0dp"
+                        android:text="@string/survey"
+                        app:chipBackgroundColor="@color/transparent"
+                        app:chipIcon="@drawable/vct_survey"
+                        app:chipStrokeColor="?attr/colorOnSurface"
+                        app:chipStrokeWidth="1dp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/prefs_card"
+                        style="@style/card_style"
+                        app:cardCornerRadius="@dimen/card_corner_rad"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            style="@style/Widget.CardContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 style="?textAppearanceBody1"

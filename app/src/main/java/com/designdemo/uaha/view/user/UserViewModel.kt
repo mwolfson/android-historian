@@ -1,6 +1,15 @@
 package com.designdemo.uaha.view.user
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,11 +19,12 @@ import androidx.work.WorkManager
 import com.designdemo.uaha.data.InfoDatabase
 import com.designdemo.uaha.data.model.user.UserEntity
 import com.designdemo.uaha.data.model.user.UserRepository
-import com.designdemo.uaha.util.NAME_MAX
-import com.designdemo.uaha.util.NAME_MIN
-import com.designdemo.uaha.util.PASSWORD_MIN
-import com.designdemo.uaha.util.PHONE_LENGTH
 import com.designdemo.uaha.util.TAG_WORK_NOTIF
+import com.designdemo.uaha.util.NAME_MIN
+import com.designdemo.uaha.util.NAME_MAX
+import com.designdemo.uaha.util.PHONE_LENGTH
+import com.designdemo.uaha.util.PASSWORD_MIN
+import com.designdemo.uaha.util.PREF_DARK_MODE
 import com.designdemo.uaha.workers.NotifWorker
 import com.support.android.designlibdemo.R
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +34,10 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
+    companion object {
+        private const val TAG = "UserViewModel"
+    }
+
     private var parentJob = Job()
     private val couroutineContext
         get() = parentJob + Dispatchers.Main
@@ -115,5 +129,41 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     fun cancelNotif() {
         workManager.cancelAllWorkByTag(TAG_WORK_NOTIF)
+    }
+
+    fun setDarkMode(radioClicked: Int, activity: Activity) {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val editor = sharedPref.edit()
+
+        var defaultNightMode = 0
+        when (radioClicked) {
+            R.id.radio_dark -> {
+                Log.d(TAG, "Dark pressed " + radioClicked)
+                defaultNightMode = MODE_NIGHT_YES
+            }
+            R.id.radio_light -> {
+                Log.d(TAG, "Light pressed " + radioClicked)
+                defaultNightMode = MODE_NIGHT_NO
+            }
+            R.id.radio_setting -> {
+                Log.d(TAG, "Setting pressed " + radioClicked)
+                // The default value is different after Android Q
+                when (Build.VERSION.SDK_INT) {
+                    in Int.MIN_VALUE..Build.VERSION_CODES.P -> defaultNightMode = MODE_NIGHT_AUTO_BATTERY
+                    else -> defaultNightMode = MODE_NIGHT_FOLLOW_SYSTEM
+                }
+            }
+        }
+
+        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+        Log.d(TAG, "MSW NightMode comparison is: $currentNightMode VS $defaultNightMode")
+
+        if (currentNightMode != defaultNightMode) {
+            AppCompatDelegate.setDefaultNightMode(defaultNightMode)
+
+            Log.d("MSW", "the value we set is: " + defaultNightMode)
+            editor.putInt(PREF_DARK_MODE, defaultNightMode)
+            editor.commit()
+        }
     }
 }

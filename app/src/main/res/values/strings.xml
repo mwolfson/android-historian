@@ -277,6 +277,7 @@
     <string name="chips_are_compact_elements_that_represent_an_input_attribute_or_action">Chips are compact elements that represent an input, attribute, or action</string>
     <string name="text_font_scale">Text Font Scale</string>
     <string name="demos">Demos</string>
+    <string name="darkmode">Dark Mode</string>
 
     <!-- BottomNavView Demo -->
     <string name="bottomnavview">BottomNavView</string>

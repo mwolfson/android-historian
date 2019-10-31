@@ -151,8 +151,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             editor.apply()
         }
     }
-
-    fun isAndroidP(): Boolean {
+    @Suppress("ExpressionBodySyntax")
+    private fun isAndroidP(): Boolean {
         return Build.VERSION.SDK_INT in Int.MIN_VALUE..Build.VERSION_CODES.P
     }
 }

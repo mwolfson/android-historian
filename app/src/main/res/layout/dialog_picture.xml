@@ -30,6 +30,7 @@
         android:paddingLeft="@dimen/card_margin"
         android:paddingEnd="@dimen/card_margin"
         android:layout_toRightOf="@+id/photo_pref_switch"
+        android:layout_toEndOf="@id/photo_pref_switch"
         style="?textAppearanceBody1"
         android:text="@string/dialog_photo_switch"/>
 </RelativeLayout>

@@ -13,6 +13,7 @@
         android:id="@+id/device_item_avatar"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/device_item_avatar"
         android:transitionName="@string/transition_string" />
 
     <LinearLayout
@@ -23,7 +24,6 @@
             android:id="@+id/device_item_title"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:autoSizeTextType="uniform"
             android:gravity="center"
             android:textAppearance="?textAppearanceHeadline6" />
 
@@ -31,7 +31,6 @@
             android:id="@+id/device_item_subtext"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:autoSizeTextType="uniform"
             android:gravity="center"
             android:textAppearance="?textAppearanceBody1"
             tools:text="this is sample" />

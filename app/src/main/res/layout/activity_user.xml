@@ -317,6 +317,7 @@
                                 android:layout_width="72dp"
                                 android:layout_height="72dp"
                                 android:layout_marginBottom="16dp"
+                                android:contentDescription="@string/account_circle"
                                 app:srcCompat="@drawable/vct_account_circle" />
 
                             <Button
@@ -338,7 +339,7 @@
                     <com.google.android.material.chip.Chip
                         android:id="@+id/notification_chip"
                         style="@style/ChipLabel"
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         app:chipBackgroundColor="@color/transparent"
                         app:chipIcon="@drawable/vct_notifications"
                         app:chipStrokeColor="?attr/colorOnSurface"
@@ -362,7 +363,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginRight="8dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             android:background="@drawable/bg_button"
                             android:text="@string/start_notifications" />
@@ -372,7 +375,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
                             android:layout_marginRight="16dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_weight="1"
                             android:background="@drawable/bg_button"
                             android:text="@string/stop_notifications" />
@@ -461,7 +466,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/add"
-                                    app:chipIcon="@drawable/vct_add" />
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipIcon="@drawable/vct_add"
+                                    app:chipStrokeWidth="1dp"/>
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/action2"
@@ -470,6 +477,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/save"
                                     app:chipIcon="@drawable/vct_save"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     app:chipIconTint="@color/grey_900" />
 
                                 <com.google.android.material.chip.Chip
@@ -478,7 +487,9 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/set_alarm"
-                                    app:chipIcon="@drawable/vct_alarm" />
+                                    app:chipIcon="@drawable/vct_alarm"
+                                    app:chipStrokeWidth="1dp"
+                                    app:chipStrokeColor="?attr/colorOnSurface"/>
 
                             </com.google.android.material.chip.ChipGroup>
 
@@ -503,7 +514,7 @@
 
                                 <com.google.android.material.chip.ChipGroup
                                     android:id="@+id/filter1_group"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     app:singleLine="true"
                                     app:singleSelection="true">
@@ -513,6 +524,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/ldpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -520,6 +533,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/mdpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -527,6 +542,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/hdpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -534,6 +551,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/xhdpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -541,6 +560,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/xxhdpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -548,6 +569,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/xxxhdpi" />
 
                                     <com.google.android.material.chip.Chip
@@ -555,6 +578,8 @@
                                         style="@style/Widget.MaterialComponents.Chip.Choice"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        app:chipStrokeColor="?attr/colorOnSurface"
+                                        app:chipStrokeWidth="1dp"
                                         android:text="@string/nodpi" />
 
                                 </com.google.android.material.chip.ChipGroup>
@@ -585,13 +610,17 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/item1"
-                                    app:chipIcon="@drawable/vct_location_pin" />
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipIcon="@drawable/vct_location_pin"
+                                    app:chipStrokeWidth="1dp" />
 
                                 <com.google.android.material.chip.Chip
                                     android:id="@+id/filter2_item2"
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item2" />
 
                                 <com.google.android.material.chip.Chip
@@ -599,6 +628,8 @@
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item3" />
 
                                 <com.google.android.material.chip.Chip
@@ -606,6 +637,8 @@
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item4" />
 
                                 <com.google.android.material.chip.Chip
@@ -613,6 +646,8 @@
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item5" />
 
                                 <com.google.android.material.chip.Chip
@@ -620,6 +655,8 @@
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item6" />
 
                                 <com.google.android.material.chip.Chip
@@ -627,6 +664,8 @@
                                     style="@style/Widget.MaterialComponents.Chip.Filter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    app:chipStrokeColor="?attr/colorOnSurface"
+                                    app:chipStrokeWidth="1dp"
                                     android:text="@string/item7" />
 
                             </com.google.android.material.chip.ChipGroup>
@@ -695,12 +734,19 @@
                                     app:chipIcon="@drawable/vct_business" />
                             </com.google.android.material.chip.ChipGroup>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/grey_200" />
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/chip_editlayout"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
+                                android:layout_marginTop="8dp"
                                 android:hint="@string/chip_content"
                                 app:counterMaxLength="10"
                                 app:passwordToggleDrawable="@drawable/vct_add"
@@ -712,15 +758,9 @@
                                     android:layout_height="wrap_content"
                                     android:focusable="true"
                                     android:inputType="text"
-                                    android:maxLength="10" />
+                                    android:maxLength="10"
+                                    android:autofillHints="Manually entered chip"/>
                             </com.google.android.material.textfield.TextInputLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@color/grey_200" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip_action_custom"
@@ -730,7 +770,9 @@
                                 android:text="@string/save_state"
                                 android:textColor="?attr/colorOnPrimary"
                                 app:chipBackgroundColor="@color/fab_selector"
-                                app:chipIcon="@drawable/vct_add" />
+                                app:chipIcon="@drawable/vct_add"
+                                app:chipStrokeColor="?attr/colorOnSurface"
+                                app:chipStrokeWidth="1dp"/>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
@@ -778,6 +820,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginRight="16dp"
+                        android:contentDescription="@string/carat_up"
                         android:background="@drawable/vct_carat_up" />
                 </RelativeLayout>
 

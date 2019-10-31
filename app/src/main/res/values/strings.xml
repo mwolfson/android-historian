@@ -278,6 +278,8 @@
     <string name="text_font_scale">Text Font Scale</string>
     <string name="demos">Demos</string>
     <string name="darkmode">Dark Mode</string>
+    <string name="getting_info">Getting info</string>
+    <string name="notifications">Notifications</string>
 
     <!-- BottomNavView Demo -->
     <string name="bottomnavview">BottomNavView</string>
@@ -291,6 +293,15 @@
     <string name="mikewolfson_com">AbleAndroid.com</string>
     <string name="source_code">Source Code (Open)</string>
     <string name="help">Help</string>
+
+    <!-- Image Content Descriptions-->
+    <string name="backdrop_image">Backdrop Image</string>
+    <string name="account_circle">Account Circle</string>
+    <string name="carat_up">Carat Up</string>
+    <string name="device_item_avatar">Device Item Avatar</string>
+    <string name="favorite_item_avatar">Favorite Item Avatar</string>
+    <string name="os_item_avatar">OS Item Avatar</string>
+    <string name="version">Version:</string>
 
     <!-- Lost and Found -->
 

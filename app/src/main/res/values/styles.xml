@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <style name="Base.Theme.DesignDemo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorPrimaryDark">@color/color_primary_variant</item>
-        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorPrimaryDark">@color/primary_green_variant</item>
+        <item name="colorOnPrimary">@color/primary_white</item>
 
-        <item name="colorSecondary">@color/color_secondary</item>
-        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
-        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <item name="colorSecondary">@color/secondary_blue</item>
+        <item name="colorSecondaryVariant">@color/secondary_blue_variant</item>
+        <item name="colorOnSecondary">@color/on_secondary_whitegrey</item>
 
         <item name="colorSurface">@color/color_surface</item>
         <item name="colorOnSurface">@color/color_on_surface</item>
 
-        <item name="colorError">@color/color_error</item>
-        <item name="colorOnError">#ffffff</item>
+        <item name="colorError">@color/error_red</item>
+        <item name="colorOnError">@color/color_on_error_red</item>
 
         <item name="textAppearanceHeadline6">@style/TextAppearance.MyApp.Headline6</item>
         <item name="textAppearanceHeadline5">@style/TextAppearance.MyApp.Headline5</item>

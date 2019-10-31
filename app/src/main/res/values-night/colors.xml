@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_primary">#1f1f1f</color>
-    <color name="color_primary_variant">#050505</color>
-    <color name="color_on_primary">@color/white_grey</color>
+    <color name="primary_green">#1f1f1f</color>
+    <color name="primary_green_variant">#050505</color>
+    <color name="primary_white">@color/white_grey</color>
 
-    <color name="color_secondary">#5670C7</color>
-    <color name="color_secondary_variant">#546CA5</color>
-    <color name="color_on_secondary">@color/white_grey</color>
+    <color name="secondary_blue">#5670C7</color>
+    <color name="secondary_blue_variant">#546CA5</color>
+    <color name="on_secondary_whitegrey">@color/white_grey</color>
 
     <color name="color_surface">#ff121212</color>
     <color name="color_on_surface">@color/white_grey</color>
 
-    <color name="color_error">#CBCC5252</color>
-    <color name="color_on_error">@color/white_grey</color>
+    <color name="error_red">#CBCC5252</color>
+    <color name="color_on_error_red">@color/white_grey</color>
 
 </resources>

@@ -43,7 +43,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(couroutineContext)
 
-    val repository: UserRepository
+    private val repository: UserRepository
     val allUserEntity: LiveData<List<UserEntity>>
 
     internal val outputWorkInfos: LiveData<List<WorkInfo>>
@@ -72,12 +72,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun getAddUserStatus() = saveStatusCode
 
     /**
-     * This method will validate the input, and either return a error
+     * This method will validate the input, and either return a error or save the value if it is valid
      */
     fun addUserData(userEntity: UserEntity) {
         val isNameValid: () -> Int = {
             var retVal = 0
-            if (!(userEntity.name.length in NAME_MIN..NAME_MAX)) {
+            if (userEntity.name.length !in NAME_MIN..NAME_MAX) {
                 retVal = R.string.name_input_error
             }
             retVal
@@ -104,17 +104,14 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val nameError = isNameValid()
         val passwordError = isPasswordValid()
 
-        if (phoneError != 0 || nameError != 0 || passwordError != 0) {
-            if (nameError != 0) {
-                saveStatusCode.postValue(nameError)
-            } else if (phoneError != 0) {
-                saveStatusCode.postValue(phoneError)
-            } else if (passwordError != 0) {
-                saveStatusCode.postValue(passwordError)
+        when {
+            nameError != 0 -> saveStatusCode.postValue(nameError)
+            phoneError != 0 -> saveStatusCode.postValue(phoneError)
+            passwordError != 0 -> saveStatusCode.postValue(passwordError)
+            else -> {
+                insert(userEntity)
+                saveStatusCode.postValue(R.string.profile_saved_confirm)
             }
-        } else {
-            insert(userEntity)
-            saveStatusCode.postValue(R.string.profile_saved_confirm)
         }
     }
 
@@ -135,24 +132,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val editor = sharedPref.edit()
 
-        var defaultNightMode = 0
-        when (radioClicked) {
-            R.id.radio_dark -> {
-                Log.d(TAG, "Dark pressed " + radioClicked)
-                defaultNightMode = MODE_NIGHT_YES
-            }
-            R.id.radio_light -> {
-                Log.d(TAG, "Light pressed " + radioClicked)
-                defaultNightMode = MODE_NIGHT_NO
-            }
-            R.id.radio_setting -> {
-                Log.d(TAG, "Setting pressed " + radioClicked)
-                // The default value is different after Android Q
-                when (Build.VERSION.SDK_INT) {
-                    in Int.MIN_VALUE..Build.VERSION_CODES.P -> defaultNightMode = MODE_NIGHT_AUTO_BATTERY
-                    else -> defaultNightMode = MODE_NIGHT_FOLLOW_SYSTEM
-                }
-            }
+        val defaultNightMode = when {
+            radioClicked == R.id.radio_dark -> MODE_NIGHT_YES
+            radioClicked == R.id.radio_light -> MODE_NIGHT_NO
+            radioClicked == R.id.radio_setting && isAndroidP() -> MODE_NIGHT_AUTO_BATTERY
+            radioClicked == R.id.radio_setting -> MODE_NIGHT_FOLLOW_SYSTEM
+            else -> 0
         }
 
         val currentNightMode = AppCompatDelegate.getDefaultNightMode()
@@ -163,7 +148,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
             Log.d("MSW", "the value we set is: " + defaultNightMode)
             editor.putInt(PREF_DARK_MODE, defaultNightMode)
-            editor.commit()
+            editor.apply()
         }
+    }
+
+    fun isAndroidP(): Boolean {
+        return Build.VERSION.SDK_INT in Int.MIN_VALUE..Build.VERSION_CODES.P
     }
 }

@@ -10,6 +10,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Base.Theme.DesignDemo"
+        android:name="com.designdemo.uaha.HistorianApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.designdemo.uaha.view.product.ProductActivity"

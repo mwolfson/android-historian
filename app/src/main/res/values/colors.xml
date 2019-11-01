@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_primary">#476600</color>
-    <color name="color_primary_variant">#364D00</color>
-    <color name="color_on_primary">@color/white_grey</color>
+    <color name="primary_green">#476600</color>
+    <color name="primary_green_variant">#364D00</color>
+    <color name="primary_white">@color/white_grey</color>
 
-    <color name="color_secondary">#2e60c8</color>
-    <color name="color_secondary_variant">#1a4399</color>
-    <color name="color_on_secondary">@color/white_grey</color>
+    <color name="secondary_blue">#2e60c8</color>
+    <color name="secondary_blue_variant">#1a4399</color>
+    <color name="on_secondary_whitegrey">@color/white_grey</color>
 
     <color name="color_surface">@color/white_grey</color>
     <color name="color_on_surface">#121212</color>
 
-    <color name="color_error">#d01716</color>
-    <color name="color_on_error">#d01716</color>
+    <color name="error_red">#d01716</color>
+    <color name="color_on_error_red">@color/white_grey</color>
 
     <color name="white_grey">#FFfdfdff</color>
     <color name="black">#FF000000</color>

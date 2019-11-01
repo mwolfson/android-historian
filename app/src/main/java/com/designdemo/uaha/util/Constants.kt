@@ -20,3 +20,7 @@ const val PHONE_LENGTH = 14
 // Bottom Sheet Constants
 const val PEEK_HEIGHT_PIXEL = 300
 const val ROTATION_180 = -180
+
+// SharedPreferences
+const val PREF_DARK_MODE = "sharedPrefDarkMode"
+const val PREF_FILE = "sharedPrefsFile"

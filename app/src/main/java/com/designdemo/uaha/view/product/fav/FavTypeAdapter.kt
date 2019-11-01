@@ -53,10 +53,7 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         holder.boundString = values[position].title
         holder.textView.text = values[position].title
         // We will set random length text to offset this view for staggarred effect
-        val rand = Random()
-        val randomNum = rand.nextInt(3)
-
-        val strRes = when (randomNum) {
+        val strRes = when (Random().nextInt(3)) {
             0 -> R.string.ipsum_med
             1 -> R.string.ipsum_long
             else -> R.string.ipsum_short

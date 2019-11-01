@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:transitionName="@string/transition_string" />
+                android:transitionName="@string/transition_string"
+                android:contentDescription="@string/favorite_item_avatar"/>
 
             <TextView
                 android:id="@+id/fav_item_title"

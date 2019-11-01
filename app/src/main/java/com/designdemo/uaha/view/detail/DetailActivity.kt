@@ -49,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.support.android.designlibdemo.R.layout.activity_detail)
+        setContentView(R.layout.activity_detail)
 
         if (androidName === "unset") {
             androidName = intent.getStringExtra(EXTRA_APP_NAME)
@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
         val intent = intent
         handleIntent(intent)
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition()
         }
 
@@ -137,7 +137,6 @@ class DetailActivity : AppCompatActivity() {
                     detailViewModel.updateProductFromRefresh(deviceStrings[randInt])
                     this.androidName = deviceStrings[randInt]
 //                    onResume()
-                    true
                 }
                 R.id.menu_help -> {
                     val bottomNavIntent = Intent(applicationContext, BottomNavActivity::class.java)
@@ -153,7 +152,7 @@ class DetailActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && hasFocus) {
             startPostponedEnterTransition()
         }
     }

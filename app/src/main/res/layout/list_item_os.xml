@@ -16,6 +16,7 @@
         android:id="@+id/os_item_avatar"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/os_item_avatar"
         android:transitionName="@string/transition_string" />
 
     <LinearLayout
@@ -28,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginLeft="8dp"
-            android:autoSizeTextType="uniform"
+            android:layout_marginStart="8dp"
             android:gravity="center_vertical"
             android:textAppearance="?textAppearanceHeadline6" />
 
@@ -37,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="24dp"
             android:layout_marginLeft="8dp"
-            android:autoSizeTextType="uniform"
+            android:layout_marginStart="8dp"
             android:gravity="center_vertical"
             tools:text="this is sample"
             android:textAppearance="?textAppearanceBody1" />

@@ -31,7 +31,6 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
         val imageView: ImageView = view.device_item_avatar
         val titleText: TextView = view.device_item_title
         val subTitleText: TextView = view.device_item_subtext
-        var osVersion = 0
 
         override fun toString() = super.toString() + " '" + titleText.text
     }

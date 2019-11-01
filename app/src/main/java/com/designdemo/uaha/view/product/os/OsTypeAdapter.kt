@@ -30,7 +30,6 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         val imageView: ImageView = view.os_item_avatar
         val titleText = view.os_item_title
         val subTitleText = view.os_item_subtext
-        var osVersion: Int = 0
 
         override fun toString() = super.toString() + " '" + titleText.text
     }

@@ -39,12 +39,12 @@ class OsFragment : Fragment() {
         osViewModel.getOsData().observe(this, Observer { osList ->
             if (osList.isNotEmpty()) {
                 setupRecyclerView(rv, osList)
-                product_recyclerview.setVisibility(View.VISIBLE)
-                noLayout.setVisibility(View.GONE)
+                product_recyclerview.visibility = View.VISIBLE
+                noLayout.visibility = View.GONE
             } else {
-                noText.setText(getString(R.string.getting_os_info))
-                product_recyclerview.setVisibility(View.GONE)
-                noLayout.setVisibility(View.VISIBLE)
+                noText.text = getString(R.string.getting_os_info)
+                product_recyclerview.visibility = View.GONE
+                noLayout.visibility = View.VISIBLE
             }
         })
 

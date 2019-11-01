@@ -40,12 +40,12 @@ class DeviceFragment : Fragment() {
         deviceViewModel.getDeviceData().observe(this, Observer { devList ->
             if (devList.isNotEmpty()) {
                 setupRecyclerView(rv, devList)
-                product_recyclerview.setVisibility(View.VISIBLE)
-                noLayout.setVisibility(View.GONE)
+                product_recyclerview.visibility = View.VISIBLE
+                noLayout.visibility = View.GONE
             } else {
-                noText.setText(getString(R.string.getting_device_info))
-                product_recyclerview.setVisibility(View.GONE)
-                noLayout.setVisibility(View.VISIBLE)
+                noText.text = getString(R.string.getting_device_info)
+                product_recyclerview.visibility = View.GONE
+                noLayout.visibility = View.VISIBLE
             }
         })
 

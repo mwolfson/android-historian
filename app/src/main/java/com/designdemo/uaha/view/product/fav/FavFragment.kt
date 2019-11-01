@@ -40,13 +40,13 @@ class FavFragment : Fragment() {
         favViewModel.getFavData().observe(this, Observer { favList ->
             if (favList.isNotEmpty()) {
                 setupRecyclerView(rv, favList)
-                product_recyclerview.setVisibility(View.VISIBLE)
-                noLayout.setVisibility(View.GONE)
+                product_recyclerview.visibility = View.VISIBLE
+                noLayout.visibility = View.GONE
             } else {
-                noText.setText(getString(R.string.add_fav_text))
-                noTextImg.setVisibility(View.VISIBLE)
-                noLayout.setVisibility(View.VISIBLE)
-                product_recyclerview.setVisibility(View.GONE)
+                noText.text = getString(R.string.add_fav_text)
+                noTextImg.visibility = View.VISIBLE
+                noLayout.visibility = View.VISIBLE
+                product_recyclerview.visibility = View.GONE
             }
         })
 

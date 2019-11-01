@@ -51,7 +51,7 @@ class ProductActivity : AppCompatActivity() {
                 versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
-                appTitleText.setOnClickListener { text ->
+                appTitleText.setOnClickListener {
                     val playStore = Intent(Intent.ACTION_VIEW, Uri.parse(
                             "https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
                     startActivity(playStore)
@@ -102,7 +102,7 @@ class ProductActivity : AppCompatActivity() {
 
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            var retVal: Boolean
+            val retVal: Boolean
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_userinfo -> {

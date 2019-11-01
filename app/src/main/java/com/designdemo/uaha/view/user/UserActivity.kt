@@ -105,14 +105,14 @@ class UserActivity : AppCompatActivity() {
                     // If there is a value to reset show snackbar with undo option
                     val sizeOfList = users.size
                     if (sizeOfList > 1) {
-                        val oldUserInfo = users.get(sizeOfList - 2)
+                        val oldUserInfo = users[sizeOfList - 2]
 
                         // Show snackbar, and include the option to Undo the previous operation
                         val snackbar = Snackbar.make(user_main_coordinator, getString(statusInt), Snackbar.LENGTH_LONG)
-                                .setAction(getString(R.string.undo)) { _ ->
+                                .setAction(getString(R.string.undo)) {
                                     userViewModel.addUserData(oldUserInfo)
                                 }
-                        snackbar.setAnchorView(user_fab)
+                        snackbar.anchorView = user_fab
                         snackbar.show()
                     } else {
                         // No backup available, so don't show undo option
@@ -144,7 +144,7 @@ class UserActivity : AppCompatActivity() {
                 versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
-                appTitleText.setOnClickListener { text ->
+                appTitleText.setOnClickListener {
                     val playStore = Intent(
                         Intent.ACTION_VIEW,
                         Uri.parse("https://play.google.com/store/apps/details?id=com.ableandroid.historian"))
@@ -203,9 +203,9 @@ class UserActivity : AppCompatActivity() {
         // Format phone number as user is typing
         phone_edit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
-        profile_pic_button?.setOnClickListener { v -> setPictureDialog() }
+        profile_pic_button?.setOnClickListener { setPictureDialog() }
 
-        user_fab?.setOnClickListener { v ->
+        user_fab?.setOnClickListener {
             val userInfo = UserEntity(name_edit.text.toString(), phone_edit.text.toString(), password_edit.text.toString())
             userViewModel.addUserData(userInfo)
         }
@@ -220,7 +220,7 @@ class UserActivity : AppCompatActivity() {
             userViewModel.cancelNotif()
         }
 
-        darkmode_group.setOnCheckedChangeListener { myGroup, radioClicked ->
+        darkmode_group.setOnCheckedChangeListener { _, radioClicked ->
             userViewModel.setDarkMode(radioClicked, this)
         }
 
@@ -235,7 +235,7 @@ class UserActivity : AppCompatActivity() {
     private fun showSnackbar(@StringRes displayString: Int) {
         val snackbar = Snackbar.make(user_main_scroll_layout, getString(displayString), Snackbar.LENGTH_SHORT)
         // Need to set a calculate a specific offset for this so it appears higher then the BottomAppBar per spec
-        snackbar.setAnchorView(user_fab)
+        snackbar.anchorView = user_fab
         snackbar.show()
     }
 
@@ -256,7 +256,7 @@ class UserActivity : AppCompatActivity() {
         setChipCloseAndRandomColor(chipEntry5)
 
         val filter1Group = filter1_group
-        filter1Group.setOnCheckedChangeListener { chipGroup, i ->
+        filter1Group.setOnCheckedChangeListener { _, i ->
             when (i) {
                 R.id.choice_item1 -> Log.d(TAG, "Filter1 Item 1")
                 R.id.choice_item2 -> Log.d(TAG, "Filter1 Item 2")
@@ -265,7 +265,7 @@ class UserActivity : AppCompatActivity() {
         }
 
         val filter2Group = filter2_group
-        filter2Group.setOnCheckedChangeListener { chipGroup, i ->
+        filter2Group.setOnCheckedChangeListener { _, i ->
             when (i) {
                 R.id.filter2_item1 -> Log.d(TAG, "Filter2 Item 1")
                 R.id.filter2_item2 -> Log.d(TAG, "Filter2 Item 2")
@@ -283,13 +283,13 @@ class UserActivity : AppCompatActivity() {
 
         val activity = this
 
-        customChipEdit.setOnEditorActionListener { textView, i, keyEvent ->
+        customChipEdit.setOnEditorActionListener { _, _, _ ->
             saveChipEntry(customChipEdit, activity, entryGroup)
             false
         }
 
         val chipActionCustom = chip_action_custom
-        chipActionCustom.setOnClickListener { view ->
+        chipActionCustom.setOnClickListener {
             saveChipEntry(customChipEdit, activity, entryGroup)
         }
     }
@@ -315,13 +315,13 @@ class UserActivity : AppCompatActivity() {
         bottomSheetBehavior = from(bottomSheet)
 
         val closeButton = textscale_close
-        closeButton.setOnClickListener { view ->
+        closeButton.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             bottomSheetBehavior.setPeekHeight(0)
         }
 
         val showHide = show_bottom_sheet
-        showHide.setOnClickListener { view -> bottomSheetBehavior.setPeekHeight(PEEK_HEIGHT_PIXEL) }
+        showHide.setOnClickListener { bottomSheetBehavior.setPeekHeight(PEEK_HEIGHT_PIXEL) }
 
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -424,12 +424,12 @@ class UserActivity : AppCompatActivity() {
         builder.setView(dialogView)
         builder.setTitle(mainActivity!!.getString(R.string.picture_dialog_title))
         builder.setCancelable(true)
-        builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { dialog, which ->
+        builder.setPositiveButton(mainActivity!!.getString(R.string.picture_dialog_button)) { _, _ ->
             Log.d("Dialog", "Positive button pressed") }
 
         val prefSwitch = dialogView.photo_pref_switch
         prefSwitch.isChecked = true
-        prefSwitch.setOnClickListener { v ->
+        prefSwitch.setOnClickListener {
             if (prefSwitch.isChecked) {
                 Log.d(TAG, "The Photo switch was enabled")
             } else {
@@ -443,55 +443,31 @@ class UserActivity : AppCompatActivity() {
 
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            var retVal = false
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     val osIntent = Intent(applicationContext, ProductActivity::class.java)
                     osIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.OS_FRAG)
                     startActivity(osIntent)
-                    retVal = true
                 }
                 R.id.nav_devices -> {
                     val deviceIntent = Intent(applicationContext, ProductActivity::class.java)
                     deviceIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.DEVICE_FRAG)
                     startActivity(deviceIntent)
-                    retVal = true
                 }
                 R.id.nav_favorites -> {
                     val favIntent = Intent(applicationContext, ProductActivity::class.java)
                     favIntent.putExtra(ProductActivity.EXTRA_FRAG_TYPE, ProductActivity.FAV_FRAG)
                     startActivity(favIntent)
-                    retVal = true
                 }
-                R.id.nav_userinfo -> {
-                    drawer_layout.closeDrawers()
-                    retVal = true
-                }
-                R.id.nav_homepage -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/")))
-                    retVal = true
-                }
-                R.id.nav_playlink -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian")))
-                    retVal = true
-                }
-                R.id.nav_githublink -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mwolfson/android-historian")))
-                    retVal = true
-                }
-                R.id.nav_link1 -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/")))
-                    retVal = true
-                }
-                R.id.nav_link2 -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/")))
-                    retVal = true
-                }
-
-                else -> retVal = true
+                R.id.nav_userinfo -> drawer_layout.closeDrawers()
+                R.id.nav_homepage -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ableandroid.com/")))
+                R.id.nav_playlink -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/apps/testing/com.ableandroid.historian")))
+                R.id.nav_githublink -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/mwolfson/android-historian")))
+                R.id.nav_link1 -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.android.com/")))
+                R.id.nav_link2 -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://material.io/")))
             }
-            retVal
+            true
         }
     }
 }

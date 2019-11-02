@@ -270,7 +270,7 @@
 
     <!-- Profile Activity -->
     <string name="survey">Survey</string>
-    <string name="when_did_you_get_your_first_android_phone">When did you get your first Android phone?</string>
+    <string name="when_did_you_get_your_first_android_phone">How long have you loved Android?</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="text_scale_demo">Text Scale Demo</string>
     <string name="chip_demo">Chip Demo</string>

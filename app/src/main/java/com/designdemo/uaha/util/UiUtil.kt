@@ -10,6 +10,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.util.DisplayMetrics
 
 import androidx.annotation.DimenRes
+import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
 import java.util.Random
 
@@ -131,4 +132,6 @@ object UiUtil {
         val randInt = Random().nextInt(drawables.size)
         return drawables[randInt]
     }
+
+    fun versionInfo(cxt: Context) = cxt.resources.getString(R.string.header_version, "${BuildConfig.VERSION_NAME}", BuildConfig.VERSION_CODE)
 }

@@ -34,7 +34,6 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.dialog_picture.view.*
@@ -141,7 +140,7 @@ class UserActivity : AppCompatActivity() {
             val headerView = navigationView.getHeaderView(0)
             if (headerView != null) {
                 val versionText = headerView.findViewById<TextView>(R.id.header_versioninfo)
-                versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+                versionText.text = UiUtil.versionInfo(this)
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
                 appTitleText.setOnClickListener {

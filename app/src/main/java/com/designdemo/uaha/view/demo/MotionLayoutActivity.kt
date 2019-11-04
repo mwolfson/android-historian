@@ -12,7 +12,7 @@ class MotionLayoutActivity : Activity() {
         setContentView(R.layout.activity_motion_layout)
 
         val infoButton = launch_button
-        infoButton.setOnClickListener { v -> launchMotionScene() }
+        infoButton.setOnClickListener { launchMotionScene() }
     }
 
     private fun launchMotionScene() {

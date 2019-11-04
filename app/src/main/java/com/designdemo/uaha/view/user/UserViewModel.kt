@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
@@ -129,9 +128,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setDarkMode(radioClicked: Int, activity: Activity) {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        val editor = sharedPref.edit()
-
         val defaultNightMode = when {
             radioClicked == R.id.radio_dark -> MODE_NIGHT_YES
             radioClicked == R.id.radio_light -> MODE_NIGHT_NO
@@ -140,17 +136,13 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             else -> 0
         }
 
-        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
-        Log.d(TAG, "MSW NightMode comparison is: $currentNightMode VS $defaultNightMode")
-
-        if (currentNightMode != defaultNightMode) {
-            AppCompatDelegate.setDefaultNightMode(defaultNightMode)
-
-            Log.d("MSW", "the value we set is: " + defaultNightMode)
-            editor.putInt(PREF_DARK_MODE, defaultNightMode)
-            editor.apply()
-        }
+        AppCompatDelegate.setDefaultNightMode(defaultNightMode)
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val editor = sharedPref.edit()
+        editor.putInt(PREF_DARK_MODE, defaultNightMode)
+        editor.apply()
     }
+
     @Suppress("ExpressionBodySyntax")
     private fun isAndroidP(): Boolean {
         return Build.VERSION.SDK_INT in Int.MIN_VALUE..Build.VERSION_CODES.P

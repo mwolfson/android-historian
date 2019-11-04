@@ -20,11 +20,11 @@ class HistorianApplication : Application() {
         super.onCreate()
 
         // The default value is different after Android Q
-        val defaultNightMode: Int
-        when (Build.VERSION.SDK_INT) {
-            in Int.MIN_VALUE..Build.VERSION_CODES.P -> defaultNightMode = MODE_NIGHT_AUTO_BATTERY
-            else -> defaultNightMode = MODE_NIGHT_FOLLOW_SYSTEM
+        val defaultNightMode =  when (Build.VERSION.SDK_INT) {
+            in Int.MIN_VALUE..Build.VERSION_CODES.P -> MODE_NIGHT_AUTO_BATTERY
+            else -> MODE_NIGHT_FOLLOW_SYSTEM
         }
+        Log.d("MSW", "This is the default nigh tmode setting: $defaultNightMode")
 
         // If the user has previously set a value for darkMode, use that
         val sharedPref = applicationContext.getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE)

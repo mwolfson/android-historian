@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.designdemo.uaha.util.UiUtil
 import com.designdemo.uaha.view.demo.BottomNavActivity
 import com.designdemo.uaha.view.demo.MotionLayoutActivity
 import com.designdemo.uaha.view.product.device.DeviceFragment
@@ -19,13 +20,12 @@ import com.designdemo.uaha.view.product.fav.FavFragment
 import com.designdemo.uaha.view.product.os.OsFragment
 import com.designdemo.uaha.view.user.UserActivity
 import com.google.android.material.navigation.NavigationView
-import com.support.android.designlibdemo.BuildConfig
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.activity_detail.bottom_appbar
-import kotlinx.android.synthetic.main.activity_main.nav_view
-import kotlinx.android.synthetic.main.activity_main.product_viewpager
-import kotlinx.android.synthetic.main.activity_main.product_tabs
 import kotlinx.android.synthetic.main.activity_main.drawer_layout
+import kotlinx.android.synthetic.main.activity_main.nav_view
+import kotlinx.android.synthetic.main.activity_main.product_tabs
+import kotlinx.android.synthetic.main.activity_main.product_viewpager
 
 class ProductActivity : AppCompatActivity() {
 
@@ -48,7 +48,7 @@ class ProductActivity : AppCompatActivity() {
             val headerView = navigationView.getHeaderView(0)
             if (headerView != null) {
                 val versionText = headerView.findViewById<TextView>(R.id.header_versioninfo)
-                versionText.text = "Version:  ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+                versionText.text = UiUtil.versionInfo(this)
 
                 val appTitleText = headerView.findViewById<TextView>(R.id.header_apptitle)
                 appTitleText.setOnClickListener {

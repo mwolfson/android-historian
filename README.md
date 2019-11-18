@@ -19,6 +19,12 @@ Now you can download this app from the Play Store (You must [join The Beta Distr
 
 ![Screen Flow Demo](https://github.com/mwolfson/android-historian/blob/master/art/historian2.gif)
 
+Nov 4, 2019
+- Dark Mode Implementation
+    - Implement Style\Theming to support Dark Mode
+    - Required UI to support user setting for Dark Mode
+    - (GIF showing Dark Mode coming soon)
+
 Apr 6, 2019
 - Adaptive Icon, w/ Custom Vector Logo
 - WorkManager Example (sending periodic notifications)

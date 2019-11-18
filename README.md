@@ -80,7 +80,7 @@ Sept 15, 2015
 Special Thanks
 --------------
 
-Item Decorator from [Stacey Devino](https://twitter.com/doesitpew/)
+Item Decorator from [Stacy Devino](https://twitter.com/doesitpew/)
 
 Pre-requisites
 --------------

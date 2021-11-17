@@ -72,6 +72,17 @@ class DeviceTypeAdapter(private val activity: Activity, context: Context, privat
             }
         }
 
+        holder.view.setOnLongClickListener {
+            Intent().apply {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_TEXT, values[position].title)
+                shareIntent.putExtra(Intent.EXTRA_TEXT, values[position].imgId)
+                holder.itemView.context.startActivity(Intent.createChooser(shareIntent, "Share link using"))
+            }
+            true
+        }
+
         Glide.with(holder.imageView.context)
                 .load(values[position].imgId)
                 .fitCenter()

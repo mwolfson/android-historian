@@ -6,7 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@+id/start"
-        motion:interpolator="easeOut"
+        motion:motionInterpolator="easeOut"
         motion:duration="1000">
         <OnSwipe
             motion:dragDirection="dragUp"
@@ -19,13 +19,13 @@
                 android:scaleY="2"
                 android:rotation="-45"
                 motion:framePosition="50"
-                motion:target="@id/text_the" />
+                motion:motionTarget="@id/text_the" />
             <KeyPosition
                 motion:keyPositionType="parentRelative"
                 motion:percentX="0.25"
                 android:rotation="45"
                 motion:framePosition="50"
-                motion:target="@+id/text_the"/>
+                motion:motionTarget="@+id/text_the"/>
         </KeyFrameSet>
     </Transition>
 

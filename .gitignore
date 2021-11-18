@@ -43,3 +43,4 @@ projectFilesBackup/.idea/workspace.xml
 build/intermediates/dex-cache/cache.xml
 
 .gradle/*
+.gradle/buildOutputCleanup/cache.properties

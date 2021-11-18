@@ -52,7 +52,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         if (androidName === "unset") {
-            androidName = intent.getStringExtra(EXTRA_APP_NAME)
+            androidName = intent.getStringExtra(EXTRA_APP_NAME).toString()
         }
 
         detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)

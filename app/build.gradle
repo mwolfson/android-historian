@@ -4,13 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.0'
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.ableandroid.historian"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
         multiDexEnabled true
 
         versionCode 12

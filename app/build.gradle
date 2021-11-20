@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.ableandroid.historian"
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
 
         versionCode 12
@@ -53,7 +53,7 @@ dependencies {
     implementation "com.google.android.material:material:$mdc"
     implementation "androidx.legacy:legacy-support-v4:$jetpackVersion"
     implementation "androidx.recyclerview:recyclerview:$recycler"
-    implementation "androidx.palette:palette:$jetpackVersion"
+    implementation "androidx.palette:palette-ktx:$palette"
     implementation "androidx.vectordrawable:vectordrawable:$vectordrawable"
 
     //WorkManager
@@ -68,11 +68,11 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$workManager"
 
     //ConstraintLayout
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
 
     //Lifecycle Components
     implementation "androidx.lifecycle:lifecycle-extensions:$archComponentsVersion"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$archComponentsVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$archComponentsVersionJava8"
 
     // Room components
     implementation "androidx.room:room-runtime:$roomVersion"

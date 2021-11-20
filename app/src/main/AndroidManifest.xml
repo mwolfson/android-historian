@@ -15,7 +15,8 @@
         <activity
             android:name="com.designdemo.uaha.view.product.ProductActivity"
             android:theme="@style/Base.Theme.DesignDemo.Launcher"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:exported="true">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -30,7 +31,8 @@
         <activity
             android:name="com.designdemo.uaha.view.detail.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="com.designdemo.uaha.view.product.ProductActivity">
+            android:parentActivityName="com.designdemo.uaha.view.product.ProductActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -51,6 +51,6 @@ class OsFragment : Fragment() {
         val llm = LinearLayoutManager(recyclerView.context)
         recyclerView.layoutManager = llm
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, llm.orientation))
-        recyclerView.adapter = OsTypeAdapter(mainActivity, mainActivity, osViewModel.getOsData().value!!)
+        recyclerView.adapter = OsTypeAdapter(mainActivity, mainActivity, devList)
     }
 }

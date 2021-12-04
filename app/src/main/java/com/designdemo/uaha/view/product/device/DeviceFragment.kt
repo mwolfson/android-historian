@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_lay
 
 class DeviceFragment : Fragment() {
 
-    private var mainActivity: FragmentActivity? = null
+    private lateinit var mainActivity: FragmentActivity
 
     private lateinit var deviceViewModel: DeviceViewModel
 
@@ -35,7 +35,7 @@ class DeviceFragment : Fragment() {
         val noText = mainView.product_nodata_text
         val noLayout = mainView.product_nodata_layout
 
-        mainActivity = activity
+        mainActivity = requireActivity()
         deviceViewModel = ViewModelProvider(this).get(DeviceViewModel::class.java)
         deviceViewModel.getDeviceData().observe(viewLifecycleOwner, Observer { devList ->
             if (devList.isNotEmpty()) {
@@ -61,6 +61,6 @@ class DeviceFragment : Fragment() {
                             it
                     )
                 }
-        recyclerView.adapter = DeviceTypeAdapter(mainActivity!!, mainActivity!!, devList)
+        recyclerView.adapter = DeviceTypeAdapter(mainActivity, mainActivity, devList)
     }
 }

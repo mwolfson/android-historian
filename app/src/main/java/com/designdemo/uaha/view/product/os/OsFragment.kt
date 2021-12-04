@@ -9,23 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
-import com.designdemo.uaha.view.product.device.DeviceViewModel
-import com.designdemo.uaha.view.product.fav.FavViewModel
 import com.support.android.designlibdemo.R
-import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview
-import kotlinx.android.synthetic.main.fragment_prod_list.view.product_recyclerview
-import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_text
-import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_layout
+import kotlinx.android.synthetic.main.fragment_prod_list.*
+import kotlinx.android.synthetic.main.fragment_prod_list.view.*
 
 class OsFragment : Fragment() {
 
-    private var mainActivity: FragmentActivity? = null
-
+    private lateinit var mainActivity: FragmentActivity
     private lateinit var osViewModel: OsViewModel
 
     @Nullable
@@ -36,7 +30,7 @@ class OsFragment : Fragment() {
         val noText = mainView.product_nodata_text
         val noLayout = mainView.product_nodata_layout
 
-        mainActivity = activity
+        mainActivity = requireActivity()
         osViewModel = ViewModelProvider(this).get(OsViewModel::class.java)
         osViewModel.getOsData().observe(viewLifecycleOwner, Observer { osList ->
             if (osList.isNotEmpty()) {
@@ -57,6 +51,6 @@ class OsFragment : Fragment() {
         val llm = LinearLayoutManager(recyclerView.context)
         recyclerView.layoutManager = llm
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, llm.orientation))
-        recyclerView.adapter = OsTypeAdapter(mainActivity!!, mainActivity!!, osViewModel.getOsData().value!!)
+        recyclerView.adapter = OsTypeAdapter(mainActivity, mainActivity, osViewModel.getOsData().value!!)
     }
 }

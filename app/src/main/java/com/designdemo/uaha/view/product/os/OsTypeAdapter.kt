@@ -34,8 +34,6 @@ class OsTypeAdapter(private val activity: Activity, context: Context, private va
         override fun toString() = super.toString() + " '" + titleText.text
     }
 
-    fun getValueAt(position: Int) = values[position]
-
     init {
         context.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
         background = typedValue.resourceId

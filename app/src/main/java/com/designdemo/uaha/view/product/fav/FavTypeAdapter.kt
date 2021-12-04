@@ -35,8 +35,6 @@ class FavTypeAdapter(private val activity: Activity, private val values: List<Pr
         override fun toString() = super.toString() + " '" + textView.text
     }
 
-    fun getValueAt(position: Int) = values[position]
-
     init {
         activity.applicationContext.theme.resolveAttribute(R.attr.selectableItemBackground, typedValue, true)
         background = typedValue.resourceId

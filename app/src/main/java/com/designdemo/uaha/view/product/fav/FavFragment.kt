@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_prod_list.view.product_nodata_img
 
 class FavFragment : Fragment() {
 
-    private var mainActivity: FragmentActivity? = null
+    private lateinit var mainActivity: FragmentActivity
 
     private lateinit var favViewModel: FavViewModel
 
@@ -36,7 +36,7 @@ class FavFragment : Fragment() {
         val noLayout = mainView.product_nodata_layout
         val noTextImg = mainView.product_nodata_img
 
-        mainActivity = activity
+        mainActivity = requireActivity()
         favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
         favViewModel.getFavData().observe(viewLifecycleOwner, Observer { favList ->
             if (favList.isNotEmpty()) {
@@ -56,6 +56,6 @@ class FavFragment : Fragment() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView, devList: List<ProductEntity>) {
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView.adapter = FavTypeAdapter(mainActivity!!, favViewModel.getFavData().value!!)
+        recyclerView.adapter = FavTypeAdapter(mainActivity, favViewModel.getFavData().value!!)
     }
 }

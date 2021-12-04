@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,16 +36,15 @@ class DeviceFragment : Fragment() {
         val noLayout = mainView.product_nodata_layout
 
         mainActivity = activity
-
-        deviceViewModel = ViewModelProviders.of(this).get(DeviceViewModel::class.java)
-        deviceViewModel.getDeviceData().observe(this, Observer { devList ->
+        deviceViewModel = ViewModelProvider(this).get(DeviceViewModel::class.java)
+        deviceViewModel.getDeviceData().observe(viewLifecycleOwner, Observer { devList ->
             if (devList.isNotEmpty()) {
                 setupRecyclerView(rv, devList)
-                product_recyclerview.visibility = View.VISIBLE
+                rv.visibility = View.VISIBLE
                 noLayout.visibility = View.GONE
             } else {
                 noText.text = getString(R.string.getting_device_info)
-                product_recyclerview.visibility = View.GONE
+                rv.visibility = View.GONE
                 noLayout.visibility = View.VISIBLE
             }
         })

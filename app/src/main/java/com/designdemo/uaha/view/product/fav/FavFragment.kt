@@ -8,10 +8,12 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.designdemo.uaha.data.model.product.ProductEntity
+import com.designdemo.uaha.view.product.device.DeviceViewModel
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview
 import kotlinx.android.synthetic.main.fragment_prod_list.view.product_recyclerview
@@ -35,12 +37,11 @@ class FavFragment : Fragment() {
         val noTextImg = mainView.product_nodata_img
 
         mainActivity = activity
-
-        favViewModel = ViewModelProviders.of(this).get(FavViewModel::class.java)
-        favViewModel.getFavData().observe(this, Observer { favList ->
+        favViewModel = ViewModelProvider(this).get(FavViewModel::class.java)
+        favViewModel.getFavData().observe(viewLifecycleOwner, Observer { favList ->
             if (favList.isNotEmpty()) {
                 setupRecyclerView(rv, favList)
-                product_recyclerview.visibility = View.VISIBLE
+                rv.visibility = View.VISIBLE
                 noLayout.visibility = View.GONE
             } else {
                 noText.text = getString(R.string.add_fav_text)

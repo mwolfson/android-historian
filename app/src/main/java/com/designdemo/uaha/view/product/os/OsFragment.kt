@@ -8,11 +8,14 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.designdemo.uaha.data.model.product.ProductEntity
+import com.designdemo.uaha.view.product.device.DeviceViewModel
+import com.designdemo.uaha.view.product.fav.FavViewModel
 import com.support.android.designlibdemo.R
 import kotlinx.android.synthetic.main.fragment_prod_list.product_recyclerview
 import kotlinx.android.synthetic.main.fragment_prod_list.view.product_recyclerview
@@ -34,12 +37,11 @@ class OsFragment : Fragment() {
         val noLayout = mainView.product_nodata_layout
 
         mainActivity = activity
-
-        osViewModel = ViewModelProviders.of(this).get(OsViewModel::class.java)
-        osViewModel.getOsData().observe(this, Observer { osList ->
+        osViewModel = ViewModelProvider(this).get(OsViewModel::class.java)
+        osViewModel.getOsData().observe(viewLifecycleOwner, Observer { osList ->
             if (osList.isNotEmpty()) {
                 setupRecyclerView(rv, osList)
-                product_recyclerview.visibility = View.VISIBLE
+                rv.visibility = View.VISIBLE
                 noLayout.visibility = View.GONE
             } else {
                 noText.text = getString(R.string.getting_os_info)
